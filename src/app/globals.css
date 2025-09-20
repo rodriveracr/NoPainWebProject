@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Swiper styles */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+body {
+  @apply bg-black text-white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero genérico */
+.hero-bg {
+  background-image: url('/beneficios.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Fondos por producto */
+.bg-nopaincream {
+  background-image: url('/pmu.png'); /* 🔥 asegúrate que esta imagen esté en /public/ */
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-numbing {
+  background-image: url('/numbingback.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-xterinum {
+  background-image: url('/xterinumb4.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-wicann {
+  background-image: url('/Wicann2.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-greensoap {
+  background-image: url('/greensoapback.jpg');
+  background-size: cover;
+  background-position: center;
+}
