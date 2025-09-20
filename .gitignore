@@ -1,0 +1,30 @@
+# dependencias
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# build de Next.js
+.next
+out
+dist
+
+# sistema
+.DS_Store
+Thumbs.db
+
+# entorno
+.env
+.env.local
+.env.*.local
+
+# editor
+.vscode
+.idea
+
+# testing / coverage
+coverage
+*.log
+
+# archivos de sistema de windows
+desktop.ini
