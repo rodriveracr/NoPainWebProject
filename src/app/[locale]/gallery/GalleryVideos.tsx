@@ -8,21 +8,77 @@ import { useTranslations } from "next-intl";
 export default function GalleryVideos() {
   const t = useTranslations("Gallery");
 
+  // ✅ URLs de Cloudinary
   const videos = [
-    { base: "video2", desc: t("usage1") },
-    { base: "video6", desc: t("usage2") },
-    { base: "video4", desc: t("usage1") },
-    { base: "video7", desc: t("usage2") },
-    { base: "video8", desc: t("usage1") },
-    { base: "video9", desc: t("usage2") },
-    { base: "video10", desc: t("usage1") },
-    { base: "video1", desc: t("usage2") },
-    { base: "video10", desc: t("usage1") },
-    { base: "video1", desc: t("usage2") },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
+      ],
+      desc: t("usage1"),
+    },
+     {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
+      ],
+      desc: t("usage1"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575938/video2_e3y1ve.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video2_hqa5wk.webm",
+      ],
+      desc: t("usage2"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575925/video6_nrrxvf.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video6_tm6zvu.mp4",
+      ],
+      desc: t("usage1"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575923/video7_do4jtr.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575922/video7_gb7ngw.mp4",
+      ],
+      desc: t("usage2"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575926/video8_pmtnmy.webm",
+      ],
+      desc: t("usage1"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575932/video10_scucel.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575946/video10_ytjveg.mp4",
+      ],
+      desc: t("usage2"),
+    },
+     {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
+      ],
+      desc: t("usage1"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575932/video10_scucel.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575946/video10_ytjveg.mp4",
+      ],
+      desc: t("usage2"),
+    },
+     {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
+      ],
+      desc: t("usage1"),
+    },
   ];
 
-  const maxVisible = 8; // 4 columnas × 2 filas
-  const visibleVideos = videos.slice(0, maxVisible - 1); // primeras 7
+  const maxVisible = 8;
+  const visibleVideos = videos.slice(0, maxVisible - 1);
   const remaining =
     videos.length > maxVisible ? videos.length - (maxVisible - 1) : 0;
 
@@ -51,8 +107,13 @@ export default function GalleryVideos() {
                 playsInline
                 className="object-cover w-full h-[500px] lg:h-[550px] rounded-lg"
               >
-                <source src={`/videos/${video.base}.webm`} type="video/webm" />
-                <source src={`/videos/${video.base}.mp4`} type="video/mp4" />
+                {video.sources.map((src, i) => (
+                  <source
+                    key={i}
+                    src={src}
+                    type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
+                  />
+                ))}
                 {t("videoNotSupported")}
               </video>
               <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
@@ -61,7 +122,6 @@ export default function GalleryVideos() {
             </div>
           ))}
 
-          {/* Bloque +X */}
           {remaining > 0 && (
             <div
               onClick={() => setCurrent(maxVisible - 1)}
@@ -82,7 +142,6 @@ export default function GalleryVideos() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Botón cerrar */}
             <button
               onClick={() => setCurrent(null)}
               title="Close"
@@ -91,7 +150,6 @@ export default function GalleryVideos() {
               <X size={32} />
             </button>
 
-            {/* Flecha izquierda */}
             <button
               onClick={prev}
               title="Previous"
@@ -100,7 +158,6 @@ export default function GalleryVideos() {
               <ChevronLeft size={40} />
             </button>
 
-            {/* Video + texto */}
             <div className="flex flex-col md:flex-row items-center gap-6 max-w-6xl p-4">
               <video
                 controls
@@ -109,14 +166,13 @@ export default function GalleryVideos() {
                 playsInline
                 className="rounded-lg max-h-[85vh] w-auto"
               >
-                <source
-                  src={`/videos/${videos[current].base}.webm`}
-                  type="video/webm"
-                />
-                <source
-                  src={`/videos/${videos[current].base}.mp4`}
-                  type="video/mp4"
-                />
+                {videos[current].sources.map((src, i) => (
+                  <source
+                    key={i}
+                    src={src}
+                    type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
+                  />
+                ))}
                 {t("videoNotSupported")}
               </video>
               <div className="text-white max-w-sm">
@@ -129,7 +185,6 @@ export default function GalleryVideos() {
               </div>
             </div>
 
-            {/* Flecha derecha */}
             <button
               onClick={next}
               title="Next"

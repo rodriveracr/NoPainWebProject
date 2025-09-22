@@ -209,7 +209,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           </div>
           <p className="max-w-3xl mx-auto text-white mt-8">{tAbout("closing")}</p>
 
-          {/* 🎥 GRID DE VIDEOS */}
+          {/* 🎥 GRID DE VIDEOS (Cloudinary) */}
           <div className="mt-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
             <video
               className="w-full rounded-lg"
@@ -220,8 +220,8 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
               controls
               preload="metadata"
             >
-              <source src="/videos/video4.webm" type="video/webm" />
-              <source src="/videos/video4.mp4" type="video/mp4" />
+              <source src="https://res.cloudinary.com/dw31xhowm/video/upload/v1758575932/video10_scucel.webm" type="video/webm" />
+              <source src="https://res.cloudinary.com/dw31xhowm/video/upload/v1758575946/video10_ytjveg.mp4" type="video/mp4" />
               {tGallery("videoNotSupported")}
             </video>
 
@@ -234,8 +234,8 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
               controls
               preload="metadata"
             >
-              <source src="/videos/video2.webm" type="video/webm" />
-              <source src="/videos/video2.mp4" type="video/mp4" />
+              <source src="https://res.cloudinary.com/dw31xhowm/video/upload/v1758575925/video6_nrrxvf.webm" type="video/webm" />
+              <source src="https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video6_tm6zvu.mp4" type="video/mp4" />
               {tGallery("videoNotSupported")}
             </video>
           </div>
