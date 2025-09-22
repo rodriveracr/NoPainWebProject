@@ -1,4 +1,3 @@
-// src/app/[locale]/gallery/GalleryVideos.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,31 +8,26 @@ import { useTranslations } from "next-intl";
 export default function GalleryVideos() {
   const t = useTranslations("Gallery");
 
-  // ✅ URLs de Cloudinary
+  // ✅ Videos de Cloudinary (solo válidos, sin duplicados)
   const videos = [
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575932/video10_scucel.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575946/video10_ytjveg.mp4",
       ],
       desc: t("usage1"),
-    },
-     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
-      ],
-      desc: t("usage1"),
-    },
-    {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575938/video2_e3y1ve.mp4",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video2_hqa5wk.webm",
-      ],
-      desc: t("usage2"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575925/video6_nrrxvf.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video6_tm6zvu.mp4",
+      ],
+      desc: t("usage2"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575938/video2_e3y1ve.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video2_hqa5wk.webm",
       ],
       desc: t("usage1"),
     },
@@ -50,38 +44,11 @@ export default function GalleryVideos() {
       ],
       desc: t("usage1"),
     },
-    {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575932/video10_scucel.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575946/video10_ytjveg.mp4",
-      ],
-      desc: t("usage2"),
-    },
-     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
-      ],
-      desc: t("usage1"),
-    },
-    {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575932/video10_scucel.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575946/video10_ytjveg.mp4",
-      ],
-      desc: t("usage2"),
-    },
-     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575944/video4_djf0ct.mp4",
-      ],
-      desc: t("usage1"),
-    },
   ];
 
-  const maxVisible = 8;
-  const visibleVideos = videos.slice(0, maxVisible - 1);
-  const remaining =
-    videos.length > maxVisible ? videos.length - (maxVisible - 1) : 0;
+  const maxVisible = 4;
+  const visibleVideos = videos.slice(0, maxVisible);
+  const remaining = videos.length > maxVisible ? videos.length - maxVisible : 0;
 
   const [current, setCurrent] = useState<number | null>(null);
 
@@ -125,7 +92,7 @@ export default function GalleryVideos() {
 
           {remaining > 0 && (
             <div
-              onClick={() => setCurrent(maxVisible - 1)}
+              onClick={() => setCurrent(maxVisible)}
               className="flex items-center justify-center bg-gray-800 rounded-2xl cursor-pointer hover:bg-gray-700 transition h-[500px] lg:h-[550px]"
             >
               <span className="text-3xl font-bold text-white">+{remaining}</span>
