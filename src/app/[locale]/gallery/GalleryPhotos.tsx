@@ -18,6 +18,10 @@ export default function GalleryPhotos() {
     { src: "/xterinumback3.jpg", desc: t("xteri") },
     { src: "/wicannback2.jpg", desc: t("wicann") },
     { src: "/greensoapback.jpg", desc: t("greenSoap") },
+    { src: "/wicannback2.jpg", desc: t("wicann") },
+    { src: "/greensoapback.jpg", desc: t("greenSoap") },
+    { src: "/wicannback2.jpg", desc: t("wicann") },
+    { src: "/greensoapback.jpg", desc: t("greenSoap") },
     // 👉 agrega más fotos aquí
   ];
 

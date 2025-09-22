@@ -9,18 +9,20 @@ export const metadata = {
   description: "Encuentra respuestas a las dudas más comunes sobre No Pain Brand.",
 };
 
-export default async function FAQ({ params }: { params: { locale: string } }) {
-  const { locale } = await Promise.resolve(params);
-  const t = await getTranslations({ locale, namespace: 'FAQ' });
+export default async function FAQ({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "FAQ" });
 
-
-  // 👇 Lista de secciones de FAQ organizadas por producto
   const sections = ["noPain", "xteri", "wicann", "greenSoap"];
 
   return (
     <>
       <Header locale={locale} />
-      <div className="h-16"></div>
+      <div className="h-16" />
       <main className="bg-black text-white min-h-screen py-24 px-6 font-sans">
         <section className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-12">
@@ -39,9 +41,7 @@ export default async function FAQ({ params }: { params: { locale: string } }) {
                       <h3 className="text-lg font-semibold mb-1">
                         {t(`${sectionKey}.q${i}`)}
                       </h3>
-                      <p className="text-gray-300">
-                        {t(`${sectionKey}.a${i}`)}
-                      </p>
+                      <p className="text-gray-300">{t(`${sectionKey}.a${i}`)}</p>
                     </div>
                   ))}
                 </div>

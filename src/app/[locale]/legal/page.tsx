@@ -4,60 +4,66 @@ import Footer from "@/components/Footer";
 import "../../globals.css";
 
 export const metadata = {
-  title: "Políticas & Legal - No Pain Brand",
-  description: "Información legal y políticas de No Pain Brand en Costa Rica y a nivel internacional.",
+  title: "Políticas y Legal - No Pain Brand",
+  description: "Información legal, derechos de autor, privacidad y términos de uso.",
 };
 
-export default async function Legal({ params }: { params: { locale: string } }) {
-  const { locale } = await Promise.resolve(params);
-  const t = await getTranslations({ locale, namespace: 'Legal' });
-
+export default async function LegalPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Legal" });
 
   return (
     <>
       <Header locale={locale} />
-      <div className="h-16"></div>
-      <main className="bg-black text-white min-h-screen py-24 px-6 font-sans">
-        <section className="max-w-4xl mx-auto space-y-12">
-          <h1 className="text-4xl font-bold text-center mb-12">
-            {t("title")}
-          </h1>
+      <div className="h-16" />
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">{t("intellectualPropertyTitle")}</h2>
-            <p className="text-gray-300">{t("intellectualPropertyText")}</p>
-          </div>
+      <main className="relative text-white min-h-screen font-sans">
+        <div className="absolute inset-0 hero-bg" />
+        <div className="absolute inset-0 bg-black/80" />
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">{t("registrationTitle")}</h2>
-            <p className="text-gray-300">{t("registrationText")}</p>
-          </div>
+        <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold mb-10">{t("title")}</h1>
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">{t("internationalTitle")}</h2>
-            <p className="text-gray-300">{t("internationalText")}</p>
-          </div>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">{t("intellectualPropertyTitle")}</h2>
+            <p>{t("intellectualPropertyText")}</p>
+          </section>
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">{t("infractionsTitle")}</h2>
-            <p className="text-gray-300">{t("infractionsText")}</p>
-          </div>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">{t("registrationTitle")}</h2>
+            <p>{t("registrationText")}</p>
+          </section>
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">{t("termsTitle")}</h2>
-            <p className="text-gray-300">{t("termsText")}</p>
-          </div>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">{t("internationalTitle")}</h2>
+            <p>{t("internationalText")}</p>
+          </section>
 
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">{t("privacyTitle")}</h2>
-            <p className="text-gray-300">{t("privacyText")}</p>
-          </div>
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">{t("infractionsTitle")}</h2>
+            <p>{t("infractionsText")}</p>
+          </section>
 
-          <p className="text-sm text-gray-500 mt-12 text-center">
-            📅 {t("lastUpdated")}: 18/09/2025
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">{t("termsTitle")}</h2>
+            <p>{t("termsText")}</p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">{t("privacyTitle")}</h2>
+            <p>{t("privacyText")}</p>
+          </section>
+
+          <p className="text-sm text-gray-400 mt-10">
+            {t("lastUpdated")}: 2025
           </p>
-        </section>
+        </div>
       </main>
+
       <Footer />
     </>
   );

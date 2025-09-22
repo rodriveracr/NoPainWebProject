@@ -1,93 +1,78 @@
-// src/app/[locale]/xteri-numb/page.tsx
 import Image from "next/image";
-import Link from "next/link";
-import { getTranslations } from 'next-intl/server';
+import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import "../../globals.css"; // desde src/app/[locale]/xteri-numb/ a src/app/globals.css
+import "../../globals.css";
 
 export const metadata = {
   title: "Xteri-Numb - No Pain Brand",
   description: "Spray desinfectante y anestésico para usar durante el tatuaje.",
 };
 
-export default async function XteriNumb({ params }: { params: { locale: string } }) {
-  const { locale } = await Promise.resolve(params);
-  const t = await getTranslations({ locale, namespace: 'products' });
-
-
+export default async function XteriNumb({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "products" });
 
   return (
     <>
       <Header locale={locale} />
-      <div className="h-16"></div>
+      <div className="h-16" />
+
       <main className="relative text-white min-h-screen font-sans">
-        <div className="absolute inset-0 bg-xterinum" />
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 py-24 px-6">
-          {/* HERO */}
-          <section className="text-center max-w-4xl mx-auto">
-            <Image
-              src="/xteri.png"
-              alt={t('xteriNumb') || 'Xteri-Numb'}
-              width={400}
-              height={400}
-              className="mx-auto rounded-lg shadow-lg"
-            />
-            <h1 className="text-3xl sm:text-4xl font-bold mt-6 text-white">
-              {t('xteriNumb') || 'Xteri-Numb'}
-            </h1>
-            <p className="text-base mt-4 text-white">
-              {t('xteriNumbTagline') || 'Spray desinfectante y anestésico para usar durante el tatuaje.'}
-            </p>
-          </section>
+        <div className="absolute inset-0 bg-xterinum bg-cover bg-center" />
+        <div className="absolute inset-0 bg-black/80" />
 
-          {/* DESCRIPCIÓN */}
-          <section className="mt-16 max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-semibold mb-4 text-white">{t('productDetails')}</h2>
-            <p className="text-base text-white">
-              {t('xteriNumbDescription') || 'Xteri-Numb es un spray diseñado para aplicar durante la sesión de tatuaje. Ayuda a mantener el área limpia, desinfectada y con menor sensibilidad al dolor.'}
-            </p>
-          </section>
+        <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
+          {/* 🔥 Imagen del producto */}
+          <Image
+            src="/xteri.png"
+            alt="Xteri-Numb Spray"
+            width={550}
+            height={550}
+            className="mx-auto mb-8 rounded-lg shadow-lg"
+            priority
+          />
 
-          {/* CARACTERÍSTICAS */}
-          <section className="mt-16 max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-semibold mb-4 text-white">{t('features')}</h2>
-            <ul className="mt-6 space-y-2 text-base text-white text-left max-w-md mx-auto">
-              <li>{t('xteriBenefit1') || '✔️ Uso seguro durante el tatuaje'}</li>
-              <li>{t('xteriBenefit2') || '✔️ Desinfecta y refresca la piel'}</li>
-              <li>{t('xteriBenefit3') || '✔️ Reduce la molestia en sesiones largas'}</li>
-              <li>{t('xteriBenefit4') || '✔️ No altera pigmentos ni cicatrización'}</li>
-            </ul>
-          </section>
+          <h1 className="text-4xl font-bold mb-6">{t("xteriNumb")}</h1>
+          <p className="text-lg text-gray-200 mb-8">{t("xteriNumbTagline")}</p>
 
-          {/* MODO DE USO */}
-          <section className="mt-16 max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-semibold mb-4 text-white">{t('usage') || 'Modo de uso'}</h2>
-            <ol className="list-decimal list-inside space-y-3 text-base text-white text-left max-w-md mx-auto">
-              <li>{t('xteriUsage1') || 'Agita bien antes de usar.'}</li>
-              <li>{t('xteriUsage2') || 'Rocía sobre la piel tatuada cada vez que sea necesario.'}</li>
-              <li>{t('xteriUsage3') || 'No enjuagar, deja que actúe de inmediato.'}</li>
-              <li>{t('xteriUsage4') || 'Evita contacto con ojos y mucosas.'}</li>
-            </ol>
-          </section>
+          <h2 className="text-2xl font-semibold">{t("productDetails")}</h2>
+          <p className="mb-6">{t("xteriNumbDescription")}</p>
 
-          {/* CONSEJOS */}
-          <section className="mt-16 max-w-3xl mx-auto text-center pb-20">
-            <h2 className="text-2xl font-semibold mb-4 text-white">{t('tips') || 'Consejos'}</h2>
-            <ul className="mt-6 space-y-2 text-base text-white text-left max-w-md mx-auto">
-              <li>{t('xteriTip1') || '💡 Mantener en lugar fresco y seco.'}</li>
-              <li>{t('xteriTip2') || '💡 Uso exclusivo profesional.'}</li>
-              <li>{t('xteriTip3') || '💡 No aplicar sobre heridas abiertas.'}</li>
-            </ul>
-          </section>
+          <h3 className="text-xl font-semibold mt-6">{t("features")}</h3>
+          <ul className="list-disc pl-6 text-left space-y-2">
+            <li>{t("xteriBenefit1")}</li>
+            <li>{t("xteriBenefit2")}</li>
+            <li>{t("xteriBenefit3")}</li>
+            <li>{t("xteriBenefit4")}</li>
+          </ul>
+
+          <h3 className="text-xl font-semibold mt-6">{t("usage")}</h3>
+          <ul className="list-disc pl-6 text-left space-y-2">
+            <li>{t("xteriUsage1")}</li>
+            <li>{t("xteriUsage2")}</li>
+            <li>{t("xteriUsage3")}</li>
+            <li>{t("xteriUsage4")}</li>
+          </ul>
+
+          <h3 className="text-xl font-semibold mt-6">{t("tips")}</h3>
+          <ul className="list-disc pl-6 text-left space-y-2">
+            <li>{t("xteriTip1")}</li>
+            <li>{t("xteriTip2")}</li>
+            <li>{t("xteriTip3")}</li>
+          </ul>
         </div>
       </main>
+
       <Footer />
     </>
   );
 }
 
 export async function generateStaticParams() {
-  return [{ locale: 'es' }, { locale: 'en' }];
+  return [{ locale: "es" }, { locale: "en" }];
 }

@@ -220,8 +220,9 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
     loop
     playsInline
     controls
+    preload="metadata"
   >
-    <source src="/video7.mp4" type="video/mp4" />
+    <source src="/video4.mp4" type="video/mp4" />
     {tGallery("videoNotSupported")}
   </video>
 
@@ -232,8 +233,9 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
     loop
     playsInline
     controls
+    preload="metadata"
   >
-    <source src="/video10.mp4" type="video/mp4" />
+    <source src="/video2.mp4" type="video/mp4" />
     {tGallery("videoNotSupported")}
   </video>
 </div>

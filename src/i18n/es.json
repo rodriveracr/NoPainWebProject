@@ -156,7 +156,60 @@
     "rights": "Todos los derechos reservados."
   },
   "FAQ": {
-    "pageTitle": "Preguntas Frecuentes"
+  "pageTitle": "Preguntas Frecuentes",
+  "noPain": {
+    "title": "Crema No Pain Numbing",
+    "q1": "¿Cuánto dura el efecto?",
+    "a1": "Dura entre 2 y 4 horas dependiendo del tipo de piel.",
+    "q2": "¿Afecta la cicatrización?",
+    "a2": "No, está diseñada para no interferir con la cicatrización natural.",
+    "q3": "¿Se puede usar en PMU (maquillaje permanente)?",
+    "a3": "Sí, es segura para tatuajes y maquillaje permanente.",
+    "q4": "¿Es de uso profesional?",
+    "a4": "Sí, su uso es exclusivo para profesionales.",
+    "q5": "¿Dónde puedo comprarla?",
+    "a5": "Consulta nuestra sección de distribuidores autorizados."
+  },
+  "xteri": {
+    "title": "Xteri-Numb",
+    "q1": "¿Cuándo se aplica?",
+    "a1": "Durante la sesión de tatuaje, según se necesite.",
+    "q2": "¿Desinfecta la piel?",
+    "a2": "Sí, contiene agentes desinfectantes.",
+    "q3": "¿Reduce el dolor?",
+    "a3": "Sí, ayuda a reducir las molestias en sesiones largas.",
+    "q4": "¿Afecta los pigmentos?",
+    "a4": "No, no altera el color ni la fijación.",
+    "q5": "¿Es de uso tópico?",
+    "a5": "Sí, se aplica superficialmente sobre la piel."
+  },
+  "wicann": {
+    "title": "Wicann",
+    "q1": "¿Para qué sirve?",
+    "a1": "Para calmar e hidratar la piel después del tatuaje.",
+    "q2": "¿Con qué frecuencia se aplica?",
+    "a2": "2 a 3 veces al día según necesidad.",
+    "q3": "¿Ayuda con el enrojecimiento?",
+    "a3": "Sí, reduce la irritación y las molestias.",
+    "q4": "¿Es natural?",
+    "a4": "Contiene extractos regeneradores de origen natural.",
+    "q5": "¿Puede usarlo cualquier persona?",
+    "a5": "Sí, es seguro para la mayoría de tipos de piel."
+  },
+  "greenSoap": {
+    "title": "Jabón Verde",
+    "q1": "¿Cómo se diluye?",
+    "a1": "1 parte de jabón con 9 partes de agua filtrada o destilada.",
+    "q2": "¿Se usa para limpiar la piel?",
+    "a2": "Sí, antes, durante y después del tatuaje.",
+    "q3": "¿Es seguro?",
+    "a3": "Sí, es una fórmula de grado profesional.",
+    "q4": "¿Se puede usar en equipos?",
+    "a4": "Sí, también sirve para limpiar superficies y equipos.",
+    "q5": "¿Contiene alcohol?",
+    "a5": "No, su formulación utiliza clorhexidina como activo."
+  }
+
   },
   "Legal": {
     "title": "Políticas y Legal",

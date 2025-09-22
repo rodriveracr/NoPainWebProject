@@ -1,3 +1,4 @@
+// src/app/[locale]/gallery/page.tsx
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,37 +11,31 @@ export const metadata = {
   description: "Discover photos and videos with No Pain Brand.",
 };
 
-export default async function Gallery(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params; // ✅ corregido
+export default async function Gallery({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Gallery" });
 
   return (
     <>
-      {/* HEADER */}
       <Header locale={locale} />
-      <div className="h-16"></div>
+      <div className="h-16" />
 
-      {/* MAIN */}
       <main className="bg-black text-white min-h-screen py-24 px-6 font-sans space-y-24">
-        {/* Encabezado */}
         <section className="text-center max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold">
-            {t("title") || "Gallery"}
-          </h1>
+          <h1 className="text-3xl sm:text-4xl font-bold">{t("title") || "Gallery"}</h1>
           <p className="text-base text-gray-300 mt-4">
-            {t("description") ||
-              "Discover our products, their real use, and our global story."}
+            {t("description") || "Discover our products, their real use, and our global story."}
           </p>
         </section>
 
-        {/* Sección Fotos */}
         <GalleryPhotos />
-
-        {/* Sección Videos */}
         <GalleryVideos />
       </main>
 
-      {/* FOOTER */}
       <Footer locale={locale} />
     </>
   );

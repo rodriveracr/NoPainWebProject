@@ -1,8 +1,10 @@
+// src/components/Footer.tsx
 "use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { getSlug } from "@/utils/slugMap";
+import NewsletterForm from "./NewsletterForm";
 
 export default function Footer({ locale = "es" }: { locale?: string }) {
   const t = useTranslations("Footer");
@@ -42,7 +44,7 @@ export default function Footer({ locale = "es" }: { locale?: string }) {
           <ul className="space-y-2">
             <li>
               <Link href={`/${locale}/${getSlug("contact", locale)}`} className="hover:text-white transition">
-              {t("contact")}
+                {t("contact")}
               </Link>
             </li>
 
@@ -67,21 +69,7 @@ export default function Footer({ locale = "es" }: { locale?: string }) {
         {/* NEWSLETTER */}
         <div className="text-center sm:text-left">
           <h3 className="font-semibold text-lg mb-3 text-white">{t("newsletterTitle")}</h3>
-          <form className="flex flex-col sm:flex-row items-center sm:items-start gap-3" suppressHydrationWarning>
-            <input
-              type="email"
-              placeholder={t("newsletterPlaceholder")}
-              className="px-3 py-2 rounded bg-gray-800 border border-gray-600 text-sm focus:outline-none focus:ring-1 focus:ring-pink-500 w-full sm:w-auto"
-              required
-              data-lpignore="true"
-            />
-            <button
-              type="submit"
-              className="px-4 py-2 bg-gradient-to-r from-pink-500 to-red-500 rounded text-white text-sm hover:opacity-90 transition"
-            >
-              {t("subscribe")}
-            </button>
-          </form>
+          <NewsletterForm locale={locale} />
         </div>
       </div>
 

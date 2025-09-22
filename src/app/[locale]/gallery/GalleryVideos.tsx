@@ -9,15 +9,15 @@ export default function GalleryVideos() {
   const t = useTranslations("Gallery");
 
   const videos = [
-    { src: "/video1.mp4", desc: t("usage1") },
-    { src: "/video2.mp4", desc: t("usage2") },
-    { src: "/video1.mp4", desc: t("usage1") },
-    { src: "/video2.mp4", desc: t("usage2") },
-    { src: "/video1.mp4", desc: t("usage1") },
-    { src: "/video2.mp4", desc: t("usage2") },
-    { src: "/video1.mp4", desc: t("usage1") },
-    { src: "/video2.mp4", desc: t("usage2") },
-    { src: "/video1.mp4", desc: t("usage1") },
+    { src: "/video2.mp4", desc: t("usage1") },
+    { src: "/video6.mp4", desc: t("usage2") },
+    { src: "/video2.mp4", desc: t("usage1") },
+    { src: "/video6.mp4", desc: t("usage2") },
+    { src: "/video2.mp4", desc: t("usage1") },
+    { src: "/video6.mp4", desc: t("usage2") },
+    { src: "/video2.mp4", desc: t("usage1") },
+    { src: "/video6.mp4", desc: t("usage2") },
+    { src: "/video2.mp4", desc: t("usage1") },
     // 👉 agrega más videos aquí
   ];
 
