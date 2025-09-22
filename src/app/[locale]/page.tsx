@@ -153,7 +153,7 @@ const REGIONS: Region[] = [
 ];
 
 export default async function Home(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params; // ✅ corregido
+  const { locale } = await props.params;
 
   // ✅ Traducciones
   const tHero = await getTranslations({ locale, namespace: "Hero" });
@@ -207,40 +207,38 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
               <li>{tAbout("result3")}</li>
             </ul>
           </div>
-          <p className="max-w-3xl mx-auto text-white mt-8">
-            {tAbout("closing")}
-          </p>
+          <p className="max-w-3xl mx-auto text-white mt-8">{tAbout("closing")}</p>
 
-{/* 🎥 GRID DE VIDEOS */}
-<div className="mt-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
-  <video
-    className="w-full rounded-lg"
-    autoPlay
-    muted
-    loop
-    playsInline
-    controls
-    preload="metadata"
-  >
-    <source src="/video4.mp4" type="video/mp4" />
-    {tGallery("videoNotSupported")}
-  </video>
+          {/* 🎥 GRID DE VIDEOS */}
+          <div className="mt-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <video
+              className="w-full rounded-lg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+            >
+              <source src="/videos/video4.webm" type="video/webm" />
+              <source src="/videos/video4.mp4" type="video/mp4" />
+              {tGallery("videoNotSupported")}
+            </video>
 
-  <video
-    className="w-full rounded-lg"
-    autoPlay
-    muted
-    loop
-    playsInline
-    controls
-    preload="metadata"
-  >
-    <source src="/video2.mp4" type="video/mp4" />
-    {tGallery("videoNotSupported")}
-  </video>
-</div>
-
-
+            <video
+              className="w-full rounded-lg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+            >
+              <source src="/videos/video2.webm" type="video/webm" />
+              <source src="/videos/video2.mp4" type="video/mp4" />
+              {tGallery("videoNotSupported")}
+            </video>
+          </div>
         </section>
 
         {/* PRODUCTOS */}
@@ -287,9 +285,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                   className="mx-auto object-cover rounded-lg"
                   loading="lazy"
                 />
-                <h3 className="mt-4 text-xl font-semibold text-white">
-                  {p.title}
-                </h3>
+                <h3 className="mt-4 text-xl font-semibold text-white">{p.title}</h3>
                 <p className="text-base text-white flex-grow">{p.desc}</p>
                 <Link
                   href={p.link}
@@ -359,9 +355,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                                     {d.name}
                                   </a>
                                 ) : (
-                                  <span className="flex items-center gap-2">
-                                    {d.name}
-                                  </span>
+                                  <span className="flex items-center gap-2">{d.name}</span>
                                 )}
 
                                 <a

@@ -9,19 +9,19 @@ export default function GalleryVideos() {
   const t = useTranslations("Gallery");
 
   const videos = [
-    { src: "/video2.mp4", desc: t("usage1") },
-    { src: "/video6.mp4", desc: t("usage2") },
-    { src: "/video2.mp4", desc: t("usage1") },
-    { src: "/video6.mp4", desc: t("usage2") },
-    { src: "/video2.mp4", desc: t("usage1") },
-    { src: "/video6.mp4", desc: t("usage2") },
-    { src: "/video2.mp4", desc: t("usage1") },
-    { src: "/video6.mp4", desc: t("usage2") },
-    { src: "/video2.mp4", desc: t("usage1") },
-    // 👉 agrega más videos aquí
+    { base: "video2", desc: t("usage1") },
+    { base: "video6", desc: t("usage2") },
+    { base: "video4", desc: t("usage1") },
+    { base: "video7", desc: t("usage2") },
+    { base: "video8", desc: t("usage1") },
+    { base: "video9", desc: t("usage2") },
+    { base: "video10", desc: t("usage1") },
+    { base: "video1", desc: t("usage2") },
+    { base: "video10", desc: t("usage1") },
+    { base: "video1", desc: t("usage2") },
   ];
 
-  const maxVisible = 8; // ✅ 4 columnas × 2 filas
+  const maxVisible = 8; // 4 columnas × 2 filas
   const visibleVideos = videos.slice(0, maxVisible - 1); // primeras 7
   const remaining =
     videos.length > maxVisible ? videos.length - (maxVisible - 1) : 0;
@@ -45,12 +45,16 @@ export default function GalleryVideos() {
               className="relative cursor-pointer overflow-hidden rounded-2xl border border-gray-700 hover:scale-105 transition-transform shadow-lg"
             >
               <video
-                src={video.src}
+                autoPlay
                 muted
                 loop
-                autoPlay
+                playsInline
                 className="object-cover w-full h-[500px] lg:h-[550px] rounded-lg"
-              />
+              >
+                <source src={`/videos/${video.base}.webm`} type="video/webm" />
+                <source src={`/videos/${video.base}.mp4`} type="video/mp4" />
+                {t("videoNotSupported")}
+              </video>
               <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
                 <p className="text-white text-lg font-semibold">{video.desc}</p>
               </div>
@@ -99,12 +103,22 @@ export default function GalleryVideos() {
             {/* Video + texto */}
             <div className="flex flex-col md:flex-row items-center gap-6 max-w-6xl p-4">
               <video
-                src={videos[current].src}
                 controls
                 autoPlay
                 muted
+                playsInline
                 className="rounded-lg max-h-[85vh] w-auto"
-              />
+              >
+                <source
+                  src={`/videos/${videos[current].base}.webm`}
+                  type="video/webm"
+                />
+                <source
+                  src={`/videos/${videos[current].base}.mp4`}
+                  type="video/mp4"
+                />
+                {t("videoNotSupported")}
+              </video>
               <div className="text-white max-w-sm">
                 <h3 className="text-xl font-bold mb-4">
                   {videos[current].desc}
