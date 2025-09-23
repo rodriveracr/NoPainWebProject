@@ -31,8 +31,8 @@ export default async function XteriNumb({
           <Image
             src="/xteri.png"
             alt="Xteri-Numb Spray"
-            width={550}
-            height={550}
+            width={450}
+            height={450}
             className="mx-auto mb-8 rounded-lg shadow-lg"
             priority
           />

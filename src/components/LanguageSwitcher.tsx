@@ -1,39 +1,48 @@
-// src/components/LanguageSwitcher.tsx
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
 
-export default function LanguageSwitcher() {
+type Props = {
+  small?: boolean;
+};
+
+export default function LanguageSwitcher({ small }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const changeLanguage = (locale: string) => {
+  const changeLanguage = (lang: string) => {
     if (!pathname) return;
     const segments = pathname.split("/");
-    segments[1] = locale; // cambia /es → /en
+    segments[1] = lang;
     router.push(segments.join("/"));
   };
 
-  const current = pathname?.startsWith("/en") ? "en" : "es";
-
   return (
-    <div className="flex space-x-2">
+    <div className={`flex justify-center space-x-2 ${small ? "text-xs" : "text-sm"}`}>
       <button
         onClick={() => changeLanguage("es")}
-        className={`px-3 py-1 rounded text-sm font-medium transition ${
-          current === "es"
+        className={`rounded font-bold transition ${
+          small
+            ? "px-2 py-1 text-xs"
+            : "px-3 py-2 text-sm"
+        } ${
+          pathname?.startsWith("/es")
             ? "bg-pink-600 text-white"
-            : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            : "bg-gray-700 text-white"
         }`}
       >
         ES
       </button>
       <button
         onClick={() => changeLanguage("en")}
-        className={`px-3 py-1 rounded text-sm font-medium transition ${
-          current === "en"
+        className={`rounded font-bold transition ${
+          small
+            ? "px-2 py-1 text-xs"
+            : "px-3 py-2 text-sm"
+        } ${
+          pathname?.startsWith("/en")
             ? "bg-pink-600 text-white"
-            : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+            : "bg-gray-700 text-white"
         }`}
       >
         EN

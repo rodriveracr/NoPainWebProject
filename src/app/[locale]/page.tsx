@@ -213,7 +213,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           {/* 🎥 GRID DE VIDEOS (Cloudinary) */}
           <div className="mt-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
             <video
-              className="w-full rounded-lg"
+              className="w-full h-[500px] object-cover rounded-lg"
               autoPlay
               muted
               loop
@@ -227,7 +227,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
             </video>
 
             <video
-              className="w-full rounded-lg"
+              className="w-full h-[500px] object-cover rounded-lg"
               autoPlay
               muted
               loop

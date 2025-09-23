@@ -20,24 +20,24 @@ export default async function GreenSoap({
   return (
     <>
       <Header locale={locale} />
-      <div className="h-16" />
+      <div className="h-15" />
 
       <main className="relative text-white min-h-screen font-sans">
         <div className="absolute inset-0 bg-greensoap bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/80" />
 
-        <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
+        <div className="relative z-5 py-5 px-2 max-w-4xl mx-auto text-center">
           {/* 🔥 Imagen del producto */}
           <Image
             src="/GreenSoap.png"
             alt="Jabón Verde"
-            width={550}
-            height={550}
-            className="mx-auto mb-8 rounded-lg shadow-lg"
+            width={400}
+            height={400}
+            className="mx-auto mb-20 rounded-lg shadow-lg"
             priority
           />
 
-          <h1 className="text-4xl font-bold mb-6">{t("greenSoap")}</h1>
+          <h1 className="text-4xl font-bold mb-30">{t("greenSoap")}</h1>
           <p className="text-lg text-gray-200 mb-8">{t("greenSoapTagline")}</p>
 
           <h2 className="text-2xl font-semibold">{t("productDetails")}</h2>

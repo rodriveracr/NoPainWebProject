@@ -31,8 +31,8 @@ export default async function NoPainNumbingCream({
           <Image
             src="/numbing-bg.jpg" // asegúrate que este archivo exista en /public
             alt="No Pain Numbing Cream"
-            width={550}
-            height={550}
+            width={500}
+            height={500}
             className="mx-auto mb-8 rounded-lg shadow-lg"
             priority
           />

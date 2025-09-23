@@ -31,8 +31,8 @@ export default async function Wicann({
           <Image
             src="/wicann23.jpg"
             alt="Wicann"
-            width={550}
-            height={550}
+            width={450}
+            height={450}
             className="mx-auto mb-8 rounded-lg shadow-lg"
             priority
           />

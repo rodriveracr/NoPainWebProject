@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -8,53 +7,91 @@ import { useTranslations } from "next-intl";
 export default function GalleryVideos() {
   const t = useTranslations("Gallery");
 
-  // ✅ Videos de Cloudinary (solo válidos, sin duplicados)
   const videos = [
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575932/video10_scucel.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575946/video10_ytjveg.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591186/video1_i3p6na.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590810/video1_yayuse.mp4",
       ],
       desc: t("usage1"),
     },
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575925/video6_nrrxvf.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video6_tm6zvu.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591192/video2_onqzug.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590829/video2_yq7teb.mp4",
       ],
       desc: t("usage2"),
     },
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575938/video2_e3y1ve.mp4",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575924/video2_hqa5wk.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591186/video3_ozteiz.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590810/video3_uglbf5.mp4",
       ],
       desc: t("usage1"),
     },
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575923/video7_do4jtr.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575922/video7_gb7ngw.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591207/video4_rvedvq.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590819/video4_n8d3ad.mp4",
       ],
       desc: t("usage2"),
     },
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758575926/video8_pmtnmy.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video5_kfeaxg.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590811/video5_rxowee.mp4",
       ],
       desc: t("usage1"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591189/video6_pmlgvj.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video6_odecam.mp4",
+      ],
+      desc: t("usage2"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video7_tbyozu.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video7_kqrijw.mp4",
+      ],
+      desc: t("usage1"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591188/video8_mmv8lu.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590813/video8_lblkzn.mp4",
+      ],
+      desc: t("usage2"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video9_mmd6uq.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590815/video9_o2dyim.mp4",
+      ],
+      desc: t("usage1"),
+    },
+    {
+      sources: [
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video10_bvqxrv.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590825/video10_ulyyst.mp4",
+      ],
+      desc: t("usage2"),
     },
   ];
 
-  const maxVisible = 4;
-  const visibleVideos = videos.slice(0, maxVisible);
-  const remaining = videos.length > maxVisible ? videos.length - maxVisible : 0;
+  const maxVisible = 8;
+  const visibleVideos = videos.slice(0, maxVisible - 1);
+  const remaining = videos.length > maxVisible ? videos.length - (maxVisible - 1) : 0;
 
   const [current, setCurrent] = useState<number | null>(null);
 
-  const next = () => setCurrent((prev) => (prev! + 1) % videos.length);
+  const next = () =>
+    setCurrent((prev) => (prev !== null ? (prev + 1) % videos.length : 0));
   const prev = () =>
-    setCurrent((prev) => (prev! - 1 + videos.length) % videos.length);
+    setCurrent((prev) =>
+      prev !== null ? (prev - 1 + videos.length) % videos.length : videos.length - 1
+    );
 
   return (
     <>
@@ -90,9 +127,10 @@ export default function GalleryVideos() {
             </div>
           ))}
 
+          {/* Bloque +X */}
           {remaining > 0 && (
             <div
-              onClick={() => setCurrent(maxVisible)}
+              onClick={() => setCurrent(maxVisible - 1)}
               className="flex items-center justify-center bg-gray-800 rounded-2xl cursor-pointer hover:bg-gray-700 transition h-[500px] lg:h-[550px]"
             >
               <span className="text-3xl font-bold text-white">+{remaining}</span>
@@ -117,7 +155,6 @@ export default function GalleryVideos() {
             >
               <X size={32} />
             </button>
-
             <button
               onClick={prev}
               title="Previous"
@@ -126,27 +163,29 @@ export default function GalleryVideos() {
               <ChevronLeft size={40} />
             </button>
 
+            {/* Video con marco uniforme */}
             <div className="flex flex-col md:flex-row items-center gap-6 max-w-6xl p-4">
-              <video
-                controls
-                autoPlay
-                muted
-                playsInline
-                className="rounded-lg max-h-[85vh] w-auto"
-              >
-                {videos[current].sources.map((src, i) => (
-                  <source
-                    key={i}
-                    src={src}
-                    type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
-                  />
-                ))}
-                {t("videoNotSupported")}
-              </video>
+              <div className="bg-black rounded-lg flex items-center justify-center w-[1280px] h-[720px]">
+                <video
+                  key={current} // 🔑 fuerza actualización al cambiar
+                  controls
+                  autoPlay
+                  muted
+                  playsInline
+                  className="max-w-full max-h-full object-contain rounded-lg"
+                >
+                  {videos[current].sources.map((src, i) => (
+                    <source
+                      key={i}
+                      src={src}
+                      type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
+                    />
+                  ))}
+                  {t("videoNotSupported")}
+                </video>
+              </div>
               <div className="text-white max-w-sm">
-                <h3 className="text-xl font-bold mb-4">
-                  {videos[current].desc}
-                </h3>
+                <h3 className="text-xl font-bold mb-4">{videos[current].desc}</h3>
                 <p className="text-gray-300">
                   Aquí puedes poner una breve descripción del video.
                 </p>
