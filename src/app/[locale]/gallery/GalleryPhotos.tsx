@@ -23,10 +23,10 @@ export default function GalleryPhotos() {
     { src: "/_CZC3283-Editar.jpg", alt: "Xteri Spray" },
     { src: "/_CZC3396-Editar.jpg", alt: "Wicann" },
     { src: "/Green Soap 2.jpg", alt: "Green Soap" },
-    { src: "/_czc3133.jpg", alt: "No Pain Tube" },
-    { src: "/kar.jpg", alt: "Xteri Bottle" },
-    { src: "/_CZC3302-Editar.jpg", alt: "No Pain Display" },
-    { src: "/CZC_6145.jpg", alt: "Green Soap Bottle" },
+    { src: "/kar.jpg", alt: "No Pain Tube" },
+    { src: "/IMG_4897 copia.jpg", alt: "Xteri Bottle" },
+    { src: "/linea.jpg", alt: "No Pain Display" },
+    { src: "/grees.jpg", alt: "Green Soap Bottle" },
   ];
 
   const [current, setCurrent] = useState<number | null>(null);
