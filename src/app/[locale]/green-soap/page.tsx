@@ -1,5 +1,6 @@
-//src/app/[locale]/green-soap/page.tsx
+// src/app/[locale]/green-soap/page.tsx
 import Image from "next/image";
+import { Suspense } from "react"; // 👈 IMPORTANTE
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,14 +21,18 @@ export default async function GreenSoap({
 
   return (
     <>
-      <Header locale={locale} />
-      <div className="h-15" />
+      {/* ✅ Header en Suspense */}
+      <Suspense fallback={<div>Loading header...</div>}>
+        <Header locale={locale} />
+      </Suspense>
 
-      <main className="relative text-white min-h-screen font-sans">
+      <div className="h-16" />
+
+      <main className="relative text-white min-h-screen font-franklin">
         <div className="absolute inset-0 bg-greensoap bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/80" />
 
-        <div className="relative z-5 py-5 px-2 max-w-4xl mx-auto text-center">
+        <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
           {/* 🔥 Imagen del producto */}
           <Image
             src="/Green-Soap-1.jpg"
@@ -38,7 +43,7 @@ export default async function GreenSoap({
             priority
           />
 
-          <h1 className="text-4xl font-bold mb-30">{t("greenSoap")}</h1>
+          <h1 className="text-4xl font-bold mb-8">{t("greenSoap")}</h1>
           <p className="text-lg text-gray-200 mb-8">{t("greenSoapTagline")}</p>
 
           <h2 className="text-2xl font-semibold">{t("productDetails")}</h2>
@@ -71,7 +76,10 @@ export default async function GreenSoap({
         </div>
       </main>
 
-      <Footer />
+      {/* ✅ Footer en Suspense */}
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </>
   );
 }

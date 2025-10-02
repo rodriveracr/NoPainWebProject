@@ -8,6 +8,7 @@ import { useTranslations, useLocale } from "next-intl";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../../globals.css";
+import { Suspense } from "react"; // 👈 para seguridad con Header/Footer
 
 export default function Contact() {
   const t = useTranslations("Contact");
@@ -33,7 +34,6 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("🔥 handleSubmit ACTIVADO con:", formData);
 
     try {
       const res = await fetch("/api/contact", {
@@ -43,19 +43,17 @@ export default function Contact() {
       });
 
       const json = await res.json().catch(() => ({}));
-      console.log("📥 Respuesta backend /api/contact:", res.status, json);
 
       if (res.ok && json && json.success) {
-        // Mostrar toda la respuesta para depuración (frontend)
-        // Esto mostrará requestId, support, client, newsletter, etc.
-        alert("Enviado OK. Respuesta backend:\n\n" + JSON.stringify(json, null, 2));
+        alert(
+          "✅ Enviado OK:\n\n" + JSON.stringify(json, null, 2)
+        );
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
       } else {
-        // Mostrar detalle de error si existe
         const errDetail =
-          (json && (json.error || JSON.stringify(json))) || "Error sending message.";
-        console.error("❌ Error en /api/contact:", errDetail);
-        alert("Error: " + (typeof errDetail === "string" ? errDetail : JSON.stringify(errDetail)));
+          (json && (json.error || JSON.stringify(json))) ||
+          "Error sending message.";
+        alert("❌ Error: " + errDetail);
       }
     } catch (err) {
       console.error("❌ Error en fetch /api/contact:", err);
@@ -65,9 +63,13 @@ export default function Contact() {
 
   return (
     <>
-      <Header locale={locale} />
+      {/* ✅ Header en Suspense */}
+      <Suspense fallback={<div>Loading header...</div>}>
+        <Header locale={locale} />
+      </Suspense>
       <div className="h-16" />
-      <main className="bg-black text-white min-h-screen py-24 px-6 font-sans">
+
+      <main className="bg-black text-white min-h-screen py-24 px-6 font-franklin">
         <section className="text-center max-w-3xl mx-auto mb-16">
           <h1 className="text-3xl sm:text-4xl font-bold">{t("title")}</h1>
           <p className="text-base text-gray-300 mt-4">{t("description")}</p>
@@ -116,7 +118,9 @@ export default function Contact() {
                 height={28}
                 className="opacity-80"
               />
-              <h3 className="font-semibold text-lg text-center">{t("whatsappTitle")}</h3>
+              <h3 className="font-semibold text-lg text-center">
+                {t("whatsappTitle")}
+              </h3>
               <span className="sr-only">+506 8315 1806</span>
             </a>
           </div>
@@ -124,9 +128,6 @@ export default function Contact() {
 
         {/* FORMULARIO */}
         <section className="max-w-lg mx-auto">
-          {/* ⚡ log visual para confirmar que el form es el nuevo */}
-          <p className="text-red-500 text-sm">⚡ Formulario listo con POST</p>
-
           <form onSubmit={handleSubmit} className="space-y-4" method="post">
             <input
               type="text"
@@ -175,7 +176,11 @@ export default function Contact() {
           </form>
         </section>
       </main>
-      <Footer />
+
+      {/* ✅ Footer en Suspense */}
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </>
   );
 }

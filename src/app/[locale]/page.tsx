@@ -1,6 +1,7 @@
 // src/app/[locale]/page.tsx
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react"; // 👈 IMPORTANTE
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -156,7 +157,12 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
   return (
     <>
       <main className="text-white bg-black min-h-screen font-franklin">
-        <Header locale={locale} />
+
+        {/* ✅ Header envuelto en Suspense */}
+        <Suspense fallback={<div>Loading header...</div>}>
+          <Header locale={locale} />
+        </Suspense>
+
         <div className="h-16"></div>
 
         {/* HERO */}
@@ -219,13 +225,13 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
               >
                 <video
                   className="w-full h-full object-cover"
-                  autoPlay={true}
-                  muted={true}
-                  loop={true}
-                  playsInline={true}
-                  controls={true}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
                   preload="metadata"
-                  suppressHydrationWarning={true}
+                  suppressHydrationWarning
                 >
                   {video.sources.map((src, i) => (
                     <source
@@ -402,8 +408,10 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         </section>
       </main>
 
-      {/* ✅ Footer fuera de <main> */}
-      <Footer locale={locale} />
+      {/* ✅ Footer envuelto en Suspense */}
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </>
   );
 }

@@ -1,5 +1,6 @@
-//src/app/[locale]/no-pain-numbing-cream/page.tsx
+// src/app/[locale]/no-pain-numbing-cream/page.tsx
 import Image from "next/image";
+import { Suspense } from "react"; // 👈 IMPORTANTE
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -19,7 +20,11 @@ export default async function NoPainNumbingCream({
 
   return (
     <>
-      <Header locale={locale} />
+      {/* ✅ Header envuelto en Suspense */}
+      <Suspense fallback={<div>Loading header...</div>}>
+        <Header locale={locale} />
+      </Suspense>
+
       <div className="h-16" />
 
       <main className="relative text-white min-h-screen font-franklin">
@@ -70,7 +75,10 @@ export default async function NoPainNumbingCream({
         </div>
       </main>
 
-      <Footer locale={locale} />
+      {/* ✅ Footer envuelto en Suspense */}
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </>
   );
 }

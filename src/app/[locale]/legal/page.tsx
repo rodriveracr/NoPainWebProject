@@ -1,8 +1,9 @@
-//src/app/[locale]/legal/page.tsx
+// src/app/[locale]/legal/page.tsx
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../../globals.css";
+import { Suspense } from "react"; // 👈 agregado
 
 export const metadata = {
   title: "Políticas y Legal - No Pain Brand",
@@ -19,10 +20,13 @@ export default async function LegalPage({
 
   return (
     <>
-      <Header locale={locale} />
+      {/* ✅ Header con Suspense */}
+      <Suspense fallback={<div>Loading header...</div>}>
+        <Header locale={locale} />
+      </Suspense>
       <div className="h-16" />
 
-      <main className="relative text-white min-h-screen font-sans">
+      <main className="relative text-white min-h-screen font-franklin">
         <div className="absolute inset-0 hero-bg" />
         <div className="absolute inset-0 bg-black/80" />
 
@@ -65,7 +69,10 @@ export default async function LegalPage({
         </div>
       </main>
 
-      <Footer />
+      {/* ✅ Footer con Suspense */}
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </>
   );
 }

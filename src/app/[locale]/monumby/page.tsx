@@ -1,6 +1,7 @@
-//src/app/[locale]/monumby/page.tsx
+// src/app/[locale]/monumby/page.tsx
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react"; // 👈 IMPORTANTE
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getTranslations } from "next-intl/server";
@@ -14,12 +15,14 @@ export default async function MonumbyPage(props: {
   const t = await getTranslations({ locale, namespace: "Monumby" });
 
   return (
-    <div className="relative min-h-screen bg-black text-white font-sans">
-      {/* HEADER */}
-      <Header locale={locale} />
+    <div className="relative min-h-screen bg-black text-white font-franklin">
+      {/* ✅ Header en Suspense */}
+      <Suspense fallback={<div>Loading header...</div>}>
+        <Header locale={locale} />
+      </Suspense>
       <div className="h-16" />
 
-      {/* HERO (fusionado con CTA final) */}
+      {/* HERO */}
       <section className="h-[90vh] flex flex-col items-center justify-center text-center px-6 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-black via-pink-900/20 to-black" />
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -28,7 +31,7 @@ export default async function MonumbyPage(props: {
             alt="Monumby Logo"
             width={600}
             height={600}
-            className="mx-auto -top-8 mb2 drop-shadow-lg"
+            className="mx-auto -top-8 mb-2 drop-shadow-lg"
             priority
           />
           <h1 className="text-4xl md:text-5xl font-bold uppercase mb-4">
@@ -58,8 +61,10 @@ export default async function MonumbyPage(props: {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <Footer locale={locale} />
+      {/* ✅ Footer en Suspense */}
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </div>
   );
 }

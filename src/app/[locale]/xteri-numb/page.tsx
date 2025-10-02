@@ -1,4 +1,6 @@
+// src/app/[locale]/xteri-numb/page.tsx
 import Image from "next/image";
+import { Suspense } from "react"; // 👈 IMPORTANTE
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -19,10 +21,14 @@ export default async function XteriNumb({
 
   return (
     <>
-      <Header locale={locale} />
+      {/* ✅ Header envuelto en Suspense */}
+      <Suspense fallback={<div>Loading header...</div>}>
+        <Header locale={locale} />
+      </Suspense>
+
       <div className="h-16" />
 
-      <main className="relative text-white min-h-screen font-sans">
+      <main className="relative text-white min-h-screen font-franklin">
         <div className="absolute inset-0 bg-xterinum bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/80" />
 
@@ -68,7 +74,10 @@ export default async function XteriNumb({
         </div>
       </main>
 
-      <Footer />
+      {/* ✅ Footer envuelto en Suspense con locale */}
+      <Suspense fallback={<div>Loading footer...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </>
   );
 }
