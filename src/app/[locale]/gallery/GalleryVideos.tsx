@@ -22,58 +22,58 @@ export default function GalleryVideos() {
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591188/video8_mmv8lu.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590813/video8_lblkzn.mp4",
       ],
-      desc: t("usage1"),
+      desc: t("video1.overlay"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video9_mmd6uq.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590815/video9_o2dyim.mp4",
       ],
-      desc: t("usage2"),
+      desc: t("video2.overlay"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591189/video6_pmlgvj.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video6_odecam.mp4",
       ],
-      desc: t("usage1"),
+      desc: t("video3.overlay"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591207/video4_rvedvq.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590819/video4_n8d3ad.mp4",
       ],
-      desc: t("usage2"),
+      desc: t("video4.overlay"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video5_kfeaxg.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590811/video5_rxowee.mp4",
       ],
-      desc: t("usage1"),
+      desc: t("video5.overlay"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video7_tbyozu.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video7_kqrijw.mp4",
       ],
-      desc: t("usage2"),
+      desc: t("video6.overlay"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video10_bvqxrv.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590825/video10_ulyyst.mp4",
       ],
-      desc: t("usage2"),
+      desc: t("video7.overlay"),
     },
     {
       sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1759418641/wicannx_miwtnu.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1759418642/wicannx_mawau8.mp4",
       ],
-      desc: t("video8.overlay"), // ✅ usa overlay de video8
+      desc: t("video8.overlay"),
     },
-  ]; // 👈 ahora 8 videos fijos
+  ]; // ✅ ahora todos usan videoX.overlay en lugar de usage1/usage2
 
   const [current, setCurrent] = useState<number | null>(null);
 
@@ -81,7 +81,9 @@ export default function GalleryVideos() {
     setCurrent((prev) => (prev !== null ? (prev + 1) % videos.length : 0));
   const prev = () =>
     setCurrent((prev) =>
-      prev !== null ? (prev - 1 + videos.length) % videos.length : videos.length - 1
+      prev !== null
+        ? (prev - 1 + videos.length) % videos.length
+        : videos.length - 1
     );
 
   return (

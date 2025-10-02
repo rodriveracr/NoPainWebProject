@@ -1,4 +1,3 @@
-// src/app/[locale]/contact/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -8,7 +7,7 @@ import { useTranslations, useLocale } from "next-intl";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../../globals.css";
-import { Suspense } from "react"; // 👈 para seguridad con Header/Footer
+import { Suspense } from "react"; 
 
 export default function Contact() {
   const t = useTranslations("Contact");
@@ -20,6 +19,9 @@ export default function Contact() {
     mensaje: "",
     newsletter: false,
   });
+
+  const [status, setStatus] = useState<null | "sending" | "ok" | "error">(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,6 +37,9 @@ export default function Contact() {
     e.preventDefault();
     e.stopPropagation();
 
+    setStatus("sending");
+    setMessage(null);
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -45,25 +50,39 @@ export default function Contact() {
       const json = await res.json().catch(() => ({}));
 
       if (res.ok && json && json.success) {
-        alert(
-          "✅ Enviado OK:\n\n" + JSON.stringify(json, null, 2)
-        );
+        setStatus("ok");
+        setMessage("✅ Tu mensaje fue enviado correctamente.");
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
+
+        setTimeout(() => {
+          setStatus(null);
+          setMessage(null);
+        }, 4000);
       } else {
         const errDetail =
           (json && (json.error || JSON.stringify(json))) ||
-          "Error sending message.";
-        alert("❌ Error: " + errDetail);
+          "Error enviando el mensaje.";
+        setStatus("error");
+        setMessage("❌ " + errDetail);
+
+        setTimeout(() => {
+          setStatus(null);
+          setMessage(null);
+        }, 5000);
       }
     } catch (err) {
       console.error("❌ Error en fetch /api/contact:", err);
-      alert("An error occurred. Please try again later.");
+      setStatus("error");
+      setMessage("❌ Ocurrió un error. Inténtalo de nuevo.");
+      setTimeout(() => {
+        setStatus(null);
+        setMessage(null);
+      }, 5000);
     }
   };
 
   return (
     <>
-      {/* ✅ Header en Suspense */}
       <Suspense fallback={<div>Loading header...</div>}>
         <Header locale={locale} />
       </Suspense>
@@ -169,15 +188,26 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="w-full py-2 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded hover:opacity-90 transition"
+              className="w-full py-2 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded hover:opacity-90 transition disabled:opacity-50"
+              disabled={status === "sending"}
             >
-              {t("submit")}
+              {status === "sending" ? "..." : t("submit")}
             </button>
           </form>
+
+          {message && (
+            <div
+              className={`mt-4 text-center ${
+                status === "ok" ? "text-green-400" : "text-red-400"
+              }`}
+              role="status"
+            >
+              {message}
+            </div>
+          )}
         </section>
       </main>
 
-      {/* ✅ Footer en Suspense */}
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer locale={locale} />
       </Suspense>

@@ -200,16 +200,19 @@
     "headOffice": "Oficinas centrales",
     "ordersUSA": "Pedidos dentro de USA"
   },
-  "Footer": {
-    "linksTitle": "ENLACES",
-    "contact": "CONTACTO",
-    "suppliers": "DISTRIBUIDORES",
-    "faq": "PREGUNTAS FRECUENTES",
-    "legal": "POLÍTICAS & LEGAL",
-    "newsletterTitle": "RECIBE NOVEDADES",
-    "newsletterPlaceholder": "tu@email.com",
-    "subscribe": "SUSCRIBIRSE",
-    "rights": "Todos los derechos reservados."
+"Footer": {
+  "linksTitle": "ENLACES",
+  "contact": "CONTACTO",
+  "suppliers": "DISTRIBUIDORES",
+  "faq": "PREGUNTAS FRECUENTES",
+  "legal": "POLÍTICAS & LEGAL",
+  "newsletterTitle": "RECIBE NOVEDADES",
+  "newsletterPlaceholder": "tu@email.com",
+  "subscribe": "SUSCRIBIRSE",
+  "newsletterSuccess": "✅ Gracias — suscripción correcta",
+  "newsletterError": "❌ No se pudo completar la suscripción. Intenta nuevamente.",
+  "rights": "Todos los derechos reservados."
+
   },
   "Monumby": {
     "title": "Mother of Numby",

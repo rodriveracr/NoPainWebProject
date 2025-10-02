@@ -200,16 +200,22 @@
     "headOffice": "Head office",
     "ordersUSA": "Orders within the USA"
   },
-  "Footer": {
-    "linksTitle": "LINKS",
-    "contact": "CONTACT",
-    "suppliers": "SUPPLIERS",
-    "faq": "FAQ",
-    "legal": "POLICIES & LEGAL",
-    "newsletterTitle": "GET UPDATES",
-    "newsletterPlaceholder": "your@email.com",
-    "subscribe": "SUBSCRIBE",
-    "rights": "All rights reserved."
+ "Footer": {
+  "linksTitle": "LINKS",
+  "contact": "CONTACT",
+  "suppliers": "SUPPLIERS",
+  "faq": "FAQ",
+  "legal": "POLICIES & LEGAL",
+  "newsletterTitle": "GET UPDATES",
+  "newsletterPlaceholder": "your@email.com",
+  "subscribe": "SUBSCRIBE",
+  "newsletterSuccess": "✅ Thank you — subscription successful",
+  "newsletterError": "❌ Could not complete subscription. Please try again.",
+  "rights": "All rights reserved."
+
+    
+    
+    
   },
   "Monumby": {
     "title": "Mother of Numby",
