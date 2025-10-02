@@ -305,107 +305,109 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         </section>
 
         {/* PROVEEDORES */}
-        <section id="proveedores" className="py-24 px-6 bg-black">
-          <h2 className="text-3xl font-semibold text-center mb-16 uppercase">
-            {tSuppliers("title")}
-          </h2>
+<section id="proveedores" className="py-24 px-6 bg-black">
+  <h2 className="text-3xl font-semibold text-center mb-16 uppercase">
+    {tSuppliers("title")}
+  </h2>
 
-          <div className="max-w-6xl mx-auto space-y-16">
-            {REGIONS.map((region) => (
-              <div key={region.name}>
-                <h3 className="text-2xl font-bold mb-8 text-center uppercase">
-                  {tSuppliers(region.name)}
-                </h3>
+  <div className="max-w-6xl mx-auto space-y-16">
+    {REGIONS.map((region) => (
+      <div key={region.name}>
+        <h3 className="text-2xl font-bold mb-8 text-center uppercase">
+          {tSuppliers(region.name)}
+        </h3>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  {region.countries.map((country) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {region.countries.map((country) => (
+            <div
+              key={country.name}
+              className="border border-gray-700 rounded-xl p-5 hover:border-gray-500 transition"
+            >
+              <h4 className="text-xl font-semibold mb-4 flex items-center gap-2 uppercase">
+                <Image
+                  src={country.flag}
+                  alt={tSuppliers(country.name)}
+                  width={24}
+                  height={16}
+                  className="rounded-sm"
+                  loading="lazy"
+                />
+                {tSuppliers(country.name)}
+              </h4>
+
+              <div className="space-y-3 text-white">
+                {country.dists.map((d, index) => {
+                  const wa = `https://wa.me/${d.whatsapp.replace(/\D/g, "")}`;
+                  return (
                     <div
-                      key={country.name}
-                      className="border border-gray-700 rounded-xl p-5 hover:border-gray-500 transition"
+                      key={`${country.name}-${index}`}
+                      className="border-b border-gray-700 pb-3"
                     >
-                      <h4 className="text-xl font-semibold mb-4 flex items-center gap-2 uppercase">
-                        <Image
-                          src={country.flag}
-                          alt={tSuppliers(country.name)}
-                          width={24}
-                          height={16}
-                          className="rounded-sm"
-                          loading="lazy"
-                        />
-                        {tSuppliers(country.name)}
-                      </h4>
+                      <div className="flex flex-col gap-1">
+                        {d.url ? (
+                          <a
+                            href={d.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 hover:text-gray-300"
+                          >
+                            <Image
+                              src="/icons/instagram.svg"
+                              alt="Instagram"
+                              width={18}
+                              height={18}
+                              loading="lazy"
+                            />
+                            {d.name}
+                          </a>
+                        ) : (
+                          <span className="flex items-center gap-2">{d.name}</span>
+                        )}
 
-                      <div className="space-y-3 text-white">
-                        {country.dists.map((d, index) => {
-                          const wa = `https://wa.me/${d.whatsapp.replace(/\D/g, "")}`;
-                          return (
-                            <div
-                              key={`${country.name}-${index}`}
-                              className="border-b border-gray-700 pb-3"
-                            >
-                              <div className="flex flex-col gap-1">
-                                {d.url ? (
-                                  <a
-                                    href={d.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 hover:text-gray-300"
-                                  >
-                                    <Image
-                                      src="/icons/instagram.svg"
-                                      alt="Instagram"
-                                      width={18}
-                                      height={18}
-                                      loading="lazy"
-                                    />
-                                    {d.name}
-                                  </a>
-                                ) : (
-                                  <span className="flex items-center gap-2">{d.name}</span>
-                                )}
+                        <a
+                          href={wa}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-green-400 hover:text-green-300"
+                        >
+                          <Image
+                            src="/icons/whatsapp.svg"
+                            alt="WhatsApp"
+                            width={18}
+                            height={18}
+                            loading="lazy"
+                          />
+                          {d.whatsapp}
+                        </a>
 
-                                <a
-                                  href={wa}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-2 text-green-400 hover:text-green-300"
-                                >
-                                  <Image
-                                    src="/icons/whatsapp.svg"
-                                    alt="WhatsApp"
-                                    width={18}
-                                    height={18}
-                                    loading="lazy"
-                                  />
-                                  {d.whatsapp}
-                                </a>
-
-                                {d.extra && (
-                                  <p className="text-sm text-white">
-                                    {d.extra}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
+                        {/* ✅ Ahora maneja traducción o texto fijo */}
+                        {d.extra && (
+                          <p className="text-sm text-white">
+                            {d.isFixedText ? d.extra : tSuppliers(d.extra)}
+                          </p>
+                        )}
                       </div>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
 
-          <div className="text-center mt-16">
-            <Link
-              href="mailto:customercare@nopainnumbing.net"
-              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
-            >
-              {tSuppliers("beDistributor")}
-            </Link>
-          </div>
-        </section>
+  <div className="text-center mt-16">
+    <Link
+      href="mailto:customercare@nopainnumbing.net"
+      className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
+    >
+      {tSuppliers("beDistributor")}
+    </Link>
+  </div>
+</section>
+
       </main>
 
       {/* ✅ Footer envuelto en Suspense */}
