@@ -1,4 +1,4 @@
-//src/app/[locale]/distribuidores/page.tsx
+// src/app/[locale]/distribuidores/page.tsx
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -33,7 +33,6 @@ export default async function DistribuidoresPage({
             <h2 className="text-2xl font-semibold mb-4">{t("latinAmerica")}</h2>
             <ul className="space-y-2">
               <li>{t("colombia")} — {t("exclusiveDistributorBogota")}</li>
-              <li>{t("costaRica")} — {t("nationalShipping")}</li>
               <li>{t("nicaragua")} — {t("wholesaleRetail")}</li>
               <li>{t("venezuela")}</li>
               <li>{t("mexico")}</li>
