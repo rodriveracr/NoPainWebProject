@@ -7,8 +7,8 @@ import GalleryPhotos from "./GalleryPhotos";
 import GalleryVideos from "./GalleryVideos";
 
 export const metadata = {
-  title: "Gallery - No Pain Brand",
-  description: "Discover photos and videos with No Pain Brand.",
+  title: "Gallery - No Pain",
+  description: "Discover photos and videos with No Pain.",
 };
 
 export default async function Gallery({
@@ -31,9 +31,9 @@ export default async function Gallery({
             {t("description") || "Discover our products, their real use, and our global story."}
           </p>
         </section>
-
-        <GalleryPhotos />
         <GalleryVideos />
+        <GalleryPhotos />
+        
       </main>
 
       <Footer locale={locale} />

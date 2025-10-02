@@ -1,3 +1,4 @@
+//src/app/[locale]/green-soap/page.tsx
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
@@ -5,7 +6,7 @@ import Footer from "@/components/Footer";
 import "../../globals.css";
 
 export const metadata = {
-  title: "Jabón Verde - No Pain Brand",
+  title: "Green Soap by No Pain",
   description: "Jabón antiséptico concentrado con clorhexidina.",
 };
 

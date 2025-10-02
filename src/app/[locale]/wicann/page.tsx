@@ -1,3 +1,4 @@
+//src/app/[locale]/wicann/page.tsx
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
@@ -5,7 +6,7 @@ import Footer from "@/components/Footer";
 import "../../globals.css";
 
 export const metadata = {
-  title: "Wicann - No Pain Brand",
+  title: "Wicann by No Pain",
   description: "Tónico calmante y regenerador para después del tatuaje.",
 };
 

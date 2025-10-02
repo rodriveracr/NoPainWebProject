@@ -1,3 +1,4 @@
+// src/components/NewsletterForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -22,18 +23,25 @@ export default function NewsletterForm({ locale = "es" }: { locale?: string }) {
         body: JSON.stringify({ email }),
       });
 
-      const body = await res.json().catch(() => ({}));
+      // Try parse JSON; if not JSON, fallback to text
+      const text = await res.text();
+      let body: any = {};
+      try {
+        body = text ? JSON.parse(text) : {};
+      } catch {
+        body = { raw: text };
+      }
 
       if (res.ok) {
         setStatus("ok");
         setEmail("");
-        setMessage(t("newsletterSuccess") ?? "Gracias — suscripción correcta");
+        setMessage(t("newsletterSuccess") ?? "✅ Gracias — suscripción correcta");
         setTimeout(() => {
           setStatus(null);
           setMessage(null);
         }, 3000);
       } else {
-        const err = (body?.error || body?.message || "Error al suscribir") + (body?.details ? ` — ${JSON.stringify(body.details)}` : "");
+        const err = body?.error || body?.message || JSON.stringify(body) || "Error al suscribir";
         setStatus("error");
         setMessage(String(err));
         setTimeout(() => {
@@ -53,28 +61,31 @@ export default function NewsletterForm({ locale = "es" }: { locale?: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center sm:items-start gap-3" noValidate>
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3" noValidate>
       <input
         type="email"
         placeholder={t("newsletterPlaceholder")}
-        className="px-3 py-2 rounded bg-gray-800 border border-gray-600 text-sm focus:outline-none focus:ring-1 focus:ring-pink-500 w-full sm:w-auto"
+        className="px-3 py-2 rounded bg-gray-800 border border-gray-600 text-sm w-full sm:w-auto"
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         aria-label={t("newsletterPlaceholder")}
-        data-lpignore="true"
         disabled={status === "sending"}
       />
       <button
         type="submit"
-        className="px-4 py-2 bg-gradient-to-r from-pink-500 to-red-500 rounded text-white text-sm hover:opacity-90 transition disabled:opacity-60"
         disabled={status === "sending"}
+        className="px-4 py-2 bg-gradient-to-r from-pink-500 to-red-500 rounded text-white disabled:opacity-60"
       >
         {status === "sending" ? "..." : t("subscribe")}
       </button>
 
       {message && (
-        <div className={`text-sm mt-2 sm:mt-0 sm:ml-3 ${status === "ok" ? "text-green-400" : "text-amber-400"}`} role="status">
+        <div
+          className={`text-sm mt-2 ${status === "ok" ? "text-green-400" : "text-amber-400"}`}
+          role="status"
+          aria-live="polite"
+        >
           {message}
         </div>
       )}

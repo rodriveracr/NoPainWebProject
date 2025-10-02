@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import "../../globals.css";
 
 export const metadata = {
-  title: "Xteri-Numb - No Pain Brand",
+  title: "Xteri-Numb by No Pain",
   description: "Spray desinfectante y anestésico para usar durante el tatuaje.",
 };
 

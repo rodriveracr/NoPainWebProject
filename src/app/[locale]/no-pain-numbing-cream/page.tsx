@@ -1,10 +1,11 @@
+//src/app/[locale]/no-pain-numbing-cream/page.tsx
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "No Pain Numbing Cream - No Pain Brand",
+  title: "No Pain Numbing Cream by No Pain",
   description: "Crema anestésica tópica premium para tatuajes y PMU.",
 };
 

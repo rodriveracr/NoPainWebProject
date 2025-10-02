@@ -6,9 +6,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "No Pain Brand - Anestésicos y Productos para Tatuajes",
+  title: "No Pain ",
   description:
-    "No Pain Brand ofrece cremas anestésicas, tónicos y jabones para tatuajes y PMU.",
+    "No Pain ofrece cremas anestésicas, tónicos y jabones para tatuajes y PMU.",
 };
 
 // 🔹 Estructura distribuidores

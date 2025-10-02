@@ -191,41 +191,77 @@
     "ctaText": "Descubre la diferencia de trabajar con Monumby, la gama premium de productos creada para artistas que buscan lo mejor.",
     "ctaButton": "Visita Monumby.com"
   },
-  "FAQ": {
-    "pageTitle": "Preguntas Frecuentes",
-    "noPain": {
-      "title": "No Pain — Preguntas",
-      "q1": "¿Qué es No Pain?",
-      "a1": "No Pain es una crema anestésica tópica diseñada para tatuajes y PMU.",
-      "q2": "¿Cuánto dura?",
-      "a2": "La duración varía según la aplicación, puede durar varias horas.",
-      "q3": "¿Es segura?",
-      "a3": "Sí, cuando se utiliza según indicaciones profesionales.",
-      "q4": "¿Cuándo aplicarla?",
-      "a4": "Aplicar 20 minutos antes del procedimiento.",
-      "q5": "¿Precauciones?",
-      "a5": "Evitar contacto con ojos y mucosas."
-    },
-    "xteri": {
-      "title": "Xteri-Numb — Preguntas",
-      "q1": "¿Qué es Xteri-Numb?",
-      "a1": "Un spray desinfectante y anestésico para uso durante el tatuaje.",
-      "q2": "...",
-      "a2": "..."
-    },
-    "wicann": {
-      "title": "Wicann — Preguntas",
-      "q1": "¿Qué es Wicann?",
-      "a1": "Un tónico calmante y regenerador para el post-tatuaje.",
-      "q2": "...",
-      "a2": "..."
-    },
-    "greenSoap": {
-      "title": "Green Soap — Preguntas",
-      "q1": "¿Cómo usar Green Soap?",
-      "a1": "Diluir 1:9 y usar para limpieza durante el tatuaje.",
-      "q2": "...",
-      "a2": "..."
-    }
+ "FAQ": {
+  "pageTitle": "Preguntas Frecuentes",
+  "noPain": {
+    "title": "No Pain — Preguntas",
+    "q1": "¿Qué es No Pain?",
+    "a1": "No Pain es una crema anestésica tópica diseñada para tatuajes y PMU.",
+    "q2": "¿Cuánto dura?",
+    "a2": "La duración varía según la aplicación, puede durar varias horas.",
+    "q3": "¿Es segura?",
+    "a3": "Sí, cuando se utiliza según indicaciones profesionales.",
+    "q4": "¿Cuándo aplicarla?",
+    "a4": "Aplicar 20 minutos antes del procedimiento.",
+    "q5": "¿Precauciones?",
+    "a5": "Evitar contacto con ojos y mucosas."
+  },
+  "xteri": {
+    "title": "Xteri-Numb — Preguntas",
+    "q1": "¿Qué es Xteri-Numb?",
+    "a1": "Un spray desinfectante y anestésico para uso durante el tatuaje.",
+    "q2": "¿Cómo se usa?",
+    "a2": "Agita bien y rocía sobre la piel tatuada cuando sea necesario.",
+    "q3": "¿Es seguro?",
+    "a3": "Sí, cuando es aplicado por profesionales durante el tatuaje.",
+    "q4": "¿Afecta los pigmentos?",
+    "a4": "No, no altera pigmentos ni la cicatrización.",
+    "q5": "¿Precauciones?",
+    "a5": "Evitar ojos, mucosas y heridas abiertas."
+  },
+  "wicann": {
+    "title": "Wicann — Preguntas",
+    "q1": "¿Qué es Wicann?",
+    "a1": "Un tónico calmante y regenerador para el post-tatuaje.",
+    "q2": "¿Cómo se usa?",
+    "a2": "Limpia con Green Soap y aplica Wicann 2–3 veces al día.",
+    "q3": "¿Es natural?",
+    "a3": "Sí, contiene extractos naturales que reducen la irritación y ayudan a la recuperación.",
+    "q4": "¿Reemplaza las cremas?",
+    "a4": "No, complementa las cremas post-tatuaje, ayudando a la piel a recuperarse más rápido.",
+    "q5": "¿Precauciones?",
+    "a5": "Evitar contacto con ojos y mucosas. Uso externo únicamente."
+  },
+  "greenSoap": {
+    "title": "Green Soap — Preguntas",
+    "q1": "¿Cómo usar Green Soap?",
+    "a1": "Diluir 1:9 y usar para limpieza durante el tatuaje.",
+    "q2": "¿Cuál es la concentración?",
+    "a2": "Contiene 4% clorhexidina gluconato para acción antiséptica segura.",
+    "q3": "¿Es seguro para todo tipo de piel?",
+    "a3": "Sí, cuando se diluye correctamente es seguro para la mayoría de tipos de piel.",
+    "q4": "¿Otros usos?",
+    "a4": "Ideal para limpiar heridas, equipos y áreas contaminadas.",
+    "q5": "¿Precauciones?",
+    "a5": "Usar siempre diluido. Mantener fuera del alcance de los niños."
   }
+
+  },
+  "Legal": {
+  "title": "POLÍTICAS & LEGAL",
+  "intellectualPropertyTitle": "Propiedad Intelectual",
+  "intellectualPropertyText": "Todas las marcas, logotipos y contenidos pertenecen a No Pain Brand y están protegidos por la ley.",
+  "registrationTitle": "Registro y Uso",
+  "registrationText": "Nuestros productos deben ser utilizados únicamente por profesionales y según la normativa local.",
+  "internationalTitle": "Distribución Internacional",
+  "internationalText": "No Pain cuenta con distribuidores autorizados en todo el mundo. Revendedores no autorizados no están cubiertos.",
+  "infractionsTitle": "Infracciones",
+  "infractionsText": "Cualquier violación de la propiedad intelectual o uso indebido de los productos puede resultar en acciones legales.",
+  "termsTitle": "Términos de Servicio",
+  "termsText": "Al usar nuestro sitio web o productos, aceptas cumplir con todos los términos y condiciones.",
+  "privacyTitle": "Política de Privacidad",
+  "privacyText": "Respetamos tu privacidad. Los datos personales se manejan bajo estricta confidencialidad.",
+  "lastUpdated": "Última actualización"
+}
+
 }
