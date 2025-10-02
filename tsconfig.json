@@ -18,10 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-
-    // 👇 Aquí el valor correcto
     "ignoreDeprecations": "6.0",
-
     "plugins": [
       {
         "name": "next"
