@@ -6,8 +6,7 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "strict": true,
-    "ignoreDeprecations": "6.0",
-    "baseUrl": "./src",   // ✅ ahora apunta a src
+    "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]
     },
@@ -19,16 +18,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
+
+    // 👇 Aquí el valor correcto
+    "ignoreDeprecations": "6.0",
+
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "src",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["next-env.d.ts", "src", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
