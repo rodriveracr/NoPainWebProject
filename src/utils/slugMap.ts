@@ -21,7 +21,7 @@ export const slugMap = {
     en: "gallery",
   },
   contact: {
-    es: "contacto", // 🔹 corregido
+    es: "contact", // ✅ mismo slug en ambos idiomas
     en: "contact",
   },
   faq: {
@@ -32,9 +32,8 @@ export const slugMap = {
     es: "legal",
     en: "legal",
   },
-} as const;
+};
 
 export function getSlug(key: keyof typeof slugMap, locale: string) {
-  // Si existe en el idioma, úsalo. Si no, fallback al inglés.
   return slugMap[key]?.[locale as "es" | "en"] ?? slugMap[key].en;
 }

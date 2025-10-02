@@ -1,3 +1,4 @@
+//src/app/[locale]/contact/page.tsx
 "use client";
 
 import { useState } from "react";
