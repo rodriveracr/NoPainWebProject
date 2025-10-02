@@ -1,4 +1,5 @@
 // src/app/[locale]/faq/page.tsx
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,7 +13,7 @@ export const metadata = {
 export default async function FAQ({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string }>; 
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "FAQ" });
@@ -21,8 +22,13 @@ export default async function FAQ({
 
   return (
     <>
-      <Header locale={locale} />
+      {/* ✅ Header con Suspense */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Header locale={locale} />
+      </Suspense>
+
       <div className="h-16" />
+
       <main className="bg-black text-white min-h-screen py-24 px-6 font-sans">
         <section className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-12">
@@ -50,7 +56,11 @@ export default async function FAQ({
           </div>
         </section>
       </main>
-      <Footer />
+
+      {/* ✅ Footer con Suspense */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Footer locale={locale} />
+      </Suspense>
     </>
   );
 }
