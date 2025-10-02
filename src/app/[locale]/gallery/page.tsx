@@ -1,11 +1,10 @@
-// src/app/[locale]/gallery/page.tsx
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../../globals.css";
 import GalleryPhotos from "./GalleryPhotos";
 import GalleryVideos from "./GalleryVideos";
-import { Suspense } from "react"; // 👈 IMPORTANTE
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Gallery - No Pain",
@@ -29,6 +28,7 @@ export default async function Gallery({
       <div className="h-16" />
 
       <main className="bg-black text-white min-h-screen py-24 px-6 font-franklin space-y-24">
+        {/* 🎯 Título y descripción */}
         <section className="text-center max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold">
             {t("title") || "Gallery"}
@@ -39,8 +39,10 @@ export default async function Gallery({
           </p>
         </section>
 
-        {/* 🎥 Videos y 📸 Fotos */}
+        {/* 🎥 Videos */}
         <GalleryVideos />
+
+        {/* 📸 Fotos */}
         <GalleryPhotos />
       </main>
 

@@ -94,52 +94,80 @@
     "greenSoapTip4": "Ideal for cleaning equipment and surfaces as well.",
     "moreInfo": "MORE INFO"
   },
-  "Gallery": {
-    "title": "GALLERY",
-    "description": "Discover the studios, tattoo artists, and experiences with No Pain Brand.",
-    "photosTitle": "PHOTOS",
-    "videosTitle": "VIDEOS",
-    "noPain": "No Pain Cream",
-    "xteri": "Xteri-Numb",
-    "wicann": "Wicann",
-    "greenSoap": "Green Soap",
-    "usage1": "Application of No Pain in tattoo studio, Mexico City",
-    "usage2": "Clinical use of Xteri-Numb in Barcelona",
-    "journey1": "Supplier visit in Berlin, Germany (2024)",
-    "journey2": "Tattoo Expo Medellín (2023)",
-    "journey3": "Laboratory visit in USA (2022)",
-    "galleryAlt1": "No Pain Studio 1",
-    "galleryAlt2": "No Pain Studio 2",
-    "galleryAlt3": "No Pain Tattoo Artist",
-    "videoNotSupported": "Your browser does not support video.",
-    "video1": {
-      "overlay": "Here's the solution — No Pain",
-      "longDesc": "You suffer? Here's the solution: No Pain. Not for everyone, but it gives control and relief when needed."
-    },
-    "video2": {
-      "overlay": "Color-safe healing",
-      "longDesc": "Since discovering No Pain I test it on myself first. It allows color tattoos that heal properly — no pigment loss, no healing issues. Many artists use it for confident color work."
-    },
-    "video3": {
-      "overlay": "Adrián — Adsertattoos (Realism)",
-      "longDesc": "Adrián from Adsertattoos (Florida). With ~13 years of experience and a realism specialty, he uses staged applications (2–3 spots) for big pieces: move the cream as you progress, reapply, and keep the client comfortable for longer sessions."
-    },
-    "video4": {
-      "overlay": "Andrés — SupplyTattoo",
-      "longDesc": "Andrés (SupplyTattoo) explains three main benefits: lets people get tattooed despite fear, helps continue stalled projects, and assists clients with low pain tolerance. Apply 1–2 mm, cover 90–120 min for first use, effect lasts ~2–6 h; safe on open skin and doesn't affect pigments."
-    },
-    "video5": {
-      "overlay": "All styles — one solution",
-      "longDesc": "No Pain works across tattoo styles — from realism to color pieces — delivering comfort while preserving pigment and healing."
-    },
-    "video6": {
-      "overlay": "Transformation without pain",
-      "longDesc": "For a tattoo transformation like never before: No Pain brings a smooth session, long-lasting numbing and lets you focus only on the art. Expect up to several hours of comfort and unrivaled results."
-    },
-    "video7": {
-      "overlay": "Professional hygiene — Green Soap",
-      "longDesc": "Looking for effective cleanliness during tattooing? Green Soap by No Pain with chlorhexidine is ideal for skin disinfection. Dilute, apply, and tattoo with confidence. Professional results."
-    }
+ "Gallery": {
+  "title": "GALLERY",
+  "description": "Discover studios, tattoo artists, and experiences with No Pain Brand.",
+  "photosTitle": "PHOTOS",
+  "videosTitle": "VIDEOS",
+  "videoNotSupported": "Your browser does not support the video.",
+
+  "photo1": {
+    "overlay": "No Pain Cream in action",
+    "longDesc": "Our premium cream applied before tattooing: the strongest and safest formula on the market, designed to provide comfort and confidence in every session."
+  },
+  "photo2": {
+    "overlay": "Xteri-Numb — Extended precision",
+    "longDesc": "The Xteri-Numb spray prepares the skin for long sessions. A practical application that ensures continuous comfort and flawless results."
+  },
+  "photo3": {
+    "overlay": "Wicann Witch Hazel natural",
+    "longDesc": "The soothing power of Witch Hazel in every drop: Wicann refreshes and protects the skin, allowing the ink to settle evenly."
+  },
+  "photo4": {
+    "overlay": "Green Soap — Professional hygiene",
+    "longDesc": "Effective and safe cleaning with No Pain’s Green Soap: disinfection without irritation to ensure a flawless tattoo from start to finish."
+  },
+  "photo5": {
+    "overlay": "No Pain — Professional format",
+    "longDesc": "No Pain in its professional format: maximum power in every application, designed to support the artist in any tattoo style."
+  },
+  "photo6": {
+    "overlay": "Xteri-Numb reliable",
+    "longDesc": "Formulated with 4% lidocaine, Xteri-Numb provides reliable anesthetic and disinfecting action without altering pigments or healing."
+  },
+  "photo7": {
+    "overlay": "The complete No Pain line",
+    "longDesc": "An exhibition that represents our philosophy: premium products created for artists who demand the best in every detail."
+  },
+  "photo8": {
+    "overlay": "Green Soap essential",
+    "longDesc": "The foundation of professional hygiene: Green Soap keeps the skin clean, calm, and ready, supporting tattoo artists worldwide."
+  },
+
+  "video1": {
+    "overlay": "Suffering? Here's the solution",
+    "longDesc": "Are you suffering because you want to? Here is the solution: No Pain. It's not for everyone, but it offers relief and control when needed."
+  },
+  "video2": {
+    "overlay": "Healing and color intact",
+    "longDesc": "Since I discovered No Pain, I always test it on myself first. It allows color tattoos without affecting healing or pigments. I've done many color works and they always healed properly."
+  },
+  "video3": {
+    "overlay": "Adrián — Adsertattoos (Realism)",
+    "longDesc": "Adrián from Adsertattoos (Florida), realism specialist with ~13 years of career. Uses 2–3 applications on large pieces, moves the cream as you progress, and reapplies to keep the client comfortable during long sessions."
+  },
+  "video4": {
+    "overlay": "Andrés — SupplyTattoo",
+    "longDesc": "Andrés (SupplyTattoo) highlights 3 benefits: it allows people afraid of pain to get tattoos, helps resume paused projects, and makes it easier for clients with low tolerance. Apply 1–2 mm, cover for 90–120 min (first time), effect ~2–6 h; safe on fresh skin and does not affect pigments."
+  },
+  "video5": {
+    "overlay": "All styles — One solution",
+    "longDesc": "No Pain works with all tattoo styles, providing comfort while preserving pigment and healing."
+  },
+  "video6": {
+    "overlay": "Pain-free transformation",
+    "longDesc": "Tattoo transformation like never before: No Pain allows more comfortable sessions, with long-lasting anesthesia and focus on artistic results. Hours of comfort to achieve the best work."
+  },
+  "video7": {
+    "overlay": "Professional hygiene — Green Soap",
+    "longDesc": "Looking for effective cleaning during tattooing? No Pain's Green Soap with chlorhexidine is ideal for disinfecting the skin. Dilute, apply, and tattoo with confidence. Professional results."
+  },
+  "video8": {
+    "overlay": "Wicann Witch Hazel",
+    "longDesc": "Wicann Witch Hazel is ideal for diluting pigments and creating different tones that adapt to your style. Its balm & astringent action allows ink to settle more evenly on the skin. Apply it directly to the skin for a trauma-free and irritation-free tattoo. Also ideal for skincare routines, aesthetic processes, and permanent makeup."
+  }
+
+
   },
   "Contact": {
     "title": "CONTACT",
