@@ -1,3 +1,4 @@
+// src/utils/slugMap.ts
 export const slugMap = {
   noPainNumbingCream: {
     es: "crema-no-pain-numbing",
@@ -20,7 +21,7 @@ export const slugMap = {
     en: "gallery",
   },
   contact: {
-    es: "contacto", // ✅ corregido
+    es: "contacto", // 🔹 corregido
     en: "contact",
   },
   faq: {
@@ -31,8 +32,9 @@ export const slugMap = {
     es: "legal",
     en: "legal",
   },
-};
+} as const;
 
 export function getSlug(key: keyof typeof slugMap, locale: string) {
+  // Si existe en el idioma, úsalo. Si no, fallback al inglés.
   return slugMap[key]?.[locale as "es" | "en"] ?? slugMap[key].en;
 }
