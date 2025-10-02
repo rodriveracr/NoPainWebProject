@@ -10,13 +10,14 @@ export default function Footer({ locale = "es" }: { locale?: string }) {
   const t = useTranslations("Footer");
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12 px-6 border-t border-gray-700">
+    <footer className="bg-gray-900 text-gray-300 py-12 px-6 border-t border-gray-700 font-franklin">
+
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-12">
         
         {/* LOGO + Redes */}
         <div className="flex flex-col items-center sm:items-start space-y-4">
           <Image
-            src="/LogoNopainvector1.png"
+            src="/No-PAIN.png"
             alt="No Pain Brand"
             width={140}
             height={40}
@@ -75,7 +76,7 @@ export default function Footer({ locale = "es" }: { locale?: string }) {
 
       {/* COPYRIGHT */}
       <div className="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} No Pain Brand. {t("rights")}
+        &copy; {new Date().getFullYear()} No Pain. {t("rights")}
       </div>
     </footer>
   );

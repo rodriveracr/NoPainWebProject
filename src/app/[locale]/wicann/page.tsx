@@ -29,7 +29,7 @@ export default async function Wicann({
         <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
           {/* 🔥 Imagen del producto */}
           <Image
-            src="/wicann23.jpg"
+            src="/Wicann1.jpg"
             alt="Wicann"
             width={450}
             height={450}

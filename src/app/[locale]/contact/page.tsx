@@ -1,10 +1,10 @@
 // src/app/[locale]/contact/page.tsx
 "use client";
 
-import {useState} from "react";
-import {Mail, Instagram} from "lucide-react";
+import { useState } from "react";
+import { Mail, Instagram } from "lucide-react";
 import Image from "next/image";
-import {useTranslations, useLocale} from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../../globals.css";
@@ -13,34 +13,52 @@ export default function Contact() {
   const t = useTranslations("Contact");
   const locale = useLocale();
 
-
-
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
     mensaje: "",
+    newsletter: false,
   });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setFormData({...formData, [e.target.name]: e.target.value});
+  ) => {
+    const { name, type, value, checked } = e.target as HTMLInputElement;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation();
+    console.log("🔥 handleSubmit ACTIVADO con:", formData);
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      if (res.ok) {
-        alert(t("submitMessage") || "Thank you for contacting us. We will respond soon.");
-        setFormData({nombre: "", email: "", mensaje: ""});
+
+      const json = await res.json().catch(() => ({}));
+      console.log("📥 Respuesta backend /api/contact:", res.status, json);
+
+      if (res.ok && json && json.success) {
+        // Mostrar toda la respuesta para depuración (frontend)
+        // Esto mostrará requestId, support, client, newsletter, etc.
+        alert("Enviado OK. Respuesta backend:\n\n" + JSON.stringify(json, null, 2));
+        setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
       } else {
-        alert("Error sending message. Please try again.");
+        // Mostrar detalle de error si existe
+        const errDetail =
+          (json && (json.error || JSON.stringify(json))) || "Error sending message.";
+        console.error("❌ Error en /api/contact:", errDetail);
+        alert("Error: " + (typeof errDetail === "string" ? errDetail : JSON.stringify(errDetail)));
       }
     } catch (err) {
-      console.error(err);
+      console.error("❌ Error en fetch /api/contact:", err);
       alert("An error occurred. Please try again later.");
     }
   };
@@ -60,7 +78,10 @@ export default function Contact() {
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-xl hover:border-gray-500 transition">
             <Mail className="w-8 h-8 text-gray-400" />
             <h3 className="font-semibold text-lg">{t("emailTitle")}</h3>
-            <a href="mailto:customercare@nopainnumbing.net" className="text-gray-300 hover:text-white transition">
+            <a
+              href="mailto:customercare@nopainnumbing.net"
+              className="text-gray-300 hover:text-white transition"
+            >
               customercare@nopainnumbing.net
             </a>
           </div>
@@ -78,29 +99,35 @@ export default function Contact() {
             </a>
           </div>
 
+          {/* WHATSAPP */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-xl hover:border-gray-500 transition">
-            <Image
-              src="/icons/wagrey.png"
-              alt={t("whatsappAlt")}
-              width={32}
-              height={32}
-              className="opacity-80"
-            />
-            <h3 className="font-semibold text-lg">{t("whatsappTitle")}</h3>
             <a
               href="https://wa.me/50683151806"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-green-400 hover:text-green-300 transition"
+              aria-label="+506 8315 1806"
+              title="Abrir WhatsApp"
+              className="flex flex-col items-center gap-2 focus:outline-none focus:ring-2 focus:ring-green-400 rounded"
             >
-              +506 8315 1806
+              <Image
+                src="/icons/wagrey.png"
+                alt={t("whatsappAlt")}
+                width={28}
+                height={28}
+                className="opacity-80"
+              />
+              <h3 className="font-semibold text-lg text-center">{t("whatsappTitle")}</h3>
+              <span className="sr-only">+506 8315 1806</span>
             </a>
           </div>
         </section>
 
         {/* FORMULARIO */}
         <section className="max-w-lg mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-4">
+          {/* ⚡ log visual para confirmar que el form es el nuevo */}
+          <p className="text-red-500 text-sm">⚡ Formulario listo con POST</p>
+
+          <form onSubmit={handleSubmit} className="space-y-4" method="post">
             <input
               type="text"
               name="nombre"
@@ -127,6 +154,18 @@ export default function Contact() {
               className="w-full p-2 bg-gray-800 border border-gray-700 rounded"
               required
             />
+
+            <label className="flex items-center space-x-2 text-sm text-gray-300">
+              <input
+                type="checkbox"
+                name="newsletter"
+                checked={formData.newsletter}
+                onChange={handleChange}
+                className="w-4 h-4 accent-pink-500"
+              />
+              <span>{t("newsletterOptIn")}</span>
+            </label>
+
             <button
               type="submit"
               className="w-full py-2 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded hover:opacity-90 transition"

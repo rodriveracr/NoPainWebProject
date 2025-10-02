@@ -1,3 +1,4 @@
+//src/app/[locale]/gallery/GalleryPhotos.tsx
 "use client";
 
 import { useState } from "react";
@@ -10,18 +11,21 @@ export default function GalleryPhotos() {
   const t = useTranslations("Gallery");
 
   const photos = [
-    { src: "/numbing-bg.jpg", desc: t("noPain") },
-    { src: "/xterinumback3.jpg", desc: t("xteri") },
-    { src: "/wicannback2.jpg", desc: t("wicann") },
-    { src: "/greensoapback.jpg", desc: t("greenSoap") },
-    { src: "/wicann.jpg", desc: t("noPain") },
-    { src: "/xterinumback3.jpg", desc: t("xteri") },
-    { src: "/wicannback2.jpg", desc: t("wicann") },
-    { src: "/greensoapback.jpg", desc: t("greenSoap") },
-    { src: "/wicannback2.jpg", desc: t("wicann") },
-    { src: "/greensoapback.jpg", desc: t("greenSoap") },
-    { src: "/wicannback2.jpg", desc: t("wicann") },
-    { src: "/greensoapback.jpg", desc: t("greenSoap") },
+    { src: "/CZC_6271.jpg", desc: t("noPain") },
+    { src: "/_CZC3283-Editar.jpg", desc: t("xteri") },
+    { src: "/_CZC3396-Editar.jpg", desc: t("wicann") },
+    { src: "/Green Soap 2.jpg", desc: t("greenSoap") },
+    { src: "/_czc3133.jpg", desc: t("noPain") },
+    { src: "/kar.jpg", desc: t("xteri") },
+    { src: "/_CZC3302-Editar.jpg", desc: t("noPain") },
+    { src: "/CZC_6145.jpg", desc: t("greenSoap") },
+    { src: "Wicann2.png", desc: t("greenSoap") },
+    { src: "/Screenshot 2025-09-17 162122.png", desc: t("greenSoap") },
+    { src: "/wican2.png", desc: t("greenSoap") },
+    { src: "/green2.png", desc: t("greenSoap") },
+    { src: "/xterinumback.jpg", desc: t("greenSoap") },
+    { src: "/WhatsApp Image 2025-09-10 at 16.08.19_876636be.jpg", desc: t("greenSoap") },
+    
     // 👉 agrega más fotos aquí
   ];
 

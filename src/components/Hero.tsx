@@ -1,3 +1,4 @@
+//src/components/Hero.tsx
 "use client";
 import { useTranslations } from "next-intl";
 

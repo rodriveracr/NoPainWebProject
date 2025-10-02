@@ -29,7 +29,7 @@ export default async function XteriNumb({
         <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
           {/* 🔥 Imagen del producto */}
           <Image
-            src="/xteri.png"
+            src="/_CZC3060.jpg"
             alt="Xteri-Numb Spray"
             width={450}
             height={450}

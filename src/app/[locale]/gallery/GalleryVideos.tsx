@@ -1,3 +1,4 @@
+// src/app/[locale]/gallery/GalleryVideos.tsx
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,25 +8,35 @@ import { useTranslations } from "next-intl";
 export default function GalleryVideos() {
   const t = useTranslations("Gallery");
 
+  // helper seguro: intenta traducir y si falla devuelve fallback
+  const safeT = (key: string, fallback: string) => {
+    try {
+      const res = t(key as any);
+      return typeof res === "string" && res !== key ? res : fallback;
+    } catch {
+      return fallback;
+    }
+  };
+
   const videos = [
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591186/video1_i3p6na.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590810/video1_yayuse.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591188/video8_mmv8lu.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590813/video8_lblkzn.mp4",
       ],
       desc: t("usage1"),
     },
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591192/video2_onqzug.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590829/video2_yq7teb.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video9_mmd6uq.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590815/video9_o2dyim.mp4",
       ],
       desc: t("usage2"),
     },
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591186/video3_ozteiz.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590810/video3_uglbf5.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591189/video6_pmlgvj.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video6_odecam.mp4",
       ],
       desc: t("usage1"),
     },
@@ -45,22 +56,16 @@ export default function GalleryVideos() {
     },
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591189/video6_pmlgvj.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video6_odecam.mp4",
-      ],
-      desc: t("usage2"),
-    },
-    {
-      sources: [
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video7_tbyozu.webm",
         "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video7_kqrijw.mp4",
       ],
-      desc: t("usage1"),
+      desc: t("usage2"),
     },
+    // resto (no overlay/longDesc obligatorio)
     {
       sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591188/video8_mmv8lu.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590813/video8_lblkzn.mp4",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video10_bvqxrv.webm",
+        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590825/video10_ulyyst.mp4",
       ],
       desc: t("usage2"),
     },
@@ -99,33 +104,38 @@ export default function GalleryVideos() {
       <section className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-8">{t("videosTitle")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {visibleVideos.map((video, idx) => (
-            <div
-              key={idx}
-              onClick={() => setCurrent(idx)}
-              className="relative cursor-pointer overflow-hidden rounded-2xl border border-gray-700 hover:scale-105 transition-transform shadow-lg"
-            >
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="object-cover w-full h-[500px] lg:h-[550px] rounded-lg"
+          {visibleVideos.map((video, idx) => {
+            // overlay y longDesc para los primeros 7: claves: Gallery.video{n}.overlay / .longDesc
+            const overlay = safeT(`video${idx + 1}.overlay`, "");
+            return (
+              <div
+                key={idx}
+                onClick={() => setCurrent(idx)}
+                className="relative cursor-pointer overflow-hidden rounded-2xl border border-gray-700 hover:scale-105 transition-transform shadow-lg"
               >
-                {video.sources.map((src, i) => (
-                  <source
-                    key={i}
-                    src={src}
-                    type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
-                  />
-                ))}
-                {t("videoNotSupported")}
-              </video>
-              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
-                <p className="text-white text-lg font-semibold">{video.desc}</p>
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="object-cover w-full h-[500px] lg:h-[550px] rounded-lg"
+                >
+                  {video.sources.map((src, i) => (
+                    <source
+                      key={i}
+                      src={src}
+                      type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
+                    />
+                  ))}
+                  {t("videoNotSupported")}
+                </video>
+                <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
+                  {/* muestra overlay (si existe) o fallback video.desc */}
+                  <p className="text-white text-lg font-semibold">{overlay || video.desc}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* Bloque +X */}
           {remaining > 0 && (
@@ -185,9 +195,14 @@ export default function GalleryVideos() {
                 </video>
               </div>
               <div className="text-white max-w-sm">
-                <h3 className="text-xl font-bold mb-4">{videos[current].desc}</h3>
+                {/* título: usa overlay si existe, sino desc */}
+                <h3 className="text-xl font-bold mb-4">
+                  {safeT(`video${current + 1}.overlay`, videos[current].desc)}
+                </h3>
+
+                {/* descripción larga sólo si existe la clave */}
                 <p className="text-gray-300">
-                  Aquí puedes poner una breve descripción del video.
+                  {safeT(`video${current + 1}.longDesc`, "Aquí puedes poner una breve descripción del video.")}
                 </p>
               </div>
             </div>

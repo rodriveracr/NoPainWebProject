@@ -29,11 +29,11 @@ export default async function GreenSoap({
         <div className="relative z-5 py-5 px-2 max-w-4xl mx-auto text-center">
           {/* 🔥 Imagen del producto */}
           <Image
-            src="/GreenSoap.png"
+            src="/Green-Soap-1.jpg"
             alt="Jabón Verde"
-            width={400}
-            height={400}
-            className="mx-auto mb-20 rounded-lg shadow-lg"
+            width={450}
+            height={450}
+            className="mx-auto mb-8 rounded-lg shadow-lg"
             priority
           />
 

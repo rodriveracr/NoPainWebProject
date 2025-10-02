@@ -2,7 +2,6 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import "../../globals.css";
 
 export const metadata = {
   title: "No Pain Numbing Cream - No Pain Brand",
@@ -22,17 +21,17 @@ export default async function NoPainNumbingCream({
       <Header locale={locale} />
       <div className="h-16" />
 
-      <main className="relative text-white min-h-screen font-sans">
+      <main className="relative text-white min-h-screen font-franklin">
         <div className="absolute inset-0 bg-nopaincream bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/80" />
 
         <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
           {/* 🔥 Imagen del producto */}
           <Image
-            src="/numbing-bg.jpg" // asegúrate que este archivo exista en /public
+            src="/_czc3133.jpg"
             alt="No Pain Numbing Cream"
-            width={500}
-            height={500}
+            width={450}
+            height={450}
             className="mx-auto mb-8 rounded-lg shadow-lg"
             priority
           />
@@ -70,7 +69,7 @@ export default async function NoPainNumbingCream({
         </div>
       </main>
 
-      <Footer />
+      <Footer locale={locale} />
     </>
   );
 }

@@ -1,7 +1,8 @@
 export default function ProductLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <div className="font-franklin">{children}</div>;
 }
+//src/app/[locale]/layout.tsx

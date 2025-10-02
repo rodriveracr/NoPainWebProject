@@ -1,3 +1,4 @@
+//src/components/Header.tsx
 "use client";
 
 import Image from "next/image";
@@ -28,6 +29,7 @@ export default function Header({ locale }: { locale: string }) {
     { href: `/${locale}/xteri-numb`, label: t("xteriNumb") },
     { href: `/${locale}/wicann`, label: t("wicann") },
     { href: `/${locale}/green-soap`, label: t("greenSoap") },
+    { href: `/${locale}/monumby`, label: t("monumby") } // ✅ Nuevo link Monumby
   ];
 
   const rightLinks = [
@@ -36,7 +38,8 @@ export default function Header({ locale }: { locale: string }) {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-black border-b border-gray-700">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-black border-b border-gray-700 font-franklin">
+
       {/* NAV PRINCIPAL */}
       <nav className="flex items-center justify-between px-6 py-2 relative">
         {/* BOTÓN HAMBURGUESA (Mobile) */}
@@ -67,9 +70,9 @@ export default function Header({ locale }: { locale: string }) {
               onClick={handlePlaySound}
             >
               <Image
-                src="/Picture3.png"
+                src="/COCODRILO.png"
                 alt="Logo No Pain"
-                width={100}
+                width={100}   // 🔽 Más pequeño que antes
                 height={100}
                 className="drop-shadow-lg"
                 priority
@@ -90,13 +93,13 @@ export default function Header({ locale }: { locale: string }) {
       </nav>
 
       {/* BOTONES DE IDIOMA DEBAJO DE LA LÍNEA GRIS, CENTRADOS */}
-      <div className="hidden md:flex justify-center py-0 bg-black">
+      <div className="hidden md:flex  justify-center py-0 bg-black">
         <LanguageSwitcher small />
       </div>
 
       {/* MENÚ MOBILE */}
       {menuOpen && (
-        <div className="md:hidden bg-black border-t border-gray-700 flex flex-col space-y-4 px-6 py-6 text-sm uppercase">
+        <div className="md:hidden bg-black border-t border-gray-700 flex flex-col space-y-4 px-10 py-6 text-sm uppercase">
           {leftLinks.concat(rightLinks).map((link, idx) => (
             <Link
               key={idx}
@@ -114,12 +117,12 @@ export default function Header({ locale }: { locale: string }) {
               href="https://monumby.com"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Verificado por Munumby"
+              aria-label="Verificado por Monumby"
               className="hover:opacity-80 transition"
             >
               <Image
-                src="/badgeMuNumby.png"
-                alt="Verificado por Munumby"
+                src="/junto.png"
+                alt="Verificado por Monumby"
                 width={60}
                 height={60}
               />

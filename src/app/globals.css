@@ -8,15 +8,59 @@
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';
 
-body {
-  @apply bg-black text-white;
+/* ------------------ */
+/* Fuente principal   */
+/* ------------------ */
+@font-face {
+  font-family: 'FranklinGothicDemi';
+  src: url('/fonts/franklin-gothic-demi.woff2') format('woff2'),
+       url('/fonts/franklin-gothic-demi.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
+/* ------------------ */
+/* Base global        */
+/* ------------------ */
 html {
   scroll-behavior: smooth;
 }
 
-/* Hero genérico */
+:root {
+  --ui-font: 'FranklinGothicDemi', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  @apply bg-black text-white;
+  font-family: var(--ui-font);
+}
+
+/* Evita forzar la fuente en TODOS los elementos con !important.
+   Si necesitas un fallback forzado, hazlo por componentes concretos. */
+
+/* ------------------ */
+/* Tipografía global  */
+/* ------------------ */
+h1 {
+  @apply text-4xl md:text-5xl font-bold uppercase;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl font-semibold uppercase;
+}
+
+h3 {
+  @apply text-2xl font-semibold;
+}
+
+p {
+  @apply text-base md:text-lg leading-relaxed;
+}
+
+/* ------------------ */
+/* Hero y fondos      */
+/* ------------------ */
 .hero-bg {
   background-image: url('/beneficios.png');
   background-size: cover;
@@ -25,31 +69,13 @@ html {
 
 /* Fondos por producto */
 .bg-nopaincream {
-  background-image: url('/pmu.png'); /* 🔥 asegúrate que esta imagen esté en /public/ */
+  background-image: url('/No-Pain-1.jpg');
   background-size: cover;
   background-position: center;
 }
 
-.bg-numbing {
-  background-image: url('/numbingback.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.bg-xterinum {
-  background-image: url('/xterinumb4.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.bg-wicann {
-  background-image: url('/Wicann2.png');
-  background-size: cover;
-  background-position: center;
-}
-
-.bg-greensoap {
-  background-image: url('/greensoapback.jpg');
-  background-size: cover;
-  background-position: center;
-}
+/* etc... */
+.bg-numbing { background-image: url('/numbingback.jpg'); background-size:cover; background-position:center; }
+.bg-xterinum { background-image: url('/Xterinumb2.jpg'); background-size:cover; background-position:center; }
+.bg-wicann { background-image: url('/wicannbg.png'); background-size:cover; background-position:center; }
+.bg-greensoap { background-image: url('/Green-Soap1.jpg'); background-size:cover; background-position:center; }
