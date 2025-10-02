@@ -50,14 +50,14 @@ export default function Contact() {
       const json = await res.json().catch(() => ({}));
 
       if (res.ok && json && json.success) {
-        setStatus("ok");
-        setMessage("✅ Tu mensaje fue enviado correctamente.");
-        setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
+  setStatus("ok");
+  setMessage(t("submitMessage")); // ✅ usa traducción desde JSON
+  setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
 
-        setTimeout(() => {
-          setStatus(null);
-          setMessage(null);
-        }, 4000);
+  setTimeout(() => {
+    setStatus(null);
+    setMessage(null);
+  }, 4000);
       } else {
         const errDetail =
           (json && (json.error || JSON.stringify(json))) ||
