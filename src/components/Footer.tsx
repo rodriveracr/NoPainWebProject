@@ -48,7 +48,6 @@ export default function Footer({ locale = "es" }: { locale?: string }) {
                 {t("contact")}
               </Link>
             </li>
-
             <li>
               <Link href={`/${locale}#proveedores`} className="hover:text-white transition">
                 {t("suppliers")}
@@ -74,9 +73,50 @@ export default function Footer({ locale = "es" }: { locale?: string }) {
         </div>
       </div>
 
-      {/* COPYRIGHT */}
-      <div className="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} No Pain. {t("rights")}
+      {/* COPYRIGHT + FIRMA PERSONAL */}
+      <div className="mt-12 border-t border-gray-700 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+        <div className="text-center sm:text-left">
+          &copy; {new Date().getFullYear()} No Pain. {t("rights")}
+        </div>
+
+        {/* Firma desarrollador (lado derecho) */}
+        <div className="flex items-center space-x-2 text-xs mt-4 sm:mt-0">
+          <span>Made with</span>
+          <Image
+            src="/costa.svg"
+            alt="Costa Rica Heart"
+            width={14}
+            height={14}
+            className="inline-block"
+          />
+          <span>in Costa Rica</span>
+         <a 
+  href="https://rodcr.carrd.co" 
+  target="_blank" 
+  rel="noopener noreferrer" 
+  aria-label="Portfolio de Rodolfo VR"
+  title="Portfolio de Rodolfo VR"
+  className="flex items-center gap-1 hover:opacity-80 transition"
+>
+  <span className="text-gray-400 text-xs">Made with</span>
+  <Image 
+    src="/crheart.png" 
+    alt="Costa Rica Heart" 
+    width={14} 
+    height={14} 
+    className="inline-block"
+  />
+  <span className="text-gray-400 text-xs">in Costa Rica</span>
+  <Image 
+    src="/riveras-logo.png" 
+    alt="Rivera's Industries Logo" 
+    width={18} 
+    height={18} 
+    className="ml-2 inline-block"
+  />
+</a>
+
+        </div>
       </div>
     </footer>
   );
