@@ -8,7 +8,7 @@ import "../../globals.css";
 
 export const metadata = {
   title: "Green Soap by No Pain",
-  description: "Jabón antiséptico concentrado con clorhexidina.",
+  description: "Concentrated antiseptic soap with 4% chlorhexidine gluconate.",
 };
 
 export default async function GreenSoap({
@@ -36,7 +36,7 @@ export default async function GreenSoap({
           {/* 🔥 Imagen del producto */}
           <Image
             src="/Green-Soap-1.jpg"
-            alt="Jabón Verde"
+            alt="Green Soap"
             width={450}
             height={450}
             className="mx-auto mb-8 rounded-lg shadow-lg"
@@ -54,9 +54,8 @@ export default async function GreenSoap({
             <li>{t("greenSoapBenefit1")}</li>
             <li>{t("greenSoapBenefit2")}</li>
             <li>{t("greenSoapBenefit3")}</li>
+            <li>{t("greenSoapBenefit4")}</li> {/* ✅ antes era Additional */}
           </ul>
-
-          <p className="mt-4">{t("greenSoapAdditional")}</p>
 
           <h3 className="text-xl font-semibold mt-6">{t("usage")}</h3>
           <ul className="list-disc pl-6 text-left space-y-2">

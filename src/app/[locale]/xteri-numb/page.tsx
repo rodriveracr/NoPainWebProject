@@ -1,22 +1,31 @@
 // src/app/[locale]/xteri-numb/page.tsx
 import Image from "next/image";
-import { Suspense } from "react"; // 👈 IMPORTANTE
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../../globals.css";
 
-export const metadata = {
-  title: "Xteri-Numb by No Pain",
-  description: "Spray desinfectante y anestésico para usar durante el tatuaje.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params; // ✅ ahora se espera correctamente
+  const t = await getTranslations({ locale, namespace: "products" });
+
+  return {
+    title: "Xteri-Numb by No Pain",
+    description: t("xteriNumbTagline"), // ✅ descripción dinámica desde JSON
+  };
+}
 
 export default async function XteriNumb({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale } = await params; // ✅ se resuelve la promesa de params
   const t = await getTranslations({ locale, namespace: "products" });
 
   return (
@@ -74,7 +83,7 @@ export default async function XteriNumb({
         </div>
       </main>
 
-      {/* ✅ Footer envuelto en Suspense con locale */}
+      {/* ✅ Footer envuelto en Suspense */}
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer locale={locale} />
       </Suspense>
