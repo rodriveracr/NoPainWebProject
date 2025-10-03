@@ -205,7 +205,10 @@
     "nationalShipping": "National shipping",
     "wholesaleRetail": "Wholesale and retail sales",
     "headOffice": "Head office",
-    "ordersUSA": "Orders within the USA"
+    "ordersUSA": "Orders within the USA",
+   "distributorMailSubject": "Request to become a No Pain distributor",
+"distributorMailBody": "Hello No Pain,\n\nMy name is: [your name]\nMy company is: [company name]\nMy country is: [your country]\nMy WhatsApp or phone number is: [number]\n\nI would like to receive information to become an authorized distributor.\n\nThanks."
+
   },
  "Footer": {
   "linksTitle": "LINKS",

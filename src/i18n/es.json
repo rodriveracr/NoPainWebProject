@@ -207,7 +207,12 @@
     "nationalShipping": "Envíos nacionales",
     "wholesaleRetail": "Ventas al por mayor y detalle",
     "headOffice": "Oficinas centrales",
-    "ordersUSA": "Pedidos dentro de USA"
+    "ordersUSA": "Pedidos dentro de USA",
+   "distributorMailSubject": "Solicitud para ser distribuidor No Pain",
+"distributorMailBody": "Hola No Pain,\n\nMi nombre es: [tu nombre]\nMi empresa es: [nombre de la empresa]\nMi país es: [tu país]\nMi WhatsApp o teléfono es: [número]\n\nQuisiera recibir información para ser distribuidor autorizado.\n\nGracias."
+
+
+    
   },
 "Footer": {
   "linksTitle": "ENLACES",

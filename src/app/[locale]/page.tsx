@@ -398,14 +398,18 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
     ))}
   </div>
 
-  <div className="text-center mt-16">
-    <Link
-      href="mailto:customercare@nopainnumbing.net"
-      className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
-    >
-      {tSuppliers("beDistributor")}
-    </Link>
-  </div>
+ <div className="text-center mt-16">
+  <a
+    href={`mailto:customercare@nopainnumbing.net?subject=${encodeURIComponent(
+      tSuppliers("distributorMailSubject")
+    )}&body=${encodeURIComponent(tSuppliers("distributorMailBody"))}`}
+    className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
+  >
+    {tSuppliers("beDistributor")}
+  </a>
+</div>
+
+
 </section>
 
       </main>
