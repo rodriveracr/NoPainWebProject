@@ -1,9 +1,9 @@
+// src/components/Popup.tsx
 "use client";
-
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { X } from "lucide-react"; // icono X para cerrar
+import { X } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Popup({ locale }: { locale: string }) {
@@ -11,25 +11,24 @@ export default function Popup({ locale }: { locale: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // ✅ Carrusel con productos destacados
   const slides = [
-    {
-      img: "/Green-Soap-1.jpg",
-      title: t("greenSoapTitle"),
-      desc: t("greenSoapDesc"),
-      link: `/${locale}/green-soap`,
-    },
-    {
-      img: "/Monumby-1.jpg",
-      title: t("monumbyTitle"),
-      desc: t("monumbyDesc"),
-      link: `/${locale}/monumby`,
-    },
+    { img: "/Green-Soap-1.jpg", title: t("greenSoapTitle"), desc: t("greenSoapDesc"), link: `/${locale}/green-soap` },
+    { img: "/Monumby-1.jpg", title: t("monumbyTitle"), desc: t("monumbyDesc"), link: `/${locale}/monumby` },
   ];
 
-  // ✅ Mostrar popup solo si no fue cerrado en esta sesión
   useEffect(() => {
+    // Verificar entorno cliente
+    if (typeof window === "undefined") return;
+
     const closed = sessionStorage.getItem(`popupClosed-${locale}`);
+    const isDev = process.env.NODE_ENV === "development";
+
+    if (isDev) {
+      // en desarrollo mostrar siempre
+      setIsOpen(true);
+      return;
+    }
+
     if (!closed) {
       setIsOpen(true);
     }
@@ -37,18 +36,13 @@ export default function Popup({ locale }: { locale: string }) {
 
   const closePopup = () => {
     setIsOpen(false);
-    sessionStorage.setItem(`popupClosed-${locale}`, "true");
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem(`popupClosed-${locale}`, "true");
+    }
   };
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) =>
-      prev === 0 ? slides.length - 1 : prev - 1
-    );
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
 
   if (!isOpen) return null;
 
@@ -60,28 +54,13 @@ export default function Popup({ locale }: { locale: string }) {
         exit={{ scale: 0.8, opacity: 0 }}
         className="relative bg-white text-black rounded-2xl shadow-2xl max-w-lg w-full p-6"
       >
-        {/* Botón cerrar */}
-        <button
-          onClick={closePopup}
-          aria-label="Close popup"
-          title="Close popup"
-          className="absolute top-3 right-3 text-gray-600 hover:text-black"
-        >
+        <button onClick={closePopup} aria-label="Close popup" title="Close popup" className="absolute top-3 right-3 text-gray-600 hover:text-black">
           <X size={24} />
         </button>
-
-        {/* Logo arriba */}
         <div className="flex justify-center mb-4">
-          <Image
-            src="/logo-nopain.png"
-            alt="No Pain Logo"
-            width={120}
-            height={60}
-          />
+          <Image src="/logo-nopain.png" alt="No Pain Logo" width={120} height={60} />
         </div>
-
-        {/* Carrusel */}
-        <div className="relative">
+        <div className="relative text-center">
           <Image
             src={slides[currentSlide].img}
             alt={slides[currentSlide].title}
@@ -97,25 +76,9 @@ export default function Popup({ locale }: { locale: string }) {
           >
             {t("cta")}
           </a>
-
-          {/* Controles carrusel */}
           <div className="flex justify-between mt-4">
-            <button
-              onClick={prevSlide}
-              aria-label="Previous slide"
-              title="Previous slide"
-              className="px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300"
-            >
-              ◀
-            </button>
-            <button
-              onClick={nextSlide}
-              aria-label="Next slide"
-              title="Next slide"
-              className="px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300"
-            >
-              ▶
-            </button>
+            <button onClick={prevSlide} className="px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300">◀</button>
+            <button onClick={nextSlide} className="px-3 py-1 bg-gray-200 rounded-full hover:bg-gray-300">▶</button>
           </div>
         </div>
       </motion.div>

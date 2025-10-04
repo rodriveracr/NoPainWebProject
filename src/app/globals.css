@@ -14,11 +14,13 @@
 @font-face {
   font-family: 'FranklinGothicDemi';
   src: url('/fonts/franklin-gothic-demi.woff2') format('woff2'),
-       url('/fonts/franklin-gothic-demi.woff') format('woff');
+       url('/fonts/franklin-gothic-demi.woff') format('woff'),
+       url('/fonts/franklin-gothic-demi.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
+
 
 /* ------------------ */
 /* Base global        */

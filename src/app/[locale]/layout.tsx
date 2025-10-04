@@ -26,7 +26,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <>
      <NextIntlClientProvider locale={locale} messages={messages}>
   {/* Popup global */}
-  <Popup locale={locale} />
+  {/*<Popup locale={locale} />*/}
 
   {/* Badge flotante */}
   <a
