@@ -67,114 +67,61 @@
     "xteriTip3": "Apply only on tattooed skin, not on damaged tissue.",
 
     "wicann": "WICANN",
-"wicannTagline": "Soothing and regenerative tonic with witch hazel extract for post-tattoo care.",
-"wicannDescription": "Wicann is a natural witch hazel tonic designed for use after tattooing. It calms irritation, promotes regeneration, and helps pigments settle evenly on the skin.",
-"wicannBenefit1": "Hydrates and soothes freshly tattooed skin.",
-"wicannBenefit2": "Supports natural regeneration of the skin.",
-"wicannBenefit3": "Reduces redness, burning, and discomfort.",
-"wicannBenefit4": "Lightweight, fast-absorbing formula with no oily residue.",
-"wicannUsage1": "Clean the tattooed area with Green Soap before use.",
-"wicannUsage2": "Apply Wicann directly to the tattooed skin.",
-"wicannUsage3": "Let it absorb naturally, do not rinse.",
-"wicannUsage4": "Repeat 2-3 times a day as needed.",
-"wicannTip1": "For post-tattoo use only.",
-"wicannTip2": "Store in a cool, dry place away from sunlight.",
-"wicannTip3": "Avoid contact with eyes and mucous membranes."
-,
+    "wicannTagline": "Soothing and regenerative tonic with witch hazel extract for post-tattoo care.",
+    "wicannDescription": "Wicann is a natural witch hazel tonic designed for use after tattooing. It calms irritation, promotes regeneration, and helps pigments settle evenly on the skin.",
+    "wicannBenefit1": "Hydrates and soothes freshly tattooed skin.",
+    "wicannBenefit2": "Supports natural regeneration of the skin.",
+    "wicannBenefit3": "Reduces redness, burning, and discomfort.",
+    "wicannBenefit4": "Lightweight, fast-absorbing formula with no oily residue.",
+    "wicannUsage1": "Clean the tattooed area with Green Soap before use.",
+    "wicannUsage2": "Apply Wicann directly to the tattooed skin.",
+    "wicannUsage3": "Let it absorb naturally, do not rinse.",
+    "wicannUsage4": "Repeat 2-3 times a day as needed.",
+    "wicannTip1": "For post-tattoo use only.",
+    "wicannTip2": "Store in a cool, dry place away from sunlight.",
+    "wicannTip3": "Avoid contact with eyes and mucous membranes.",
 
-"greenSoap": "GREEN SOAP",
-"greenSoapTagline": "4% chlorhexidine gluconate concentrated antiseptic soap.",
-"greenSoapDescription": "Green Soap with 4% chlorhexidine gluconate is a professional-grade antiseptic soap. Designed for deep and safe skin cleaning before, during, and after tattooing. Also suitable for wound hygiene and disinfection of contaminated areas.",
-"greenSoapBenefit1": "Provides maximum antiseptic protection.",
-"greenSoapBenefit2": "Professional-grade antibacterial formula.",
-"greenSoapBenefit3": "Safe and effective for most skin types when diluted correctly.",
-"greenSoapBenefit4": "A reliable solution for preparation, disinfection, and hygiene in tattoo procedures and other applications requiring maximum cleanliness.",
-"greenSoapUsage1": "Dilute 1 part soap with 9 parts filtered or distilled water.",
-"greenSoapUsage2": "Apply with a spray bottle or clean cloth to the skin.",
-"greenSoapUsage3": "Use during and after tattooing for safe cleaning.",
-"greenSoapUsage4": "Store in a clean, sealed container.",
-"greenSoapTip1": "Always dilute before use to avoid irritation.",
-"greenSoapTip2": "Can be combined with post-tattoo care products.",
-"greenSoapTip3": "Keep out of reach of children.",
-"greenSoapTip4": "Also ideal for cleaning equipment and surfaces.",
-"moreInfo": "MORE INFO"
+    "greenSoap": "GREEN SOAP",
+    "greenSoapTagline": "4% chlorhexidine gluconate concentrated antiseptic soap.",
+    "greenSoapDescription": "Green Soap with 4% chlorhexidine gluconate is a professional-grade antiseptic soap. Designed for deep and safe skin cleaning before, during, and after tattooing. Also suitable for wound hygiene and disinfection of contaminated areas.",
+    "greenSoapBenefit1": "Provides maximum antiseptic protection.",
+    "greenSoapBenefit2": "Professional-grade antibacterial formula.",
+    "greenSoapBenefit3": "Safe and effective for most skin types when diluted correctly.",
+    "greenSoapBenefit4": "A reliable solution for preparation, disinfection, and hygiene in tattoo procedures and other applications requiring maximum cleanliness.",
+    "greenSoapUsage1": "Dilute 1 part soap with 9 parts filtered or distilled water.",
+    "greenSoapUsage2": "Apply with a spray bottle or clean cloth to the skin.",
+    "greenSoapUsage3": "Use during and after tattooing for safe cleaning.",
+    "greenSoapUsage4": "Store in a clean, sealed container.",
+    "greenSoapTip1": "Always dilute before use to avoid irritation.",
+    "greenSoapTip2": "Can be combined with post-tattoo care products.",
+    "greenSoapTip3": "Keep out of reach of children.",
+    "greenSoapTip4": "Also ideal for cleaning equipment and surfaces.",
+    "moreInfo": "MORE INFO"
+  },
+  "Gallery": {
+    "title": "GALLERY",
+    "description": "Discover studios, tattoo artists, and experiences with No Pain Brand.",
+    "photosTitle": "PHOTOS",
+    "videosTitle": "VIDEOS",
+    "videoNotSupported": "Your browser does not support the video.",
 
+    "photo1": { "overlay": "No Pain Cream in action", "longDesc": "Our premium cream applied before tattooing: the strongest and safest formula on the market, designed to provide comfort and confidence in every session." },
+    "photo2": { "overlay": "Xteri-Numb — Extended precision", "longDesc": "The Xteri-Numb spray prepares the skin for long sessions. A practical application that ensures continuous comfort and flawless results." },
+    "photo3": { "overlay": "Wicann Witch Hazel natural", "longDesc": "The soothing power of Witch Hazel in every drop: Wicann refreshes and protects the skin, allowing the ink to settle evenly." },
+    "photo4": { "overlay": "Green Soap — Professional hygiene", "longDesc": "Effective and safe cleaning with No Pain’s Green Soap: disinfection without irritation to ensure a flawless tattoo from start to finish." },
+    "photo5": { "overlay": "No Pain — Professional format", "longDesc": "No Pain in its professional format: maximum power in every application, designed to support the artist in any tattoo style." },
+    "photo6": { "overlay": "Xteri-Numb reliable", "longDesc": "Formulated with 4% lidocaine, Xteri-Numb provides reliable anesthetic and disinfecting action without altering pigments or healing." },
+    "photo7": { "overlay": "The complete No Pain line", "longDesc": "An exhibition that represents our philosophy: premium products created for artists who demand the best in every detail." },
+    "photo8": { "overlay": "Green Soap essential", "longDesc": "The foundation of professional hygiene: Green Soap keeps the skin clean, calm, and ready, supporting tattoo artists worldwide." },
 
-  },
- "Gallery": {
-  "title": "GALLERY",
-  "description": "Discover studios, tattoo artists, and experiences with No Pain Brand.",
-  "photosTitle": "PHOTOS",
-  "videosTitle": "VIDEOS",
-  "videoNotSupported": "Your browser does not support the video.",
-
-  "photo1": {
-    "overlay": "No Pain Cream in action",
-    "longDesc": "Our premium cream applied before tattooing: the strongest and safest formula on the market, designed to provide comfort and confidence in every session."
-  },
-  "photo2": {
-    "overlay": "Xteri-Numb — Extended precision",
-    "longDesc": "The Xteri-Numb spray prepares the skin for long sessions. A practical application that ensures continuous comfort and flawless results."
-  },
-  "photo3": {
-    "overlay": "Wicann Witch Hazel natural",
-    "longDesc": "The soothing power of Witch Hazel in every drop: Wicann refreshes and protects the skin, allowing the ink to settle evenly."
-  },
-  "photo4": {
-    "overlay": "Green Soap — Professional hygiene",
-    "longDesc": "Effective and safe cleaning with No Pain’s Green Soap: disinfection without irritation to ensure a flawless tattoo from start to finish."
-  },
-  "photo5": {
-    "overlay": "No Pain — Professional format",
-    "longDesc": "No Pain in its professional format: maximum power in every application, designed to support the artist in any tattoo style."
-  },
-  "photo6": {
-    "overlay": "Xteri-Numb reliable",
-    "longDesc": "Formulated with 4% lidocaine, Xteri-Numb provides reliable anesthetic and disinfecting action without altering pigments or healing."
-  },
-  "photo7": {
-    "overlay": "The complete No Pain line",
-    "longDesc": "An exhibition that represents our philosophy: premium products created for artists who demand the best in every detail."
-  },
-  "photo8": {
-    "overlay": "Green Soap essential",
-    "longDesc": "The foundation of professional hygiene: Green Soap keeps the skin clean, calm, and ready, supporting tattoo artists worldwide."
-  },
-
-  "video1": {
-    "overlay": "Suffering? Here's the solution",
-    "longDesc": "Are you suffering because you want to? Here is the solution: No Pain. It's not for everyone, but it offers relief and control when needed."
-  },
-  "video2": {
-    "overlay": "Healing and color intact",
-    "longDesc": "Since I discovered No Pain, I always test it on myself first. It allows color tattoos without affecting healing or pigments. I've done many color works and they always healed properly."
-  },
-  "video3": {
-    "overlay": "Adrián — Adsertattoos (Realism)",
-    "longDesc": "Adrián from Adsertattoos (Florida), realism specialist with ~13 years of career. Uses 2–3 applications on large pieces, moves the cream as you progress, and reapplies to keep the client comfortable during long sessions."
-  },
-  "video4": {
-    "overlay": "Andrés — SupplyTattoo",
-    "longDesc": "Andrés (SupplyTattoo) highlights 3 benefits: it allows people afraid of pain to get tattoos, helps resume paused projects, and makes it easier for clients with low tolerance. Apply 1–2 mm, cover for 90–120 min (first time), effect ~2–6 h; safe on fresh skin and does not affect pigments."
-  },
-  "video5": {
-    "overlay": "All styles — One solution",
-    "longDesc": "No Pain works with all tattoo styles, providing comfort while preserving pigment and healing."
-  },
-  "video6": {
-    "overlay": "Pain-free transformation",
-    "longDesc": "Tattoo transformation like never before: No Pain allows more comfortable sessions, with long-lasting anesthesia and focus on artistic results. Hours of comfort to achieve the best work."
-  },
-  "video7": {
-    "overlay": "Professional hygiene — Green Soap",
-    "longDesc": "Looking for effective cleaning during tattooing? No Pain's Green Soap with chlorhexidine is ideal for disinfecting the skin. Dilute, apply, and tattoo with confidence. Professional results."
-  },
-  "video8": {
-    "overlay": "Wicann Witch Hazel",
-    "longDesc": "Wicann Witch Hazel is ideal for diluting pigments and creating different tones that adapt to your style. Its balm & astringent action allows ink to settle more evenly on the skin. Apply it directly to the skin for a trauma-free and irritation-free tattoo. Also ideal for skincare routines, aesthetic processes, and permanent makeup."
-  }
-
-
+    "video1": { "overlay": "Suffering? Here's the solution", "longDesc": "Are you suffering because you want to? Here is the solution: No Pain. It's not for everyone, but it offers relief and control when needed." },
+    "video2": { "overlay": "Healing and color intact", "longDesc": "Since I discovered No Pain, I always test it on myself first. It allows color tattoos without affecting healing or pigments. I've done many color works and they always healed properly." },
+    "video3": { "overlay": "Adrián — Adsertattoos (Realism)", "longDesc": "Adrián from Adsertattoos (Florida), realism specialist with ~13 years of career. Uses 2–3 applications on large pieces, moves the cream as you progress, and reapplies to keep the client comfortable during long sessions." },
+    "video4": { "overlay": "Andrés — SupplyTattoo", "longDesc": "Andrés (SupplyTattoo) highlights 3 benefits: it allows people afraid of pain to get tattoos, helps resume paused projects, and makes it easier for clients with low tolerance. Apply 1–2 mm, cover for 90–120 min (first time), effect ~2–6 h; safe on fresh skin and does not affect pigments." },
+    "video5": { "overlay": "All styles — One solution", "longDesc": "No Pain works with all tattoo styles, providing comfort while preserving pigment and healing." },
+    "video6": { "overlay": "Pain-free transformation", "longDesc": "Tattoo transformation like never before: No Pain allows more comfortable sessions, with long-lasting anesthesia and focus on artistic results. Hours of comfort to achieve the best work." },
+    "video7": { "overlay": "Professional hygiene — Green Soap", "longDesc": "Looking for effective cleaning during tattooing? No Pain's Green Soap with chlorhexidine is ideal for disinfecting the skin. Dilute, apply, and tattoo with confidence. Professional results." },
+    "video8": { "overlay": "Wicann Witch Hazel", "longDesc": "Wicann Witch Hazel is ideal for diluting pigments and creating different tones that adapt to your style. Its balm & astringent action allows ink to settle more evenly on the skin. Apply it directly to the skin for a trauma-free and irritation-free tattoo. Also ideal for skincare routines, aesthetic processes, and permanent makeup." }
   },
   "Contact": {
     "title": "CONTACT",
@@ -206,26 +153,28 @@
     "wholesaleRetail": "Wholesale and retail sales",
     "headOffice": "Head office",
     "ordersUSA": "Orders within the USA",
-   "distributorMailSubject": "Request to become a No Pain distributor",
-"distributorMailBody": "Hello No Pain,\n\nMy name is: [your name]\nMy company is: [company name]\nMy country is: [your country]\nMy WhatsApp or phone number is: [number]\n\nI would like to receive information to become an authorized distributor.\n\nThanks."
-
+    "distributorMailSubject": "Request to become a No Pain distributor",
+    "distributorMailBody": "Hello No Pain,\n\nMy name is: [your name]\nMy company is: [company name]\nMy country is: [your country]\nMy WhatsApp or phone number is: [number]\n\nI would like to receive information to become an authorized distributor.\n\nThanks."
   },
- "Footer": {
-  "linksTitle": "LINKS",
-  "contact": "CONTACT",
-  "suppliers": "SUPPLIERS",
-  "faq": "FAQ",
-  "legal": "POLICIES & LEGAL",
-  "newsletterTitle": "GET UPDATES",
-  "newsletterPlaceholder": "your@email.com",
-  "subscribe": "SUBSCRIBE",
-  "newsletterSuccess": "✅ Thank you — subscription successful",
-  "newsletterError": "❌ Could not complete subscription. Please try again.",
-  "rights": "All rights reserved."
-
-    
-    
-    
+  "popup": {
+    "greenSoapTitle": "Green Soap",
+    "greenSoapDesc": "Concentrated antiseptic soap with chlorhexidine, perfect for deep skin cleaning in tattoos.",
+    "monumbyTitle": "Monumby Premium",
+    "monumbyDesc": "Discover the exclusive Monumby product line, designed for the best skin care.",
+    "cta": "Learn more"
+  },
+  "Footer": {
+    "linksTitle": "LINKS",
+    "contact": "CONTACT",
+    "suppliers": "SUPPLIERS",
+    "faq": "FAQ",
+    "legal": "POLICIES & LEGAL",
+    "newsletterTitle": "GET UPDATES",
+    "newsletterPlaceholder": "your@email.com",
+    "subscribe": "SUBSCRIBE",
+    "newsletterSuccess": "✅ Thank you — subscription successful",
+    "newsletterError": "❌ Could not complete subscription. Please try again.",
+    "rights": "All rights reserved."
   },
   "Monumby": {
     "title": "Mother of Numby",
@@ -235,77 +184,75 @@
     "ctaText": "Discover the difference of working with Monumby, the premium product line created for artists who demand the best.",
     "ctaButton": "Visit Monumby.com"
   },
- "FAQ": {
-  "pageTitle": "FAQ",
-  "noPain": {
-    "title": "No Pain — FAQ",
-    "q1": "What is No Pain?",
-    "a1": "No Pain is a topical anesthetic cream designed for tattoos and PMU.",
-    "q2": "How long does it last?",
-    "a2": "Effects can last several hours depending on use.",
-    "q3": "Is it safe?",
-    "a3": "Yes, when used as directed by professionals.",
-    "q4": "When to apply?",
-    "a4": "Apply 20 minutes before the procedure.",
-    "q5": "Precautions?",
-    "a5": "Avoid eyes and mucous membranes."
+  "FAQ": {
+    "pageTitle": "FAQ",
+    "noPain": {
+      "title": "No Pain — FAQ",
+      "q1": "What is No Pain?",
+      "a1": "No Pain is a topical anesthetic cream designed for tattoos and PMU.",
+      "q2": "How long does it last?",
+      "a2": "Effects can last several hours depending on use.",
+      "q3": "Is it safe?",
+      "a3": "Yes, when used as directed by professionals.",
+      "q4": "When to apply?",
+      "a4": "Apply 20 minutes before the procedure.",
+      "q5": "Precautions?",
+      "a5": "Avoid eyes and mucous membranes."
+    },
+    "xteri": {
+      "title": "Xteri-Numb — FAQ",
+      "q1": "What is Xteri-Numb?",
+      "a1": "A disinfectant and anesthetic spray for use during tattooing.",
+      "q2": "How to use it?",
+      "a2": "Shake well and spray on tattooed skin as needed.",
+      "q3": "Is it safe?",
+      "a3": "Yes, when applied by professionals during tattooing.",
+      "q4": "Does it affect pigments?",
+      "a4": "No, it does not affect pigments or healing.",
+      "q5": "Precautions?",
+      "a5": "Avoid eyes, mucous membranes and open wounds."
+    },
+    "wicann": {
+      "title": "Wicann — FAQ",
+      "q1": "What is Wicann?",
+      "a1": "A soothing and regenerative tonic for post-tattoo care.",
+      "q2": "How to use it?",
+      "a2": "Clean with Green Soap and apply Wicann 2–3 times a day.",
+      "q3": "Is it natural?",
+      "a3": "Yes, it contains natural extracts to reduce irritation and aid recovery.",
+      "q4": "Does it replace creams?",
+      "a4": "It complements post-tattoo creams, helping the skin recover faster.",
+      "q5": "Precautions?",
+      "a5": "Avoid eyes and mucous membranes. For external use only."
+    },
+    "greenSoap": {
+      "title": "Green Soap — FAQ",
+      "q1": "How to use Green Soap?",
+      "a1": "Dilute 1:9 and use for skin cleaning during tattooing.",
+      "q2": "What is the concentration?",
+      "a2": "It contains 4% chlorhexidine gluconate for safe antiseptic action.",
+      "q3": "Is it safe for all skin types?",
+      "a3": "Yes, when diluted correctly it is safe for most skin types.",
+      "q4": "Other uses?",
+      "a4": "Ideal for cleaning wounds, equipment, and contaminated areas.",
+      "q5": "Precautions?",
+      "a5": "Always dilute before use. Keep away from children."
+    }
   },
-  "xteri": {
-    "title": "Xteri-Numb — FAQ",
-    "q1": "What is Xteri-Numb?",
-    "a1": "A disinfectant and anesthetic spray for use during tattooing.",
-    "q2": "How to use it?",
-    "a2": "Shake well and spray on tattooed skin as needed.",
-    "q3": "Is it safe?",
-    "a3": "Yes, when applied by professionals during tattooing.",
-    "q4": "Does it affect pigments?",
-    "a4": "No, it does not affect pigments or healing.",
-    "q5": "Precautions?",
-    "a5": "Avoid eyes, mucous membranes and open wounds."
-  },
-  "wicann": {
-    "title": "Wicann — FAQ",
-    "q1": "What is Wicann?",
-    "a1": "A soothing and regenerative tonic for post-tattoo care.",
-    "q2": "How to use it?",
-    "a2": "Clean with Green Soap and apply Wicann 2–3 times a day.",
-    "q3": "Is it natural?",
-    "a3": "Yes, it contains natural extracts to reduce irritation and aid recovery.",
-    "q4": "Does it replace creams?",
-    "a4": "It complements post-tattoo creams, helping the skin recover faster.",
-    "q5": "Precautions?",
-    "a5": "Avoid eyes and mucous membranes. For external use only."
-  },
-  "greenSoap": {
-    "title": "Green Soap — FAQ",
-    "q1": "How to use Green Soap?",
-    "a1": "Dilute 1:9 and use for skin cleaning during tattooing.",
-    "q2": "What is the concentration?",
-    "a2": "It contains 4% chlorhexidine gluconate for safe antiseptic action.",
-    "q3": "Is it safe for all skin types?",
-    "a3": "Yes, when diluted correctly it is safe for most skin types.",
-    "q4": "Other uses?",
-    "a4": "Ideal for cleaning wounds, equipment, and contaminated areas.",
-    "q5": "Precautions?",
-    "a5": "Always dilute before use. Keep away from children."
+   "Legal": {
+    "title": "POLICIES & LEGAL",
+    "intellectualPropertyTitle": "Intellectual Property",
+    "intellectualPropertyText": "All trademarks, logos and content belong to No Pain Brand and are protected by law.",
+    "registrationTitle": "Registration & Use",
+    "registrationText": "Our products must be used only by professionals and according to local regulations.",
+    "internationalTitle": "International Distribution",
+    "internationalText": "No Pain has authorized distributors worldwide. Unauthorized resellers are not covered.",
+    "infractionsTitle": "Infractions",
+    "infractionsText": "Any violation of intellectual property or misuse of products may result in legal action.",
+    "termsTitle": "Terms of Service",
+    "termsText": "By using our website or products, you agree to comply with all terms and conditions.",
+    "privacyTitle": "Privacy Policy",
+    "privacyText": "We respect your privacy. Personal data is handled under strict confidentiality.",
+    "lastUpdated": "Last updated"
   }
-
-  },
-  "Legal": {
-  "title": "POLICIES & LEGAL",
-  "intellectualPropertyTitle": "Intellectual Property",
-  "intellectualPropertyText": "All trademarks, logos and content belong to No Pain Brand and are protected by law.",
-  "registrationTitle": "Registration & Use",
-  "registrationText": "Our products must be used only by professionals and according to local regulations.",
-  "internationalTitle": "International Distribution",
-  "internationalText": "No Pain has authorized distributors worldwide. Unauthorized resellers are not covered.",
-  "infractionsTitle": "Infractions",
-  "infractionsText": "Any violation of intellectual property or misuse of products may result in legal action.",
-  "termsTitle": "Terms of Service",
-  "termsText": "By using our website or products, you agree to comply with all terms and conditions.",
-  "privacyTitle": "Privacy Policy",
-  "privacyText": "We respect your privacy. Personal data is handled under strict confidentiality.",
-  "lastUpdated": "Last updated"
-}
-
 }
