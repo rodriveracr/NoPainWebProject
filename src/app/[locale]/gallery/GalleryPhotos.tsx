@@ -40,6 +40,7 @@ export default function GalleryPhotos() {
 
   return (
     <>
+      {/* 📸 Grid de fotos */}
       <section className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-8">{t("photosTitle")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -67,6 +68,7 @@ export default function GalleryPhotos() {
         </div>
       </section>
 
+      {/* Modal con scroll en descripción */}
       <AnimatePresence>
         {current !== null && (
           <motion.div
@@ -74,33 +76,44 @@ export default function GalleryPhotos() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setCurrent(null)}
           >
-            <button
-              onClick={() => setCurrent(null)}
-              title="Close"
-              className="absolute top-6 right-6 text-white text-3xl"
+            <div
+              className="relative flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 max-w-6xl w-[92vw] p-2 md:p-4"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X size={32} />
-            </button>
+              {/* Botón cerrar */}
+              <button
+                onClick={() => setCurrent(null)}
+                title="Close"
+                className="absolute top-4 right-4 text-white bg-black/70 hover:bg-black/90 p-2 rounded-full transition z-[10000]"
+              >
+                <X size={28} />
+              </button>
 
-            <button
-              onClick={prev}
-              title="Previous"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
-            >
-              <ChevronLeft size={36} />
-            </button>
+              {/* Flecha izquierda */}
+              <button
+                onClick={prev}
+                title="Previous"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl z-[10000] bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
+              >
+                <ChevronLeft size={36} />
+              </button>
 
-            <div className="flex flex-col md:flex-row items-center gap-6 max-w-6xl p-4">
-              <Image
-                src={photos[current].src}
-                alt={photos[current].alt}
-                width={800}
-                height={1000}
-                className="rounded-lg object-cover max-h-[85vh]"
-              />
-              <div className="text-white max-w-sm mt-4 md:mt-0 overflow-y-auto max-h-[30vh] md:max-h-[60vh] pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
-                <h3 className="text-xl font-bold mb-4">
+              {/* Imagen principal */}
+              <div className="flex items-center justify-center w-full max-w-[1280px] h-[55vh] md:h-[680px] bg-black rounded-lg shadow-2xl">
+                <Image
+                  src={photos[current].src}
+                  alt={photos[current].alt}
+                  width={800}
+                  height={1000}
+                  className="rounded-lg object-contain max-h-full max-w-full"
+                />
+              </div>
+
+              {/* Descripción con scroll */}
+              <div className="text-white max-w-sm mt-3 md:mt-0 px-2 md:px-0 overflow-y-auto max-h-[25vh] md:max-h-[55vh] pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+                <h3 className="text-xl font-bold mb-2">
                   {safeT(`photo${current + 1}.overlay`, photos[current].alt)}
                 </h3>
                 <p className="text-gray-300 text-sm md:text-base leading-relaxed">
@@ -110,15 +123,16 @@ export default function GalleryPhotos() {
                   )}
                 </p>
               </div>
-            </div>
 
-            <button
-              onClick={next}
-              title="Next"
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
-            >
-              <ChevronRight size={36} />
-            </button>
+              {/* Flecha derecha */}
+              <button
+                onClick={next}
+                title="Next"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl z-[10000] bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
+              >
+                <ChevronRight size={36} />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
