@@ -1,3 +1,4 @@
+//src/app/[locale]/gallery/GalleryVideos.tsx
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -73,7 +74,7 @@ export default function GalleryVideos() {
       ],
       desc: t("video8.overlay"),
     },
-  ]; // ✅ ahora todos usan videoX.overlay en lugar de usage1/usage2
+  ];
 
   const [current, setCurrent] = useState<number | null>(null);
 
@@ -88,8 +89,8 @@ export default function GalleryVideos() {
 
   return (
     <>
-      {/* Grid fijo */}
-      <section className="max-w-7xl mx-auto">
+      {/* Galería de videos */}
+      <section className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-2xl font-bold mb-8">{t("videosTitle")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {videos.map((video, idx) => {
@@ -114,9 +115,8 @@ export default function GalleryVideos() {
                       type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
                     />
                   ))}
-                  {t("videoNotSupported")}
                 </video>
-                <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
+                <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
                   <p className="text-white text-lg font-semibold">
                     {overlay || video.desc}
                   </p>
@@ -127,37 +127,44 @@ export default function GalleryVideos() {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* Modal de video */}
       <AnimatePresence>
         {current !== null && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[99999]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setCurrent(null)}
           >
-            <button
-              onClick={() => setCurrent(null)}
-              title="Close"
-              className="absolute top-6 right-6 text-white text-3xl"
+            <div
+              className="relative flex flex-col md:flex-row items-center gap-6 max-w-6xl w-[92vw] p-4"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X size={32} />
-            </button>
-            <button
-              onClick={prev}
-              title="Previous"
-              className="absolute left-6 text-white text-4xl"
-            >
-              <ChevronLeft size={40} />
-            </button>
+              {/* Botón cerrar */}
+              <button
+                onClick={() => setCurrent(null)}
+                title="Close"
+                className="absolute top-4 right-4 z-[10000] text-white bg-black/70 hover:bg-black/90 p-2 rounded-full transition"
+              >
+                <X size={26} />
+              </button>
 
-            <div className="flex flex-col md:flex-row items-center gap-6 max-w-6xl p-4">
-              <div className="bg-black rounded-lg flex items-center justify-center w-[1280px] h-[720px]">
+              {/* Botón anterior */}
+              <button
+                onClick={prev}
+                title="Previous"
+                className="absolute left-3 md:left-6 text-white text-4xl z-[10000] hover:opacity-80"
+              >
+                <ChevronLeft size={36} />
+              </button>
+
+              {/* Video principal */}
+              <div className="bg-black rounded-lg flex items-center justify-center w-[90vw] max-w-[1280px] h-[60vh] md:h-[720px] shadow-2xl">
                 <video
                   key={current}
                   controls
                   autoPlay
-                  muted
                   playsInline
                   className="max-w-full max-h-full object-contain rounded-lg"
                 >
@@ -168,29 +175,31 @@ export default function GalleryVideos() {
                       type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
                     />
                   ))}
-                  {t("videoNotSupported")}
                 </video>
               </div>
-              <div className="text-white max-w-sm">
-                <h3 className="text-xl font-bold mb-4">
+
+              {/* Descripción */}
+              <div className="text-white max-w-sm mt-6 md:mt-0 px-2 md:px-0">
+                <h3 className="text-xl font-bold mb-3">
                   {safeT(`video${current + 1}.overlay`, videos[current].desc)}
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-sm md:text-base leading-relaxed">
                   {safeT(
                     `video${current + 1}.longDesc`,
                     "Aquí puedes poner una breve descripción del video."
                   )}
                 </p>
               </div>
-            </div>
 
-            <button
-              onClick={next}
-              title="Next"
-              className="absolute right-6 text-white text-4xl"
-            >
-              <ChevronRight size={40} />
-            </button>
+              {/* Botón siguiente */}
+              <button
+                onClick={next}
+                title="Next"
+                className="absolute right-3 md:right-6 text-white text-4xl z-[10000] hover:opacity-80"
+              >
+                <ChevronRight size={36} />
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

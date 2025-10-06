@@ -1,3 +1,4 @@
+//src/app/%5Blocale%5D/gallery/GalleryPhotos.tsx
 "use client";
 
 import { useState } from "react";

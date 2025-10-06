@@ -1,4 +1,7 @@
-/* globals.css */
+/* ============================== */
+/* src/app/globals.css — actualizado */
+/* ============================== */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,7 +24,6 @@
   font-display: swap;
 }
 
-
 /* ------------------ */
 /* Base global        */
 /* ------------------ */
@@ -37,9 +39,6 @@ body {
   @apply bg-black text-white;
   font-family: var(--ui-font);
 }
-
-/* Evita forzar la fuente en TODOS los elementos con !important.
-   Si necesitas un fallback forzado, hazlo por componentes concretos. */
 
 /* ------------------ */
 /* Tipografía global  */
@@ -76,8 +75,144 @@ p {
   background-position: center;
 }
 
-/* etc... */
-.bg-numbing { background-image: url('/numbingback.jpg'); background-size:cover; background-position:center; }
-.bg-xterinum { background-image: url('/Xterinumb2.jpg'); background-size:cover; background-position:center; }
-.bg-wicann { background-image: url('/wicannbg.png'); background-size:cover; background-position:center; }
-.bg-greensoap { background-image: url('/Green-Soap1.jpg'); background-size:cover; background-position:center; }
+.bg-numbing {
+  background-image: url('/numbingback.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-xterinum {
+  background-image: url('/Xterinumb2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-wicann {
+  background-image: url('/wicannbg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-greensoap {
+  background-image: url('/Green-Soap1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* ------------------ */
+/* Modales y overlays */
+/* ------------------ */
+.modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  background: rgba(0, 0, 0, 0.9);
+  -webkit-backdrop-filter: blur(4px); /* ✅ Fix Safari */
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+/* Botón de cierre universal (para popups, modales, gallery) */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 9999px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* ------------------ */
+/* Galería (Fotos y Videos) */
+/* ------------------ */
+
+.gallery-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8;
+}
+
+.gallery-item {
+  @apply relative cursor-pointer overflow-hidden rounded-2xl border border-gray-700 hover:scale-105 transition-transform shadow-lg;
+}
+
+.gallery-item video,
+.gallery-item img {
+  @apply object-cover w-full h-[500px] lg:h-[550px] rounded-lg;
+}
+
+.gallery-overlay {
+  @apply absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 flex items-center justify-center transition;
+}
+
+.gallery-overlay p {
+  @apply text-white text-lg font-semibold text-center;
+}
+
+/* ------------------ */
+/* Ajustes responsive */
+/* ------------------ */
+
+@media (max-width: 768px) {
+  .gallery-item video,
+  .gallery-item img {
+    height: 360px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-item video,
+  .gallery-item img {
+    height: 280px;
+  }
+}
+
+/* ------------------ */
+/* Popup general      */
+/* ------------------ */
+
+.popup-backdrop {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-sm;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.popup-card {
+  @apply relative w-[90vw] max-w-[720px] rounded-2xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl overflow-hidden;
+}
+
+/* ------------------ */
+/* Botones primarios  */
+/* ------------------ */
+
+.btn-gradient {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-semibold shadow-md hover:opacity-90 transition;
+}
+
+/* ------------------ */
+/* Scrollbar (opcional estilizado) */
+/* ------------------ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
