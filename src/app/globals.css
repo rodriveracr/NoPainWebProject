@@ -216,3 +216,12 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
+/* Ajuste de botones de navegación en videos */
+@media (max-width: 768px) {
+  .gallery-modal button[title="Previous"],
+  .gallery-modal button[title="Next"] {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem;
+    border-radius: 9999px;
+  }
+}
