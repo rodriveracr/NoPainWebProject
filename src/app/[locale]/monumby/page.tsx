@@ -29,9 +29,9 @@ export default async function MonumbyPage(props: {
           <Image
             src="/junto.png"
             alt="Monumby Logo"
-            width={600}
-            height={600}
-            className="mx-auto -top-8 mb-2 drop-shadow-lg"
+            width={500}
+            height={500}
+            className="mx-auto mt-6 mb-6 drop-shadow-lg"
             priority
           />
           <h1 className="text-4xl md:text-5xl font-bold uppercase mb-4">
