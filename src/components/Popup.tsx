@@ -1,8 +1,11 @@
+//src/components/Popup.tsx
 "use client";
 
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
+import LanguageSwitcher from "./LanguageSwitcher";
+
 
 const STORAGE_KEYS = {
   sessionClosed: (loc: string) => `popupClosed-${loc}`,
@@ -153,9 +156,15 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
           >
             <X size={18} />
           </button>
-        </div>
+          {/* Botones de idioma debajo del botón X */}
+<div className="absolute top-14 right-3">
+  <LanguageSwitcher small />
+</div>
 
-        <div className="px-6 pt-5 pb-6">
+        </div>
+        
+
+        <div className="px-1 pt-1 pb-1">
           <h2 className="text-2xl sm:text-3xl font-black mb-4 text-center">
             {slide.title}
           </h2>
