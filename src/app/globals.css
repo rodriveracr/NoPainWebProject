@@ -217,11 +217,11 @@ p {
   background: #666;
 }
 /* Ajuste de botones de navegación en videos */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .gallery-modal button[title="Previous"],
   .gallery-modal button[title="Next"] {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 0.5rem;
-    border-radius: 9999px;
+    border-radius: 9950px;
   }
 }

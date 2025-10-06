@@ -88,6 +88,7 @@ export default function GalleryVideos() {
 
   return (
     <>
+      {/* Galería de videos */}
       <section className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-2xl font-bold mb-8">{t("videosTitle")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -136,7 +137,7 @@ export default function GalleryVideos() {
             onClick={() => setCurrent(null)}
           >
             <div
-              className="relative flex flex-col md:flex-row items-center gap-6 max-w-6xl w-[92vw] p-4"
+              className="relative flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 max-w-6xl w-[92vw] p-2 md:p-4"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Botón cerrar */}
@@ -158,7 +159,7 @@ export default function GalleryVideos() {
               </button>
 
               {/* Video principal */}
-              <div className="bg-black rounded-lg flex items-center justify-center w-[90vw] max-w-[1280px] h-[60vh] md:h-[720px] shadow-2xl">
+              <div className="bg-black rounded-lg flex items-center justify-center w-full max-w-[1280px] h-[55vh] md:h-[680px] shadow-2xl">
                 <video
                   key={current}
                   controls
@@ -176,9 +177,9 @@ export default function GalleryVideos() {
                 </video>
               </div>
 
-              {/* Descripción con scroll */}
-              <div className="text-white max-w-sm mt-6 md:mt-0 px-2 md:px-0 overflow-y-auto max-h-[30vh] md:max-h-[60vh] pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
-                <h3 className="text-xl font-bold mb-3">
+              {/* Descripción compacta con scroll */}
+              <div className="text-white max-w-sm mt-3 md:mt-0 px-2 md:px-0 overflow-y-auto max-h-[25vh] md:max-h-[55vh] pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+                <h3 className="text-xl font-bold mb-2">
                   {safeT(`video${current + 1}.overlay`, videos[current].desc)}
                 </h3>
                 <p className="text-gray-300 text-sm md:text-base leading-relaxed">
