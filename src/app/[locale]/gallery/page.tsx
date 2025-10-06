@@ -1,4 +1,3 @@
-//src/app/[locale]/gallery/page.tsx
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,14 +21,12 @@ export default async function Gallery({
 
   return (
     <>
-      {/* ✅ Header con Suspense */}
       <Suspense fallback={<div>Loading header...</div>}>
         <Header locale={locale} />
       </Suspense>
       <div className="h-16" />
 
       <main className="bg-black text-white min-h-screen py-24 px-6 font-franklin space-y-24">
-        {/* 🎯 Título y descripción */}
         <section className="text-center max-w-4xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold">
             {t("title") || "Gallery"}
@@ -40,14 +37,10 @@ export default async function Gallery({
           </p>
         </section>
 
-        {/* 🎥 Videos */}
         <GalleryVideos />
-
-        {/* 📸 Fotos */}
         <GalleryPhotos />
       </main>
 
-      {/* ✅ Footer con Suspense */}
       <Suspense fallback={<div>Loading footer...</div>}>
         <Footer locale={locale} />
       </Suspense>

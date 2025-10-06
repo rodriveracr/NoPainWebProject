@@ -1,4 +1,3 @@
-//src/app/[locale]/gallery/GalleryVideos.tsx
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -89,7 +88,6 @@ export default function GalleryVideos() {
 
   return (
     <>
-      {/* Galería de videos */}
       <section className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-2xl font-bold mb-8">{t("videosTitle")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -127,7 +125,7 @@ export default function GalleryVideos() {
         </div>
       </section>
 
-      {/* Modal de video */}
+      {/* Modal */}
       <AnimatePresence>
         {current !== null && (
           <motion.div
@@ -150,11 +148,11 @@ export default function GalleryVideos() {
                 <X size={26} />
               </button>
 
-              {/* Botón anterior */}
+              {/* Flecha izquierda */}
               <button
                 onClick={prev}
                 title="Previous"
-                className="absolute left-3 md:left-6 text-white text-4xl z-[10000] hover:opacity-80"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl z-[10000] bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
               >
                 <ChevronLeft size={36} />
               </button>
@@ -178,8 +176,8 @@ export default function GalleryVideos() {
                 </video>
               </div>
 
-              {/* Descripción */}
-              <div className="text-white max-w-sm mt-6 md:mt-0 px-2 md:px-0">
+              {/* Descripción con scroll */}
+              <div className="text-white max-w-sm mt-6 md:mt-0 px-2 md:px-0 overflow-y-auto max-h-[30vh] md:max-h-[60vh] pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
                 <h3 className="text-xl font-bold mb-3">
                   {safeT(`video${current + 1}.overlay`, videos[current].desc)}
                 </h3>
@@ -191,11 +189,11 @@ export default function GalleryVideos() {
                 </p>
               </div>
 
-              {/* Botón siguiente */}
+              {/* Flecha derecha */}
               <button
                 onClick={next}
                 title="Next"
-                className="absolute right-3 md:right-6 text-white text-4xl z-[10000] hover:opacity-80"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl z-[10000] bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
               >
                 <ChevronRight size={36} />
               </button>

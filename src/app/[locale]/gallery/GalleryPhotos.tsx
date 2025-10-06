@@ -1,4 +1,3 @@
-//src/app/%5Blocale%5D/gallery/GalleryPhotos.tsx
 "use client";
 
 import { useState } from "react";
@@ -41,7 +40,6 @@ export default function GalleryPhotos() {
 
   return (
     <>
-      {/* 📸 Grid de fotos */}
       <section className="max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-8">{t("photosTitle")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -69,7 +67,6 @@ export default function GalleryPhotos() {
         </div>
       </section>
 
-      {/* Modal */}
       <AnimatePresence>
         {current !== null && (
           <motion.div
@@ -78,7 +75,6 @@ export default function GalleryPhotos() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Botón cerrar */}
             <button
               onClick={() => setCurrent(null)}
               title="Close"
@@ -87,16 +83,14 @@ export default function GalleryPhotos() {
               <X size={32} />
             </button>
 
-            {/* Flecha izquierda */}
             <button
               onClick={prev}
               title="Previous"
-              className="absolute left-6 text-white text-4xl"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
             >
-              <ChevronLeft size={40} />
+              <ChevronLeft size={36} />
             </button>
 
-            {/* Imagen modal */}
             <div className="flex flex-col md:flex-row items-center gap-6 max-w-6xl p-4">
               <Image
                 src={photos[current].src}
@@ -105,11 +99,11 @@ export default function GalleryPhotos() {
                 height={1000}
                 className="rounded-lg object-cover max-h-[85vh]"
               />
-              <div className="text-white max-w-sm">
+              <div className="text-white max-w-sm mt-4 md:mt-0 overflow-y-auto max-h-[30vh] md:max-h-[60vh] pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
                 <h3 className="text-xl font-bold mb-4">
                   {safeT(`photo${current + 1}.overlay`, photos[current].alt)}
                 </h3>
-                <p className="text-gray-300">
+                <p className="text-gray-300 text-sm md:text-base leading-relaxed">
                   {safeT(
                     `photo${current + 1}.longDesc`,
                     "Aquí puedes poner una breve descripción de la foto."
@@ -118,13 +112,12 @@ export default function GalleryPhotos() {
               </div>
             </div>
 
-            {/* Flecha derecha */}
             <button
               onClick={next}
               title="Next"
-              className="absolute right-6 text-white text-4xl"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
             >
-              <ChevronRight size={40} />
+              <ChevronRight size={36} />
             </button>
           </motion.div>
         )}
