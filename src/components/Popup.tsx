@@ -130,7 +130,7 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
       onClick={close}
     >
       <div
-        className="relative w-[92vw] max-w-[720px] rounded-2xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl overflow-hidden"
+        className="relative w-[90vw] max-w-[640px] max-h-[88vh] sm:max-h-[85vh] rounded-2xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header con logo */}
@@ -160,7 +160,7 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
             {slide.title}
           </h2>
 
-          {/* 🖼️ Imagen cuadrada reducida (85% ancho) */}
+          {/* 🖼️ Imagen cuadrada reducida */}
           <div className="relative w-[85%] mx-auto aspect-square bg-black rounded-xl overflow-hidden mb-4 shadow-lg flex items-center justify-center">
             <Image
               src={slide.image}
@@ -200,7 +200,7 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
           )}
 
           {/* Dots */}
-          <div className="mt-6 flex items-center justify-center gap-2">
+          <div className="mt-6 flex items-center justify-center gap-2 pb-1">
             {slides.map((_, i) => (
               <button
                 key={i}
