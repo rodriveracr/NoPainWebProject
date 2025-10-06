@@ -205,11 +205,17 @@
     "distributorMailBody": "Hola No Pain,\n\nMi nombre es: [tu nombre]\nMi empresa es: [nombre de la empresa]\nMi país es: [tu país]\nMi WhatsApp o teléfono es: [número]\n\nQuisiera recibir información para ser distribuidor autorizado.\n\nGracias."
   },
   "popup": {
-    "greenSoapTitle": "Green Soap",
-    "greenSoapDesc": "Jabón antiséptico concentrado con clorhexidina, ideal para limpieza profunda de la piel en tatuajes.",
-    "monumbyTitle": "Monumby Premium",
-    "monumbyDesc": "Descubre la línea exclusiva de productos Monumby, creados para el mejor cuidado de la piel.",
-    "cta": "Ver más"
+  "munumbyTeaserTitle": "Munumby · No Pain",
+  "munumbyTeaserDesc": "Próximamente. Línea premium de cuidado profesional.",
+  "munumbyTeaserDescAlt": "Próximamente. Investigación, precisión y resultados.",
+  "ctaPrimary": "Conocer Munumby",
+  "ctaSecondary": "Recibir novedades",
+
+  "greenSoapTitle": "Green Soap – Limpieza profesional",
+  "greenSoapDesc": "Jabón suave para tatuajes y PMU. Limpia sin irritar.",
+  "cta": "Ver más",
+  "remindLater": "Recordármelo luego",
+  "disclaimer": "Puedes cerrar este mensaje cuando quieras."
   },
   "Footer": {
     "linksTitle": "ENLACES",

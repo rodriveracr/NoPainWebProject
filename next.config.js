@@ -1,3 +1,4 @@
+//src/next.config.js
 const createNextIntlPlugin = require('next-intl/plugin');
 
 const nextConfig = {

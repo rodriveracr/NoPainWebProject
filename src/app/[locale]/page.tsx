@@ -1,10 +1,13 @@
 // src/app/[locale]/page.tsx
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react"; // 👈 IMPORTANTE
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+// ✅ Importa el componente cliente directamente (Popup.tsx tiene "use client")
+import ClientPopup from "@/components/Popup";
 
 export const metadata = {
   title: "No Pain ",
@@ -112,7 +115,8 @@ const REGIONS: Region[] = [
             name: "@adsertattoos",
             url: "https://instagram.com/adsertattoos",
             whatsapp: "+15303085643",
-            extra: "Compra online: https://adsertattoos.bigcartel.com/product/no-pain-numbing",
+            extra:
+              "Compra online: https://adsertattoos.bigcartel.com/product/no-pain-numbing",
             isFixedText: true,
           },
           {
@@ -157,6 +161,8 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
   return (
     <>
       <main className="text-white bg-black min-h-screen font-franklin">
+        {/* ✅ POPUP SOLO EN LANDING (cliente) */}
+        <ClientPopup locale={locale} />
 
         {/* ✅ Header envuelto en Suspense */}
         <Suspense fallback={<div>Loading header...</div>}>
@@ -191,16 +197,18 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           </div>
         </section>
 
-        {/* QUIENES SOMOS */}
+        {/* QUIÉNES SOMOS + Videos */}
         <section id="quienes-somos" className="py-24 text-center px-6 bg-black">
           <h2 className="text-4xl font-semibold mb-4 uppercase">{tNavbar("about")}</h2>
           <p className="max-w-3xl mx-auto text-white">{tAbout("intro")}</p>
+
           <div className="mt-8 text-base text-white text-left max-w-xl mx-auto space-y-2">
             <p className="font-semibold">{tAbout("resultTitle")}</p>
             <p>{tAbout("result1")}</p>
             <p>{tAbout("result2")}</p>
             <p>{tAbout("result3")}</p>
           </div>
+
           <p className="max-w-3xl mx-auto text-white mt-8">{tAbout("closing")}</p>
 
           {/* 🎥 GRID DE VIDEOS */}
@@ -252,6 +260,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           <h2 className="text-3xl font-semibold text-center mb-12 uppercase">
             {tProducts("title")}
           </h2>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-6xl mx-auto">
             {[
               {
@@ -291,7 +300,9 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                   className="mx-auto object-cover rounded-lg"
                   loading="lazy"
                 />
-                <h3 className="mt-4 text-xl font-semibold text-white uppercase">{p.title}</h3>
+                <h3 className="mt-4 text-xl font-semibold text-white uppercase">
+                  {p.title}
+                </h3>
                 <p className="text-base text-white flex-grow">{p.desc}</p>
                 <Link
                   href={p.link}
@@ -305,113 +316,112 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         </section>
 
         {/* PROVEEDORES */}
-<section id="proveedores" className="py-24 px-6 bg-black">
-  <h2 className="text-3xl font-semibold text-center mb-16 uppercase">
-    {tSuppliers("title")}
-  </h2>
+        <section id="proveedores" className="py-24 px-6 bg-black">
+          <h2 className="text-3xl font-semibold text-center mb-16 uppercase">
+            {tSuppliers("title")}
+          </h2>
 
-  <div className="max-w-6xl mx-auto space-y-16">
-    {REGIONS.map((region) => (
-      <div key={region.name}>
-        <h3 className="text-2xl font-bold mb-8 text-center uppercase">
-          {tSuppliers(region.name)}
-        </h3>
+          <div className="max-w-6xl mx-auto space-y-16">
+            {REGIONS.map((region) => (
+              <div key={region.name}>
+                <h3 className="text-2xl font-bold mb-8 text-center uppercase">
+                  {tSuppliers(region.name)}
+                </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {region.countries.map((country) => (
-            <div
-              key={country.name}
-              className="border border-gray-700 rounded-xl p-5 hover:border-gray-500 transition"
-            >
-              <h4 className="text-xl font-semibold mb-4 flex items-center gap-2 uppercase">
-                <Image
-                  src={country.flag}
-                  alt={tSuppliers(country.name)}
-                  width={24}
-                  height={16}
-                  className="rounded-sm"
-                  loading="lazy"
-                />
-                {tSuppliers(country.name)}
-              </h4>
-
-              <div className="space-y-3 text-white">
-                {country.dists.map((d, index) => {
-                  const wa = `https://wa.me/${d.whatsapp.replace(/\D/g, "")}`;
-                  return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {region.countries.map((country) => (
                     <div
-                      key={`${country.name}-${index}`}
-                      className="border-b border-gray-700 pb-3"
+                      key={country.name}
+                      className="border border-gray-700 rounded-xl p-5 hover:border-gray-500 transition"
                     >
-                      <div className="flex flex-col gap-1">
-                        {d.url ? (
-                          <a
-                            href={d.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 hover:text-gray-300"
-                          >
-                            <Image
-                              src="/icons/instagram.svg"
-                              alt="Instagram"
-                              width={18}
-                              height={18}
-                              loading="lazy"
-                            />
-                            {d.name}
-                          </a>
-                        ) : (
-                          <span className="flex items-center gap-2">{d.name}</span>
-                        )}
+                      <h4 className="text-xl font-semibold mb-4 flex items-center gap-2 uppercase">
+                        <Image
+                          src={country.flag}
+                          alt={tSuppliers(country.name)}
+                          width={24}
+                          height={16}
+                          className="rounded-sm"
+                          loading="lazy"
+                        />
+                        {tSuppliers(country.name)}
+                      </h4>
 
-                        <a
-                          href={wa}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-green-400 hover:text-green-300"
-                        >
-                          <Image
-                            src="/icons/whatsapp.svg"
-                            alt="WhatsApp"
-                            width={18}
-                            height={18}
-                            loading="lazy"
-                          />
-                          {d.whatsapp}
-                        </a>
+                      <div className="space-y-3 text-white">
+                        {country.dists.map((d, index) => {
+                          const wa = `https://wa.me/${d.whatsapp.replace(/\D/g, "")}`;
+                          return (
+                            <div
+                              key={`${country.name}-${index}`}
+                              className="border-b border-gray-700 pb-3"
+                            >
+                              <div className="flex flex-col gap-1">
+                                {d.url ? (
+                                  <a
+                                    href={d.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 hover:text-gray-300"
+                                  >
+                                    <Image
+                                      src="/icons/instagram.svg"
+                                      alt="Instagram"
+                                      width={18}
+                                      height={18}
+                                      loading="lazy"
+                                    />
+                                    {d.name}
+                                  </a>
+                                ) : (
+                                  <span className="flex items-center gap-2">
+                                    {d.name}
+                                  </span>
+                                )}
 
-                        {/* ✅ Ahora maneja traducción o texto fijo */}
-                        {d.extra && (
-                          <p className="text-sm text-white">
-                            {d.isFixedText ? d.extra : tSuppliers(d.extra)}
-                          </p>
-                        )}
+                                <a
+                                  href={wa}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center gap-2 text-green-400 hover:text-green-300"
+                                >
+                                  <Image
+                                    src="/icons/whatsapp.svg"
+                                    alt="WhatsApp"
+                                    width={18}
+                                    height={18}
+                                    loading="lazy"
+                                  />
+                                  {d.whatsapp}
+                                </a>
+
+                                {/* ✅ Traducción o texto fijo */}
+                                {d.extra && (
+                                  <p className="text-sm text-white">
+                                    {d.isFixedText ? d.extra : tSuppliers(d.extra)}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
-  </div>
+            ))}
+          </div>
 
- <div className="text-center mt-16">
-  <a
-    href={`mailto:customercare@nopainnumbing.net?subject=${encodeURIComponent(
-      tSuppliers("distributorMailSubject")
-    )}&body=${encodeURIComponent(tSuppliers("distributorMailBody"))}`}
-    className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
-  >
-    {tSuppliers("beDistributor")}
-  </a>
-</div>
-
-
-</section>
-
+          <div className="text-center mt-16">
+            <a
+              href={`mailto:customercare@nopainnumbing.net?subject=${encodeURIComponent(
+                tSuppliers("distributorMailSubject")
+              )}&body=${encodeURIComponent(tSuppliers("distributorMailBody"))}`}
+              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
+            >
+              {tSuppliers("beDistributor")}
+            </a>
+          </div>
+        </section>
       </main>
 
       {/* ✅ Footer envuelto en Suspense */}

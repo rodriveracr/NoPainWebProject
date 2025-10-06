@@ -156,12 +156,19 @@
     "distributorMailSubject": "Request to become a No Pain distributor",
     "distributorMailBody": "Hello No Pain,\n\nMy name is: [your name]\nMy company is: [company name]\nMy country is: [your country]\nMy WhatsApp or phone number is: [number]\n\nI would like to receive information to become an authorized distributor.\n\nThanks."
   },
-  "popup": {
-    "greenSoapTitle": "Green Soap",
-    "greenSoapDesc": "Concentrated antiseptic soap with chlorhexidine, perfect for deep skin cleaning in tattoos.",
-    "monumbyTitle": "Monumby Premium",
-    "monumbyDesc": "Discover the exclusive Monumby product line, designed for the best skin care.",
-    "cta": "Learn more"
+"popup": {
+  "munumbyTeaserTitle": "Munumby · No Pain",
+  "munumbyTeaserDesc": "Coming soon. Premium professional care.",
+  "munumbyTeaserDescAlt": "Coming soon. Research, precision, results.",
+  "ctaPrimary": "Learn about Munumby",
+  "ctaSecondary": "Get updates",
+
+  "greenSoapTitle": "Green Soap – Pro cleaning",
+  "greenSoapDesc": "Gentle soap for tattoos & PMU. Cleans without irritation.",
+  "cta": "See more",
+  "remindLater": "Remind me later",
+  "disclaimer": "You can dismiss this message anytime."
+
   },
   "Footer": {
     "linksTitle": "LINKS",
