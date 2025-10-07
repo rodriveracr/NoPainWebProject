@@ -14,90 +14,118 @@
     "contactSlug": "contact"
   },
   "Hero": {
-    "title": "The stronger and safer anesthetic - For Tattoo and PMU",
+    "title": "The best and safest anesthetics for tattoos and PMU",
     "button": "SEE PRODUCTS",
     "headline": "FEEL THE POWER OF NO PAIN",
     "subtitle": "Premium numbing cream designed for tattoos, waxing, laser treatments and more."
   },
   "About": {
-    "intro": "At No Pain we create anesthetic creams, tonics and soaps designed for tattoo and PMU, focusing on safety and performance.",
-    "resultTitle": "WHAT MAKES US DIFFERENT:",
-    "result1": "The strongest and safest formula on the market.",
-    "result2": "No additives that alter pigments or affect healing.",
-    "result3": "Products designed specifically for artists and professionals.",
-    "closing": "Our commitment is to provide confidence, quality and results in every session."
-  },
-  "products": {
-    "title": "OUR PRODUCTS",
-    "description": "DESCRIPTION",
-    "benefits": "BENEFITS",
+  "intro": "At No Pain, we develop advanced topical anesthesia formulas specially designed for the tattooing process. Our creams contain a high concentration of anesthetic actives that block nerve stimuli, reducing partial or total skin sensitivity.",
+  "resultTitle": "THE RESULT:",
+  "result1": "Less pain and discomfort during tattoo and PMU sessions.",
+  "result2": "No alterations in the skin’s natural healing process.",
+  "result3": "Full respect for pigment tone and fixation.",
+  "closing": "Thanks to cutting-edge technology, we provide a more comfortable, safe, and professional tattoo experience—without compromising artistic quality or final results on the skin."
+},
 
-    "noPainNumbingCream": "NO PAIN NUMBING CREAM",
-    "noPainNumbingCreamTagline": "Premium 5% lidocaine topical anesthetic cream for tattoos and PMU. Reduces pain without affecting healing or pigment retention.",
-    "noPainNumbingCreamDescription": "No Pain Numbing Cream contains 5% lidocaine, specially formulated for tattoo and PMU procedures. Provides fast, deep, and long-lasting numbing effect while respecting pigment tone and the skin’s natural healing process.",
-    "productDetails": "PRODUCT DETAILS",
-    "features": "FEATURES",
-    "feature1": "Formulated with 5% lidocaine for maximum effect.",
-    "feature2": "Significantly reduces pain for 2-4 hours depending on skin type.",
-    "feature3": "Does not interfere with pigment fixation or healing.",
-    "feature4": "Safe and effective when applied correctly by professionals.",
-    "usage": "HOW TO USE",
-    "noPainNumbingCreamUsage1": "Apply a thick, even layer 20-40 minutes before the procedure.",
-    "noPainNumbingCreamUsage2": "Cover with plastic film to enhance absorption.",
-    "noPainNumbingCreamUsage3": "Remove the excess cream before starting tattooing or PMU.",
-    "noPainNumbingCreamUsage4": "Avoid contact with eyes, mucous membranes, or damaged skin.",
-    "tips": "TIPS",
-    "noPainNumbingCreamTip1": "Effect duration: approximately 2-4 hours depending on skin and area.",
-    "noPainNumbingCreamTip2": "For professional use only - not recommended for self-application.",
-    "noPainNumbingCreamTip3": "Test on a small area before full application.",
+"products": {
+  "title": "OUR PRODUCTS",
 
-    "xteriNumb": "XTERI-NUMB",
-    "xteriNumbTagline": "4% lidocaine disinfectant and anesthetic spray for use during tattooing.",
-    "xteriNumbDescription": "Xteri-Numb is a professional spray with 4% lidocaine, specially designed to be applied during tattoo sessions. It disinfects, refreshes, and provides fast pain relief without affecting pigments or healing.",
-    "xteriBenefit1": "Formulated with 4% lidocaine for safe and effective use during tattooing.",
-    "xteriBenefit2": "Disinfects and refreshes the skin instantly.",
-    "xteriBenefit3": "Reduces pain and discomfort in long sessions.",
-    "xteriBenefit4": "Does not alter pigments or interfere with the healing process.",
-    "xteriUsage1": "Shake well before use.",
-    "xteriUsage2": "Spray directly on tattooed skin as needed during the session.",
-    "xteriUsage3": "Do not rinse, let it act immediately.",
-    "xteriUsage4": "Avoid contact with eyes, mucous membranes, or open wounds.",
-    "xteriTip1": "Store in a cool, dry place.",
-    "xteriTip2": "For professional use only.",
-    "xteriTip3": "Apply only on tattooed skin, not on damaged tissue.",
+  "noPainNumbingCream": "NO PAIN NUMBING CREAM",
+  "noPainNumbingCreamTagline": "Gel cream with a high concentration of topical anesthetic actives.",
+  "noPainNumbingCreamDescription": "Gel cream developed with a high concentration of topical anesthetic ingredients that provide between 1 and 4 hours of nerve-blocking action, reducing partial or total sensitivity in the treated area. Ideal for tattooing, PMU, and aesthetic procedures. Apply 90 minutes before the session, and up to 2 hours on more resistant skin for complete absorption.",
 
-    "wicann": "WICANN",
-    "wicannTagline": "Soothing and regenerative tonic with witch hazel extract for post-tattoo care.",
-    "wicannDescription": "Wicann is a natural witch hazel tonic designed for use after tattooing. It calms irritation, promotes regeneration, and helps pigments settle evenly on the skin.",
-    "wicannBenefit1": "Hydrates and soothes freshly tattooed skin.",
-    "wicannBenefit2": "Supports natural regeneration of the skin.",
-    "wicannBenefit3": "Reduces redness, burning, and discomfort.",
-    "wicannBenefit4": "Lightweight, fast-absorbing formula with no oily residue.",
-    "wicannUsage1": "Clean the tattooed area with Green Soap before use.",
-    "wicannUsage2": "Apply Wicann directly to the tattooed skin.",
-    "wicannUsage3": "Let it absorb naturally, do not rinse.",
-    "wicannUsage4": "Repeat 2-3 times a day as needed.",
-    "wicannTip1": "For post-tattoo use only.",
-    "wicannTip2": "Store in a cool, dry place away from sunlight.",
-    "wicannTip3": "Avoid contact with eyes and mucous membranes.",
+  "xteriNumb": "XTERI-NUMB",
+  "xteriNumbTagline": "Medical-grade antiseptic and disinfectant with anesthetic effect.",
+  "xteriNumbDescription": "Broad-spectrum medical-grade antiseptic and disinfectant that cleanses and numbs the skin. Thanks to its dual action, it is ideal for use throughout the tattoo process on open skin, and as a complement to No Pain to reinforce the numbing effect with each pass while providing an antimicrobial barrier. Formulated with lidocaine, free from dyes and fragrances, it ensures effective disinfection without irritation, pigment alteration, or burning sensation.",
 
-    "greenSoap": "GREEN SOAP",
-    "greenSoapTagline": "4% chlorhexidine gluconate concentrated antiseptic soap.",
-    "greenSoapDescription": "Green Soap with 4% chlorhexidine gluconate is a professional-grade antiseptic soap. Designed for deep and safe skin cleaning before, during, and after tattooing. Also suitable for wound hygiene and disinfection of contaminated areas.",
-    "greenSoapBenefit1": "Provides maximum antiseptic protection.",
-    "greenSoapBenefit2": "Professional-grade antibacterial formula.",
-    "greenSoapBenefit3": "Safe and effective for most skin types when diluted correctly.",
-    "greenSoapBenefit4": "A reliable solution for preparation, disinfection, and hygiene in tattoo procedures and other applications requiring maximum cleanliness.",
-    "greenSoapUsage1": "Dilute 1 part soap with 9 parts filtered or distilled water.",
-    "greenSoapUsage2": "Apply with a spray bottle or clean cloth to the skin.",
-    "greenSoapUsage3": "Use during and after tattooing for safe cleaning.",
-    "greenSoapUsage4": "Store in a clean, sealed container.",
-    "greenSoapTip1": "Always dilute before use to avoid irritation.",
-    "greenSoapTip2": "Can be combined with post-tattoo care products.",
-    "greenSoapTip3": "Keep out of reach of children.",
-    "greenSoapTip4": "Also ideal for cleaning equipment and surfaces.",
-    "moreInfo": "MORE INFO"
-  },
+  "wicann": "WICANN",
+  "wicannTagline": "100% natural tonic distilled from witch hazel.",
+  "wicannDescription": "Natural tonic distilled from witch hazel, preserving all the plant’s beneficial properties. Known for its soothing and conditioning effect on the skin, it is ideal for diluting pigments and creating custom tones adapted to each artist’s style. Its astringent and balm-like action helps the ink settle evenly on the skin. Perfect for trauma-free tattoos, PMU, skincare routines, and other aesthetic procedures.",
+
+  "greenSoap": "GREEN SOAP",
+  "greenSoapTagline": "Vegetable-based antiseptic soap for professional cleaning.",
+  "greenSoapDescription": "High-quality vegetable soap specially formulated for tattoo studios, piercings, and medical environments. Its plant-based composition (coconut, olive, and glycerin oils) makes it gentle and skin-friendly, ideal for cleaning and preparing the tattoo area. It also contains chlorhexidine, providing effective antiseptic action without drying or irritating the skin.",
+  "greenSoapNote": "A reliable solution for preparation, disinfection, and care in procedures requiring maximum hygiene. Directions: dilute 1 part soap with 9 parts filtered or distilled water.",
+
+  "moreInfo": "MORE INFO",
+
+  "productDetails": "PRODUCT DETAILS",
+  "features": "FEATURES",
+  "feature1": "Fast-acting, deep-penetration formula with next-generation topical anesthetics.",
+  "feature2": "Provides effective nerve blockage for 1–4 hours depending on skin type and treated area.",
+  "feature3": "Does not alter pigment tone or interfere with the natural healing process.",
+  "feature4": "Formulated for safe professional use, free from irritants or drying components.",
+  "feature5": "Smooth gel texture enhances absorption and ensures even, residue-free application.",
+
+  "usage": "HOW TO USE",
+  "noPainNumbingCreamUsage1": "Apply a thick, even layer over the area about 90 minutes before the procedure.",
+  "noPainNumbingCreamUsage2": "Cover with plastic wrap (occlusive film) to enhance absorption and numbing effect.",
+  "noPainNumbingCreamUsage3": "Remove excess cream immediately before starting the tattoo or PMU procedure.",
+  "noPainNumbingCreamUsage4": "Avoid contact with eyes, mucous membranes, or irritated or broken skin.",
+
+  "xteriBenefit1": "Medical-grade formula that instantly cleanses and disinfects the skin, minimizing contamination risk.",
+  "xteriBenefit2": "Immediate anesthetic effect that reduces sensitivity and pain during tattooing.",
+  "xteriBenefit3": "Complements No Pain by extending and reinforcing the numbing effect with each application.",
+  "xteriBenefit4": "Free from dyes and fragrances to prevent irritation, pigment alteration, or burning.",
+  "xteriBenefit5": "Ideal for cleaning and disinfecting contaminated areas or as an antiseptic wash during tattoo sessions.",
+
+  "xteriUsage1": "Shake well before use.",
+  "xteriUsage2": "Spray directly over the tattooed or treated area during the procedure.",
+  "xteriUsage3": "Allow it to act for a few seconds without rinsing to enhance the numbing and disinfecting effect.",
+  "xteriUsage4": "Avoid contact with eyes, mucous membranes, or open wounds.",
+
+  "xteriTip1": "Store in a cool, dry place, away from direct light.",
+  "xteriTip2": "For professional use only — do not apply on non-tattooed or irritated skin.",
+  "xteriTip3": "Can be reapplied during the session to maintain active anesthesia and disinfection.",
+
+  "wicannBenefit1": "Made from pure witch hazel extract, preserving all its natural soothing and toning properties.",
+  "wicannBenefit2": "Astringent and balm-like effect that helps ink distribute more evenly on the skin.",
+  "wicannBenefit3": "Ideal for diluting pigments and creating custom tones that adapt to the artist’s technique.",
+  "wicannBenefit4": "Conditions, tones, and calms the skin, reducing irritation and redness after tattoo or PMU sessions.",
+  "wicannBenefit5": "Available in 250 ml bottles with twist cap or spray presentation for easy application.",
+
+  "wicannUsage1": "Clean the area with Green Soap before applying the tonic.",
+  "wicannUsage2": "Apply directly onto the skin using a spray bottle or clean cloth.",
+  "wicannUsage3": "Allow it to absorb naturally without rinsing.",
+  "wicannUsage4": "Repeat 2–3 times a day as needed or after aesthetic procedures.",
+
+  "wicannTip1": "For external use only. Avoid contact with eyes and mucous membranes.",
+  "wicannTip2": "Ideal for daily skincare routines, PMU sessions, and tattoo aftercare.",
+  "wicannTip3": "Store in a cool, dry place away from direct sunlight.",
+
+  "greenSoapBenefit1": "Effective cleaning and early disinfection: removes blood, ink, and bacteria without harming the skin.",
+  "greenSoapBenefit2": "Soothes and hydrates thanks to glycerin and natural oils, keeping the skin soft and moisturized.",
+  "greenSoapBenefit3": "Thick texture allows smooth, long-lasting application during tattooing, preventing quick evaporation.",
+  "greenSoapBenefit4": "Professional-grade formula ideal for skin preparation, cleaning, and care before, during, and after tattooing.",
+  "greenSoapBenefit5": "Also suitable for cleaning wounds, equipment, and contaminated areas.",
+
+  "greenSoapUsage1": "Dilute 1 part of soap with 9 parts of filtered or distilled water.",
+  "greenSoapUsage2": "Apply on the skin with a spray bottle or clean cloth during and after the procedure.",
+  "greenSoapUsage3": "Gently clean to remove traces of blood, ink, or residue.",
+  "greenSoapUsage4": "Store in a clean, sealed container to preserve purity and effectiveness.",
+
+  "greenSoapTip1": "Always use diluted to avoid irritation or dryness.",
+  "greenSoapTip2": "Safe for all skin types when properly diluted.",
+  "greenSoapTip3": "Ideal for tattoo studios, piercings, and medical environments requiring maximum hygiene.",
+  "greenSoapTip4": "Keep out of reach of children and away from direct sunlight.",
+
+  "tips": "TIPS",
+  "noPainNumbingCreamTip1": "Effect duration: 1–4 hours depending on skin type, area, and exposure time.",
+  "noPainNumbingCreamTip2": "For professional use only — not recommended for unsupervised self-application.",
+  "noPainNumbingCreamTip3": "For resistant skin types, extend application time up to 2 hours for complete absorption.",
+  "noPainNumbingCreamTip4": "Always test on a small area before full application to ensure tolerance.",
+  "noPainNumbingCreamTip5": "Keep out of reach of children and store in a cool, dry place."
+},
+
+
+
+
+
+
+
+
+
   "Gallery": {
     "title": "GALLERY",
     "description": "Discover studios, tattoo artists, and experiences with No Pain Brand.",
