@@ -62,3 +62,5 @@ export default async function Gallery({
 export async function generateStaticParams() {
   return [{ locale: "es" }, { locale: "en" }];
 }
+export const revalidate = 1800; // 🕒 30 minutos (galería suele actualizarse más seguido)
+

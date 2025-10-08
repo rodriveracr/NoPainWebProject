@@ -73,3 +73,5 @@ export default async function DistribuidoresPage({
 export async function generateStaticParams() {
   return [{ locale: "es" }, { locale: "en" }];
 }
+export const revalidate = 86400; // 🕒 24 horas
+

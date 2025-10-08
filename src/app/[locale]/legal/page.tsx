@@ -80,3 +80,4 @@ export default async function LegalPage({
 export async function generateStaticParams() {
   return [{ locale: "es" }, { locale: "en" }];
 }
+export const revalidate = 2592000; // 🕒 30 días (texto legal no cambia seguido)

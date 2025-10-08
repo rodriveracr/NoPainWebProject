@@ -68,3 +68,4 @@ export default async function FAQ({
 export async function generateStaticParams() {
   return [{ locale: "es" }, { locale: "en" }];
 }
+export const revalidate = 3600; // 🕒 1 hora

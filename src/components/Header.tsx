@@ -1,3 +1,4 @@
+//src/components/Header.tsx
 "use client";
 
 import Image from "next/image";
@@ -120,14 +121,16 @@ export default function Header({ locale }: { locale: string }) {
               onMouseEnter={handlePlaySound}
               onClick={handlePlaySound}
             >
-              <Image
-                src="/COCODRILO.webp"
-                alt="Logo No Pain - Cocodrilo"
-                width={90}
-                height={90}
-                className="drop-shadow-lg select-none"
-                priority
-              />
+             <Image
+  src="/COCODRILO.webp"
+  alt="Logo No Pain - Cocodrilo"
+  width={90}
+  height={90}
+  className="drop-shadow-lg select-none"
+  loading="lazy"
+/>
+
+              
             </motion.div>
           </Link>
           <audio ref={audioRef} src="/greesound.wav" preload="auto" aria-hidden="true" />
@@ -210,3 +213,4 @@ export default function Header({ locale }: { locale: string }) {
     </header>
   );
 }
+export const revalidate = 3600; // 1 hora
