@@ -7,8 +7,10 @@ const nextConfig = {
   experimental: {
     serverActions: {},
   },
+
   async headers() {
     return [
+      // 🌍 1. Seguridad y políticas globales
       {
         source: "/(.*)",
         headers: [
@@ -52,6 +54,34 @@ const nextConfig = {
               "form-action 'self';",
               "upgrade-insecure-requests;",
             ].join(" "),
+          },
+
+          // ⚡️ Cache general para HTML dinámico
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, must-revalidate",
+          },
+        ],
+      },
+
+      // ⚙️ 2. Cache para archivos estáticos (sirve desde CDN)
+      {
+        source: "/_next/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+
+      // 🖼️ 3. Cache para imágenes optimizadas por Next.js
+      {
+        source: "/_next/image(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
