@@ -139,7 +139,7 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
         {/* Header con logo */}
         <div className="relative border-b border-neutral-800 px-4 py-5 text-center bg-neutral-800/50">
           <Image
-            src="/No-PAIN.png"
+            src="/No-PAIN.webp"
             alt="No Pain"
             width={240}
             height={72}
