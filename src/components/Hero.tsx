@@ -13,22 +13,23 @@ export default function Hero() {
       role="banner"
       aria-label="Hero section"
     >
-      {/* 🔲 Fondo e overlay coherente con el resto */}
-      <div className="absolute inset-0 hero-bg bg-cover bg-center" aria-hidden="true" />
-      <div className="absolute inset-0 bg-black/80" aria-hidden="true" />
+      {/* 🖼️ Imagen principal (LCP real) */}
+      <Image
+        src="/No-PAIN.webp"
+        alt="No Pain Brand Hero Image"
+        width={800}
+        height={800}
+        priority
+        fetchPriority="high"
+        quality={75}
+        className="absolute inset-0 w-full h-full object-cover object-center opacity-60"
+      />
+
+      {/* 🔲 Capa oscura sobre la imagen */}
+      <div className="absolute inset-0 bg-black/70" aria-hidden="true" />
 
       {/* 🔹 Contenido principal */}
       <div className="relative z-10 max-w-4xl mx-auto">
-        {/* ✅ Imagen opcional si querés logo o fondo decorativo */}
-        {/* <Image
-          src="/hero-logo.webp"
-          alt="No Pain Logo"
-          width={200}
-          height={200}
-          className="mx-auto mb-6 drop-shadow-lg"
-          priority
-        /> */}
-
         <h1 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide">
           {t("headline")}
         </h1>
@@ -37,7 +38,7 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* 🔻 Efecto degradado inferior opcional */}
+      {/* 🔻 Efecto degradado inferior */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   );
