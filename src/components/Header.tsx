@@ -197,13 +197,14 @@ export default function Header({ locale }: { locale: string }) {
           className="block hover:scale-110 transition-transform duration-300"
         >
           <Image
-            src="/sailedited.png"
-            alt="Sello de verificación Monumby"
-            width={110}
-            height={110}
-            className="drop-shadow-2xl rotate-6"
-            priority
-          />
+  src="/sailedited.png"
+  alt="Sello de verificación Monumby"
+  width={90}
+  height={90}
+  className="drop-shadow-2xl rotate-6 mt-2 translate-y-[-20px]"
+  priority
+/>
+
         </a>
       </div>
     </header>
