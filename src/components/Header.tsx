@@ -1,4 +1,4 @@
-//src/components/Header.tsx
+// 📄 /src/components/Header.tsx
 "use client";
 
 import Image from "next/image";
@@ -15,14 +15,12 @@ export default function Header({ locale }: { locale: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // 🔸 Detectar scroll para solidificar el fondo
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // 🔸 Cerrar menú con ESC
   useEffect(() => {
     if (!menuOpen) return;
     const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
@@ -30,7 +28,6 @@ export default function Header({ locale }: { locale: string }) {
     return () => document.removeEventListener("keydown", handleEsc);
   }, [menuOpen]);
 
-  // 🔸 Bloquear scroll cuando el menú está abierto
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -46,7 +43,6 @@ export default function Header({ locale }: { locale: string }) {
     setMenuOpen(false);
   }, []);
 
-  // 🔸 useMemo para evitar recrear arrays en cada render
   const leftLinks = useMemo(
     () => [
       { href: `/${locale}`, label: t("home") },
@@ -77,7 +73,6 @@ export default function Header({ locale }: { locale: string }) {
         scrolled ? "bg-black/95 shadow-md" : "bg-black/80"
       }`}
     >
-      {/* NAV PRINCIPAL */}
       <nav
         className="flex items-center justify-between px-6 py-2 relative"
         role="navigation"
@@ -121,19 +116,17 @@ export default function Header({ locale }: { locale: string }) {
               onMouseEnter={handlePlaySound}
               onClick={handlePlaySound}
             >
-             <Image
-  src="/COCODRILO.webp"
-  alt="Logo No Pain - Cocodrilo"
-  width={90}
-  height={90}
-  className="drop-shadow-lg select-none"
-  loading="lazy"
-/>
-
-              
+              <Image
+                src="/COCODRILO.webp"
+                alt="Logo No Pain - Cocodrilo"
+                width={90}
+                height={90}
+                className="drop-shadow-lg select-none"
+                loading="lazy"
+              />
             </motion.div>
           </Link>
-          <audio ref={audioRef} src="/greesound.wav" preload="auto" aria-hidden="true" />
+          <audio ref={audioRef} src="/greesound.mp3" preload="none" aria-hidden="true" />
         </div>
 
         {/* LINKS DERECHA (Desktop) */}
@@ -150,12 +143,12 @@ export default function Header({ locale }: { locale: string }) {
         </div>
       </nav>
 
-      {/* IDIOMA (Desktop) */}
+      {/* IDIOMA */}
       <div className="hidden md:flex justify-center py-0 bg-black">
         <LanguageSwitcher small />
       </div>
 
-      {/* MENÚ MOBILE con AnimatePresence */}
+      {/* MENÚ MOBILE */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -181,7 +174,7 @@ export default function Header({ locale }: { locale: string }) {
                 </Link>
               ))}
 
-              {/* Idiomas en mobile */}
+              {/* Idioma mobile */}
               <div className="flex flex-col items-center pt-4 border-t border-gray-700 space-y-3">
                 <LanguageSwitcher small />
               </div>
@@ -190,7 +183,7 @@ export default function Header({ locale }: { locale: string }) {
         )}
       </AnimatePresence>
 
-      {/* 🟣 Nuevo Monumby Badge — animado y flotante */}
+      {/* 🟣 Badge Monumby optimizado */}
       <div className="fixed top-24 right-6 z-[9999] pointer-events-auto animate-bounce-slow">
         <a
           href="https://monumbycom.godaddysites.com/"
@@ -199,13 +192,14 @@ export default function Header({ locale }: { locale: string }) {
           aria-label="Verificado por Monumby"
           className="block hover:scale-110 transition-transform duration-300"
         >
-          <Image
-  src="/sailedited.png"
+      <Image
+  src="/sailedited.webp"
   alt="Sello de verificación Monumby"
   width={90}
   height={90}
+  unoptimized
+  loading="lazy"
   className="drop-shadow-2xl rotate-6 mt-2 translate-y-[-20px]"
-  priority
 />
 
         </a>
@@ -213,4 +207,5 @@ export default function Header({ locale }: { locale: string }) {
     </header>
   );
 }
+
 export const revalidate = 3600; // 1 hora

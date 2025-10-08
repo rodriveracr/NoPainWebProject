@@ -3,7 +3,6 @@ import React, { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "../globals.css";
-import ClientPopup from "@/components/Popup"; // ✅ popup global (cliente)
 
 type Props = {
   children: ReactNode;
@@ -22,10 +21,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      {/* ✅ Popup global (cliente) */}
-      <ClientPopup locale={locale} />
-
-      {/* ✅ Contenido de cada página */}
+      {/* ✅ Solo renderiza el contenido de la página */}
       {children}
     </NextIntlClientProvider>
   );

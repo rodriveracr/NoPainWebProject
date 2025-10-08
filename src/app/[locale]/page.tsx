@@ -177,12 +177,13 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           <div className="z-10 text-center px-6">
             <Link href={`#no-pain-brand`}>
               <Image
-                src="/No-PAIN.png"
+                src="/No-PAIN.webp"
                 alt="No Pain Brand Logo"
                 width={400}
                 height={120}
                 className="mx-auto"
                 priority
+                fetchPriority="high"
               />
             </Link>
             <p className="mt-4 text-2xl sm:text-3xl font-semibold text-white uppercase">
