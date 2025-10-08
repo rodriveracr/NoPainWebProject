@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = params;
+  const { locale } = await params; // 👈 aquí agregamos "await"
 
   // ✅ Cargar los mensajes de traducción para el idioma actual
   let messages: Record<string, any> = {};
