@@ -1,13 +1,15 @@
-// src/app/[locale]/no-pain-numbing-cream/page.tsx
-import Image from "next/image";
-import { Suspense } from "react"; // 👈 IMPORTANTE
+// 📄 /src/app/[locale]/no-pain-numbing-cream/page.tsx
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProductLayout from "@/components/ProductLayout";
+import ClientPopup from "@/components/Popup"; // ✅ Popup cliente
 
 export const metadata = {
-  title: "No Pain Numbing Cream by No Pain",
-  description: "Crema anestésica tópica premium para tatuajes y PMU.",
+  title: "No Pain Numbing Cream | Premium Tattoo & PMU Numbing",
+  description:
+    "Crema anestésica tópica premium de acción rápida para tatuajes y micropigmentación. Eficaz, segura y dermatológicamente probada.",
 };
 
 export default async function NoPainNumbingCream({
@@ -20,63 +22,63 @@ export default async function NoPainNumbingCream({
 
   return (
     <>
-      {/* ✅ Header envuelto en Suspense */}
-      <Suspense fallback={<div>Loading header...</div>}>
+      {/* ✅ Popup (solo cliente, no bloquea SSR) */}
+      <ClientPopup locale={locale} />
+
+      {/* ✅ Header con Suspense */}
+      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading header...</div>}>
         <Header locale={locale} />
       </Suspense>
 
-      <div className="h-16" />
+      {/* ✅ Layout unificado para productos */}
+      <ProductLayout
+        title={t("noPainNumbingCream")}
+        tagline={t("noPainNumbingCreamTagline")}
+        imageSrc="/_czc3133.webp" // ✅ imagen original
+        imageAlt={t("noPainNumbingCreamAlt") || "No Pain Numbing Cream product"}
+        backgroundClass="bg-nopaincream"
+      >
+        {/* 🔹 Detalles del producto */}
+        <section>
+          <h2 className="text-2xl font-semibold text-white mb-2">{t("productDetails")}</h2>
+          <p className="text-gray-300">{t("noPainNumbingCreamDescription")}</p>
+        </section>
 
-      <main className="relative text-white min-h-screen font-franklin">
-        <div className="absolute inset-0 bg-nopaincream bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/80" />
-
-        <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
-          {/* 🔥 Imagen del producto */}
-          <Image
-            src="/_czc3133.jpg"
-            alt="No Pain Numbing Cream"
-            width={450}
-            height={450}
-            className="mx-auto mb-8 rounded-lg shadow-lg"
-            priority
-          />
-
-          <h1 className="text-4xl font-bold mb-6">{t("noPainNumbingCream")}</h1>
-          <p className="text-lg text-gray-200 mb-8">
-            {t("noPainNumbingCreamTagline")}
-          </p>
-
-          <h2 className="text-2xl font-semibold">{t("productDetails")}</h2>
-          <p className="mb-6">{t("noPainNumbingCreamDescription")}</p>
-
-          <h3 className="text-xl font-semibold mt-6">{t("features")}</h3>
-          <ul className="list-disc pl-6 text-left space-y-2">
+        {/* 🔹 Características */}
+        <section>
+          <h3 className="text-xl font-semibold text-white mb-2">{t("features")}</h3>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
             <li>{t("feature1")}</li>
             <li>{t("feature2")}</li>
             <li>{t("feature3")}</li>
             <li>{t("feature4")}</li>
           </ul>
+        </section>
 
-          <h3 className="text-xl font-semibold mt-6">{t("usage")}</h3>
-          <ul className="list-disc pl-6 text-left space-y-2">
+        {/* 🔹 Modo de uso */}
+        <section>
+          <h3 className="text-xl font-semibold text-white mb-2">{t("usage")}</h3>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
             <li>{t("noPainNumbingCreamUsage1")}</li>
             <li>{t("noPainNumbingCreamUsage2")}</li>
             <li>{t("noPainNumbingCreamUsage3")}</li>
             <li>{t("noPainNumbingCreamUsage4")}</li>
           </ul>
+        </section>
 
-          <h3 className="text-xl font-semibold mt-6">{t("tips")}</h3>
-          <ul className="list-disc pl-6 text-left space-y-2">
+        {/* 🔹 Consejos */}
+        <section>
+          <h3 className="text-xl font-semibold text-white mb-2">{t("tips")}</h3>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
             <li>{t("noPainNumbingCreamTip1")}</li>
             <li>{t("noPainNumbingCreamTip2")}</li>
             <li>{t("noPainNumbingCreamTip3")}</li>
           </ul>
-        </div>
-      </main>
+        </section>
+      </ProductLayout>
 
-      {/* ✅ Footer envuelto en Suspense */}
-      <Suspense fallback={<div>Loading footer...</div>}>
+      {/* ✅ Footer con Suspense */}
+      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading footer...</div>}>
         <Footer locale={locale} />
       </Suspense>
     </>

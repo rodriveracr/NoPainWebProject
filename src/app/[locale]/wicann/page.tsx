@@ -1,17 +1,17 @@
-// src/app/[locale]/wicann/page.tsx
-import Image from "next/image";
-import { Suspense } from "react"; // 👈 IMPORTANTE
+// 📄 /src/app/[locale]/wicann/page.tsx
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import "../../globals.css";
+import ProductLayout from "@/components/ProductLayout";
 
 export const metadata = {
   title: "Wicann by No Pain",
-  description: "Tónico calmante y regenerador para después del tatuaje.",
+  description:
+    "Tónico natural destilado de hamamelis, ideal para calmar, tonificar y preparar la piel antes y después del tatuaje o PMU.",
 };
 
-export default async function Wicann({
+export default async function WicannPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -21,61 +21,61 @@ export default async function Wicann({
 
   return (
     <>
-      {/* ✅ Header envuelto en Suspense */}
-      <Suspense fallback={<div>Loading header...</div>}>
+      {/* ✅ Header optimizado con Suspense */}
+      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading header...</div>}>
         <Header locale={locale} />
       </Suspense>
 
-      <div className="h-16" />
+      {/* ✅ Layout unificado para producto */}
+      <ProductLayout
+        title={t("wicann")}
+        tagline={t("wicannTagline")}
+        imageSrc="/_CZC3097.webp"
+        imageAlt={t("wicannAlt") || "Wicann witch hazel tonic by No Pain"}
+        backgroundClass="bg-wicann"
+      >
+        {/* 🔹 Detalles del producto */}
+        <section>
+          <h2 className="text-2xl font-semibold text-white mb-2">{t("productDetails")}</h2>
+          <p className="text-gray-300">{t("wicannDescription")}</p>
+        </section>
 
-      <main className="relative text-white min-h-screen font-franklin">
-        <div className="absolute inset-0 bg-wicann bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/80" />
-
-        <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto text-center">
-          {/* 🔥 Imagen del producto */}
-          <Image
-            src="/Wicann1.jpg"
-            alt="Wicann"
-            width={450}
-            height={450}
-            className="mx-auto mb-8 rounded-lg shadow-lg"
-            priority
-          />
-
-          <h1 className="text-4xl font-bold mb-6">{t("wicann")}</h1>
-          <p className="text-lg text-gray-200 mb-8">{t("wicannTagline")}</p>
-
-          <h2 className="text-2xl font-semibold">{t("productDetails")}</h2>
-          <p className="mb-6">{t("wicannDescription")}</p>
-
-          <h3 className="text-xl font-semibold mt-6">{t("features")}</h3>
-          <ul className="list-disc pl-6 text-left space-y-2">
+        {/* 🔹 Beneficios */}
+        <section>
+          <h3 className="text-xl font-semibold text-white mb-2">{t("features")}</h3>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
             <li>{t("wicannBenefit1")}</li>
             <li>{t("wicannBenefit2")}</li>
             <li>{t("wicannBenefit3")}</li>
             <li>{t("wicannBenefit4")}</li>
+            <li>{t("wicannBenefit5")}</li>
           </ul>
+        </section>
 
-          <h3 className="text-xl font-semibold mt-6">{t("usage")}</h3>
-          <ul className="list-disc pl-6 text-left space-y-2">
+        {/* 🔹 Modo de uso */}
+        <section>
+          <h3 className="text-xl font-semibold text-white mb-2">{t("usage")}</h3>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
             <li>{t("wicannUsage1")}</li>
             <li>{t("wicannUsage2")}</li>
             <li>{t("wicannUsage3")}</li>
             <li>{t("wicannUsage4")}</li>
           </ul>
+        </section>
 
-          <h3 className="text-xl font-semibold mt-6">{t("tips")}</h3>
-          <ul className="list-disc pl-6 text-left space-y-2">
+        {/* 🔹 Consejos */}
+        <section>
+          <h3 className="text-xl font-semibold text-white mb-2">{t("tips")}</h3>
+          <ul className="list-disc pl-6 space-y-2 text-gray-300">
             <li>{t("wicannTip1")}</li>
             <li>{t("wicannTip2")}</li>
             <li>{t("wicannTip3")}</li>
           </ul>
-        </div>
-      </main>
+        </section>
+      </ProductLayout>
 
-      {/* ✅ Footer envuelto en Suspense con locale */}
-      <Suspense fallback={<div>Loading footer...</div>}>
+      {/* ✅ Footer optimizado */}
+      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading footer...</div>}>
         <Footer locale={locale} />
       </Suspense>
     </>

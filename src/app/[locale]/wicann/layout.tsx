@@ -1,7 +1,8 @@
+// 📄 /src/app/[locale]/wicann/layout.tsx
 export default function WicannLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <div className="font-franklin">{children}</div>;
 }

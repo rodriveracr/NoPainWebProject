@@ -1,14 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import "../../globals.css";
 import GalleryPhotos from "./GalleryPhotos";
 import GalleryVideos from "./GalleryVideos";
 import { Suspense } from "react";
 
 export const metadata = {
   title: "Gallery - No Pain",
-  description: "Discover photos and videos with No Pain.",
+  description: "Discover photos and videos from the No Pain experience.",
 };
 
 export default async function Gallery({
@@ -21,27 +20,39 @@ export default async function Gallery({
 
   return (
     <>
-      <Suspense fallback={<div>Loading header...</div>}>
+      {/* ✅ Header en Suspense */}
+      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading header...</div>}>
         <Header locale={locale} />
       </Suspense>
-      <div className="h-16" />
 
-      <main className="bg-black text-white min-h-screen py-24 px-6 font-franklin space-y-24">
-        <section className="text-center max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold">
-            {t("title") || "Gallery"}
-          </h1>
-          <p className="text-base text-gray-300 mt-4">
-            {t("description") ||
-              "Discover our products, their real use, and our global story."}
-          </p>
-        </section>
+      {/* ✅ Contenedor principal con fondo coherente */}
+      <main className="relative text-white font-franklin overflow-hidden bg-black">
+        <div className="absolute inset-0 bg-gallery bg-cover bg-center" aria-hidden="true" />
+        <div className="absolute inset-0 bg-black/85" aria-hidden="true" />
 
-        <GalleryVideos />
-        <GalleryPhotos />
+        {/* 🔹 Contenido */}
+        <div className="relative z-10 pt-40 pb-[20vh] px-6 max-w-7xl mx-auto text-center space-y-24">
+          {/* Intro */}
+          <section className="max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide">
+              {t("title") || "Gallery"}
+            </h1>
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+              {t("description") ||
+                "Explore our products in action and behind-the-scenes moments from around the world."}
+            </p>
+          </section>
+
+          {/* Galería de Videos */}
+          <GalleryVideos />
+
+          {/* Galería de Fotos */}
+          <GalleryPhotos />
+        </div>
       </main>
 
-      <Suspense fallback={<div>Loading footer...</div>}>
+      {/* ✅ Footer en Suspense */}
+      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading footer...</div>}>
         <Footer locale={locale} />
       </Suspense>
     </>

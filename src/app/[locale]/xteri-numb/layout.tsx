@@ -1,8 +1,14 @@
-//src/app/[locale]/xteri-numb/layout.tsx
 export default function XteriLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <div
+      className="font-franklin bg-black text-white selection:bg-pink-500 selection:text-white"
+      lang="es"
+    >
+      {children}
+    </div>
+  );
 }

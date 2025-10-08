@@ -63,7 +63,7 @@ p {
 /* Hero y fondos      */
 /* ------------------ */
 .hero-bg {
-  background-image: url('/beneficios.png');
+  background-image: url('/beneficios.webp'); /* ✅ Versión optimizada */
   background-size: cover;
   background-position: center;
 }
@@ -92,12 +92,21 @@ p {
   background-size: cover;
   background-position: center;
 }
+.bg-gallery {
+  background-image: url("/gallery-bg.webp");
+}
+
 
 .bg-greensoap {
   background-image: url('/Green-Soap1.jpg');
   background-size: cover;
   background-position: center;
 }
+
+.bg-monumby {
+  background-image: url("/monumby-bg.webp");
+}
+
 
 /* ------------------ */
 /* Modales y overlays */
@@ -115,7 +124,7 @@ p {
   transition: opacity 0.3s ease;
 }
 
-/* Botón de cierre universal (para popups, modales, gallery) */
+/* Botón de cierre universal */
 .close-button {
   position: absolute;
   top: 1rem;
@@ -134,7 +143,6 @@ p {
 /* ------------------ */
 /* Galería (Fotos y Videos) */
 /* ------------------ */
-
 .gallery-grid {
   @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8;
 }
@@ -159,7 +167,6 @@ p {
 /* ------------------ */
 /* Ajustes responsive */
 /* ------------------ */
-
 @media (max-width: 768px) {
   .gallery-item video,
   .gallery-item img {
@@ -177,7 +184,6 @@ p {
 /* ------------------ */
 /* Popup general      */
 /* ------------------ */
-
 .popup-backdrop {
   @apply fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-sm;
   -webkit-backdrop-filter: blur(6px);
@@ -191,13 +197,24 @@ p {
 /* ------------------ */
 /* Botones primarios  */
 /* ------------------ */
-
 .btn-gradient {
   @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-semibold shadow-md hover:opacity-90 transition;
 }
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0) rotate(6deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(6deg);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
 
 /* ------------------ */
-/* Scrollbar (opcional estilizado) */
+/* Scrollbar personalizada */
 /* ------------------ */
 ::-webkit-scrollbar {
   width: 8px;
@@ -216,7 +233,10 @@ p {
 ::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
-/* Ajuste de botones de navegación en videos */
+
+/* ------------------ */
+/* Navegación Gallery */
+/* ------------------ */
 @media (max-width: 600px) {
   .gallery-modal button[title="Previous"],
   .gallery-modal button[title="Next"] {
@@ -224,4 +244,45 @@ p {
     padding: 0.5rem;
     border-radius: 9950px;
   }
+}
+
+/* ------------------ */
+/* Accesibilidad — focus visible */
+/* ------------------ */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #f87171; /* rojo suave */
+  outline-offset: 2px;
+}
+
+/* ============================ */
+/* Footer — Fondo premium negro */
+/* ============================ */
+footer {
+  background-color: #000; /* Negro sólido */
+  border-top: 1px solid #222; /* Línea superior sutil */
+}
+
+footer a:hover,
+footer a:focus-visible {
+  color: #fff;
+  opacity: 0.9;
+}
+
+footer h3 {
+  color: #fff;
+}
+
+footer p,
+footer li {
+  color: #ccc;
+}
+/* ============================ */
+/* Header detrás — solo en Monumby */
+/* ============================ */
+.page-monumby header {
+  z-index: 10 !important; /* baja el z-index */
+  position: relative !important; /* saca el fixed stacking context */
+  background-color: transparent !important; /* deja ver el fondo */
+  border-bottom: none !important;
 }

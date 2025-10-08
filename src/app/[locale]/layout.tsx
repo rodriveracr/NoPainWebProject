@@ -1,10 +1,9 @@
-// src/app/[locale]/layout.tsx
+// 📄 /src/app/[locale]/layout.tsx
 import React, { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import Image from "next/image";
 import "../globals.css";
-// ⛔ No montamos el popup aquí
+import ClientPopup from "@/components/Popup"; // ✅ popup global (cliente)
 
 type Props = {
   children: ReactNode;
@@ -23,24 +22,10 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      {/* Badge flotante */}
-      <a
-        href="https://monumby.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Verificado por Monumby"
-        className="fixed top-20 right-4 z-50 hover:scale-105 hover:opacity-90 transition-all duration-200"
-      >
-        <Image
-          src="/badgeMuNumby.png"
-          alt="Verificado por Monumby"
-          width={90}
-          height={90}
-          priority
-          className="drop-shadow-lg"
-        />
-      </a>
+      {/* ✅ Popup global (cliente) */}
+      <ClientPopup locale={locale} />
 
+      {/* ✅ Contenido de cada página */}
       {children}
     </NextIntlClientProvider>
   );

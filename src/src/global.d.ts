@@ -1,3 +1,4 @@
+//src/src/global.d.ts
 declare module "*.css";
 declare module "*.png";
 declare module "*.jpg";
