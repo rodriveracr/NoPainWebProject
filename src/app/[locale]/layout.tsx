@@ -1,28 +1,33 @@
 // 📄 /src/app/[locale]/layout.tsx
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import "../globals.css";
+import "../globals.css"; // ✅ Importa los estilos globales del proyecto
 
 type Props = {
   children: ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 };
 
 export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = await params;
+  const { locale } = params;
 
+  // ✅ Cargar los mensajes de traducción para el idioma actual
   let messages: Record<string, any> = {};
   try {
     messages = await getMessages({ locale });
-  } catch (err) {
-    console.warn(`[i18n] No messages for locale="${locale}", using {}.`, err);
+  } catch (error) {
+    console.warn(`[i18n] No se encontraron mensajes para el locale "${locale}".`, error);
   }
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {/* ✅ Solo renderiza el contenido de la página */}
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale}>
+      <body>
+        {/* 🌍 Proveedor de traducciones (Next Intl) */}
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
