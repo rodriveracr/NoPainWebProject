@@ -190,7 +190,7 @@ export default function Header({ locale }: { locale: string }) {
       {/* 🟣 Nuevo Monumby Badge — animado y flotante */}
       <div className="fixed top-24 right-6 z-[9999] pointer-events-auto animate-bounce-slow">
         <a
-          href="https://monumby.com"
+          href="https://monumbycom.godaddysites.com/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Verificado por Monumby"
