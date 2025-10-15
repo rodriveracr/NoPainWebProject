@@ -268,59 +268,60 @@
     "ctaButton": "Visita Monumby.com"
   },
   "FAQ": {
-    "pageTitle": "Preguntas Frecuentes",
-    "noPain": {
-      "title": "No Pain — Preguntas",
-      "q1": "¿Qué es No Pain?",
-      "a1": "No Pain es una crema anestésica tópica diseñada para tatuajes y PMU.",
-      "q2": "¿Cuánto dura?",
-      "a2": "La duración varía según la aplicación, puede durar varias horas.",
-      "q3": "¿Es segura?",
-      "a3": "Sí, cuando se utiliza según indicaciones profesionales.",
-      "q4": "¿Cuándo aplicarla?",
-      "a4": "Aplicar 20 minutos antes del procedimiento.",
-      "q5": "¿Precauciones?",
-      "a5": "Evitar contacto con ojos y mucosas."
-    },
-    "xteri": {
-      "title": "Xteri-Numb — Preguntas",
-      "q1": "¿Qué es Xteri-Numb?",
-      "a1": "Un spray desinfectante y anestésico para uso durante el tatuaje.",
-      "q2": "¿Cómo se usa?",
-      "a2": "Agita bien y rocía sobre la piel tatuada cuando sea necesario.",
-      "q3": "¿Es seguro?",
-      "a3": "Sí, cuando es aplicado por profesionales durante el tatuaje.",
-      "q4": "¿Afecta los pigmentos?",
-      "a4": "No, no altera pigmentos ni la cicatrización.",
-      "q5": "¿Precauciones?",
-      "a5": "Evitar ojos, mucosas y heridas abiertas."
-    },
-    "wicann": {
-      "title": "Wicann — Preguntas",
-      "q1": "¿Qué es Wicann?",
-      "a1": "Un tónico calmante y regenerador para el post-tatuaje.",
-      "q2": "¿Cómo se usa?",
-      "a2": "Limpia con Green Soap y aplica Wicann 2–3 veces al día.",
-      "q3": "¿Es natural?",
-      "a3": "Sí, contiene extractos naturales que reducen la irritación y ayudan a la recuperación.",
-      "q4": "¿Reemplaza las cremas?",
-      "a4": "No, complementa las cremas post-tatuaje, ayudando a la piel a recuperarse más rápido.",
-      "q5": "¿Precauciones?",
-      "a5": "Evitar contacto con ojos y mucosas. Uso externo únicamente."
-    },
-    "greenSoap": {
-      "title": "Green Soap — Preguntas",
-      "q1": "¿Cómo usar Green Soap?",
-      "a1": "Diluir 1:9 y usar para limpieza durante el tatuaje.",
-      "q2": "¿Cuál es la concentración?",
-      "a2": "Contiene 4% clorhexidina gluconato para acción antiséptica segura.",
-      "q3": "¿Es seguro para todo tipo de piel?",
-      "a3": "Sí, cuando se diluye correctamente es seguro para la mayoría de tipos de piel.",
-      "q4": "¿Otros usos?",
-      "a4": "Ideal para limpiar heridas, equipos y áreas contaminadas.",
-      "q5": "¿Precauciones?",
-      "a5": "Usar siempre diluido. Mantener fuera del alcance de los niños."
-    }
+  "pageTitle": "Preguntas Frecuentes",
+  "noPain": {
+    "title": "No Pain — Preguntas",
+    "q1": "¿Qué es No Pain?",
+    "a1": "No Pain es una crema anestésica tópica en gel, desarrollada con alta concentración de activos anestésicos para tatuajes, PMU y procedimientos estéticos.",
+    "q2": "¿Cuánto dura?",
+    "a2": "Su efecto puede durar entre 1 y 4 horas, dependiendo del tipo de piel, la zona tratada y el tiempo de exposición.",
+    "q3": "¿Es segura?",
+    "a3": "Sí, cuando se utiliza correctamente por profesionales. No altera el pigmento ni interfiere con la cicatrización natural.",
+    "q4": "¿Cuándo aplicarla?",
+    "a4": "Aplicar una capa gruesa y uniforme 90 minutos antes del procedimiento, y hasta 2 horas en pieles más resistentes. Cubrir con plástico film para potenciar la absorción.",
+    "q5": "¿Precauciones?",
+    "a5": "Evitar el contacto con ojos, mucosas o piel irritada. Solo para uso profesional externo."
+  },
+  "xteri": {
+    "title": "Xteri-Numb — Preguntas",
+    "q1": "¿Qué es Xteri-Numb?",
+    "a1": "Un spray antiséptico y anestésico de grado médico, diseñado para limpiar y adormecer la piel durante el tatuaje.",
+    "q2": "¿Cómo se usa?",
+    "a2": "Agita bien y rocía directamente sobre la piel tatuada o tratada durante la sesión, sin enjuagar.",
+    "q3": "¿Es seguro?",
+    "a3": "Sí, es seguro cuando lo aplican profesionales. No irrita ni altera pigmentos.",
+    "q4": "¿Afecta los pigmentos?",
+    "a4": "No, su fórmula libre de colorantes y fragancias no afecta el color ni la cicatrización.",
+    "q5": "¿Precauciones?",
+    "a5": "Evitar contacto con ojos, mucosas o heridas abiertas. Solo para uso profesional."
+  },
+  "wicann": {
+    "title": "Wicann — Preguntas",
+    "q1": "¿Qué es Wicann?",
+    "a1": "Un tónico natural destilado de hamamelis, con efecto calmante, astringente y regenerador para el post-tatuaje.",
+    "q2": "¿Cómo se usa?",
+    "a2": "Limpia el área con Green Soap y aplica Wicann directamente 2–3 veces al día. Deja absorber sin enjuagar.",
+    "q3": "¿Es natural?",
+    "a3": "Sí, elaborado a partir de extracto puro de hamamelis, sin colorantes ni alcohol.",
+    "q4": "¿Reemplaza las cremas?",
+    "a4": "No, complementa las cremas post-tatuaje, ayudando a calmar la piel y acelerar la recuperación.",
+    "q5": "¿Precauciones?",
+    "a5": "Evitar contacto con ojos y mucosas. Uso externo únicamente."
+  },
+  "greenSoap": {
+    "title": "Green Soap — Preguntas",
+    "q1": "¿Cómo usar Green Soap?",
+    "a1": "Diluir 1 parte de jabón en 9 partes de agua filtrada o destilada. Aplicar con atomizador o paño limpio durante y después del tatuaje.",
+    "q2": "¿Cuál es la concentración?",
+    "a2": "Contiene 4% de clorhexidina gluconato, proporcionando limpieza y desinfección segura.",
+    "q3": "¿Es seguro para todo tipo de piel?",
+    "a3": "Sí, su base vegetal con glicerina y aceites naturales lo hace suave y seguro cuando se diluye correctamente.",
+    "q4": "¿Otros usos?",
+    "a4": "Ideal para limpiar heridas, equipos o áreas contaminadas en entornos profesionales.",
+    "q5": "¿Precauciones?",
+    "a5": "Usar siempre diluido. Mantener fuera del alcance de los niños y alejado de la luz solar directa."
+  }
+
   },
   "Legal": {
     "title": "POLÍTICAS & LEGAL",

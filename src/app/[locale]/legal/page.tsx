@@ -82,7 +82,6 @@ export default async function LegalPage({
           </div>
         </main>
 
-        <Footer locale={locale} />
       </>
     </Suspense>
   );

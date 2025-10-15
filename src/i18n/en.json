@@ -269,59 +269,60 @@
     "ctaButton": "Visit Monumby.com"
   },
   "FAQ": {
-    "pageTitle": "FAQ",
-    "noPain": {
-      "title": "No Pain — FAQ",
-      "q1": "What is No Pain?",
-      "a1": "No Pain is a topical anesthetic cream designed for tattoos and PMU.",
-      "q2": "How long does it last?",
-      "a2": "Effects can last several hours depending on use.",
-      "q3": "Is it safe?",
-      "a3": "Yes, when used as directed by professionals.",
-      "q4": "When to apply?",
-      "a4": "Apply 20 minutes before the procedure.",
-      "q5": "Precautions?",
-      "a5": "Avoid eyes and mucous membranes."
-    },
-    "xteri": {
-      "title": "Xteri-Numb — FAQ",
-      "q1": "What is Xteri-Numb?",
-      "a1": "A disinfectant and anesthetic spray for use during tattooing.",
-      "q2": "How to use it?",
-      "a2": "Shake well and spray on tattooed skin as needed.",
-      "q3": "Is it safe?",
-      "a3": "Yes, when applied by professionals during tattooing.",
-      "q4": "Does it affect pigments?",
-      "a4": "No, it does not affect pigments or healing.",
-      "q5": "Precautions?",
-      "a5": "Avoid eyes, mucous membranes and open wounds."
-    },
-    "wicann": {
-      "title": "Wicann — FAQ",
-      "q1": "What is Wicann?",
-      "a1": "A soothing and regenerative tonic for post-tattoo care.",
-      "q2": "How to use it?",
-      "a2": "Clean with Green Soap and apply Wicann 2–3 times a day.",
-      "q3": "Is it natural?",
-      "a3": "Yes, it contains natural extracts to reduce irritation and aid recovery.",
-      "q4": "Does it replace creams?",
-      "a4": "It complements post-tattoo creams, helping the skin recover faster.",
-      "q5": "Precautions?",
-      "a5": "Avoid eyes and mucous membranes. For external use only."
-    },
-    "greenSoap": {
-      "title": "Green Soap — FAQ",
-      "q1": "How to use Green Soap?",
-      "a1": "Dilute 1:9 and use for skin cleaning during tattooing.",
-      "q2": "What is the concentration?",
-      "a2": "It contains 4% chlorhexidine gluconate for safe antiseptic action.",
-      "q3": "Is it safe for all skin types?",
-      "a3": "Yes, when diluted correctly it is safe for most skin types.",
-      "q4": "Other uses?",
-      "a4": "Ideal for cleaning wounds, equipment, and contaminated areas.",
-      "q5": "Precautions?",
-      "a5": "Always dilute before use. Keep away from children."
-    }
+  "pageTitle": "FAQ",
+  "noPain": {
+    "title": "No Pain — FAQ",
+    "q1": "What is No Pain?",
+    "a1": "No Pain is a topical anesthetic gel cream developed with a high concentration of active ingredients for tattoos, PMU, and aesthetic procedures.",
+    "q2": "How long does it last?",
+    "a2": "Its effect lasts between 1 and 4 hours depending on skin type, treated area, and exposure time.",
+    "q3": "Is it safe?",
+    "a3": "Yes, when used correctly by professionals. It does not alter pigment color or interfere with natural healing.",
+    "q4": "When to apply?",
+    "a4": "Apply a thick, even layer about 90 minutes before the procedure, and up to 2 hours on resistant skin. Cover with plastic wrap to enhance absorption.",
+    "q5": "Precautions?",
+    "a5": "Avoid contact with eyes, mucous membranes, or irritated skin. For professional external use only."
+  },
+  "xteri": {
+    "title": "Xteri-Numb — FAQ",
+    "q1": "What is Xteri-Numb?",
+    "a1": "A medical-grade antiseptic and anesthetic spray designed to clean and numb the skin during tattooing.",
+    "q2": "How to use it?",
+    "a2": "Shake well and spray directly over tattooed or treated skin during the session, without rinsing.",
+    "q3": "Is it safe?",
+    "a3": "Yes, when applied by professionals. It does not irritate or affect pigments.",
+    "q4": "Does it affect pigments?",
+    "a4": "No, its dye- and fragrance-free formula ensures no alteration of color or healing.",
+    "q5": "Precautions?",
+    "a5": "Avoid contact with eyes, mucous membranes, or open wounds. For professional use only."
+  },
+  "wicann": {
+    "title": "Wicann — FAQ",
+    "q1": "What is Wicann?",
+    "a1": "A natural tonic distilled from witch hazel with soothing, astringent, and regenerative effects for post-tattoo care.",
+    "q2": "How to use it?",
+    "a2": "Clean the area with Green Soap and apply Wicann directly 2–3 times a day. Allow it to absorb naturally without rinsing.",
+    "q3": "Is it natural?",
+    "a3": "Yes, made from pure witch hazel extract, free from dyes and alcohol.",
+    "q4": "Does it replace creams?",
+    "a4": "No, it complements post-tattoo creams by calming the skin and speeding up recovery.",
+    "q5": "Precautions?",
+    "a5": "Avoid contact with eyes and mucous membranes. For external use only."
+  },
+  "greenSoap": {
+    "title": "Green Soap — FAQ",
+    "q1": "How to use Green Soap?",
+    "a1": "Dilute 1 part soap with 9 parts filtered or distilled water. Apply with a spray bottle or clean cloth during and after tattooing.",
+    "q2": "What is the concentration?",
+    "a2": "Contains 4% chlorhexidine gluconate for safe antiseptic action.",
+    "q3": "Is it safe for all skin types?",
+    "a3": "Yes, its vegetable base with glycerin and natural oils makes it gentle and safe when properly diluted.",
+    "q4": "Other uses?",
+    "a4": "Ideal for cleaning wounds, equipment, and contaminated areas in professional environments.",
+    "q5": "Precautions?",
+    "a5": "Always use diluted. Keep out of reach of children and away from direct sunlight."
+  }
+
   },
   "Legal": {
     "title": "POLICIES & LEGAL",
