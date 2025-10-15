@@ -1,26 +1,24 @@
-// src/app/[locale]/page.tsx
+// 📄 /src/app/[locale]/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-
-// ✅ Importa el componente cliente directamente (Popup.tsx tiene "use client")
 import ClientPopup from "@/components/Popup";
 
+// 📄 Metadatos
 export const metadata = {
-  title: "No Pain ",
+  title: "No Pain",
   description:
-    "No Pain ofrece cremas anestésicas, tónicos y jabones para tatuajes y PMU.",
+    "No Pain offers anesthetic creams, tonics, and soaps for tattoos and PMU.",
 };
 
-// 🔹 Estructura distribuidores
+// 📄 Tipos
 type Dist = {
   name: string;
   whatsapp: string;
   url?: string;
-  extra?: string;
+  extra?: string | JSX.Element;
   isFixedText?: boolean;
 };
 
@@ -35,6 +33,7 @@ type Region = {
   countries: Country[];
 };
 
+// 📄 Regiones y distribuidores
 const REGIONS: Region[] = [
   {
     name: "latinAmerica",
@@ -102,6 +101,36 @@ const REGIONS: Region[] = [
           },
         ],
       },
+      {
+        name: "panama",
+        flag: "/flags/panama.png",
+        dists: [
+          {
+            name: "@janethsupply",
+            url: "https://instagram.com/janethsupply",
+            whatsapp: "+50767558558",
+            extra:
+              "Janeth Beauty Supply – Centro Comercial Los Pueblos y Chorrera",
+            isFixedText: true,
+          },
+          {
+            name: "@pangeaink",
+            url: "https://instagram.com/pangeaink",
+            whatsapp: "+50762620736",
+            extra:
+              "Pangea Ink – Vía Argentina, Edificio Sobredo, Planta Baja Local A",
+            isFixedText: true,
+          },
+          {
+            name: "@tattoevolutionpanama",
+            url: "https://instagram.com/tattoevolutionpanama",
+            whatsapp: "+50765174118",
+            extra:
+              "Tattoo Evolution Panamá – Plaza Galápagos, Santa Clara, 1er piso local 22",
+            isFixedText: true,
+          },
+        ],
+      },
     ],
   },
   {
@@ -115,14 +144,19 @@ const REGIONS: Region[] = [
             name: "@adsertattoos",
             url: "https://instagram.com/adsertattoos",
             whatsapp: "+15303085643",
-            extra:
-              "Compra online: https://adsertattoos.bigcartel.com/product/no-pain-numbing",
-            isFixedText: true,
-          },
-          {
-            name: "Cali Tattoo Supply",
-            whatsapp: "+50683151806",
-            extra: "Sacramento, California / Web: calitattoosupply.com",
+            extra: (
+              <span className="break-all text-sm sm:text-base leading-relaxed block">
+                Compra online:{" "}
+                <a
+                  href="https://adsertattoos.bigcartel.com/product/no-pain-numbing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-white hover:text-gray-300 break-all"
+                >
+                  adsertattoos.bigcartel.com/product/no-pain-numbing
+                </a>
+              </span>
+            ),
             isFixedText: true,
           },
         ],
@@ -147,13 +181,16 @@ const REGIONS: Region[] = [
   },
 ];
 
-export default async function Home(props: { params: Promise<{ locale: string }> }) {
-  const { locale } = await props.params;
+// ✅ FIX: params ya no es Promise
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
 
-  // ✅ Traducciones
   const tNavbar = await getTranslations({ locale, namespace: "Navbar" });
   const tProducts = await getTranslations({ locale, namespace: "products" });
-  const tGallery = await getTranslations({ locale, namespace: "Gallery" });
   const tAbout = await getTranslations({ locale, namespace: "About" });
   const tSuppliers = await getTranslations({ locale, namespace: "Suppliers" });
   const tHero = await getTranslations({ locale, namespace: "Hero" });
@@ -161,11 +198,15 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
   return (
     <>
       <main className="text-white bg-black min-h-screen font-franklin">
-        {/* ✅ POPUP SOLO EN LANDING (cliente) */}
         <ClientPopup locale={locale} />
 
-        {/* ✅ Header envuelto en Suspense */}
-        <Suspense fallback={<div>Loading header...</div>}>
+        <Suspense
+          fallback={
+            <div className="text-center py-8 text-gray-400 bg-black">
+              Loading header...
+            </div>
+          }
+        >
           <Header locale={locale} />
         </Suspense>
 
@@ -175,7 +216,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         <section className="h-screen flex items-center justify-center relative hero-bg">
           <div className="absolute inset-0 bg-black/60" />
           <div className="z-10 text-center px-6">
-            <Link href={`#no-pain-brand`}>
+            <Link href="#no-pain-brand">
               <Image
                 src="/No-PAIN.webp"
                 alt="No Pain Brand Logo"
@@ -183,14 +224,13 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                 height={120}
                 className="mx-auto"
                 priority
-                fetchPriority="high"
               />
             </Link>
-            <p className="mt-4 text-2xl sm:text-3xl font-semibold text-white uppercase">
+            <p className="mt-4 text-2xl sm:text-3xl font-semibold text-white uppercase tracking-wide">
               {tHero("title")}
             </p>
             <Link
-              href={`#productos`}
+              href="#productos"
               className="mt-6 inline-block px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white font-medium rounded-2xl shadow-md hover:opacity-90 transition"
             >
               {tHero("button")}
@@ -198,49 +238,44 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           </div>
         </section>
 
-        {/* QUIÉNES SOMOS + Videos */}
+        {/* QUIÉNES SOMOS */}
         <section id="quienes-somos" className="py-24 text-center px-6 bg-black">
-          <h2 className="text-4xl font-semibold mb-4 uppercase">{tNavbar("about")}</h2>
-          <p className="max-w-3xl mx-auto text-white">{tAbout("intro")}</p>
+          <h2 className="text-4xl font-semibold mb-4 uppercase font-franklin">
+            {tNavbar("about")}
+          </h2>
+          <p className="max-w-3xl mx-auto text-white font-franklin">
+            {tAbout("intro")}
+          </p>
 
-          <div className="mt-8 text-base text-white text-left max-w-xl mx-auto space-y-2">
+          <div className="mt-8 text-base text-white text-left max-w-xl mx-auto space-y-2 font-franklin">
             <p className="font-semibold">{tAbout("resultTitle")}</p>
             <p>{tAbout("result1")}</p>
             <p>{tAbout("result2")}</p>
             <p>{tAbout("result3")}</p>
           </div>
 
-          <p className="max-w-3xl mx-auto text-white mt-8">{tAbout("closing")}</p>
+          <p className="max-w-3xl mx-auto text-white mt-8 font-franklin">
+            {tAbout("closing")}
+          </p>
 
-          {/* 🎥 GRID DE VIDEOS */}
+          {/* VIDEOS LOCALES */}
           <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              {
-                sources: [
-                  "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video7_tbyozu.webm",
-                  "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video7_tbyozu.webm",
-                ],
-              },
-              {
-                sources: [
-                  "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591192/video2_onqzug.webm",
-                  "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590829/video2_yq7teb.mp4",
-                ],
-              },
+              { sources: ["/videos/video7.webm", "/videos/video7.mp4"] },
+              { sources: ["/videos/video2.webm", "/videos/video2.mp4"] },
             ].map((video, idx) => (
               <div
                 key={idx}
-                className="w-full h-[700px] rounded-lg overflow-hidden border border-gray-700"
+                className="w-full h-[700px] rounded-lg overflow-hidden border border-gray-700 shadow-lg"
               >
                 <video
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-lg"
                   autoPlay
                   muted
                   loop
                   playsInline
                   controls
                   preload="metadata"
-                  suppressHydrationWarning
                 >
                   {video.sources.map((src, i) => (
                     <source
@@ -249,7 +284,6 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                       type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
                     />
                   ))}
-                  Tu navegador no soporta el video.
                 </video>
               </div>
             ))}
@@ -258,7 +292,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
 
         {/* PRODUCTOS */}
         <section id="productos" className="py-20 px-6 bg-black">
-          <h2 className="text-3xl font-semibold text-center mb-12 uppercase">
+          <h2 className="text-3xl font-semibold text-center mb-12 uppercase font-franklin">
             {tProducts("title")}
           </h2>
 
@@ -291,7 +325,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
             ].map((p, i) => (
               <div
                 key={i}
-                className="text-center flex flex-col items-center p-4 border border-gray-700 rounded-xl hover:border-gray-500 transition-transform hover:scale-105"
+                className="text-center flex flex-col items-center p-4 border border-gray-700 rounded-xl hover:border-gray-500 transition-transform hover:scale-105 font-franklin"
               >
                 <Image
                   src={p.img}
@@ -317,7 +351,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
         </section>
 
         {/* PROVEEDORES */}
-        <section id="proveedores" className="py-24 px-6 bg-black">
+        <section id="proveedores" className="py-24 px-6 bg-black font-franklin">
           <h2 className="text-3xl font-semibold text-center mb-16 uppercase">
             {tSuppliers("title")}
           </h2>
@@ -361,7 +395,7 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                                     href={d.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 hover:text-gray-300"
+                                    className="flex items-center gap-2 hover:text-gray-300 break-all text-sm sm:text-base leading-relaxed"
                                   >
                                     <Image
                                       src="/icons/instagram.svg"
@@ -370,10 +404,10 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                                       height={18}
                                       loading="lazy"
                                     />
-                                    {d.name}
+                                    <span className="break-all">{d.name}</span>
                                   </a>
                                 ) : (
-                                  <span className="flex items-center gap-2">
+                                  <span className="flex items-center gap-2 break-all text-sm sm:text-base leading-relaxed">
                                     {d.name}
                                   </span>
                                 )}
@@ -394,10 +428,13 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
                                   {d.whatsapp}
                                 </a>
 
-                                {/* ✅ Traducción o texto fijo */}
                                 {d.extra && (
-                                  <p className="text-sm text-white">
-                                    {d.isFixedText ? d.extra : tSuppliers(d.extra)}
+                                  <p className="text-sm text-white break-words">
+                                    {typeof d.extra === "string"
+                                      ? d.isFixedText
+                                        ? d.extra
+                                        : tSuppliers(d.extra)
+                                      : d.extra}
                                   </p>
                                 )}
                               </div>
@@ -412,10 +449,11 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
             ))}
           </div>
 
+          {/* Botón de contacto */}
           <div className="text-center mt-16">
             <a
               href={`mailto:customercare@nopainnumbing.net?subject=${encodeURIComponent(
-                tSuppliers("distributorMailSubject")
+                tSuppliers("distributorMailSubject"),
               )}&body=${encodeURIComponent(tSuppliers("distributorMailBody"))}`}
               className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
             >
@@ -424,15 +462,11 @@ export default async function Home(props: { params: Promise<{ locale: string }> 
           </div>
         </section>
       </main>
-
-      {/* ✅ Footer envuelto en Suspense */}
-      <Suspense fallback={<div>Loading footer...</div>}>
-        <Footer locale={locale} />
-      </Suspense>
     </>
   );
 }
 
+// ✅ Revalidación estática
 export async function generateStaticParams() {
   return [{ locale: "es" }, { locale: "en" }];
 }

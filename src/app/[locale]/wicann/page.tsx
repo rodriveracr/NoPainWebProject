@@ -1,14 +1,13 @@
 // 📄 /src/app/[locale]/wicann/page.tsx
-import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import ProductLayout from "@/components/ProductLayout";
+import ClientPopup from "@/components/Popup";
+import { Suspense } from "react"; // 👈 importante
 
 export const metadata = {
-  title: "Wicann by No Pain",
+  title: "Wicann | Natural Witch Hazel Tonic for Tattoo Care",
   description:
-    "Tónico natural destilado de hamamelis, ideal para calmar, tonificar y preparar la piel antes y después del tatuaje o PMU.",
+    "Natural tonic distilled from witch hazel for soothing and conditioning skin after tattoos and PMU.",
 };
 
 export default async function WicannPage({
@@ -20,70 +19,81 @@ export default async function WicannPage({
   const t = await getTranslations({ locale, namespace: "products" });
 
   return (
-    <>
-      {/* ✅ Header optimizado con Suspense */}
-      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading header...</div>}>
-        <Header locale={locale} />
-      </Suspense>
+    <Suspense
+      fallback={
+        <div className="text-center py-20 text-gray-400 bg-black/85 min-h-[200px]">
+          Loading Wicann...
+        </div>
+      }
+    >
+      <>
+        {/* ✅ Popup (solo cliente, no bloquea SSR) */}
+        <ClientPopup locale={locale} />
 
-      {/* ✅ Layout unificado para producto */}
-      <ProductLayout
-        title={t("wicann")}
-        tagline={t("wicannTagline")}
-        imageSrc="/_CZC3097.webp"
-        imageAlt={t("wicannAlt") || "Wicann witch hazel tonic by No Pain"}
-        backgroundClass="bg-wicann"
-      >
-        {/* 🔹 Detalles del producto */}
-        <section>
-          <h2 className="text-2xl font-semibold text-white mb-2">{t("productDetails")}</h2>
-          <p className="text-gray-300">{t("wicannDescription")}</p>
-        </section>
+        {/* ✅ Layout de producto (Header/Footer gestionados por layout global) */}
+        <ProductLayout
+          title={t("wicann")}
+          tagline={t("wicannTagline")}
+          imageSrc="/_CZC3097.webp"
+          imageAlt={t("wicannAlt") || "Wicann witch hazel tonic"}
+          backgroundClass="bg-wicann"
+        >
+          {/* 🔹 Detalles del producto */}
+          <section>
+            <h2 className="text-2xl font-semibold text-white mb-2">
+              {t("productDetails")}
+            </h2>
+            <p className="text-gray-300">{t("wicannDescription")}</p>
+          </section>
 
-        {/* 🔹 Beneficios */}
-        <section>
-          <h3 className="text-xl font-semibold text-white mb-2">{t("features")}</h3>
-          <ul className="list-disc pl-6 space-y-2 text-gray-300">
-            <li>{t("wicannBenefit1")}</li>
-            <li>{t("wicannBenefit2")}</li>
-            <li>{t("wicannBenefit3")}</li>
-            <li>{t("wicannBenefit4")}</li>
-            <li>{t("wicannBenefit5")}</li>
-          </ul>
-        </section>
+          {/* 🔹 Características */}
+          <section>
+            <h3 className="text-xl font-semibold text-white mb-2">
+              {t("features")}
+            </h3>
+            <ul className="list-disc pl-6 space-y-2 text-gray-300">
+              <li>{t("wicannBenefit1")}</li>
+              <li>{t("wicannBenefit2")}</li>
+              <li>{t("wicannBenefit3")}</li>
+              <li>{t("wicannBenefit4")}</li>
+              <li>{t("wicannBenefit5")}</li>
+            </ul>
+          </section>
 
-        {/* 🔹 Modo de uso */}
-        <section>
-          <h3 className="text-xl font-semibold text-white mb-2">{t("usage")}</h3>
-          <ul className="list-disc pl-6 space-y-2 text-gray-300">
-            <li>{t("wicannUsage1")}</li>
-            <li>{t("wicannUsage2")}</li>
-            <li>{t("wicannUsage3")}</li>
-            <li>{t("wicannUsage4")}</li>
-          </ul>
-        </section>
+          {/* 🔹 Modo de uso */}
+          <section>
+            <h3 className="text-xl font-semibold text-white mb-2">
+              {t("usage")}
+            </h3>
+            <ul className="list-disc pl-6 space-y-2 text-gray-300">
+              <li>{t("wicannUsage1")}</li>
+              <li>{t("wicannUsage2")}</li>
+              <li>{t("wicannUsage3")}</li>
+              <li>{t("wicannUsage4")}</li>
+            </ul>
+          </section>
 
-        {/* 🔹 Consejos */}
-        <section>
-          <h3 className="text-xl font-semibold text-white mb-2">{t("tips")}</h3>
-          <ul className="list-disc pl-6 space-y-2 text-gray-300">
-            <li>{t("wicannTip1")}</li>
-            <li>{t("wicannTip2")}</li>
-            <li>{t("wicannTip3")}</li>
-          </ul>
-        </section>
-      </ProductLayout>
-
-      {/* ✅ Footer optimizado */}
-      <Suspense fallback={<div className="text-center py-8 text-gray-400">Loading footer...</div>}>
-        <Footer locale={locale} />
-      </Suspense>
-    </>
+          {/* 🔹 Consejos */}
+          <section>
+            <h3 className="text-xl font-semibold text-white mb-2">
+              {t("tips")}
+            </h3>
+            <ul className="list-disc pl-6 space-y-2 text-gray-300">
+              <li>{t("wicannTip1")}</li>
+              <li>{t("wicannTip2")}</li>
+              <li>{t("wicannTip3")}</li>
+            </ul>
+          </section>
+        </ProductLayout>
+      </>
+    </Suspense>
   );
 }
 
+// 🌍 Generar rutas estáticas (es/en)
 export async function generateStaticParams() {
   return [{ locale: "es" }, { locale: "en" }];
 }
-export const revalidate = 604800; // 🕒 7 días
 
+// ♻️ Revalidar cada 7 días
+export const revalidate = 604800;

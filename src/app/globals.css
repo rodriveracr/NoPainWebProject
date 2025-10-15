@@ -1,130 +1,315 @@
 /* ============================== */
-/* src/app/globals.css — actualizado */
+/* 📦 src/app/globals.css — VERSIÓN FINAL (Reels/TikTok + Fondos Producción + Texto Blanco Intenso) */
 /* ============================== */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Swiper styles */
-@import 'swiper/css';
-@import 'swiper/css/navigation';
-@import 'swiper/css/pagination';
+/* ------------------ */
+/* 🧱 Imports de librerías y estilos base */
+/* ------------------ */
+@import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
 /* ------------------ */
-/* Fuente principal   */
+/* 🔠 Fuente principal del sitio */
 /* ------------------ */
 @font-face {
-  font-family: 'FranklinGothicDemi';
-  src: url('/fonts/franklin-gothic-demi.woff2') format('woff2'),
-       url('/fonts/franklin-gothic-demi.woff') format('woff'),
-       url('/fonts/franklin-gothic-demi.ttf') format('truetype');
+  font-family: "FranklinGothicDemi";
+  src:
+    url("/fonts/franklin-gothic-demi.woff2") format("woff2"),
+    url("/fonts/franklin-gothic-demi.woff") format("woff"),
+    url("/fonts/franklin-gothic-demi.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 /* ------------------ */
-/* Base global        */
+/* ⚙️ Base global del HTML y BODY */
 /* ------------------ */
 html {
   scroll-behavior: smooth;
 }
 
 :root {
-  --ui-font: 'FranklinGothicDemi', Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* ✅ Geist ahora es la fuente global principal */
+  --ui-font:
+    var(--font-geist), Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
   @apply bg-black text-white;
   font-family: var(--ui-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ------------------ */
-/* Tipografía global  */
-/* ------------------ */
+/* ============================== */
+/* ✨ Reforzar color y legibilidad del texto */
+/* ============================== */
+
+body,
+p,
+li,
+span,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffffff !important;
+}
+
+.text-gray-200,
+.text-gray-300,
+.text-gray-400,
+.text-gray-500 {
+  color: #ffffff !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li {
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.25);
+}
+
+p,
+li,
+a {
+  font-size: 1.15rem !important;
+  line-height: 1.7;
+}
+
 h1 {
-  @apply text-4xl md:text-5xl font-bold uppercase;
+  font-size: 2.75rem !important;
 }
-
 h2 {
-  @apply text-3xl md:text-4xl font-semibold uppercase;
+  font-size: 2.25rem !important;
 }
-
 h3 {
-  @apply text-2xl font-semibold;
+  font-size: 1.75rem !important;
 }
 
-p {
-  @apply text-base md:text-lg leading-relaxed;
+/* ✅ Mantener tamaño original del eslogan principal */
+h2.tagline,
+.hero-subtitle,
+.hero-text {
+  font-size: 1.5rem !important;
+  line-height: 1.4 !important;
+  text-shadow: none !important;
 }
-
 /* ------------------ */
-/* Hero y fondos      */
+/* 🖼️ Galería general (imagenes y videos) */
 /* ------------------ */
-.hero-bg {
-  background-image: url('/4865jpg.webp'); /* ✅ Versión optimizada */
-  background-size: cover;
-  background-position: center;
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 
-/* Fondos por producto */
-.bg-nopaincream {
-  background-image: url('/No-Pain-1.jpg');
-  background-size: cover;
-  background-position: center;
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.bg-numbing {
-  background-image: url('/numbingback.jpg');
-  background-size: cover;
-  background-position: center;
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-.bg-xterinum {
-  background-image: url('/Xterinumb2.jpg');
-  background-size: cover;
-  background-position: center;
+/* 🖼️ Cada item */
+.gallery-item {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid #3f3f46;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.bg-wicann {
-  background-image: url('/wicannbg.png');
-  background-size: cover;
-  background-position: center;
-}
-.bg-gallery {
-  background-image: url("/gallery-bg.webp");
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
 }
 
-
-.bg-greensoap {
-  background-image: url('/Green-Soap1.jpg');
-  background-size: cover;
-  background-position: center;
+/* 🖼️ Imagen o video principal */
+.gallery-item video,
+.gallery-item img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 0.75rem;
 }
 
-.bg-monumby {
-  background-image: url("/monumby-bg.webp");
+@media (min-width: 1024px) {
+  .gallery-item video,
+  .gallery-item img {
+    height: 550px;
+  }
 }
 
-
-/* ------------------ */
-/* Modales y overlays */
-/* ------------------ */
-.modal-overlay {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 999999 !important;
-  background: rgba(0, 0, 0, 0.9);
-  -webkit-backdrop-filter: blur(4px); /* ✅ Fix Safari */
-  backdrop-filter: blur(4px);
+/* 🌑 Overlay al pasar el mouse */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease;
 }
 
-/* Botón de cierre universal */
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+/* Texto dentro del overlay */
+.gallery-overlay p {
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
+}
+
+/* ============================== */
+/* 🎬 MODAL (pantalla ampliada del video) — versión uniforme tipo TikTok */
+/* ============================== */
+.modal-overlay.gallery-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.96);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 999999 !important;
+  height: 100dvh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
+}
+
+/* 🧱 Contenedor general del modal */
+.gallery-modal > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border-radius: 18px;
+  padding: 2.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+  max-width: 1500px;
+  width: 90vw;
+  max-height: 100vh;
+  overflow: hidden;
+  gap: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 🎥 Video principal tipo TikTok */
+.gallery-modal video {
+  aspect-ratio: 9 / 16;
+  width: auto;
+  max-width: 500px;
+  max-height: 40vh;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 18px;
+  background-color: #000;
+  display: block;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+/* 🧾 Texto descriptivo */
+.gallery-modal .video-description {
+  color: #fff;
+  text-align: left;
+  max-width: 900px;
+  overflow-y: auto;
+  max-height: 100vh;
+  line-height: 1.6;
+  margin-top: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10rem;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.gallery-modal .video-description h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* 💻 Desktop — disposición horizontal del modal */
+@media (min-width: 900px) {
+  .gallery-modal > div {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .gallery-modal video {
+    max-width: 400px;
+    max-height: 85vh;
+  }
+
+  .gallery-modal .video-description {
+    flex: 1;
+    margin-left: 0.5rem;
+  }
+}
+
+/* 📱 Móvil — full screen estilo Reels */
+@media (max-width: 600px) {
+  .gallery-modal > div {
+    flex-direction: column;
+    width: 95vw;
+    max-height: 100vh;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 5rem;
+  }
+
+  .gallery-modal video {
+    width: 100%;
+    max-height: 50vh;
+    border-radius: 10px;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gallery-modal .video-description {
+    margin-top: 0rem;
+    text-align: center;
+    width: 90%;
+    max-height: 18vh;
+  }
+}
+
+/* ❌ Botón cerrar */
 .close-button {
   position: absolute;
   top: 1rem;
@@ -135,154 +320,285 @@ p {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-
 .close-button:hover {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* ------------------ */
-/* Galería (Fotos y Videos) */
-/* ------------------ */
-.gallery-grid {
-  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8;
+/* ⬅️➡️ Flechas de navegación */
+.gallery-modal button[title="Anterior"],
+.gallery-modal button[title="Siguiente"] {
+  position: absolute;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.6rem;
+  border-radius: 9999px;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+}
+.gallery-modal button[title="Anterior"]:hover,
+.gallery-modal button[title="Siguiente"]:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-50%) scale(1.1);
 }
 
-.gallery-item {
-  @apply relative cursor-pointer overflow-hidden rounded-2xl border border-gray-700 hover:scale-105 transition-transform shadow-lg;
+/* ============================== */
+/* 🌄 Hero principal y fondos de productos */
+/* ============================== */
+
+.hero-bg {
+  background-image: url("/4865jpg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-nopaincream {
+  background-image: url("/No-Pain-1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-numbing {
+  background-image: url("/numbingback.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-xterinum {
+  background-image: url("/Xterinumb2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-wicann {
+  background-image: url("/wicannbg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.gallery-item video,
-.gallery-item img {
-  @apply object-cover w-full h-[500px] lg:h-[550px] rounded-lg;
+.bg-greensoap {
+  background-image: url("/Green-Soap1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-monumby {
+  background-image: url("/monumby-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.gallery-overlay {
-  @apply absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 flex items-center justify-center transition;
-}
-
-.gallery-overlay p {
-  @apply text-white text-lg font-semibold text-center;
-}
-
-/* ------------------ */
-/* Ajustes responsive */
-/* ------------------ */
-@media (max-width: 768px) {
-  .gallery-item video,
-  .gallery-item img {
-    height: 360px;
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery-item video,
-  .gallery-item img {
-    height: 280px;
-  }
-}
-
-/* ------------------ */
-/* Popup general      */
-/* ------------------ */
-.popup-backdrop {
-  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-sm;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-
-.popup-card {
-  @apply relative w-[90vw] max-w-[720px] rounded-2xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl overflow-hidden;
-}
-
-/* ------------------ */
-/* Botones primarios  */
-/* ------------------ */
-.btn-gradient {
-  @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-semibold shadow-md hover:opacity-90 transition;
-}
-@keyframes bounce-slow {
-  0%, 100% {
-    transform: translateY(0) rotate(6deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(6deg);
-  }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 3s ease-in-out infinite;
-}
-
-/* ------------------ */
-/* Scrollbar personalizada */
-/* ------------------ */
+/* ============================== */
+/* 🖱️ Scrollbar personalizada */
+/* ============================== */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: #111;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #444;
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
 
-/* ------------------ */
-/* Navegación Gallery */
-/* ------------------ */
-@media (max-width: 600px) {
-  .gallery-modal button[title="Previous"],
-  .gallery-modal button[title="Next"] {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 0.5rem;
-    border-radius: 9950px;
+/* ============================== */
+/* 💻 Ajuste de posición del modal en escritorio */
+/* ============================== */
+@media (min-width: 1024px) {
+  .gallery-modal > div {
+    margin-top: 4rem;
+  }
+}
+/* ============================== */
+/* 🧩 Fix z-index del header y badge para modales */
+/* ============================== */
+body:has(.gallery-modal),
+body:has(.photo-modal) {
+  header,
+  nav,
+  .badge {
+    z-index: 0 !important;
+  }
+}
+
+.gallery-modal,
+.photo-modal {
+  z-index: 999999 !important;
+  position: fixed !important;
+}
+
+/* ============================== */
+/* 🖼️ PHOTO GALLERY — Modal independiente (versión limpia y optimizada) */
+/* ============================== */
+
+/* Overlay base */
+.photo-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 999999 !important;
+  height: 100dvh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
+  isolation: isolate;
+} /* ======================================== */
+/* 🎯 FIX FINAL — PHOTO MODAL (Desktop + Móvil Optimizado) */
+/* ======================================== */
+
+/* 💻 Desktop — Imagen más pequeña (50%) + texto visible lado a lado */
+@media (min-width: 2000px) {
+  .photo-modal > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10rem;
+    margin-top: 10rem !important;
+  }
+
+  .photo-modal img {
+    max-width: 10px !important; /* Imagen reducida */
+    max-height: 60vh !important;
+    border-radius: 12px;
+    object-fit: contain;
+    object-position: center;
+    margin: 16px;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.15);
+  }
+
+  .photo-modal .text-white,
+  .photo-modal .photo-description {
+    flex: 1;
+    max-width: 380px;
+    max-height: 60vh;
+    overflow-y: auto;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    line-height: 1.55;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+  }
+
+  .photo-modal .text-white h3 {
+    font-size: 1.05rem !important;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .photo-modal .text-white p {
+    font-size: 0.9rem !important;
+  }
+} /* 📱 Móvil — Imagen más arriba y texto visible sin scroll extra */
+@media (max-width: 900px) {
+  .photo-modal > div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Prioriza imagen arriba */
+    padding: 0;
+    margin-top: 0 !important;
+    gap: 1.5rem; /* Más espacio */
+    height: 90vh;
+    width: 90vw; /* Alinea con la imagen */
+    max-height: 90vh;
+  }
+
+  .photo-modal img {
+    width: 90vw !important;
+    height: auto !important;
+    max-height: 50vh !important;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    position: relative; /* Contenedor para flechas */
+  }
+
+  .photo-modal .text-white,
+  .photo-modal .photo-description {
+    width: 90vw;
+    max-height: 25vh !important; /* Reduce para equilibrar */
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.2rem; /* Mejor espaciado */
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el texto verticalmente dentro */
+  }
+
+  .photo-modal .text-white h3 {
+    font-size: 1rem !important;
+  }
+
+  .photo-modal .text-white p {
+    font-size: 0.85rem !important;
+  }
+
+  /* Nueva regla para posicionar las flechas */
+  .photo-modal .photo-image-wrapper {
+    width: 90vw; /* Asegura que las flechas se extiendan */
+    position: relative;
   }
 }
 
 /* ------------------ */
-/* Accesibilidad — focus visible */
+/* Modal de Fotos (Photo Modal) */
 /* ------------------ */
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #f87171; /* rojo suave */
-  outline-offset: 2px;
+.photo-modal {
+  @apply fixed inset-0 z-[9999] flex items-center justify-center bg-black/90;
 }
 
-/* ============================ */
-/* Footer — Fondo premium negro */
-/* ============================ */
-footer {
-  background-color: #000; /* Negro sólido */
-  border-top: 1px solid #222; /* Línea superior sutil */
-}
+@media (max-width: 768px) {
+  .photo-modal > div {
+    @apply flex flex-col items-center justify-start gap-4 w-[90vw] h-[85vh] p-2;
+  }
 
-footer a:hover,
-footer a:focus-visible {
-  color: #fff;
-  opacity: 0.9;
-}
+  .photo-modal img {
+    @apply w-full max-w-[90vw] max-h-[50vh] object-contain rounded-lg shadow-2xl;
+  }
 
-footer h3 {
-  color: #fff;
-}
+  .photo-modal .text-white,
+  .photo-modal .photo-description {
+    @apply w-[90vw] max-h-[25vh] bg-black/40 border border-gray-700 rounded-lg p-4 text-center flex flex-col justify-center;
+  }
 
-footer p,
-footer li {
-  color: #ccc;
-}
-/* ============================ */
-/* Header detrás — solo en Monumby */
-/* ============================ */
-.page-monumby header {
-  z-index: 10 !important; /* baja el z-index */
-  position: relative !important; /* saca el fixed stacking context */
-  background-color: transparent !important; /* deja ver el fondo */
-  border-bottom: none !important;
+  .photo-modal .photo-image-wrapper {
+    @apply w-[90vw] relative;
+  }
+
+  /* Botones visibles */
+  .photo-modal button[title="Close"] {
+    @apply absolute top-4 right-4 text-white bg-black/70 hover:bg-black/90 p-2 rounded-full transition z-[10000];
+  }
+
+  /* Flecha Previous visible */
+  .photo-modal button[title="Previous"] {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl z-[10000] bg-black/40 hover:bg-black/70 p-2 rounded-full transition;
+  }
+
+  /* Ocultar otros elementos */
+  .photo-modal button[title="Next"] {
+    @apply hidden;
+  }
+
+  .photo-modal .text-white.max-w-sm {
+    @apply hidden;
+  }
 }

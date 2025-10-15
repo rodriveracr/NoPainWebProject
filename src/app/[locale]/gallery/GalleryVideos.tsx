@@ -1,6 +1,6 @@
-//src/app/[locale]/gallery/GalleryVideos.tsx
 "use client";
-import { useState } from "react";
+
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -19,87 +19,66 @@ export default function GalleryVideos() {
 
   const videos = [
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591188/video8_mmv8lu.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590813/video8_lblkzn.mp4",
-      ],
+      sources: ["/videos/video8.webm", "/videos/video8.mp4"],
       desc: t("video1.overlay"),
     },
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video9_mmd6uq.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590815/video9_o2dyim.mp4",
-      ],
+      sources: ["/videos/video9.webm", "/videos/video9.mp4"],
       desc: t("video2.overlay"),
     },
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591189/video6_pmlgvj.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video6_odecam.mp4",
-      ],
+      sources: ["/videos/video6.webm", "/videos/video6.mp4"],
       desc: t("video3.overlay"),
     },
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591207/video4_rvedvq.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590819/video4_n8d3ad.mp4",
-      ],
+      sources: ["/videos/video4.webm", "/videos/video4.mp4"],
       desc: t("video4.overlay"),
     },
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video5_kfeaxg.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590811/video5_rxowee.mp4",
-      ],
+      sources: ["/videos/video5.webm", "/videos/video5.mp4"],
       desc: t("video5.overlay"),
     },
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591187/video7_tbyozu.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590812/video7_kqrijw.mp4",
-      ],
+      sources: ["/videos/video7.webm", "/videos/video7.mp4"],
       desc: t("video6.overlay"),
     },
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758591194/video10_bvqxrv.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1758590825/video10_ulyyst.mp4",
-      ],
+      sources: ["/videos/video10.webm", "/videos/video10.mp4"],
       desc: t("video7.overlay"),
     },
     {
-      sources: [
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1759418641/wicannx_miwtnu.webm",
-        "https://res.cloudinary.com/dw31xhowm/video/upload/v1759418642/wicannx_mawau8.mp4",
-      ],
+      sources: ["/videos/wicannx.webm", "/videos/wicannx.mp4"],
       desc: t("video8.overlay"),
     },
   ];
 
   const [current, setCurrent] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const next = () =>
     setCurrent((prev) => (prev !== null ? (prev + 1) % videos.length : 0));
+
   const prev = () =>
     setCurrent((prev) =>
       prev !== null
         ? (prev - 1 + videos.length) % videos.length
-        : videos.length - 1
+        : videos.length - 1,
     );
 
   return (
     <>
-      {/* Galería de videos */}
+      {/* 🎞️ Galería de videos */}
       <section className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-2xl font-bold mb-8">{t("videosTitle")}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+        <div className="gallery-grid">
           {videos.map((video, idx) => {
             const overlay = safeT(`video${idx + 1}.overlay`, "");
             return (
               <div
                 key={idx}
                 onClick={() => setCurrent(idx)}
-                className="relative cursor-pointer overflow-hidden rounded-2xl border border-gray-700 hover:scale-105 transition-transform shadow-lg"
+                className="gallery-item"
               >
                 <video
                   autoPlay
@@ -116,10 +95,9 @@ export default function GalleryVideos() {
                     />
                   ))}
                 </video>
-                <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
-                  <p className="text-white text-lg font-semibold">
-                    {overlay || video.desc}
-                  </p>
+
+                <div className="gallery-overlay">
+                  <p>{overlay || video.desc}</p>
                 </div>
               </div>
             );
@@ -127,46 +105,46 @@ export default function GalleryVideos() {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* 🎬 Modal tipo TikTok */}
       <AnimatePresence>
         {current !== null && (
           <motion.div
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[99999]"
+            className="modal-overlay gallery-modal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             onClick={() => setCurrent(null)}
           >
             <div
-              className="relative flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 max-w-6xl w-[92vw] p-2 md:p-4"
+              className="relative flex flex-col md:flex-row items-center justify-center gap-6 max-w-[1100px] w-[90vw] p-4 bg-black rounded-2xl shadow-2xl z-[10001] mt-16"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Botón cerrar */}
               <button
                 onClick={() => setCurrent(null)}
-                title="Close"
-                className="absolute top-4 right-4 z-[10000] text-white bg-black/70 hover:bg-black/90 p-2 rounded-full transition"
+                title="Cerrar"
+                className="absolute top-4 right-4 text-white bg-black/70 hover:bg-black/90 p-2 rounded-full transition-all z-[10002]"
               >
-                <X size={26} />
+                <X size={28} />
               </button>
 
-              {/* Flecha izquierda */}
               <button
                 onClick={prev}
-                title="Previous"
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl z-[10000] bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
+                title="Anterior"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black/40 hover:bg-black/70 p-2 rounded-full transition z-[10002]"
               >
                 <ChevronLeft size={36} />
               </button>
 
-              {/* Video principal */}
-              <div className="bg-black rounded-lg flex items-center justify-center w-full max-w-[1280px] h-[55vh] md:h-[680px] shadow-2xl">
+              <div className="flex items-center justify-center w-full max-w-[400px] md:max-w-[480px]">
                 <video
+                  ref={videoRef}
                   key={current}
                   controls
-                  autoPlay
+                  muted
                   playsInline
-                  className="max-w-full max-h-full object-contain rounded-lg"
+                  preload="metadata"
+                  className="rounded-lg bg-black object-cover aspect-[9/16] w-full max-h-[85vh]"
                 >
                   {videos[current].sources.map((src, i) => (
                     <source
@@ -178,24 +156,22 @@ export default function GalleryVideos() {
                 </video>
               </div>
 
-              {/* Descripción compacta con scroll */}
-              <div className="text-white max-w-sm mt-3 md:mt-0 px-2 md:px-0 overflow-y-auto max-h-[25vh] md:max-h-[55vh] pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+              <div className="text-white md:max-w-[350px] mt-4 md:mt-0 overflow-y-auto max-h-[65vh] px-2 scrollbar-thin scrollbar-thumb-gray-700">
                 <h3 className="text-xl font-bold mb-2">
                   {safeT(`video${current + 1}.overlay`, videos[current].desc)}
                 </h3>
-                <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                <p className="text-white text-base leading-relaxed">
                   {safeT(
                     `video${current + 1}.longDesc`,
-                    "Aquí puedes poner una breve descripción del video."
+                    "Aquí puedes poner una breve descripción del video.",
                   )}
                 </p>
               </div>
 
-              {/* Flecha derecha */}
               <button
                 onClick={next}
-                title="Next"
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl z-[10000] bg-black/40 hover:bg-black/70 p-2 rounded-full transition"
+                title="Siguiente"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl bg-black/40 hover:bg-black/70 p-2 rounded-full transition z-[10002]"
               >
                 <ChevronRight size={36} />
               </button>

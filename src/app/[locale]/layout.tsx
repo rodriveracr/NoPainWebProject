@@ -1,33 +1,40 @@
-// 📄 /src/app/[locale]/layout.tsx
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import "../globals.css"; // ✅ Importa los estilos globales del proyecto
+import { notFound } from "next/navigation";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import "../globals.css";
 
-type Props = {
+interface Props {
   children: ReactNode;
-  params: { locale: string };
-};
+  params: Promise<{ locale: string }>;
+}
 
-export default async function LocaleLayout({ children, params }: Props) {
-  const { locale } = await params; // 👈 aquí agregamos "await"
-
-  // ✅ Cargar los mensajes de traducción para el idioma actual
-  let messages: Record<string, any> = {};
+// Cargar mensajes desde src/i18n
+async function loadMessages(locale: string) {
   try {
-    messages = await getMessages({ locale });
-  } catch (error) {
-    console.warn(`[i18n] No se encontraron mensajes para el locale "${locale}".`, error);
+    const messages = (await import(`../../i18n/${locale}.json`)).default;
+    return messages;
+  } catch {
+    notFound();
   }
+}
+
+/**
+ * ✅ LOCALE LAYOUT — Corregido para Next 15
+ * - Usa await params
+ * - Compatible con next-intl 4.x
+ */
+export default async function LocaleLayout({ children, params }: Props) {
+  const resolvedParams = await params;
+  const locale = resolvedParams?.locale || "es";
+  const messages = await loadMessages(locale);
 
   return (
-    <html lang={locale}>
-      <body>
-        {/* 🌍 Proveedor de traducciones (Next Intl) */}
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
+      <Header locale={locale} />
+      <main>{children}</main>
+      <Footer locale={locale} />
+    </NextIntlClientProvider>
   );
 }

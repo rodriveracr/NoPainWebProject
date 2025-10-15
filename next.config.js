@@ -1,93 +1,15 @@
-// src/next.config.js
-const createNextIntlPlugin = require("next-intl/plugin");
+// 📄 next.config.js
+import createNextIntlPlugin from "next-intl/plugin";
 
-const isDev = process.env.NODE_ENV !== "production";
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: {},
-  },
-
-  async headers() {
-    return [
-      // 🌍 1. Seguridad y políticas globales
-      {
-        source: "/(.*)",
-        headers: [
-          // 🔒 Seguridad base
-          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-          { key: "X-Frame-Options", value: "DENY" },
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-
-          // 🧱 Política de permisos mínima
-          {
-            key: "Permissions-Policy",
-            value: "geolocation=(), camera=(), microphone=(), interest-cohort=()",
-          },
-
-          // 🧠 Content Security Policy con detección de entorno
-          {
-            key: "Content-Security-Policy",
-            value: [
-              // Permite recursos locales en dev, bloquea en prod
-              `default-src 'self'${isDev ? " http://localhost:3001 http://192.168.56.1:3001" : ""};`,
-
-              // Imágenes, fuentes y estilos
-              "img-src 'self' data: blob: https://res.cloudinary.com;",
-              "font-src 'self' https://fonts.gstatic.com;",
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;",
-
-              // ✅ Scripts — permite Umami Cloud
-              "script-src 'self' 'unsafe-inline' https://cloud.umami.is;",
-
-              // ✅ Conexiones API — incluye Brevo, Cloudinary y Umami
-              "connect-src 'self' https://api.brevo.com https://res.cloudinary.com https://cloud.umami.is https://api-gateway.umami.dev;",
-
-              // Multimedia y embeds externos
-              "media-src 'self' https://res.cloudinary.com;",
-              "frame-src 'self' https://www.youtube.com https://player.vimeo.com;",
-
-              // Restricciones adicionales
-              "object-src 'none';",
-              "base-uri 'self';",
-              "form-action 'self';",
-              "upgrade-insecure-requests;",
-            ].join(" "),
-          },
-
-          // ⚡️ Cache general para HTML dinámico
-          {
-            key: "Cache-Control",
-            value: "public, max-age=3600, must-revalidate",
-          },
-        ],
-      },
-
-      // ⚙️ 2. Cache para archivos estáticos (sirve desde CDN)
-      {
-        source: "/_next/static/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-
-      // 🖼️ 3. Cache para imágenes optimizadas por Next.js
-      {
-        source: "/_next/image(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-    ];
+  experimental: { serverActions: {} },
+  reactStrictMode: true,
+  images: {
+    domains: ["res.cloudinary.com"],
   },
 };
 
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
-module.exports = withNextIntl(nextConfig);
+export default withNextIntl(nextConfig);

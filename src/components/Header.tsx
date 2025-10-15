@@ -1,32 +1,32 @@
-// 📄 /src/components/Header.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useCallback, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useRef, useState, useEffect, useCallback, useMemo, Suspense } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-export default function Header({ locale }: { locale: string }) {
+/**
+ * ✅ HEADER — Estable y sincronizado con next-intl
+ * - Corrige hydration y accesibilidad
+ * - Usa useLocale() para detectar idioma actual
+ */
+export default function Header({ locale: localeProp }: { locale?: string }) {
+  const currentLocale = useLocale();
+  const locale = localeProp || currentLocale;
   const t = useTranslations("Navbar");
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
-    document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, [menuOpen]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -36,12 +36,10 @@ export default function Header({ locale }: { locale: string }) {
   }, [menuOpen]);
 
   const handlePlaySound = useCallback(() => {
-    audioRef.current?.play().catch(() => {});
+    if (audioRef.current) audioRef.current.play().catch(() => {});
   }, []);
 
-  const handleLinkClick = useCallback(() => {
-    setMenuOpen(false);
-  }, []);
+  const handleLinkClick = useCallback(() => setMenuOpen(false), []);
 
   const leftLinks = useMemo(
     () => [
@@ -54,7 +52,7 @@ export default function Header({ locale }: { locale: string }) {
       { href: `/${locale}/green-soap`, label: t("greenSoap") },
       { href: `/${locale}/monumby`, label: t("monumby") },
     ],
-    [locale, t]
+    [locale, t],
   );
 
   const rightLinks = useMemo(
@@ -62,54 +60,53 @@ export default function Header({ locale }: { locale: string }) {
       { href: `/${locale}/gallery`, label: t("gallery") },
       { href: `/${locale}/contact`, label: t("contact") },
     ],
-    [locale, t]
+    [locale, t],
   );
 
   const allLinks = useMemo(() => [...leftLinks, ...rightLinks], [leftLinks, rightLinks]);
 
   return (
     <header
+      suppressHydrationWarning
       className={`fixed top-0 left-0 right-0 z-50 border-b border-gray-700 backdrop-blur-sm font-franklin transition-colors duration-300 ${
         scrolled ? "bg-black/95 shadow-md" : "bg-black/80"
       }`}
     >
       <nav
-        className="flex items-center justify-between px-6 py-2 relative"
         role="navigation"
-        aria-label="Navegación principal"
+        aria-label={t("home")}
+        className="flex items-center justify-between px-6 py-2 relative"
+        suppressHydrationWarning
       >
-        {/* BOTÓN HAMBURGUESA (Mobile) */}
+        {/* 🍔 Menú móvil */}
         <button
           type="button"
-          className="md:hidden text-white absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-lg hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30"
-          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-white absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30"
+          onClick={() => setMenuOpen((prev) => !prev)}
           aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={menuOpen ? "true" : "false"}
+          aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
-        {/* LINKS IZQUIERDA (Desktop) */}
+        {/* 🔗 Links izquierda */}
         <div className="hidden md:flex space-x-6 text-xs uppercase">
           {leftLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:underline"
+              onClick={handleLinkClick}
+              className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 rounded-sm"
             >
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* LOGO CENTRAL */}
+        {/* 🐊 Logo */}
         <div className="mx-auto relative">
-          <Link
-            href={`/${locale}`}
-            aria-label="Ir al inicio No Pain"
-            className="inline-block focus:outline-none focus:ring-2 focus:ring-white/30 rounded-full"
-          >
+          <Link href={`/${locale}`} aria-label="Inicio No Pain">
             <motion.div
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -123,19 +120,21 @@ export default function Header({ locale }: { locale: string }) {
                 height={90}
                 className="drop-shadow-lg select-none"
                 loading="lazy"
+                style={{ color: "transparent" }}
               />
             </motion.div>
           </Link>
           <audio ref={audioRef} src="/greesound.mp3" preload="none" aria-hidden="true" />
         </div>
 
-        {/* LINKS DERECHA (Desktop) */}
+        {/* 🔗 Links derecha */}
         <div className="hidden md:flex items-center space-x-5 text-xs uppercase">
           {rightLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:underline"
+              onClick={handleLinkClick}
+              className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 rounded-sm"
             >
               {link.label}
             </Link>
@@ -143,12 +142,14 @@ export default function Header({ locale }: { locale: string }) {
         </div>
       </nav>
 
-      {/* IDIOMA */}
-      <div className="hidden md:flex justify-center py-0 bg-black">
-        <LanguageSwitcher small />
+      {/* 🌐 Selector idioma (envuelto en Suspense) */}
+      <div className="hidden md:flex justify-end pr-8 bg-black translate-y-[8px]" suppressHydrationWarning>
+        <Suspense fallback={null}>
+          <LanguageSwitcher small />
+        </Suspense>
       </div>
 
-      {/* MENÚ MOBILE */}
+      {/* 📱 Menú móvil */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -158,33 +159,34 @@ export default function Header({ locale }: { locale: string }) {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
             className="md:hidden bg-black border-t border-gray-700 overflow-hidden"
-            role="menu"
-            aria-label="Menú de navegación móvil"
+            suppressHydrationWarning
           >
             <div className="flex flex-col space-y-4 px-10 py-6 text-sm uppercase">
               {allLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  role="menuitem"
-                  className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:underline"
                   onClick={handleLinkClick}
+                  className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 rounded-sm"
                 >
                   {link.label}
                 </Link>
               ))}
-
-              {/* Idioma mobile */}
-              <div className="flex flex-col items-center pt-4 border-t border-gray-700 space-y-3">
-                <LanguageSwitcher small />
+              <div className="flex flex-col items-center pt-4 border-t border-gray-700">
+                <Suspense fallback={null}>
+                  <LanguageSwitcher small />
+                </Suspense>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* 🟣 Badge Monumby optimizado */}
-      <div className="fixed top-24 right-6 z-[9999] pointer-events-auto animate-bounce-slow">
+      {/* 🪶 Badge Monumby */}
+      <div
+        className="fixed top-[105px] left-6 z-[9999] pointer-events-auto animate-bounce-slow"
+        suppressHydrationWarning
+      >
         <a
           href="https://monumbycom.godaddysites.com/"
           target="_blank"
@@ -192,20 +194,18 @@ export default function Header({ locale }: { locale: string }) {
           aria-label="Verificado por Monumby"
           className="block hover:scale-110 transition-transform duration-300"
         >
-      <Image
-  src="/sailedited.webp"
-  alt="Sello de verificación Monumby"
-  width={90}
-  height={90}
-  unoptimized
-  loading="lazy"
-  className="drop-shadow-2xl rotate-6 mt-2 translate-y-[-20px]"
-/>
-
+          <Image
+            src="/sailedited.webp"
+            alt="Sello de verificación Monumby"
+            width={90}
+            height={90}
+            unoptimized
+            className="drop-shadow-2xl rotate-6 mt-2 translate-y-[-20px]"
+            loading="lazy"
+            style={{ color: "transparent" }}
+          />
         </a>
       </div>
     </header>
   );
 }
-
-export const revalidate = 3600; // 1 hora

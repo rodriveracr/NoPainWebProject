@@ -82,4 +82,3 @@ export default async function MonumbyPage({
   );
 }
 export const revalidate = 604800; // 🕒 7 días
-

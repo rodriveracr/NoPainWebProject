@@ -52,7 +52,7 @@ async function sendBrevoEmail(
   fromEmail: string,
   toEmail: string,
   subject: string,
-  html: string
+  html: string,
 ) {
   const url = "https://api.brevo.com/v3/smtp/email";
   const apiKey = String(process.env.BREVO_API_KEY || "");
@@ -65,7 +65,11 @@ async function sendBrevoEmail(
   };
 
   if (!apiKey) {
-    return { ok: false, status: 401, body: { message: "Missing BREVO_API_KEY" } };
+    return {
+      ok: false,
+      status: 401,
+      body: { message: "Missing BREVO_API_KEY" },
+    };
   }
 
   try {
@@ -97,21 +101,30 @@ async function sendBrevoEmail(
 export async function POST(req: Request) {
   const reqId = makeRequestId();
   try {
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
     // 🚫 Rate limit por IP
     if (rateLimit(ip)) {
       console.warn(`[${now()}] [${reqId}] 🚫 Rate limit exceeded for ${ip}`);
-      return NextResponse.json({ error: "Too many requests. Try again later." }, { status: 429 });
+      return NextResponse.json(
+        { error: "Too many requests. Try again later." },
+        { status: 429 },
+      );
     }
 
     // leer el body como texto
     const raw = await req.text().catch(() => "");
-    console.log(`[${now()}] [${reqId}] 📩 RAW body length: ${raw?.length ?? 0}`);
+    console.log(
+      `[${now()}] [${reqId}] 📩 RAW body length: ${raw?.length ?? 0}`,
+    );
 
     if (!raw || raw.trim() === "") {
       console.log(`[${now()}] [${reqId}] ⚠️ Body vacío recibido.`);
-      return NextResponse.json({ error: "Body vacío o inválido" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Body vacío o inválido" },
+        { status: 400 },
+      );
     }
 
     // parsear JSON
@@ -124,10 +137,11 @@ export async function POST(req: Request) {
     }
 
     const { nombre, email, mensaje, newsletter, website } = body;
-    console.log(
-      `[${now()}] [${reqId}] 📩 /api/contact received:`,
-      { nombre, email: email ? "****" : undefined, mensaje: mensaje ? `(${mensaje.length} chars)` : undefined }
-    );
+    console.log(`[${now()}] [${reqId}] 📩 /api/contact received:`, {
+      nombre,
+      email: email ? "****" : undefined,
+      mensaje: mensaje ? `(${mensaje.length} chars)` : undefined,
+    });
 
     // honeypot
     if (website) {
@@ -142,9 +156,16 @@ export async function POST(req: Request) {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email) || mensaje.length > 1000 || nombre.length > 100) {
+    if (
+      !emailRegex.test(email) ||
+      mensaje.length > 1000 ||
+      nombre.length > 100
+    ) {
       console.log(`[${now()}] [${reqId}] ⚠️ Validación fallida`);
-      return NextResponse.json({ error: "Formato de datos inválido" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Formato de datos inválido" },
+        { status: 400 },
+      );
     }
 
     // Sanitizar
@@ -153,7 +174,9 @@ export async function POST(req: Request) {
     const safeMensaje = escapeHtml(mensaje);
     const safeEmailLog = safeEmail.replace(/(.{2}).+(@.*)/, "$1***$2");
 
-    const FROM_EMAIL = String(process.env.CONTACT_EMAIL || "customercare@nopainnumbing.net");
+    const FROM_EMAIL = String(
+      process.env.CONTACT_EMAIL || "customercare@nopainnumbing.net",
+    );
     const CONTACT_EMAIL = FROM_EMAIL;
 
     const supportHtml = `
@@ -165,18 +188,37 @@ export async function POST(req: Request) {
     `;
 
     console.log(`[${now()}] [${reqId}] ⏳ Enviando email soporte a Brevo...`);
-    const supportRes = await sendBrevoEmail("No Pain Contact", FROM_EMAIL, CONTACT_EMAIL, `📩 Nuevo mensaje - ${safeNombre}`, supportHtml);
-    console.log(`[${now()}] [${reqId}] 📨 Respuesta Brevo (soporte):`, supportRes);
+    const supportRes = await sendBrevoEmail(
+      "No Pain Contact",
+      FROM_EMAIL,
+      CONTACT_EMAIL,
+      `📩 Nuevo mensaje - ${safeNombre}`,
+      supportHtml,
+    );
+    console.log(
+      `[${now()}] [${reqId}] 📨 Respuesta Brevo (soporte):`,
+      supportRes,
+    );
 
     let clientRes: any = null;
     if (supportRes && supportRes.ok) {
-      console.log(`[${now()}] [${reqId}] ⏳ Enviando confirmación al cliente (${safeEmailLog})...`);
+      console.log(
+        `[${now()}] [${reqId}] ⏳ Enviando confirmación al cliente (${safeEmailLog})...`,
+      );
       const clientHtml = `<p>Hola ${safeNombre},</p>
         <p>Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos lo antes posible.</p>
         <br/><p>— Equipo No Pain</p>`;
-      clientRes = await sendBrevoEmail("No Pain Team", FROM_EMAIL, safeEmail, "✅ Hemos recibido tu mensaje", clientHtml);
+      clientRes = await sendBrevoEmail(
+        "No Pain Team",
+        FROM_EMAIL,
+        safeEmail,
+        "✅ Hemos recibido tu mensaje",
+        clientHtml,
+      );
     } else {
-      console.warn(`[${now()}] [${reqId}] ⚠️ Soporte no aceptado por Brevo, omitida confirmación cliente.`);
+      console.warn(
+        `[${now()}] [${reqId}] ⚠️ Soporte no aceptado por Brevo, omitida confirmación cliente.`,
+      );
     }
 
     // newsletter
@@ -204,7 +246,10 @@ export async function POST(req: Request) {
         } catch {
           newsletterRes = text;
         }
-        console.log(`[${now()}] [${reqId}] 📨 Respuesta newsletter:`, contactsRes.status);
+        console.log(
+          `[${now()}] [${reqId}] 📨 Respuesta newsletter:`,
+          contactsRes.status,
+        );
       } catch (err) {
         console.error(`[${now()}] [${reqId}] ❌ Error newsletter:`, err);
       }
@@ -221,7 +266,10 @@ export async function POST(req: Request) {
       newsletter: newsletterRes,
     });
 
-    response.headers.set("Access-Control-Allow-Origin", "https://www.nopainnumbing.net");
+    response.headers.set(
+      "Access-Control-Allow-Origin",
+      "https://www.nopainnumbing.net",
+    );
     response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
     response.headers.set("Access-Control-Allow-Headers", "Content-Type");
     response.headers.set("Cache-Control", "no-store, max-age=0");
@@ -229,14 +277,20 @@ export async function POST(req: Request) {
     return response;
   } catch (error) {
     console.error(`[${now()}] [${reqId}] ❌ Error en /api/contact:`, error);
-    return NextResponse.json({ error: "Error en el servidor" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error en el servidor" },
+      { status: 500 },
+    );
   }
 }
 
 // --- HANDLER OPTIONS (preflight CORS) ---
 export async function OPTIONS() {
   const res = NextResponse.json({ ok: true });
-  res.headers.set("Access-Control-Allow-Origin", "https://www.nopainnumbing.net");
+  res.headers.set(
+    "Access-Control-Allow-Origin",
+    "https://www.nopainnumbing.net",
+  );
   res.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.headers.set("Access-Control-Allow-Headers", "Content-Type");
   return res;

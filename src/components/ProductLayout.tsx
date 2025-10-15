@@ -24,13 +24,12 @@ export default function ProductLayout({
     <main
       className={`relative text-white font-franklin overflow-hidden bg-cover bg-center ${backgroundClass}`}
     >
-      {/* 🔲 Overlay oscuro */}
-      <div className="absolute inset-0 bg-black/80 z-0" />
+      {/* 🔲 Overlay oscuro (ajustado a 60% de opacidad para que se vea el fondo) */}
+      <div className="absolute inset-0 bg-black/60 z-0" />
 
       {/* 🧩 Contenido principal */}
       <div className="relative z-10 pt-36 pb-[20vh] px-6 max-w-4xl mx-auto text-center">
-
-        {/* 📸 Imagen del producto (bajada para evitar superposición con header) */}
+        {/* 📸 Imagen del producto */}
         <div className="flex justify-center mb-10 mt-20 md:mt-28">
           <Image
             src={imageSrc}
@@ -42,11 +41,13 @@ export default function ProductLayout({
           />
         </div>
 
-        {/* 🔤 Título y tagline */}
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide">
+        {/* 🔤 Título principal */}
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.25)]">
           {title}
         </h1>
-        <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed">
+
+        {/* ✨ Tagline (eslogan principal con estilo fijo y limpio) */}
+        <p className="tagline text-[1.5rem] leading-snug text-white mb-10 max-w-3xl mx-auto font-medium tracking-wide">
           {tagline}
         </p>
 

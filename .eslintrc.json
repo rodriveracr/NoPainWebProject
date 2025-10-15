@@ -1,0 +1,6 @@
+//src: eslint.config.js
+{
+  "extends": ["next/core-web-vitals"],
+  "ignorePatterns": ["node_modules", ".next", "dist"],
+  "rules": {}
+}

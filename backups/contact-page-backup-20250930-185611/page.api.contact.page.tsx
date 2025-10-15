@@ -21,7 +21,7 @@ export default function Contact() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, type, value, checked } = e.target as HTMLInputElement;
     setFormData({
@@ -39,7 +39,10 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
       if (res.ok) {
-        alert(t("submitMessage") || "Thank you for contacting us. We will respond soon.");
+        alert(
+          t("submitMessage") ||
+            "Thank you for contacting us. We will respond soon.",
+        );
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
       } else {
         alert("Error sending message. Please try again.");

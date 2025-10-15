@@ -87,4 +87,3 @@ export async function generateStaticParams() {
   return [{ locale: "es" }, { locale: "en" }];
 }
 export const revalidate = 604800; // 🕒 7 días
-

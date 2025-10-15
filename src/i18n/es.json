@@ -20,13 +20,13 @@
     "subtitle": "Crema anestésica premium diseñada para tatuajes, depilación, tratamientos láser y más."
   },
   "About": {
-  "intro": "En No Pain desarrollamos fórmulas avanzadas de anestesia tópica diseñadas especialmente para el proceso del tatuaje. Nuestras cremas cuentan con una alta concentración de activos anestésicos, que actúan bloqueando los estímulos nerviosos y reduciendo parcial o totalmente la sensibilidad de la piel.",
-  "resultTitle": "EL RESULTADO:",
-  "result1": "Menos dolor y molestias durante la sesión de tatuaje y maquillaje permanente.",
-  "result2": "Sin alteraciones en la cicatrización natural de la piel.",
-  "result3": "Respeto absoluto por la tonalidad y fijación de los pigmentos.",
-  "closing": "Gracias a la tecnología de última generación, ofrecemos una experiencia de tatuaje más cómoda, segura y profesional, sin comprometer la calidad artística ni el resultado final en tu piel."
-},
+    "intro": "En No Pain desarrollamos fórmulas avanzadas de anestesia tópica diseñadas especialmente para el proceso del tatuaje. Nuestras cremas cuentan con una alta concentración de activos anestésicos, que actúan bloqueando los estímulos nerviosos y reduciendo parcial o totalmente la sensibilidad de la piel.",
+    "resultTitle": "EL RESULTADO:",
+    "result1": "Menos dolor y molestias durante la sesión de tatuaje y maquillaje permanente.",
+    "result2": "Sin alteraciones en la cicatrización natural de la piel.",
+    "result3": "Respeto absoluto por la tonalidad y fijación de los pigmentos.",
+    "closing": "Gracias a la tecnología de última generación, ofrecemos una experiencia de tatuaje más cómoda, segura y profesional, sin comprometer la calidad artística ni el resultado final en tu piel."
+  },
 
   "products": {
     "title": "NUESTROS PRODUCTOS",
@@ -121,11 +121,6 @@
     "noPainNumbingCreamTip4": "Realizar una prueba en una pequeña área antes de la aplicación completa para asegurar tolerancia.",
     "noPainNumbingCreamTip5": "Mantener fuera del alcance de los niños y almacenar en un lugar fresco y seco."
   },
-
-
-
-
-
 
   "Gallery": {
     "title": "GALERÍA",
@@ -222,6 +217,7 @@
     "nicaragua": "NICARAGUA",
     "venezuela": "VENEZUELA",
     "mexico": "MÉXICO",
+    "panama": "PANAMÁ",
     "usa": "USA",
     "europe": "EUROPA",
     "spain": "ESPAÑA",
@@ -234,17 +230,17 @@
     "distributorMailBody": "Hola No Pain,\n\nMi nombre es: [tu nombre]\nMi empresa es: [nombre de la empresa]\nMi país es: [tu país]\nMi WhatsApp o teléfono es: [número]\n\nQuisiera recibir información para ser distribuidor autorizado.\n\nGracias."
   },
   "popup": {
-  "munumbyTeaserTitle": "Munumby · No Pain",
-  "munumbyTeaserDesc": "Próximamente. Línea premium de cuidado profesional.",
-  "munumbyTeaserDescAlt": "Próximamente. Investigación, precisión y resultados.",
-  "ctaPrimary": "Conocer Munumby",
-  "ctaSecondary": "Recibir novedades",
+    "munumbyTeaserTitle": "Munumby · No Pain",
+    "munumbyTeaserDesc": "Próximamente. Línea premium de cuidado profesional.",
+    "munumbyTeaserDescAlt": "Próximamente. Investigación, precisión y resultados.",
+    "ctaPrimary": "Conocer Munumby",
+    "ctaSecondary": "Recibir novedades",
 
-  "greenSoapTitle": "Green Soap – Limpieza profesional",
-  "greenSoapDesc": "Jabón suave para tatuajes y PMU. Limpia sin irritar.",
-  "cta": "Ver más",
-  "remindLater": "Recordármelo luego",
-  "disclaimer": "Puedes cerrar este mensaje cuando quieras."
+    "greenSoapTitle": "Green Soap – Limpieza profesional",
+    "greenSoapDesc": "Jabón suave para tatuajes y PMU. Limpia sin irritar.",
+    "cta": "Ver más",
+    "remindLater": "Recordármelo luego",
+    "disclaimer": "Puedes cerrar este mensaje cuando quieras."
   },
   "Footer": {
     "linksTitle": "ENLACES",
@@ -257,7 +253,11 @@
     "subscribe": "SUSCRIBIRSE",
     "newsletterSuccess": "✅ Gracias — suscripción correcta",
     "newsletterError": "❌ No se pudo completar la suscripción. Intenta nuevamente.",
-    "rights": "Todos los derechos reservados."
+    "rights": "Todos los derechos reservados.",
+
+    "socialLabel": "Redes sociales de No Pain",
+    "madeWith": "Hecho con",
+    "inCostaRica": "en Costa Rica"
   },
   "Monumby": {
     "title": "Mother of Numby",

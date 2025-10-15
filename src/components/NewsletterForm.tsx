@@ -35,13 +35,19 @@ export default function NewsletterForm({ locale = "es" }: { locale?: string }) {
       if (res.ok) {
         setStatus("ok");
         setEmail("");
-        setMessage(t("newsletterSuccess") ?? "✅ Gracias — suscripción correcta");
+        setMessage(
+          t("newsletterSuccess") ?? "✅ Gracias — suscripción correcta",
+        );
         setTimeout(() => {
           setStatus(null);
           setMessage(null);
         }, 3000);
       } else {
-        const err = body?.error || body?.message || JSON.stringify(body) || "Error al suscribir";
+        const err =
+          body?.error ||
+          body?.message ||
+          JSON.stringify(body) ||
+          "Error al suscribir";
         setStatus("error");
         setMessage(String(err));
         setTimeout(() => {
@@ -61,7 +67,11 @@ export default function NewsletterForm({ locale = "es" }: { locale?: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3" noValidate>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col sm:flex-row items-center gap-3"
+      noValidate
+    >
       <input
         type="email"
         placeholder={t("newsletterPlaceholder")}

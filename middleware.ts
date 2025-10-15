@@ -1,17 +1,15 @@
-//src/middleware.ts
-import createMiddleware from 'next-intl/middleware';
+// =====================================================
+// 🌍 src/middleware.ts — Detección automática de idioma
+// =====================================================
+import createMiddleware from "next-intl/middleware";
 
 export default createMiddleware({
-  // Idiomas soportados
-  locales: ['es', 'en'],
-
-  // Idioma por defecto → inglés
-  defaultLocale: 'en',
-
-  // Siempre mostrar prefijo de idioma (/es o /en)
-  localePrefix: 'always'
+  locales: ["en", "es"],
+  defaultLocale: "en",
+  localePrefix: "as-needed",
+  localeDetection: true,
 });
 
 export const config = {
-  matcher: ['/', '/(es|en)/:path*']
+  matcher: ["/", "/(en|es)/:path*"],
 };

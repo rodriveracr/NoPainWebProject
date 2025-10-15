@@ -6,7 +6,6 @@ import Image from "next/image";
 import { X } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-
 const STORAGE_KEYS = {
   sessionClosed: (loc: string) => `popupClosed-${loc}`,
   seenAt: (loc: string) => `popupSeenAt-${loc}`,
@@ -32,7 +31,9 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
   const [current, setCurrent] = useState(0);
 
   const qs =
-    typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search)
+      : null;
   const debugAlways = qs?.get("debugPopup") === "1";
   const resetFlag = qs?.get("resetPopup") === "1";
 
@@ -46,11 +47,14 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
         title: "GREEN SOAP PREMIUM",
         body: t(
           "Jabón vegetal artesanal ideal para estudios, piercings y cuidado posterior. Limpia, calma e hidrata sin afectar la tinta ni la piel.",
-          "Handcrafted plant-based soap ideal for studios, piercings, and aftercare. Cleans, soothes, and hydrates without affecting ink or skin."
+          "Handcrafted plant-based soap ideal for studios, piercings, and aftercare. Cleans, soothes, and hydrates without affecting ink or skin.",
         ),
         cta: t("Ver más", "See details"),
         href: `/${locale}/green-soap`,
-        sub: t("Disponible para distribuidores.", "Available for distributors."),
+        sub: t(
+          "Disponible para distribuidores.",
+          "Available for distributors.",
+        ),
       },
       {
         key: "monumby",
@@ -58,7 +62,7 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
         title: "MONUMBY EXPERIENCE",
         body: t(
           "La nueva línea profesional de anestesia y productos certificados para artistas. Una experiencia diseñada para precisión, confianza y resultados premium.",
-          "The new professional line of certified anesthesia and care products for artists. An experience built for precision, trust, and premium results."
+          "The new professional line of certified anesthesia and care products for artists. An experience built for precision, trust, and premium results.",
         ),
         cta: t("Conoce más", "Learn more"),
         href: `/${locale}/monumby`,
@@ -106,8 +110,12 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
     if (hasTriggered) return;
 
     const now = Date.now();
-    const seenAt = Number(localStorage.getItem(STORAGE_KEYS.seenAt(locale)) || 0);
-    const snoozeUntil = Number(localStorage.getItem(STORAGE_KEYS.snoozeUntil(locale)) || 0);
+    const seenAt = Number(
+      localStorage.getItem(STORAGE_KEYS.seenAt(locale)) || 0,
+    );
+    const snoozeUntil = Number(
+      localStorage.getItem(STORAGE_KEYS.snoozeUntil(locale)) || 0,
+    );
     const cooldownMs = COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
 
     if (sessionStorage.getItem(STORAGE_KEYS.sessionClosed(locale))) return;
@@ -157,12 +165,10 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
             <X size={18} />
           </button>
           {/* Botones de idioma debajo del botón X */}
-<div className="absolute top-14 right-3">
-  <LanguageSwitcher small />
-</div>
-
+          <div className="absolute top-14 right-3">
+            <LanguageSwitcher small />
+          </div>
         </div>
-        
 
         <div className="px-1 pt-1 pb-1">
           <h2 className="text-2xl sm:text-3xl font-black mb-4 text-center">
@@ -205,7 +211,9 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
           </div>
 
           {slide.sub && (
-            <p className="mt-3 text-xs text-neutral-400 text-center">{slide.sub}</p>
+            <p className="mt-3 text-xs text-neutral-400 text-center">
+              {slide.sub}
+            </p>
           )}
 
           {/* Dots */}
@@ -215,7 +223,9 @@ export default function Popup({ locale = "es" }: { locale?: string }) {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-2 rounded-full transition-all ${
-                  i === current ? "w-8 bg-white" : "w-3 bg-white/50 hover:bg-white/80"
+                  i === current
+                    ? "w-8 bg-white"
+                    : "w-3 bg-white/50 hover:bg-white/80"
                 }`}
                 title={`Slide ${i + 1}`}
               />

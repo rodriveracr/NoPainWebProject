@@ -1,15 +1,15 @@
-// src/i18n/request.ts
-import {getRequestConfig} from 'next-intl/server';
+import { getRequestConfig } from "next-intl/server";
 
-export default getRequestConfig(async ({locale}) => {
-  const supported = ['es', 'en'] as const;
-  const safeLocale: 'es' | 'en' =
-    supported.includes(locale as 'es' | 'en') ? (locale as 'es' | 'en') : 'es';
+export default getRequestConfig(async ({ locale }) => {
+  const supportedLocales = ["en", "es"] as const;
+
+  const safeLocale = supportedLocales.includes(
+    locale as (typeof supportedLocales)[number],
+  )
+    ? (locale as (typeof supportedLocales)[number])
+    : "en";
 
   const messages = (await import(`./${safeLocale}.json`)).default;
 
-  return {
-    locale: safeLocale,
-    messages
-  };
+  return { locale: safeLocale, messages };
 });

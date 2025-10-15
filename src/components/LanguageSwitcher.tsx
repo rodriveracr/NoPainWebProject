@@ -1,7 +1,10 @@
-// src/components/LanguageSwitcher.tsx
+// ===========================================================
+// 🌐 src/components/LanguageSwitcher.tsx — versión estable y sincronizada (Next.js 15.5.4)
+// ===========================================================
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type Props = { small?: boolean };
@@ -10,109 +13,92 @@ export default function LanguageSwitcher({ small }: Props) {
   const router = useRouter();
   const pathnameFromHook = usePathname() || "/";
   const searchParams = useSearchParams();
-  const query = searchParams && searchParams.toString() !== "" ? `?${searchParams.toString()}` : "";
 
-  // Preferir window.location.pathname cuando esté disponible (más fiel a lo que ve el navegador)
-  const getCurrentPath = () =>
-    typeof window !== "undefined" ? window.location.pathname : pathnameFromHook;
+  const query =
+    searchParams && searchParams.toString() !== ""
+      ? `?${searchParams.toString()}`
+      : "";
 
-  const buildPathWithLang = (lang: string) => {
-    const current = getCurrentPath();
-    // Reemplaza /es o /en al inicio, o añade /lang delante si no existe
-    if (/^\/(es|en)(\/|$)/.test(current)) {
-      return current.replace(/^\/(es|en)/, `/${lang}`) + query;
+  const [currentPath, setCurrentPath] = useState(pathnameFromHook);
+
+  // ✅ Se sincroniza solo en cliente (previene diferencia SSR/CSR)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentPath(window.location.pathname);
     }
-    return (current === "/" ? `/${lang}` : `/${lang}${current}`) + query;
+  }, []);
+
+  // 🔗 Construcción dinámica del path con idioma
+  const buildPathWithLang = (lang: string) => {
+    if (/^\/(es|en)(\/|$)/.test(currentPath)) {
+      return currentPath.replace(/^\/(es|en)/, `/${lang}`) + query;
+    }
+    return (
+      (currentPath === "/" ? `/${lang}` : `/${lang}${currentPath}`) + query
+    );
   };
 
-  const changeLanguage = (lang: string, event?: React.MouseEvent<HTMLAnchorElement>) => {
-    if (event) event.preventDefault(); // porque usamos <a>
-
+  // 🔄 Cambio de idioma controlado
+  const changeLanguage = (
+    lang: string,
+    e?: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    e?.preventDefault();
     const dest = buildPathWithLang(lang);
-    console.log("[LanguageSwitcher] click", { currentPath: getCurrentPath(), dest, lang });
-
-    // actualizar <html lang> para accesibilidad inmediata
-    try {
-      if (typeof document !== "undefined") document.documentElement.lang = lang;
-    } catch {}
-
-    // Intentar navegación SPA
     try {
       router.replace(dest);
-    } catch (e) {
-      console.warn("[LanguageSwitcher] router.replace failed:", e);
-      // fallback a navegación completa
+    } catch {
       window.location.assign(dest);
-      return;
     }
-
-    // Fallback forzado si SPA no aplica (ej. router bloqueado)
-    const fallback = setTimeout(() => {
-      if (typeof window !== "undefined" && window.location.pathname !== dest.split("?")[0]) {
-        console.warn("[LanguageSwitcher] SPA navigation didn't change location — forcing full reload to:", dest);
-        window.location.assign(dest);
-      }
-    }, 300);
-
-    // si hay un popstate que indica navegación, limpiar timeout
-    const onPop = () => {
-      clearTimeout(fallback);
-      window.removeEventListener("popstate", onPop);
-    };
-    window.addEventListener("popstate", onPop);
   };
 
-  const current = getCurrentPath();
-  const active = (lang: string) => /^\/(es|en)(\/|$)/.test(current) ? current.split("/")[1] === lang : false;
+  // 🧭 Determina idioma activo
+  const active = (lang: string) =>
+    /^\/(es|en)(\/|$)/.test(currentPath)
+      ? currentPath.split("/")[1] === lang
+      : false;
 
-  const baseClasses = `rounded font-bold transition ${small ? "px-2 py-1 text-xs" : "px-3 py-2 text-sm"}`;
+  const baseClasses = `rounded font-bold transition ${
+    small ? "px-2 py-1 text-xs" : "px-3 py-2 text-sm"
+  }`;
 
-  const destEs = buildPathWithLang("es");
-  const destEn = buildPathWithLang("en");
-
+  // ===========================================================
+  // 🏁 Render
+  // ===========================================================
   return (
-    <div className={`flex justify-center space-x-2 ${small ? "text-xs" : "text-sm"}`}>
-      {active("es") ? (
+    <div
+      className={`flex justify-center items-center space-x-3 ${
+        small ? "text-xs" : "text-sm"
+      }`}
+      suppressHydrationWarning
+    >
+      {[
+        { code: "es", alt: "Español", flag: "/flags/spain.png" },
+        { code: "en", alt: "English", flag: "/flags/usa.png" },
+      ].map(({ code, alt, flag }) => (
         <a
-          href={destEs}
-          aria-current="page"
-          aria-label="Página en español (actual)"
-          onClick={(e) => changeLanguage("es", e)}
-          className={`${baseClasses} bg-pink-600 text-white inline-block text-center`}
+          key={code}
+          href={buildPathWithLang(code)}
+          aria-current={active(code) ? "page" : undefined}
+          aria-label={alt}
+          onClick={(e) => changeLanguage(code, e)}
+          className={`${baseClasses} inline-flex items-center gap-1 text-center ${
+            active(code)
+              ? "bg-pink-600 text-white"
+              : "bg-gray-700 text-white hover:bg-gray-600"
+          }`}
         >
-          ES
+          <Image
+            src={flag}
+            alt={alt}
+            width={18}
+            height={18}
+            style={{ height: "auto" }} // ✅ evita el warning de proporción
+            loading="lazy"
+          />
+          {code.toUpperCase()}
         </a>
-      ) : (
-        <a
-          href={destEs}
-          aria-label="Cambiar a español"
-          onClick={(e) => changeLanguage("es", e)}
-          className={`${baseClasses} bg-gray-700 text-white inline-block text-center`}
-        >
-          ES
-        </a>
-      )}
-
-      {active("en") ? (
-        <a
-          href={destEn}
-          aria-current="page"
-          aria-label="Current page in English"
-          onClick={(e) => changeLanguage("en", e)}
-          className={`${baseClasses} bg-pink-600 text-white inline-block text-center`}
-        >
-          EN
-        </a>
-      ) : (
-        <a
-          href={destEn}
-          aria-label="Switch to English"
-          onClick={(e) => changeLanguage("en", e)}
-          className={`${baseClasses} bg-gray-700 text-white inline-block text-center`}
-        >
-          EN
-        </a>
-      )}
+      ))}
     </div>
   );
 }

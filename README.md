@@ -10,15 +10,17 @@ Incluye crema anestésica, tónicos, jabones y soluciones diseñadas con tecnolo
 🌐 **Demo en vivo:** [Ver en Vercel](https://no-pain-web-project-26s6.vercel.app/)
 
 ### ✨ Características
-- Crema anestésica premium para tatuajes y PMU.  
-- Productos diseñados para artistas profesionales.  
-- Distribuidores oficiales en América Latina, EE.UU. y Europa.  
-- Sitio bilingüe: Español / Inglés.  
-- Galería multimedia con soporte de video (Cloudinary).  
-- Diseño minimalista y elegante (Next.js + TailwindCSS).  
+
+- Crema anestésica premium para tatuajes y PMU.
+- Productos diseñados para artistas profesionales.
+- Distribuidores oficiales en América Latina, EE.UU. y Europa.
+- Sitio bilingüe: Español / Inglés.
+- Galería multimedia con soporte de video (Cloudinary).
+- Diseño minimalista y elegante (Next.js + TailwindCSS).
 
 ### 🚀 Instalación local
-```bash
+
+````bash
 # Clonar el repositorio
 git clone https://github.com/rodriveracr/NoPainWebProject.git
 
@@ -84,9 +86,10 @@ Copy code
 
 ---
 
-👉 Este archivo lo guardas como `README.md` en la raíz de tu proyecto y luego:  
+👉 Este archivo lo guardas como `README.md` en la raíz de tu proyecto y luego:
 
 ```bash
 git add README.md
 git commit -m "Add bilingual README"
 git push origin main
+````
