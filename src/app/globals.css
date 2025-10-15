@@ -602,3 +602,18 @@ body:has(.photo-modal) {
     @apply hidden;
   }
 }
+/* 📱 Ajustes extra para menú móvil */
+@media (max-width: 480px) {
+  #mobile-menu {
+    padding-bottom: 1rem;
+  }
+
+  #mobile-menu a {
+    font-size: 0.85rem;
+  }
+
+  #mobile-menu img {
+    width: 14px !important;
+    height: auto !important;
+  }
+}

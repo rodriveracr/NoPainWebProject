@@ -150,37 +150,43 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
       </div>
 
       {/* 📱 Menú móvil */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden bg-black border-t border-gray-700 overflow-hidden"
-            suppressHydrationWarning
+    {/* 📱 Menú móvil mejorado para pantallas pequeñas */}
+<AnimatePresence>
+  {menuOpen && (
+    <motion.div
+      id="mobile-menu"
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "50vh" }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.25 }}
+className="md:hidden bg-black border-t border-gray-700 overflow-y-auto max-h-[55vh] pb-10"
+      suppressHydrationWarning
+    >
+      <div className="flex flex-col space-y-3 px-6 py-5 text-sm uppercase">
+        {allLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={handleLinkClick}
+            className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 rounded-sm text-center"
           >
-            <div className="flex flex-col space-y-4 px-10 py-6 text-sm uppercase">
-              {allLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={handleLinkClick}
-                  className="text-white hover:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-white/30 rounded-sm"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="flex flex-col items-center pt-4 border-t border-gray-700">
-                <Suspense fallback={null}>
-                  <LanguageSwitcher small />
-                </Suspense>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {link.label}
+          </Link>
+        ))}
+
+        {/* 🌐 Selector de idioma — versión compacta */}
+        <div className="flex flex-col items-center pt-4 border-t border-gray-700">
+          <div className="scale-90 sm:scale-100">
+            <Suspense fallback={null}>
+              <LanguageSwitcher small />
+            </Suspense>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
 
       {/* 🪶 Badge Monumby */}
       <div
