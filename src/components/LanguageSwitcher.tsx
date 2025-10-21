@@ -59,7 +59,7 @@ export default function LanguageSwitcher({ small }: Props) {
       : false;
 
   const baseClasses = `rounded font-bold transition ${
-    small ? "px-2 py-1 text-xs" : "px-3 py-2 text-sm"
+    small ? "px-1 py 2 text-xs" : "px-1 py 2 text-sm"
   }`;
 
   // ===========================================================
@@ -82,7 +82,7 @@ export default function LanguageSwitcher({ small }: Props) {
           aria-current={active(code) ? "page" : undefined}
           aria-label={alt}
           onClick={(e) => changeLanguage(code, e)}
-          className={`${baseClasses} inline-flex items-center gap-1 text-center ${
+          className={`${baseClasses} inline-flex items-center gap 2 text-center ${
             active(code)
               ? "bg-pink-600 text-white"
               : "bg-gray-700 text-white hover:bg-gray-600"

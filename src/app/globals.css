@@ -344,52 +344,142 @@ h2.tagline,
 }
 
 /* ============================== */
-/* 🌄 Hero principal y fondos de productos */
+/* 🌄 Hero principal y fondos de productos (Versión ampliada +10%) */
 /* ============================== */
 
+/* 🏠 Landing principal */
 .hero-bg {
-  background-image: url("/4865jpg.webp");
-  background-size: cover;
-  background-position: center;
+  background-image: url("/Firefly 202510171414351.PNG");
+  background-size: 100%; /* Desktop */
+  background-position: top 100%; /* 🔼 sube / 🔽 baja */
   background-repeat: no-repeat;
-}
-.bg-nopaincream {
-  background-image: url("/No-Pain-1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.bg-numbing {
-  background-image: url("/numbingback.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.bg-xterinum {
-  background-image: url("/Xterinumb2.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.bg-wicann {
-  background-image: url("/wicannbg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #000;
+  min-height: 100dvh;
 }
 
-.bg-greensoap {
-  background-image: url("/Green-Soap1.jpg");
-  background-size: cover;
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  .hero-bg {
+    background-image: url("/nopaincreamadobe1.PNG");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+    min-height: 100dvh;
+  }
+}
+
+/* 📲 iPad / Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-bg {
+    background-image: url("/Firefly 202510171414351.PNG"); /* puedes usar otra imagen si querés */
+    background-size: 200%; /* 🔧 ajustá: 100–130% según lo que necesites */
+    background-position: top center; /* 🔼 sube / 🔽 baja */
+    background-repeat: no-repeat;
+    background-color: #000;
+    min-height: 100dvh;
+  }
+}
+
+/* 🧴 No Pain Numbing Cream */
+
+.bg-nopaincream {
+  background-image: url("/nopain789.png");
+  background-size: 150%;
+  background-position: bottom 50% center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  min-height: 100dvh;
+}
+
+
+@media (max-width: 768px) {
+  .bg-nopaincream {
+    background-image: url("/nopain789.png");
+    background-size: 275%;
+    background-position: bottom 50% center;
+    background-repeat: no-repeat;
+    background-color: #000;
+    min-height: 1dvh;
+  }
+}
+
+/* ⚡ Xteri Numb Spray */
+.bg-xterinum {
+  background-image: url("/aaaa.png");
+  background-size: 150%;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #000;
+  min-height: 100dvh;
 }
+
+@media (max-width: 768px) {
+  .bg-xterinum {
+    background-image: url("/aaaa.png");
+    background-size: 250%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+    min-height: 100dvh;
+  }
+}
+
+/* 🌸 Wicann Witch Hazel */
+.bg-wicann {
+  background-image: url("/bbbb.png");
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  min-height: 100dvh;
+}
+
+@media (max-width: 768px) {
+  .bg-wicann {
+    background-image: url("/bbbb.png");
+    background-size: 175%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+    min-height: 100dvh;
+  }
+}
+
+/* 💚 Green Soap */
+.bg-greensoap {
+  background-image: url("/99999.png");
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  min-height: 100dvh;
+}
+
+@media (max-width: 768px) {
+  .bg-greensoap {
+    background-image: url("/99999.png");
+    background-size: 175%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+    min-height: 100dvh;
+  }
+}
+
+
+
+
+/* 💎 Monumby (Premium Line) */
 .bg-monumby {
   background-image: url("/monumby-bg.webp");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #000;
+  min-height: 100dvh;
 }
+
 
 /* ============================== */
 /* 🖱️ Scrollbar personalizada */
@@ -603,7 +693,7 @@ body:has(.photo-modal) {
   }
 }
 /* 📱 Ajustes extra para menú móvil */
-@media (max-width: 480px) {
+@media (max-width: 1023px) {
   #mobile-menu {
     padding-bottom: 1rem;
   }
@@ -617,3 +707,53 @@ body:has(.photo-modal) {
     height: auto !important;
   }
 }
+/* 📱 LINEA FINAL*/
+/* 🔠 Ajuste fino de tipografía del header */
+
+
+
+/* 🎯 Ajuste del Hero en iPad / tablets (solo 769–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-image {
+    object-position: top center !important; /* 🔼 sube la imagen */
+    transform: translateY(20px); /* 🔽 baja la imagen si queda muy arriba */
+  }
+}
+
+/* 💎 Sello Monumby — Desktop / iPad */
+.global-sello {
+  position: fixed;
+  bottom: 6rem;           /* 🔽 más arriba si querés */
+  right: 2.5rem;          /* 🔼 más hacia el borde derecho */
+  width: 120px;           /* tamaño base */
+  height: auto;           /* mantiene proporción */
+  transform: rotate(3deg);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.global-sello:hover {
+  transform: rotate(0deg) scale(1.05);
+  opacity: 1;
+}
+
+/* ===========================
+   📱 SELLO MONUMBY — MOBILE (solo posición)
+   =========================== */
+@media (max-width: 640px) {
+  .global-sello {
+    bottom: 8rem !important; /* 🔼 sube / 🔽 baja en mobile */
+    right: 1rem !important;  /* 🔼 izquierda / derecha */
+    width: 100px !important; /* tamaño en mobile */
+    height: auto !important;
+  }
+}
+
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  header {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+

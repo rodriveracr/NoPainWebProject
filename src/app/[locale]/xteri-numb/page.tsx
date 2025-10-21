@@ -26,7 +26,7 @@ export default async function XteriNumbPage({
       <ProductLayout
         title={t("xteriNumb")}
         tagline={t("xteriNumbTagline")}
-        imageSrc="/_CZC3060.webp"
+        imageSrc="/Firefly20251017155918.png"
         imageAlt={t("xteriNumbAlt") || "Xteri-Numb anesthetic spray"}
         backgroundClass="bg-xterinum"
       >

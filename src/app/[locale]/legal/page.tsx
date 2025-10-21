@@ -29,59 +29,80 @@ export default async function LegalPage({
       <>
         <Header locale={locale} />
 
-        <main className="relative text-white min-h-screen font-franklin">
-          <div className="absolute inset-0 hero-bg" />
-          <div className="absolute inset-0 bg-black/80" />
+        <main className="relative text-white min-h-screen font-franklin overflow-hidden">
+          {/* 🔳 Fondo general con efecto glass */}
+          <div className="absolute inset-0 hero-bg bg-cover bg-center" />
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
-          <div className="relative z-10 py-24 px-6 max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold mb-10">{t("title")}</h1>
+          {/* ⚖️ Contenido legal */}
+<div className="relative z-10 px-6 sm:px-8 lg:px-12 max-w-5xl mx-auto mt-30 md:mt-30 lg:mt-34">
+            <h1 className="text-4xl md:text-5xl font-bold mb-12 tracking-wide text-center">
+              {t("title")}
+            </h1>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-2">
+            {/* 🌐 Secciones legales */}
+            <section className="mb-10 border-b border-white/10 pb-6">
+              <h2 className="text-2xl font-semibold mb-3 text-white/90">
                 {t("intellectualPropertyTitle")}
               </h2>
-              <p>{t("intellectualPropertyText")}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {t("intellectualPropertyText")}
+              </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-2">
+            <section className="mb-10 border-b border-white/10 pb-6">
+              <h2 className="text-2xl font-semibold mb-3 text-white/90">
                 {t("registrationTitle")}
               </h2>
-              <p>{t("registrationText")}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {t("registrationText")}
+              </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-2">
+            <section className="mb-10 border-b border-white/10 pb-6">
+              <h2 className="text-2xl font-semibold mb-3 text-white/90">
                 {t("internationalTitle")}
               </h2>
-              <p>{t("internationalText")}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {t("internationalText")}
+              </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-2">
+            <section className="mb-10 border-b border-white/10 pb-6">
+              <h2 className="text-2xl font-semibold mb-3 text-white/90">
                 {t("infractionsTitle")}
               </h2>
-              <p>{t("infractionsText")}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {t("infractionsText")}
+              </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-2">{t("termsTitle")}</h2>
-              <p>{t("termsText")}</p>
+            <section className="mb-10 border-b border-white/10 pb-6">
+              <h2 className="text-2xl font-semibold mb-3 text-white/90">
+                {t("termsTitle")}
+              </h2>
+              <p className="text-gray-300 leading-relaxed">
+                {t("termsText")}
+              </p>
             </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-2">
+            <section className="mb-10 border-b border-white/10 pb-6">
+              <h2 className="text-2xl font-semibold mb-3 text-white/90">
                 {t("privacyTitle")}
               </h2>
-              <p>{t("privacyText")}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {t("privacyText")}
+              </p>
             </section>
 
-            <p className="text-sm text-gray-400 mt-10">
+            {/* 📅 Fecha de última actualización */}
+            <p className="text-sm text-gray-400 mt-12 text-center">
               {t("lastUpdated")}: 2025
             </p>
           </div>
         </main>
 
+        
       </>
     </Suspense>
   );

@@ -28,7 +28,7 @@ export default async function FAQPage({
     >
       <>
         <Header locale={locale} />
-        <main className="relative text-white font-franklin min-h-screen">
+<main className="relative text-white font-franklin min-h-screen pt-0 md:pt-32">
           <div className="absolute inset-0 hero-bg" />
           <div className="absolute inset-0 bg-black/80" />
 

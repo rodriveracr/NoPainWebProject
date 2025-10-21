@@ -34,7 +34,7 @@ export default async function NoPainNumbingCream({
         <ProductLayout
           title={t("noPainNumbingCream")}
           tagline={t("noPainNumbingCreamTagline")}
-          imageSrc="/_czc3133.webp"
+          imageSrc="/Firefly 202510171414351.PNG"
           imageAlt={
             t("noPainNumbingCreamAlt") || "No Pain Numbing Cream product"
           }

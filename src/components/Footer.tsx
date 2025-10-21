@@ -3,14 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
-import NewsletterForm from "./NewsletterForm"; // asegúrate de tener este componente
+import NewsletterForm from "./NewsletterForm";
 import { getSlug, slugMap } from "@/utils/slugMap";
 
-/**
- * ✅ FOOTER — Estructura completa y ordenada
- * - 3 columnas: Redes / Enlaces / Newsletter
- * - Compatible con next-intl, Tailwind y accesibilidad
- */
 export default function Footer({ locale: localeProp }: { locale?: string }) {
   const fallbackLocale = useLocale();
   const locale = localeProp ?? fallbackLocale;
@@ -22,7 +17,7 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
       className="bg-black text-gray-300 py-12 px-6 border-t border-[#222] font-franklin"
     >
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-12">
-        {/* 🐊 LOGO + REDES SOCIALES */}
+        {/* 🐊 LOGO + REDES */}
         <div
           className="flex flex-col items-center sm:items-start space-y-4"
           aria-label={t("socialLabel") || "No Pain social media"}
@@ -65,26 +60,17 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-500 rounded-full transition"
+                className="hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-full transition"
               >
-                <Image
-                  src={icon}
-                  alt={label}
-                  width={24}
-                  height={24}
-                  loading="lazy"
-                />
+                <Image src={icon} alt={label} width={24} height={24} loading="lazy" />
               </a>
             ))}
           </div>
         </div>
 
         {/* 🔗 ENLACES */}
-        <nav aria-label="Enlaces del sitio" className="text-center sm:text-left">
-          <h3 className="font-semibold text-lg mb-3 text-white">
-            {t("linksTitle")}
-          </h3>
-
+        <nav aria-label="Site links" className="text-center sm:text-left">
+          <h3 className="font-semibold text-lg mb-3 text-white">{t("linksTitle")}</h3>
           <ul className="space-y-2 text-sm">
             {(
               [
@@ -92,10 +78,7 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
                 { href: "#proveedores", label: t("suppliers") },
                 { slug: "faq", label: t("faq") },
                 { slug: "legal", label: t("legal") },
-              ] as readonly (
-                | { slug: keyof typeof slugMap; label: string }
-                | { href: string; label: string }
-              )[]
+              ] as const
             ).map((item, i) => (
               <li key={i}>
                 <Link
@@ -115,15 +98,13 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
 
         {/* ✉️ NEWSLETTER */}
         <div className="text-center sm:text-left">
-          <h3 className="font-semibold text-lg mb-3 text-white">
-            {t("newsletterTitle")}
-          </h3>
+          <h3 className="font-semibold text-lg mb-3 text-white">{t("newsletterTitle")}</h3>
           <p className="text-gray-400 mb-4">{t("newsletterPlaceholder")}</p>
           <NewsletterForm locale={locale} />
         </div>
       </div>
 
-      {/* ⚖️ COPYRIGHT + FIRMA */}
+      {/* ⚖️ COPYRIGHT */}
       <div className="mt-12 border-t border-[#222] pt-6 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
         <div className="text-center sm:text-left">
           &copy; {new Date().getFullYear()} No Pain. {t("rights")}
@@ -136,20 +117,13 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
             rel="noopener noreferrer"
             aria-label="Portfolio de Rodolfo VR"
             title="Portfolio de Rodolfo VR"
-            className="flex items-center gap-1 hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-pink-500 transition"
+            className="flex items-center gap-1 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 transition"
           >
             <span className="text-gray-400 text-xs">{t("madeWith")}</span>
-            <Image
-              src="/costa.svg"
-              alt="Corazón Costa Rica"
-              width={14}
-              height={14}
-              className="inline-block"
-              loading="lazy"
-            />
+            <Image src="/costa.svg" alt="Costa Rica Heart" width={14} height={14} loading="lazy" />
             <span className="text-gray-400 text-xs">{t("inCostaRica")}</span>
             <Image
-              src="/riveras.webp"
+              src="/Screenshot 2025-10-20 204524.png"
               alt="Rivera's Industries Logo"
               width={50}
               height={50}
