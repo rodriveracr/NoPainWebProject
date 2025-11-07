@@ -85,7 +85,8 @@ export default function GalleryVideos() {
                   muted
                   loop
                   playsInline
-                  className="object-cover w-full h-[500px] lg:h-[550px] rounded-lg"
+                  preload="metadata"
+                  className="object-cover w-full h-[40vh] lg:h-[55vh] rounded-lg"
                 >
                   {video.sources.map((src, i) => (
                     <source

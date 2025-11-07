@@ -9,21 +9,21 @@ export default function Hero() {
 
   return (
     <section
-      className="relative text-white font-franklin overflow-hidden min-h-[80vh] flex flex-col items-center justify-center text-center px-6"
+      className="relative text-white font-franklin overflow-hidden min-h-[80vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-12"
       role="banner"
       aria-label="Hero section"
     >
       {/* 🖼️ Imagen principal (LCP real) */}
-   <Image
-  src="/No-PAIN.webp"
-  alt="No Pain Brand Hero Image"
-  width={800}
-  height={800}
-  priority
-  fetchPriority="high"
-  quality={85}
-  className="hero-image absolute inset-0 w-full h-full object-cover object-center opacity-55"
-/>
+      <Image
+        src="/No-PAIN.webp"
+        alt="No Pain Brand Hero Image"
+        width={1500}
+        height={1500}
+        priority
+        fetchPriority="high"
+        quality={85}
+        className="hero-image absolute inset-0 w-full h-full object-cover object-center opacity-55"
+      />
 
       
 
@@ -34,7 +34,7 @@ export default function Hero() {
       />
 
       {/* 🔹 Contenido principal */}
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 w-full max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide drop-shadow-md">
           {t("headline")}
         </h1>
@@ -44,22 +44,22 @@ export default function Hero() {
       </div>
 
       {/* 🕯️ Sello Monumby con efecto “Fade + Glow Dorado Premium” */}
-<a
-  href="https://monumbycom.godaddysites.com/"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="Visit Monumby website"
-  aria-label="Visit Monumby official website"
-  className="absolute bottom-6 right-6 z-20"
->
-  <Image
-    src="/sailedited.png"
-    alt="Monumby Quality Seal"
-    width={110}
-    height={110}
-    className="hero-sello drop-shadow-xl opacity-90 hover:opacity-100 transition-transform duration-300"
-  />
-</a>
+      <a
+        href="https://monumby.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Visit Monumby website"
+        aria-label="Visit Monumby official website"
+        className="hero-sello"
+      >
+        <Image
+          src="/sailedited.png"
+          alt="Monumby Quality Seal"
+          width={110}
+          height={110}
+          className="w-full h-auto"
+        />
+      </a>
 
 
 

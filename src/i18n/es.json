@@ -230,10 +230,10 @@
     "distributorMailBody": "Hola No Pain,\n\nMi nombre es: [tu nombre]\nMi empresa es: [nombre de la empresa]\nMi país es: [tu país]\nMi WhatsApp o teléfono es: [número]\n\nQuisiera recibir información para ser distribuidor autorizado.\n\nGracias."
   },
   "popup": {
-    "munumbyTeaserTitle": "Munumby · No Pain",
-    "munumbyTeaserDesc": "Próximamente. Línea premium de cuidado profesional.",
-    "munumbyTeaserDescAlt": "Próximamente. Investigación, precisión y resultados.",
-    "ctaPrimary": "Conocer Munumby",
+    "monumbyTeaserTitle": "Monumby · No Pain",
+    "monumbyTeaserDesc": "Próximamente. Línea premium de cuidado profesional.",
+    "monumbyTeaserDescAlt": "Próximamente. Investigación, precisión y resultados.",
+    "ctaPrimary": "Conocer Monumby",
     "ctaSecondary": "Recibir novedades",
 
     "greenSoapTitle": "Green Soap – Limpieza profesional",

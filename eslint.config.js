@@ -1,8 +1,7 @@
-// 📄 eslint.config.js
 import next from "eslint-config-next";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 
-export default [
+const config = [
   ...next(),
   {
     ignores: ["node_modules", ".next", "dist"],
@@ -14,3 +13,5 @@ export default [
     },
   },
 ];
+
+export default config;
