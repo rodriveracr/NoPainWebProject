@@ -45,7 +45,7 @@ export default async function MonumbyPage({
         {/* Botón con sello */}
         <div className="relative inline-block mt-4">
           <Link
-            href="https://monumbycom.godaddysites.com/"
+            href="https://monumby.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="px-10 py-3 bg-gradient-to-r from-pink-500 to-red-500 rounded-2xl font-semibold text-lg hover:opacity-90 transition inline-block shadow-lg"

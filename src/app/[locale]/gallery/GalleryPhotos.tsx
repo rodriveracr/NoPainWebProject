@@ -57,7 +57,7 @@ export default function GalleryPhotos() {
                   alt={photo.alt}
                   width={600}
                   height={900}
-                  className="object-cover w-full h-[500px] lg:h-[550px]"
+                  className="object-cover w-full h-[40vh] lg:h-[55vh]"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 flex items-center justify-center transition">
                   <p className="text-white text-lg font-semibold">{overlay}</p>
@@ -101,7 +101,7 @@ export default function GalleryPhotos() {
               </button>
 
               {/* Imagen principal */}
-              <div className="flex items-center justify-center w-full max-w-[1280px] h-[55vh] md:h-[680px] bg-black rounded-lg shadow-2xl">
+              <div className="flex items-center justify-center w-full max-w-[1280px] h-[55vh] md:h-[60vh] bg-black rounded-lg shadow-2xl">
                 <Image
                   src={photos[current].src}
                   alt={photos[current].alt}

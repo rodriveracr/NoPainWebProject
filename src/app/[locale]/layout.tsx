@@ -49,10 +49,10 @@ export default async function LocaleLayout({ children, params }: Props) {
 
       {/* 🧷 Sello Monumby global (fijo en todas las páginas) */}
       <Link
-        href="https://monumbycom.godaddysites.com/"
+        href="https://monumby.com/"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-[9999] hover:scale-105 transition-transform"
+        className="fixed bottom-6 right-6 z-[9999]"
         aria-label="Sello de calidad Monumby"
       >
         <Image
@@ -60,7 +60,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           alt="Sello Monumby"
           width={110}
           height={110}
-          className="global-sello drop-shadow-xl rotate-3 animate-bounce-slow opacity-90 hover:opacity-100 transition"
+          className="global-sello"
           priority
         />
       </Link>

@@ -81,9 +81,9 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
     >
       <nav
         className={`
-          flex items-center justify-center relative w-full
-          px-12 sm:px-12 md:px-12 lg:px-10 xl:px-10
-          py-12 sm:py-12 md:py-12 lg:py-10 xl:py-2
+          relative flex w-full max-w-[1400px] mx-auto items-center justify-between
+          px-6 sm:px-8 lg:px-14
+          py-10 sm:py-12 xl:py-6
         `}
       >
         {/* 🍔 Botón móvil */}
@@ -111,17 +111,17 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
 
 
         {/* 💻 Desktop */}
-        <div className="hidden xl:flex items-center justify-between w-full max-w-8xl text-white">
+        <div className="hidden xl:flex items-center justify-between w-full text-white gap-12">
           {/* Links izquierda con separadores */}
-          <div className="flex space-x-5 text-[0.9rem] uppercase tracking-wider font-medium">
+          <div className="flex flex-0.5 items-center justify-start gap-8 text-[0.9rem] uppercase tracking-wider font-medium whitespace-nowrap">
             {leftLinks.map((link, index) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
-                className={`hover:text-gray-400 transition-colors relative ${
+                className={`hover:text-gray-400 transition-colors relative whitespace-nowrap ${
                   index < leftLinks.length - 1
-                    ? "after:content-[''] after:absolute after:right-[-0.7rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
+                    ? "after:content-[''] after:absolute after:right-[-1rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
                     : ""
                 }`}
               >
@@ -131,7 +131,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
           </div>
 
           {/* 🐊 Logo Cocodrilo */}
-          <div className="flex-shrink-0 px-4">
+          <div className="flex-shrink-0 px-6">
             <Link href={`/${locale}`} onClick={handleLinkClick}>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -157,15 +157,15 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
           </div>
 
           {/* Links derecha con separadores */}
-          <div className="flex space-x-5 text-[0.9rem] uppercase tracking-wider font-medium">
+          <div className="flex flex-1 items-center justify-end gap-8 text-[0.9rem] uppercase tracking-wider font-medium whitespace-nowrap pr-4">
             {rightLinks.map((link, index) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={handleLinkClick}
-                className={`hover:text-gray-400 transition-colors relative ${
+                className={`hover:text-gray-400 transition-colors relative whitespace-nowrap ${
                   index < rightLinks.length - 1
-                    ? "after:content-[''] after:absolute after:right-[-0.7rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
+                    ? "after:content-[''] after:absolute after:right-[-1rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
                     : ""
                 }`}
               >
@@ -177,10 +177,12 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
       </nav>
 
       {/* 🌐 Selector idioma Desktop */}
-      <div className="hidden xl:flex justify-end pr-6 bg-black translate-y-[-10px]">
-        <Suspense fallback={null}>
-          <LanguageSwitcher small />
-        </Suspense>
+      <div className="hidden xl:flex bg-black translate-y-[-10px]">
+        <div className="w-full max-w-[1400px] mx-auto flex justify-end pr-12">
+          <Suspense fallback={null}>
+            <LanguageSwitcher small />
+          </Suspense>
+        </div>
       </div>
 
       {/* 📱 Menú móvil */}

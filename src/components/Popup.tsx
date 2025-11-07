@@ -1,238 +1,245 @@
-//src/components/Popup.tsx
 "use client";
 
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
-import LanguageSwitcher from "./LanguageSwitcher";
+import { motion, AnimatePresence, easeOut } from "framer-motion";
+import { useTranslations } from "next-intl";
 
-const STORAGE_KEYS = {
-  sessionClosed: (loc: string) => `popupClosed-${loc}`,
-  seenAt: (loc: string) => `popupSeenAt-${loc}`,
-  snoozeUntil: (loc: string) => `popupSnoozeUntil-${loc}`,
-} as const;
-
-const DELAY_MS = Number(process.env.NEXT_PUBLIC_POPUP_DELAY_MS ?? 1200);
-const COOLDOWN_DAYS = Number(process.env.NEXT_PUBLIC_POPUP_COOLDOWN_DAYS ?? 7);
-
-type Slide = {
-  key: "green-soap" | "monumby";
-  image: string;
-  title: string;
-  body: string;
-  cta: string;
-  href: string;
-  sub?: string;
+type Props = { 
+  locale: string;
+  storageKey?: string;
+  cooldownHours?: number;
 };
 
-export default function Popup({ locale = "es" }: { locale?: string }) {
+type Slide = {
+  img: string;
+  title: string;
+  desc: string;
+  link: string;
+  secondaryLink?: string;
+  primaryCtaKey?: string;
+  secondaryCtaKey?: string;
+};
+
+export default function Popup({ locale, storageKey = "popup-dismissed", cooldownHours = 24 }: Props) {
+  const t = useTranslations("popup");
   const [isOpen, setIsOpen] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
   const [current, setCurrent] = useState(0);
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const qs =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search)
-      : null;
-  const debugAlways = qs?.get("debugPopup") === "1";
-  const resetFlag = qs?.get("resetPopup") === "1";
-
-  const slides: Slide[] = useMemo(() => {
-    const t = (es: string, en: string) => (locale === "en" ? en : es);
-
-    return [
+  const slides: Slide[] = useMemo(
+    () => [
       {
-        key: "green-soap",
-        image: "/greensoap.gif",
-        title: "GREEN SOAP PREMIUM",
-        body: t(
-          "Jabón vegetal artesanal ideal para estudios, piercings y cuidado posterior. Limpia, calma e hidrata sin afectar la tinta ni la piel.",
-          "Handcrafted plant-based soap ideal for studios, piercings, and aftercare. Cleans, soothes, and hydrates without affecting ink or skin.",
-        ),
-        cta: t("Ver más", "See details"),
-        href: `/${locale}/green-soap`,
-        sub: t(
-          "Disponible para distribuidores.",
-          "Available for distributors.",
-        ),
+        img: "/Green-Soap-1.jpg",
+        title: t("greenSoapTitle", { default: "Green Soap – Pro cleaning" }),
+        desc: t("greenSoapDesc", {
+          default: "Gentle soap for tattoos & PMU. Cleans without irritation.",
+        }),
+        link: `/${locale}/green-soap`,
       },
       {
-        key: "monumby",
-        image: "/monumby.gif",
-        title: "MONUMBY EXPERIENCE",
-        body: t(
-          "La nueva línea profesional de anestesia y productos certificados para artistas. Una experiencia diseñada para precisión, confianza y resultados premium.",
-          "The new professional line of certified anesthesia and care products for artists. An experience built for precision, trust, and premium results.",
-        ),
-        cta: t("Conoce más", "Learn more"),
-        href: `/${locale}/monumby`,
-        sub: t("Próximamente disponible.", "Coming soon."),
+        img: "/monumby.gif",
+        title: t("monumbyTeaserTitle", { default: "Monumby · No Pain" }),
+        desc:
+          Math.random() > 0.5
+            ? t("monumbyTeaserDesc", { default: "Coming soon. Premium professional care." })
+            : t("monumbyTeaserDescAlt", {
+                default: "Coming soon. Research, precision, results.",
+              }),
+        link: `/${locale}/monumby`,
+        secondaryLink: "/#newsletter",
+        primaryCtaKey: "ctaPrimary",
+        secondaryCtaKey: "ctaSecondary",
       },
-    ];
-  }, [locale]);
+    ],
+    [locale, t]
+  );
 
-  const close = useCallback(() => {
-    setIsOpen(false);
-    if (!debugAlways && typeof window !== "undefined") {
-      sessionStorage.setItem(STORAGE_KEYS.sessionClosed(locale), "true");
+  const handleClose = useCallback(() => {
+    try {
+      localStorage.setItem(storageKey, Date.now().toString());
+    } catch (error) {
+      console.error("Error saving popup dismissal:", error);
     }
-  }, [debugAlways, locale]);
-
-  const snooze24h = useCallback(() => {
     setIsOpen(false);
-    if (!debugAlways && typeof window !== "undefined") {
-      const until = Date.now() + 24 * 60 * 60 * 1000;
-      localStorage.setItem(STORAGE_KEYS.snoozeUntil(locale), String(until));
-      sessionStorage.setItem(STORAGE_KEYS.sessionClosed(locale), "true");
-    }
-  }, [debugAlways, locale]);
+  }, [storageKey]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const checkShouldShow = () => {
+      try {
+        const dismissed = localStorage.getItem(storageKey);
+        if (!dismissed) {
+          setIsOpen(true);
+          return;
+        }
 
-    if (resetFlag) {
-      ["es", "en"].forEach((loc) => {
-        localStorage.removeItem(STORAGE_KEYS.seenAt(loc));
-        localStorage.removeItem(STORAGE_KEYS.snoozeUntil(loc));
-        sessionStorage.removeItem(STORAGE_KEYS.sessionClosed(loc));
-      });
-    }
+        const dismissedTime = parseInt(dismissed, 10);
+        const now = Date.now();
+        const hoursPassed = (now - dismissedTime) / (1000 * 60 * 60);
 
-    if (debugAlways) {
-      sessionStorage.removeItem(STORAGE_KEYS.sessionClosed(locale));
-      localStorage.removeItem(STORAGE_KEYS.snoozeUntil(locale));
-      setHasTriggered(true);
-      setIsOpen(true);
-      return;
-    }
-
-    if (process.env.NEXT_PUBLIC_POPUP !== "on") return;
-    if (hasTriggered) return;
-
-    const now = Date.now();
-    const seenAt = Number(
-      localStorage.getItem(STORAGE_KEYS.seenAt(locale)) || 0,
-    );
-    const snoozeUntil = Number(
-      localStorage.getItem(STORAGE_KEYS.snoozeUntil(locale)) || 0,
-    );
-    const cooldownMs = COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
-
-    if (sessionStorage.getItem(STORAGE_KEYS.sessionClosed(locale))) return;
-    if (snoozeUntil && now < snoozeUntil) return;
-    if (seenAt && now - seenAt < cooldownMs) return;
-
-    const openOnce = () => {
-      setHasTriggered(true);
-      setIsOpen(true);
-      localStorage.setItem(STORAGE_KEYS.seenAt(locale), String(Date.now()));
+        if (hoursPassed >= cooldownHours) {
+          localStorage.removeItem(storageKey);
+          setIsOpen(true);
+        }
+      } catch (error) {
+        console.error("Error checking popup status:", error);
+      }
     };
 
-    const timer = window.setTimeout(openOnce, DELAY_MS);
-    return () => clearTimeout(timer);
-  }, [locale, hasTriggered, debugAlways, resetFlag]);
+    checkShouldShow();
+  }, [storageKey, cooldownHours]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClose();
+      }
+    };
+    
+    document.addEventListener("keydown", onKey);
+    setTimeout(() => {
+      modalRef.current?.querySelector<HTMLButtonElement>("button[data-close]")?.focus();
+    }, 30);
+    
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isOpen, handleClose]);
+
+  useEffect(() => {
+    const { body } = document;
+    if (isOpen) {
+      const prev = body.style.overflow;
+      body.style.overflow = "hidden";
+      return () => {
+        body.style.overflow = prev;
+      };
+    }
+  }, [isOpen]);
+
+  const next = useCallback(() => setCurrent((p) => (p + 1) % slides.length), [slides.length]);
+  const prev = useCallback(() => setCurrent((p) => (p === 0 ? slides.length - 1 : p - 1)), [slides.length]);
+  const goTo = useCallback((i: number) => setCurrent(i), []);
+
   const slide = slides[current];
 
+  if (!isOpen) return null;
+
   return (
-    <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-sm"
-      onClick={close}
-    >
-      <div
-        className="relative w-[90vw] max-w-[640px] max-h-[88vh] sm:max-h-[85vh] rounded-2xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header con logo */}
-        <div className="relative border-b border-neutral-800 px-4 py-5 text-center bg-neutral-800/50">
-          <Image
-            src="/No-PAIN.webp"
-            alt="No Pain"
-            width={240}
-            height={72}
-            className="mx-auto h-12 sm:h-14 w-auto object-contain"
-            priority
-          />
-          <div className="text-xs text-neutral-300 mt-1">
-            {locale === "en" ? "Updates & products" : "Novedades y productos"}
-          </div>
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70">
+        <motion.div
+          ref={modalRef}
+          initial={{ opacity: 0, y: 10, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 10, scale: 0.98 }}
+          transition={{ duration: 0.22, ease: easeOut }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="popup-title"
+          aria-describedby="popup-desc"
+          className="relative w-[92vw] max-w-[640px] rounded-2xl shadow-2xl overflow-hidden bg-neutral-900 text-white border border-neutral-800 md:w-[88vw]"
+        >
           <button
-            onClick={close}
-            className="absolute top-3 right-3 p-2 rounded-full bg-black/60 hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white/30 transition"
-            title="Close popup"
+            type="button"
+            data-close
+            onClick={handleClose}
+            aria-label="Close popup"
+            title="Close"
+            className="absolute top-3 right-3 p-2 rounded-full bg-black/40 hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white/30 z-10"
           >
-            <X size={18} />
+            <X size={20} />
           </button>
-          {/* Botones de idioma debajo del botón X */}
-          <div className="absolute top-14 right-3">
-            <LanguageSwitcher small />
-          </div>
-        </div>
 
-        <div className="px-1 pt-1 pb-1">
-          <h2 className="text-2xl sm:text-3xl font-black mb-4 text-center">
-            {slide.title}
-          </h2>
-
-          {/* 🖼️ Imagen cuadrada reducida */}
-          <div className="relative w-[85%] mx-auto aspect-square bg-black rounded-xl overflow-hidden mb-4 shadow-lg flex items-center justify-center">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-black">
             <Image
-              src={slide.image}
+              src={slide.img}
               alt={slide.title}
-              width={1080}
-              height={1080}
-              className="object-contain"
-              unoptimized
+              fill
+              sizes="(max-width: 640px) 92vw, 640px"
+              className="object-cover"
+              priority
+              unoptimized={slide.img.endsWith('.gif')}
             />
-          </div>
-
-          <p className="text-neutral-200 text-base mb-5 leading-relaxed text-center">
-            {slide.body}
-          </p>
-
-          {/* Botones */}
-          <div className="relative mt-3">
-            <button
-              onClick={snooze24h}
-              className="absolute right-0 -top-1 text-[12px] px-3 py-1.5 rounded-md bg-neutral-800 border border-neutral-700 hover:bg-neutral-700 transition"
-            >
-              {locale === "en" ? "Remind later" : "Recordar (24h)"}
-            </button>
-
-            <div className="flex justify-center">
-              <a
-                href={slide.href}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-semibold shadow-md hover:opacity-90 transition"
+            <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-2">
+              {slides.map((_, i) => (
+                <button
+                  type="button"
+                  key={`slide-indicator-${i}`}
+                  onClick={() => goTo(i)}
+                  aria-label={`Ir al slide ${i + 1}`}
+                  aria-current={i === current ? "true" : "false"}
+                  className={`h-2 rounded-full transition-all ${
+                    i === current ? "w-6 bg-white" : "w-2 bg-white/50 hover:bg-white/80"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="hidden sm:flex absolute inset-y-0 left-0 items-center pl-2">
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Anterior"
+                className="p-2 rounded-full bg-black/40 hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white/30"
               >
-                {slide.cta}
-              </a>
+                ◀
+              </button>
+            </div>
+            <div className="hidden sm:flex absolute inset-y-0 right-0 items-center pr-2">
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Siguiente"
+                className="p-2 rounded-full bg-black/40 hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white/30"
+              >
+                ▶
+              </button>
             </div>
           </div>
 
-          {slide.sub && (
-            <p className="mt-3 text-xs text-neutral-400 text-center">
-              {slide.sub}
+          <div className="px-5 pt-5 pb-4 sm:px-6 sm:pt-6 sm:pb-6">
+            <h2 id="popup-title" className="text-xl sm:text-2xl font-semibold uppercase tracking-wide text-center">
+              {slide.title}
+            </h2>
+            <p id="popup-desc" className="mt-2 text-sm sm:text-base text-neutral-200 text-center">
+              {slide.desc}
             </p>
-          )}
 
-          {/* Dots */}
-          <div className="mt-6 flex items-center justify-center gap-2 pb-1">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === current
-                    ? "w-8 bg-white"
-                    : "w-3 bg-white/50 hover:bg-white/80"
-                }`}
-                title={`Slide ${i + 1}`}
-              />
-            ))}
+            {slide.primaryCtaKey ? (
+              <div className="mt-4 flex flex-col sm:flex-row gap-2 items-stretch sm:items-center justify-center">
+                <a
+                  href={slide.link}
+                  className="inline-flex w-full sm:w-auto items-center justify-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-medium hover:opacity-90 transition"
+                >
+                  {t(slide.primaryCtaKey, { default: "Learn more" })}
+                </a>
+                {slide.secondaryLink && slide.secondaryCtaKey && (
+                  <a
+                    href={slide.secondaryLink}
+                    className="inline-flex w-full sm:w-auto items-center justify-center px-5 py-2.5 rounded-xl bg-neutral-800 text-white font-medium hover:bg-neutral-700 transition border border-neutral-700"
+                  >
+                    {t(slide.secondaryCtaKey, { default: "Get updates" })}
+                  </a>
+                )}
+              </div>
+            ) : (
+              <a
+                href={slide.link}
+                className="mt-4 inline-flex w-full sm:w-auto items-center justify-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 text-white font-medium hover:opacity-90 transition"
+              >
+                {t("cta", { default: "See more" })}
+              </a>
+            )}
+
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <span className="text-[11px] sm:text-xs text-neutral-400 text-center sm:text-left">
+                {t("disclaimer", { default: "You can dismiss this message anytime." })}
+              </span>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 }

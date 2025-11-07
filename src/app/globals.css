@@ -36,6 +36,40 @@ html {
   --ui-font:
     var(--font-geist), Inter, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+
+  /* --------------------------- */
+  /* Breakpoints & layout vars  */
+  /* mobile-first: override per breakpoint below */
+  /* --------------------------- */
+  --breakpoint-mobile-max: 640px;
+  --breakpoint-tablet-min: 641px;
+  --breakpoint-tablet-max: 1024px;
+  --breakpoint-desktop-min: 1025px;
+
+  /* Hero background sizing (mobile-first) */
+  --hero-bg-size: 100%;
+  /* Sello (badge) sizes per breakpoint */
+  --sello-width: 92px; /* mobile default */
+  --sello-bottom: 1.75rem;
+  --sello-right: 1.5rem;
+}
+
+/* --------------------------- */
+/* Visibility helpers (mobile/tablet/desktop) */
+/* Use these to scope elements to a single breakpoint */
+.only-mobile { display: block !important; }
+@media (min-width: 641px) {
+  .only-mobile { display: none !important; }
+}
+
+.only-tablet { display: none !important; }
+@media (min-width: 641px) and (max-width: 1024px) {
+  .only-tablet { display: block !important; }
+}
+
+.only-desktop { display: none !important; }
+@media (min-width: 1025px) {
+  .only-desktop { display: block !important; }
 }
 
 body {
@@ -147,11 +181,22 @@ h2.tagline,
 
 /* 🖼️ Imagen o video principal */
 .gallery-item video,
-.gallery-item img {
+.gallery-item img,
+.gallery-item video {
   width: 100%;
-  height: 500px;
+  /* use viewport heights for responsiveness */
+  height: 40vh;
+  max-height: 550px;
   object-fit: cover;
   border-radius: 0.75rem;
+}
+
+@media (min-width: 1024px) {
+  .gallery-item img,
+  .gallery-item video {
+    height: 55vh;
+    max-height: 680px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -177,6 +222,17 @@ h2.tagline,
   opacity: 1;
 }
 
+/* On touch devices there is no hover: show overlay by default for better discoverability */
+@media (max-width: 640px) {
+  .gallery-overlay {
+    opacity: 1;
+    background: rgba(0,0,0,0.35);
+    transition: none;
+  }
+
+  .gallery-overlay p { font-size: 1rem; padding: 0.25rem 0.5rem; }
+}
+
 /* Texto dentro del overlay */
 .gallery-overlay p {
   color: #ffffff;
@@ -188,7 +244,58 @@ h2.tagline,
 }
 
 /* ============================== */
-/* 🎬 MODAL (pantalla ampliada del video) — versión uniforme tipo TikTok */
+/* �️ Subtle pan + zoom animation for gallery PHOTOS (mobile/tablet/desktop) */
+/* Applies to images only (not videos) to keep motion lightweight and predictable */
+/* Respects user preference for reduced motion and disables animation inside modals */
+/* ============================== */
+@keyframes subtle-pan-zoom {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  25% {
+    transform: scale(1.03) translateX(-3%);
+  }
+  50% {
+    transform: scale(1.06) translateX(0%);
+  }
+  75% {
+    transform: scale(1.03) translateX(3%);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+  }
+}
+
+/* Apply the gentle animation to gallery images */
+.gallery-item img {
+  transform-origin: center center;
+  animation: subtle-pan-zoom 14s ease-in-out infinite;
+}
+
+/* Slightly faster on larger screens for a more dynamic feel */
+@media (min-width: 1024px) {
+  .gallery-item img {
+    animation-duration: 12s;
+  }
+}
+
+/* Disable animation for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item img {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Ensure images inside modals are static to avoid distraction */
+.gallery-modal img,
+.photo-modal img,
+.hero-sello img {
+  animation: none !important;
+}
+
+/* ============================== */
+/* �🎬 MODAL (pantalla ampliada del video) — versión uniforme tipo TikTok */
 /* ============================== */
 .modal-overlay.gallery-modal {
   position: fixed !important;
@@ -251,7 +358,7 @@ h2.tagline,
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  padding: 10rem;
+  padding: 1rem; /* reduced from 10rem to avoid huge spacing */
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
 }
 
@@ -278,6 +385,42 @@ h2.tagline,
   .gallery-modal .video-description {
     flex: 1;
     margin-left: 0.5rem;
+  }
+}
+
+/* ============================== */
+/* Desktop & Tablet: push descriptive text below the close button */
+/* Ensures the close (×) doesn't overlap the title/heading */
+/* Applies to both photo and video modals */
+/* ============================== */
+@media (min-width: 641px) {
+  .gallery-modal > div,
+  .photo-modal > div {
+    /* align content to the top so the title sits under the close button */
+    align-items: flex-start;
+  }
+
+  /* Add extra top spacing to the descriptive panel so it appears below the X */
+  .gallery-modal .video-description,
+  .photo-modal .photo-description {
+    margin-top: 1.5rem; /* push down on tablet/desktop */
+    padding-top: 0.25rem;
+  }
+
+  /* Make room for the absolute close button so the heading doesn't get overlapped */
+  .gallery-modal .video-description h3,
+  .photo-modal .photo-description h3 {
+    padding-right: 3rem;
+  }
+
+  /* Ensure close button sits in the top-right and is easy to hit */
+  .gallery-modal button[title="Close"],
+  .gallery-modal button[title="Cerrar"],
+  .photo-modal button[title="Close"],
+  .photo-modal button[title="Cerrar"] {
+    top: 1rem !important;
+    right: 1rem !important;
+    z-index: 10002 !important;
   }
 }
 
@@ -350,7 +493,7 @@ h2.tagline,
 /* 🏠 Landing principal */
 .hero-bg {
   background-image: url("/Firefly 202510171414351.PNG");
-  background-size: 100%; /* Desktop */
+  background-size: var(--hero-bg-size); /* controlled via variables per breakpoint */
   background-position: top 100%; /* 🔼 sube / 🔽 baja */
   background-repeat: no-repeat;
   background-color: #000;
@@ -361,7 +504,7 @@ h2.tagline,
 @media (max-width: 768px) {
   .hero-bg {
     background-image: url("/nopaincreamadobe1.PNG");
-    background-size: 100%;
+    background-size: var(--hero-bg-size);
     background-position: center;
     background-repeat: no-repeat;
     background-color: #000;
@@ -373,7 +516,7 @@ h2.tagline,
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero-bg {
     background-image: url("/Firefly 202510171414351.PNG"); /* puedes usar otra imagen si querés */
-    background-size: 200%; /* 🔧 ajustá: 100–130% según lo que necesites */
+    background-size: var(--hero-bg-size); /* tablet uses variable override */
     background-position: top center; /* 🔼 sube / 🔽 baja */
     background-repeat: no-repeat;
     background-color: #000;
@@ -720,31 +863,50 @@ body:has(.photo-modal) {
   }
 }
 
-/* 💎 Sello Monumby — Desktop / iPad */
+/* 💎 Sello Monumby — mobile-first, variables control sizes per breakpoint */
+/* --------------------------------------------------------------- */
 .global-sello {
   position: fixed;
-  bottom: 6rem;           /* 🔽 más arriba si querés */
-  right: 2.5rem;          /* 🔼 más hacia el borde derecho */
-  width: 120px;           /* tamaño base */
-  height: auto;           /* mantiene proporción */
-  transform: rotate(3deg);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  bottom: var(--sello-bottom);
+  right: var(--sello-right);
+  width: var(--sello-width);
+  height: auto;
+  z-index: 9999;
 }
 
-.global-sello:hover {
-  transform: rotate(0deg) scale(1.05);
-  opacity: 1;
+.hero-sello {
+  position: absolute;
+  /* small offset from global position so hero badge sits slightly above */
+  bottom: calc(var(--sello-bottom) + 0.75rem);
+  right: var(--sello-right);
+  width: calc(var(--sello-width) - 2px);
+  z-index: 20;
+  display: block;
 }
 
-/* ===========================
-   📱 SELLO MONUMBY — MOBILE (solo posición)
-   =========================== */
-@media (max-width: 640px) {
-  .global-sello {
-    bottom: 8rem !important; /* 🔼 sube / 🔽 baja en mobile */
-    right: 1rem !important;  /* 🔼 izquierda / derecha */
-    width: 100px !important; /* tamaño en mobile */
-    height: auto !important;
+.hero-sello img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tablet: override variables for tablet range */
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --sello-width: 96px;
+    --sello-bottom: 2rem;
+    --sello-right: 1.75rem;
+    --hero-bg-size: 200%;
+  }
+}
+
+/* Desktop: override variables for desktop */
+@media (min-width: 1025px) {
+  :root {
+    --sello-width: 112px;
+    --sello-bottom: 3.5rem;
+    --sello-right: 2.25rem;
+    --hero-bg-size: 100%;
   }
 }
 
