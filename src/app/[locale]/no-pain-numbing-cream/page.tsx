@@ -30,16 +30,17 @@ export default async function NoPainNumbingCream({
         {/* ✅ Popup del cliente (CSR seguro) */}
         <ClientPopup locale={locale} />
 
-        {/* ✅ Layout de producto unificado */}
-        <ProductLayout
-          title={t("noPainNumbingCream")}
-          tagline={t("noPainNumbingCreamTagline")}
-          imageSrc="/Firefly 202510171414351.PNG"
-          imageAlt={
-            t("noPainNumbingCreamAlt") || "No Pain Numbing Cream product"
-          }
-          backgroundClass="bg-nopaincream"
-        >
+        {/* ✅ Layout de producto unificado -- envuelto en `no-animations` para esta página */}
+        <div className="no-animations">
+          <ProductLayout
+            title={t("noPainNumbingCream")}
+            tagline={t("noPainNumbingCreamTagline")}
+            /* Añadimos la imagen encima del texto similar a Xteri */
+            imageSrc="/nopain456.png"
+            imageAlt={t("noPainNumbingCreamAlt") || "No Pain Numbing Cream product"}
+            /* Use the NO-PAIN product background image */
+            backgroundClass="bg-nopaincream"
+          >
           {/* 🧴 Detalles del producto */}
           <section>
             <h2 className="text-2xl font-semibold text-white mb-2">
@@ -90,7 +91,9 @@ export default async function NoPainNumbingCream({
               <li>{t("noPainNumbingCreamTip5")}</li>
             </ul>
           </section>
-        </ProductLayout>
+      
+          </ProductLayout>
+          </div>
       </>
     </Suspense>
   );

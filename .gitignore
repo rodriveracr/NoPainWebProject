@@ -58,3 +58,10 @@ desktop.ini
 *.old
 *.orig
 *.lock
+
+# ======================================================
+# 🧰 Local tools, backups and temp outputs (do NOT commit)
+# ======================================================
+backups/
+tools/
+response_root.html

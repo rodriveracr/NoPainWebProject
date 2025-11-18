@@ -149,7 +149,14 @@ export default function Contact() {
         </section>
 
         {/* 📝 Formulario */}
-        <section className="max-w-lg mx-auto text-left bg-black/40 border border-gray-700 rounded-2xl p-8 shadow-lg backdrop-blur-sm">
+        {/*
+          suppressHydrationWarning: Prevents recoverable hydration mismatch
+          warnings when browser extensions (e.g. LastPass) inject DOM nodes
+          into forms before React hydrates the client. This is safe here because
+          the form is entirely client-controlled and we only want to avoid
+          noisy hydration errors during development.
+        */}
+        <section suppressHydrationWarning={true} className="max-w-lg mx-auto text-left bg-black/40 border border-gray-700 rounded-2xl p-8 shadow-lg backdrop-blur-sm">
           <form onSubmit={handleSubmit} className="space-y-4" method="post">
             <input
               type="text"

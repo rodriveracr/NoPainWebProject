@@ -6,8 +6,8 @@ import Image from "next/image";
 interface ProductLayoutProps {
   title: string;
   tagline: string;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string; // optional: render only when provided
+  imageAlt?: string;
   backgroundClass: string;
   children: React.ReactNode;
 }
@@ -24,22 +24,24 @@ export default function ProductLayout({
     <main
       className={`relative text-white font-franklin overflow-hidden bg-cover bg-center ${backgroundClass}`}
     >
-      {/* 🔲 Overlay oscuro (ajustado a 60% de opacidad para que se vea el fondo) */}
-      <div className="absolute inset-0 bg-black/60 z-0" />
+      {/* 🔲 Overlay oscuro (controlable por CSS: `.product-overlay`) */}
+      <div className="product-overlay absolute inset-0 z-0" />
 
       {/* 🧩 Contenido principal */}
       <div className="relative z-10 pt-36 pb-[20vh] px-6 max-w-4xl mx-auto text-center">
-        {/* 📸 Imagen del producto */}
-        <div className="flex justify-center mb-10 mt-20 md:mt-28">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            width={450}
-            height={450}
-            className="rounded-2xl shadow-2xl border border-gray-700 object-contain"
-            priority
-          />
-        </div>
+        {/* 📸 Imagen del producto (render solo si se pasa `imageSrc`) */}
+        {imageSrc ? (
+          <div className="flex justify-center mb-10 mt-20 md:mt-28">
+            <Image
+              src={imageSrc}
+              alt={imageAlt || ""}
+              width={450}
+              height={450}
+              className="rounded-2xl shadow-2xl border border-gray-700 object-contain"
+              priority
+            />
+          </div>
+        ) : null}
 
         {/* 🔤 Título principal */}
         <h1 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.25)]">

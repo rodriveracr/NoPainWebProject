@@ -50,8 +50,17 @@ html {
   --hero-bg-size: 100%;
   /* Sello (badge) sizes per breakpoint */
   --sello-width: 92px; /* mobile default */
-  --sello-bottom: 1.75rem;
+  --sello-bottom: 5rem;
   --sello-right: 1.5rem;
+  /* --------------------------- */
+  /* Brand color variables — editable to match NoPain official colors */
+  /* Replace these hex values with the exact brand tokens if you provide them */
+  --brand-whatsapp-1: #25D366;
+  --brand-whatsapp-2: #1AA34A;
+  --brand-primary-1: #ef476f; /* NoPain primary (pink/coral) */
+  --brand-primary-2: #ff6b85;
+  --brand-accent-1: #6c63ff; /* secondary / accent */
+  --brand-accent-2: #8a82ff;
 }
 
 /* --------------------------- */
@@ -289,9 +298,28 @@ h2.tagline,
 
 /* Ensure images inside modals are static to avoid distraction */
 .gallery-modal img,
-.photo-modal img,
-.hero-sello img {
+.photo-modal img {
   animation: none !important;
+}
+
+/* Contact link glow animation (doesn't change text color to avoid global !important color) */
+@keyframes contact-glow {
+  0% { text-shadow: 0 0 0 rgba(244,114,182,0); }
+  40% { text-shadow: 0 0 8px rgba(244,114,182,0.9); }
+  70% { text-shadow: 0 0 4px rgba(244,114,182,0.5); }
+ 100% { text-shadow: 0 0 0 rgba(244,114,182,0); }
+}
+
+.contact-anim {
+  display: inline-block;
+  will-change: text-shadow, filter;
+  animation: contact-glow 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-anim {
+    animation: none !important;
+  }
 }
 
 /* ============================== */
@@ -545,6 +573,17 @@ h2.tagline,
     background-color: #000;
     min-height: 1dvh;
   }
+}
+
+/* Overlay used by ProductLayout to control page darkness via variable */
+.product-overlay {
+  background-color: rgba(0,0,0,var(--product-overlay-opacity,0.6));
+}
+
+/* Make No-Pain background slightly darker than default for contrast */
+.bg-nopaincream > .product-overlay {
+  /* significantly darker overlay for No-Pain page */
+  --product-overlay-opacity: 0.75;
 }
 
 /* ⚡ Xteri Numb Spray */
@@ -863,6 +902,263 @@ body:has(.photo-modal) {
   }
 }
 
+/* ============================== */
+/* 🎬 Ken Burns — subtle pan + zoom for hero */
+/* Applies to both `.hero-bg` (background-image) and `.hero-image` (<img>)
+   so it works regardless of implementation. Respects reduced-motion. */
+/* ============================== */
+
+:root {
+  --hero-kenburns-scale: 1.03; /* reduced zoom */
+  --hero-kenburns-duration: 26s; /* slower (longer) */
+}
+
+@keyframes hero-kenburns-bg {
+  0% {
+    background-size: var(--hero-bg-size);
+    background-position: center 0%;
+  }
+  50% {
+    /* gentler zoom and smaller upward pan */
+    background-size: 103%;
+    background-position: center 3%;
+  }
+  100% {
+    background-size: var(--hero-bg-size);
+    background-position: center 0%;
+  }
+}
+
+@keyframes hero-kenburns-img {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(var(--hero-kenburns-scale)) translateY(-2%); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* Apply Ken Burns to the hero background container */
+.hero-bg {
+  /* Ken Burns effect disabled for background — kept available if re-enabled later */
+  will-change: background-position, background-size;
+  animation: none !important;
+}
+
+/* Apply Ken Burns to <img class="hero-image"> if used */
+.hero-image {
+  /* Ken Burns disabled by default for images; re-enable by removing this rule */
+  transform-origin: center center;
+  will-change: transform;
+  animation: none !important;
+}
+
+/* Slightly faster on large desktops */
+@media (min-width: 1025px) {
+  /* keep desktop slightly faster but still slower than default */
+  :root { --hero-kenburns-duration: 22s; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg,
+  .hero-image {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================== */
+/* ✨ NO-PAIN hero: subtle blur + shine border */
+/* Applies to `.bg-nopaincream` (background) and `.hero-image` (<img>)
+   - Uses a blurred pseudo-element to create a soft glow/halo
+   - Adds a subtle animated "shine" sweep on top of the hero
+   - Configurable via CSS variables and respects reduced motion
+*/
+
+:root {
+  --nopain-blur: 4px; /* blur intensity for the halo (base) */
+  --nopain-halo-blur-max: 6px; /* blur at halo peak */
+  --nopain-halo-scale: 1.03; /* subtle upscale for blurred layer (base) */
+  --nopain-halo-scale-max: 1.05; /* scale at halo peak */
+  --nopain-halo-duration: 11s; /* full pulse cycle (halo) */
+  --nopain-shine-opacity: 0.12; /* strength of the moving shine */
+  --nopain-shine-duration: 5.5s; /* how long the shine sweep takes (half halo cycle) */
+}
+
+.bg-nopaincream {
+  position: relative; /* container for pseudo elements */
+  overflow: hidden;
+}
+
+/* Blurred halo: duplicate the background and blur it slightly under content */
+.bg-nopaincream::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("/nopain789.png");
+  background-size: var(--hero-bg-size, 150%);
+  background-position: bottom 50% center;
+  background-repeat: no-repeat;
+  filter: blur(var(--nopain-blur));
+  transform: scale(var(--nopain-halo-scale));
+  opacity: 0.85; /* keep the halo subtle */
+  pointer-events: none;
+  will-change: filter, transform, opacity;
+  /* pulse the halo so it grows slightly then returns — pairs with the shine */
+  animation: nopain-halo var(--nopain-halo-duration) ease-in-out infinite;
+}
+
+/* Ensure page content inside hero sits above the halo */
+.bg-nopaincream > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Animated shine border: thin gradient sweep across the hero */
+.bg-nopaincream::after {
+  content: "";
+  position: absolute;
+  inset: -2%; /* allow the shine to peek outside edges */
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,var(--nopain-shine-opacity)) 45%,
+    rgba(255,255,255,0) 60%);
+  opacity: 1;
+  transform: translateX(-120%);
+  will-change: transform, opacity;
+  /* run the shine twice per halo pulse so it reads as a transition between blur and shine */
+  animation: nopain-shine var(--nopain-shine-duration) ease-in-out infinite;
+}
+
+@keyframes nopain-shine {
+  0% { transform: translateX(-120%); opacity: 0; }
+  22% { opacity: 0.8; }
+  55% { transform: translateX(120%); opacity: 0.6; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
+
+/* Pulse the halo blur/scale/opacity to transition into/out of the shine */
+@keyframes nopain-halo {
+  0% {
+    filter: blur(var(--nopain-blur));
+    transform: scale(var(--nopain-halo-scale));
+    opacity: 0.82;
+  }
+  40% {
+    filter: blur(var(--nopain-halo-blur-max));
+    transform: scale(var(--nopain-halo-scale-max));
+    opacity: 0.96;
+  }
+  60% {
+    /* keep a slightly elevated halo while the shine passes */
+    filter: blur(var(--nopain-halo-blur-max));
+    transform: scale(var(--nopain-halo-scale-max));
+    opacity: 0.9;
+  }
+  100% {
+    filter: blur(var(--nopain-blur));
+    transform: scale(var(--nopain-halo-scale));
+    opacity: 0.82;
+  }
+}
+
+/* Also provide a lightweight style for <img class="hero-image"> usage */
+.hero-image {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 30px rgba(0,0,0,0.45));
+  transition: filter 400ms ease, transform 400ms ease;
+}
+
+.hero-image.shiny {
+  /* If you want the shine on an <img>, add the class `shiny` to it */
+  filter: blur(0.6px) drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+}
+
+/* Respect reduced motion (disable shine animation) */
+@media (prefers-reduced-motion: reduce) {
+  .bg-nopaincream::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+  .bg-nopaincream::before {
+    animation: none !important;
+    opacity: 0.85 !important;
+    filter: blur(var(--nopain-blur)) !important;
+    transform: scale(var(--nopain-halo-scale)) !important;
+  }
+}
+
+/* ================================================== */
+/* Explicit: remove blur and any animations/effects from nopain background */
+/* This overrides the halo (::before) and shine (::after) for `.bg-nopaincream` */
+.bg-nopaincream::before,
+.bg-nopaincream::after,
+.bg-nopaincream .hero-image,
+.bg-nopaincream .hero-image.shiny {
+  animation: none !important;
+  transition: none !important;
+  will-change: auto !important;
+}
+
+.bg-nopaincream::before {
+  /* remove blurred duplicate layer */
+  filter: none !important;
+  transform: none !important;
+  opacity: 0 !important;
+  background-image: none !important;
+  display: none !important;
+}
+
+.bg-nopaincream::after {
+  /* remove shine sweep */
+  animation: none !important;
+  opacity: 0 !important;
+  display: none !important;
+  background: none !important;
+}
+
+.hero-image.shiny {
+  /* ensure no blur or drop-shadow on the hero <img> */
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Keep the effect subtle on small screens */
+@media (max-width: 640px) {
+  :root { --nopain-blur: 3px; --nopain-shine-duration: 7s; }
+  .bg-nopaincream::before { opacity: 0.75; }
+  .bg-nopaincream::after { --nopain-shine-duration: 7s; }
+}
+
+/* ================================================== */
+/* Per-page switch: disable ALL animations/transitions   */
+/* Apply `.no-animations` to a wrapper around a page to
+   turn off animations, transitions and animated pseudo-elements
+   for better control (used on the No-Pain product page). */
+.no-animations,
+.no-animations * {
+  animation: none !important;
+  transition: none !important;
+  will-change: auto !important;
+}
+.no-animations::before,
+.no-animations::after,
+.no-animations *::before,
+.no-animations *::after {
+  animation: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+}
+
+
+
 /* 💎 Sello Monumby — mobile-first, variables control sizes per breakpoint */
 /* --------------------------------------------------------------- */
 .global-sello {
@@ -888,6 +1184,86 @@ body:has(.photo-modal) {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* ============================== */
+/* 🟣 Hero / Global badge animation (float + glow) */
+/* Subtle float and soft color glow for hero seal / badge. Respects reduced-motion. */
+/* ============================== */
+@keyframes sello-float {
+  0% { transform: translateY(0) rotate(-0.4deg); }
+  25% { transform: translateY(-6px) rotate(0.6deg); }
+  50% { transform: translateY(0) rotate(-0.2deg); }
+  75% { transform: translateY(4px) rotate(0.4deg); }
+ 100% { transform: translateY(0) rotate(-0.4deg); }
+}
+
+@keyframes sello-glow {
+  0% { filter: drop-shadow(0 0 0px rgba(244,114,182,0)); }
+  50% { filter: drop-shadow(0 0 10px rgba(244,114,182,0.12)); }
+ 100% { filter: drop-shadow(0 0 0px rgba(244,114,182,0)); }
+}
+
+.global-sello,
+.hero-sello,
+.badge {
+  will-change: transform, filter;
+  transition: transform 320ms ease, filter 320ms ease;
+  /* Animate the wrapper as well as the <img> so the seal floats whether
+     Next/Image applies classes to the wrapper or the image element. The
+     explicit width set on the wrapper (via variables) prevents it from
+     expanding to full width when animated. */
+  animation: sello-float 6s ease-in-out infinite, sello-glow 6s ease-in-out infinite;
+}
+
+.global-sello img,
+.hero-sello img,
+.badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Keep animation on the <img> so either element (wrapper or img)
+     animates depending on how Next/Image renders the DOM. */
+  animation: sello-float 6s ease-in-out infinite, sello-glow 6s ease-in-out infinite;
+}
+
+/* Slightly slower on desktop for a calmer effect */
+@media (min-width: 1025px) {
+  .global-sello,
+  .hero-sello,
+  .badge,
+  .global-sello img,
+  .hero-sello img,
+  .badge img {
+    animation-duration: 7.2s, 7.2s;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  /* Respect reduced-motion for both the wrapper and the image */
+  .global-sello,
+  .hero-sello,
+  .badge,
+  .global-sello img,
+  .hero-sello img,
+  .badge img {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High-specificity fallback: ensure the hero badge animation runs and isn't accidentally overridden
+   Applied with !important to override other rules that may set animation: none elsewhere. */
+section[role="banner"] .hero-sello img,
+.hero-sello > img,
+.hero-sello img {
+  animation-name: sello-float, sello-glow !important;
+  animation-duration: 6s, 6s !important;
+  animation-timing-function: ease-in-out, ease-in-out !important;
+  animation-iteration-count: infinite !important;
+  animation-play-state: running !important;
+  will-change: transform, filter !important;
 }
 
 /* Tablet: override variables for tablet range */
@@ -916,6 +1292,106 @@ body:has(.photo-modal) {
   header {
     padding-top: 1.5rem !important;
     padding-bottom: 1.5rem !important;
+  }
+}
+
+/* ============================== */
+/* 📌 Floating Action Buttons (FAB) — stacked on the right side */
+/* ============================== */
+.floating-actions {
+  position: fixed;
+  /* pegado al borde derecho */
+  right: 0;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 11000;
+  align-items: flex-end; /* keep pills touching the edge */
+  padding-right: 6px; /* small offset so pills appear glued */
+}
+
+.floating-actions .fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 64px;
+  height: 48px;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease, right 160ms ease;
+  position: relative; /* for label positioning */
+  overflow: visible;
+}
+
+.floating-actions .fab:focus {
+  outline: 2px solid rgba(255,255,255,0.12);
+  outline-offset: 3px;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.floating-actions .fab:hover {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.floating-actions .fab svg { display: block; }
+
+/* Slightly more translucent FAB backgrounds for less visual weight */
+.floating-actions .whatsapp { background: linear-gradient(180deg, rgba(47,111,81,0.78), rgba(36,89,63,0.72)); }
+.floating-actions .contact { background: linear-gradient(180deg, rgba(107,47,58,0.78), rgba(74,31,41,0.72)); }
+.floating-actions .email { background: linear-gradient(180deg, rgba(63,65,102,0.78), rgba(43,45,74,0.72)); }
+
+/* Half-pill shape: rounded on the left, flat on the right so the buttons sit flush to the page edge */
+.floating-actions .half-pill {
+  border-radius: 9999px 0 0 9999px;
+  padding-left: 12px;
+  padding-right: 8px;
+  background-clip: padding-box;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  /* slight transparency to reduce visual weight */
+  opacity: 0.82;
+}
+
+.floating-actions .fab img { display: block; margin-left: 2px; }
+
+/* Label shown to the left of each FAB on medium+ screens */
+.floating-actions .fab-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+/* Slightly enlarge label on hover for clarity */
+.floating-actions .fab:hover .fab-label {
+  transform: translateY(-50%) translateX(-4px) scale(1.02);
+}
+
+@media (max-width: 640px) {
+  /* On small screens keep the FABs accessible but avoid covering main CTA */
+  .floating-actions { right: 0; top: 55%; transform: translateY(-55%); padding-right: 4px; }
+  .floating-actions .fab { width: 52px; height: 44px; padding-left: 8px; }
+  /* hide labels on small screens to preserve space */
+  .floating-actions .fab-label { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-actions .fab, .floating-actions .fab:hover {
+    transition: none !important;
+    transform: none !important;
   }
 }
 

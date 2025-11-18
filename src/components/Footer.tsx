@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import NewsletterForm from "./NewsletterForm";
+import { motion, useReducedMotion } from "framer-motion";
 import { getSlug, slugMap } from "@/utils/slugMap";
 
 export default function Footer({ locale: localeProp }: { locale?: string }) {
@@ -79,20 +80,30 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
                 { slug: "faq", label: t("faq") },
                 { slug: "legal", label: t("legal") },
               ] as const
-            ).map((item, i) => (
-              <li key={i}>
-                <Link
-                  href={
-                    "slug" in item
-                      ? `/${locale}/${getSlug(item.slug, locale)}`
-                      : `/${locale}${item.href}`
-                  }
-                  className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-sm transition"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            ).map((item, i) => {
+              const isContact = "slug" in item && item.slug === "contact";
+
+              return (
+                <li key={i}>
+                  <Link
+                    href={
+                      "slug" in item
+                        ? `/${locale}/${getSlug(item.slug, locale)}`
+                        : `/${locale}${item.href}`
+                    }
+                    className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-sm transition"
+                  >
+                    {isContact ? (
+                      <motion.span className="contact-anim inline-block">
+                        {item.label}
+                      </motion.span>
+                    ) : (
+                      item.label
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
