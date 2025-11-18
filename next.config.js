@@ -13,6 +13,15 @@ const nextConfig = {
   },
   reactStrictMode: true,
 
+  // Allow dev origins (fixes Cross origin request detected warning during dev)
+  // Add any local IPs or hostnames you use to access the dev server (e.g. LAN IP)
+  // In production this has no effect; it's only for the dev server security check.
+  allowedDevOrigins: [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.1.33:3000",
+  ],
+
   // 🖼️ Nueva forma recomendada de definir fuentes externas de imágenes
   images: {
     remotePatterns: [

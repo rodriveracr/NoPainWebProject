@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import FloatingActions from "@/components/FloatingActions";
 import "../globals.css";
 
 interface Props {
@@ -64,6 +65,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           priority
         />
       </Link>
+
+      {/* Floating helper buttons (WhatsApp / Contact / Email) - rendered inside NextIntlClientProvider */}
+      <FloatingActions />
     </NextIntlClientProvider>
   );
 }

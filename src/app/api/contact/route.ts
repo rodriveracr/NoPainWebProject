@@ -143,6 +143,10 @@ export async function POST(req: Request) {
       mensaje: mensaje ? `(${mensaje.length} chars)` : undefined,
     });
 
+    // --- DEBUG LOGS (temporary) ---
+    // NOTE: moved below emailRegex declaration to avoid TDZ ReferenceError in production
+    // --- end debug logs ---
+
     // honeypot
     if (website) {
       console.log(`[${now()}] [${reqId}] 🕵️ Honeypot triggered`);
@@ -156,10 +160,31 @@ export async function POST(req: Request) {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // --- DEBUG LOGS (temporary) ---
+    try {
+      console.log(
+        `[${now()}] [${reqId}] 🔍 Debug: emailValid=${emailRegex.test(
+          String(email || ""),
+        )}, nombreType=${typeof nombre}, nombreLen=${String(
+          nombre || "",
+        ).length}, mensajeType=${typeof mensaje}, mensajeLen=${String(
+          mensaje || "",
+        ).length}`,
+      );
+      console.log(
+        `[${now()}] [${reqId}] 🔍 mensaje sample: ${String(mensaje || "").slice(
+          0,
+          300,
+        )}`,
+      );
+    } catch (e) {
+      console.warn(`[${now()}] [${reqId}] ⚠️ Debug log failed:`, String(e));
+    }
+    // --- end debug logs ---
     if (
       !emailRegex.test(email) ||
-      mensaje.length > 1000 ||
-      nombre.length > 100
+      mensaje.length > 5000 ||
+      nombre.length > 200
     ) {
       console.log(`[${now()}] [${reqId}] ⚠️ Validación fallida`);
       return NextResponse.json(

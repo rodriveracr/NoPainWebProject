@@ -22,7 +22,7 @@ export default function Hero() {
         priority
         fetchPriority="high"
         quality={85}
-        className="hero-image absolute inset-0 w-full h-full object-cover object-center opacity-55"
+        className="hero-image shiny absolute inset-0 w-full h-full object-cover object-center opacity-55"
       />
 
       

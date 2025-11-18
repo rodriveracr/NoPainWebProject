@@ -158,20 +158,27 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
 
           {/* Links derecha con separadores */}
           <div className="flex flex-1 items-center justify-end gap-8 text-[0.9rem] uppercase tracking-wider font-medium whitespace-nowrap pr-4">
-            {rightLinks.map((link, index) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={handleLinkClick}
-                className={`hover:text-gray-400 transition-colors relative whitespace-nowrap ${
-                  index < rightLinks.length - 1
-                    ? "after:content-[''] after:absolute after:right-[-1rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
-                    : ""
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {rightLinks.map((link, index) => {
+              const isContact = link.href.endsWith("/contact");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className={`hover:text-gray-400 transition-colors relative whitespace-nowrap ${
+                    index < rightLinks.length - 1
+                      ? "after:content-[''] after:absolute after:right-[-1rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
+                      : ""
+                  }`}
+                >
+                  {isContact ? (
+                    <span className="contact-anim inline-block">{link.label}</span>
+                  ) : (
+                    link.label
+                  )}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>
@@ -204,7 +211,11 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
                   onClick={handleLinkClick}
                   className="text-white hover:text-gray-400 transition-colors"
                 >
-                  {link.label}
+                  {link.href.endsWith("/contact") ? (
+                    <span className="contact-anim inline-block">{link.label}</span>
+                  ) : (
+                    link.label
+                  )}
                 </Link>
               ))}
 
