@@ -111,9 +111,9 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
 
 
         {/* 💻 Desktop */}
-        <div className="hidden xl:flex items-center justify-between w-full text-white gap-12">
+        <div className="hidden xl:flex items-center justify-center w-full text-white gap-8">
           {/* Links izquierda con separadores */}
-          <div className="flex flex-0.5 items-center justify-start gap-8 text-[0.9rem] uppercase tracking-wider font-medium whitespace-nowrap">
+          <div className="flex flex-1 items-center justify-end gap-8 text-[0.9rem] uppercase tracking-wider font-medium whitespace-nowrap">
             {leftLinks.map((link, index) => (
               <Link
                 key={link.href}
@@ -131,7 +131,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
           </div>
 
           {/* 🐊 Logo Cocodrilo */}
-          <div className="flex-shrink-0 px-6">
+          <div className="flex-shrink-0 px-8">
             <Link href={`/${locale}`} onClick={handleLinkClick}>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -157,7 +157,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
           </div>
 
           {/* Links derecha con separadores */}
-          <div className="flex flex-1 items-center justify-end gap-8 text-[0.9rem] uppercase tracking-wider font-medium whitespace-nowrap pr-4">
+          <div className="flex flex-1 items-center justify-start gap-8 text-[0.9rem] uppercase tracking-wider font-medium whitespace-nowrap">
             {rightLinks.map((link, index) => {
               const isContact = link.href.endsWith("/contact");
               return (
