@@ -1,4 +1,5 @@
 // 📄 /src/app/[locale]/page.tsx
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -18,7 +19,7 @@ type Dist = {
   name: string;
   whatsapp: string;
   url?: string;
-  extra?: string | JSX.Element;
+  extra?: string | React.ReactNode;
   isFixedText?: boolean;
 };
 
