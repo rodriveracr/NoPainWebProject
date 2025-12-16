@@ -24,26 +24,40 @@ export default function Contact() {
   const [message, setMessage] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
-  // ✅ Cargar script de Turnstile
+  // ✅ Cargar script de Turnstile y renderizar widget
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
     script.async = true;
     script.defer = true;
+    
+    script.onload = () => {
+      // Una vez cargado el script, renderizar el widget
+      const turnstileContainer = document.getElementById("turnstile-widget");
+      if (turnstileContainer && (window as any).turnstile) {
+        (window as any).turnstile.render("#turnstile-widget", {
+          sitekey: TURNSTILE_SITE_KEY,
+          theme: "dark",
+          callback: (token: string) => {
+            console.log("✅ Turnstile token received");
+            setTurnstileToken(token);
+          },
+          "error-callback": () => {
+            console.error("❌ Turnstile error");
+            setTurnstileToken(null);
+          },
+        });
+      }
+    };
+    
     document.body.appendChild(script);
 
-    // Callbacks globales para Turnstile
-    (window as any).onTurnstileSuccess = (token: string) => {
-      setTurnstileToken(token);
-    };
-
-    (window as any).onTurnstileError = () => {
-      setTurnstileToken(null);
-      console.error("❌ Turnstile error");
-    };
-
     return () => {
-      document.body.removeChild(script);
+      try {
+        document.body.removeChild(script);
+      } catch (e) {
+        // Script already removed
+      }
     };
   }, []);
 
@@ -224,13 +238,7 @@ export default function Contact() {
             />
 
             {/* 🤖 Widget de Turnstile */}
-            <div
-              className="cf-turnstile"
-              data-sitekey={TURNSTILE_SITE_KEY}
-              data-callback="onTurnstileSuccess"
-              data-error-callback="onTurnstileError"
-              data-theme="dark"
-            />
+            <div id="turnstile-widget" className="flex justify-center my-4" />
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">
               <input
