@@ -6,6 +6,14 @@
 /* 🧱 Imports de librerías y estilos base */
 /* ------------------ */
 @import "tailwindcss";
+
+/* hCaptcha widget container */
+.hcaptcha-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";

@@ -250,13 +250,12 @@ export default function Contact() {
 
             {/* 🔐 Widget de hCaptcha */}
             <div
-              className="h-captcha"
+              className="h-captcha hcaptcha-container"
               data-sitekey={HCAPTCHA_SITE_KEY}
               data-theme="dark"
               data-callback="onHcaptchaSuccess"
               data-error-callback="onHcaptchaError"
               data-expired-callback="onHcaptchaExpire"
-              style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "1rem" }}
             />
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">
