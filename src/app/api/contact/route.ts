@@ -135,7 +135,7 @@ export async function POST(req: Request) {
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
-    // 🔐 Validar origen (solo desde tu dominio o localhost)
+    // 🔐 Validar origen (rechazar solo si es sospechoso, no si viene de tu sitio)
     const origin = req.headers.get("origin") || req.headers.get("referer") || "";
     const allowedOrigins = [
       "https://www.nopainnumbing.net",
@@ -145,7 +145,8 @@ export async function POST(req: Request) {
     ];
     const isValidOrigin = allowedOrigins.some(allowed => origin.includes(allowed));
     
-    if (origin && !isValidOrigin) {
+    // Solo rechazar si hay un origin Y no es válido (no rechazar si no hay origin)
+    if (origin && !isValidOrigin && !origin.includes("localhost")) {
       console.warn(`[${now()}] [${reqId}] 🔐 Origen rechazado: ${origin}`);
       return NextResponse.json(
         { error: "Origen no permitido" },
