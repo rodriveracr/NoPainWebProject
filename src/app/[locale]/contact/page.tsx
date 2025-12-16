@@ -1,7 +1,7 @@
 // 📄 /src/app/[locale]/contact/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Mail, Instagram } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl"; // ✅ useLocale ya lo maneja el layout global
@@ -11,6 +11,7 @@ const TURNSTILE_SITE_KEY = "0x4AAAAAACRC2Ecebh-YraF";
 
 export default function Contact() {
   const t = useTranslations("Contact");
+  const turnstileRef = useRef<HTMLDivElement>(null);
 
   // 🧩 Estado del formulario
   const [formData, setFormData] = useState({
@@ -23,43 +24,56 @@ export default function Contact() {
   const [status, setStatus] = useState<null | "sending" | "ok" | "error">(null);
   const [message, setMessage] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileLoaded, setTurnstileLoaded] = useState(false);
 
-  // ✅ Cargar script de Turnstile y renderizar widget
+  // ✅ Cargar script de Turnstile en el head
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = () => {
-      // Una vez cargado el script, renderizar el widget
-      const turnstileContainer = document.getElementById("turnstile-widget");
-      if (turnstileContainer && (window as any).turnstile) {
-        (window as any).turnstile.render("#turnstile-widget", {
+    // Cargar el script de Turnstile una sola vez
+    if (!window.document.getElementById("turnstile-script")) {
+      const script = document.createElement("script");
+      script.id = "turnstile-script";
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        console.log("✅ Turnstile script loaded");
+        setTurnstileLoaded(true);
+      };
+      script.onerror = () => {
+        console.error("❌ Failed to load Turnstile script");
+      };
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  // ✅ Renderizar widget cuando esté listo
+  useEffect(() => {
+    if (turnstileLoaded && turnstileRef.current && !(window as any).turnstileRendered) {
+      const turnstile = (window as any).turnstile;
+      if (turnstile && typeof turnstile.render === "function") {
+        console.log("🤖 Rendering Turnstile widget...");
+        turnstile.render(turnstileRef.current, {
           sitekey: TURNSTILE_SITE_KEY,
           theme: "dark",
           callback: (token: string) => {
-            console.log("✅ Turnstile token received");
+            console.log("✅ Turnstile token received:", token.slice(0, 20) + "...");
             setTurnstileToken(token);
           },
           "error-callback": () => {
             console.error("❌ Turnstile error");
             setTurnstileToken(null);
           },
+          "expired-callback": () => {
+            console.warn("⚠️ Turnstile token expired");
+            setTurnstileToken(null);
+          },
         });
+        (window as any).turnstileRendered = true;
+      } else {
+        console.warn("⚠️ Turnstile API not ready yet");
       }
-    };
-    
-    document.body.appendChild(script);
-
-    return () => {
-      try {
-        document.body.removeChild(script);
-      } catch (e) {
-        // Script already removed
-      }
-    };
-  }, []);
+    }
+  }, [turnstileLoaded]);
 
   // ✍️ Manejo de inputs
   const handleChange = (
@@ -238,7 +252,7 @@ export default function Contact() {
             />
 
             {/* 🤖 Widget de Turnstile */}
-            <div id="turnstile-widget" className="flex justify-center my-4" />
+            <div ref={turnstileRef} className="flex justify-center my-4" />
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">
               <input
