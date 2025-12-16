@@ -95,11 +95,12 @@ async function sendBrevoEmail(
     htmlContent: html,
   };
 
-  if (!apiKey) {
+  if (!apiKey || apiKey.length < 10) {
+    console.error("❌ BREVO_API_KEY missing or invalid:", apiKey?.slice(0, 10));
     return {
       ok: false,
       status: 401,
-      body: { message: "Missing BREVO_API_KEY" },
+      body: { message: "Missing or invalid BREVO_API_KEY" },
     };
   }
 
@@ -122,8 +123,13 @@ async function sendBrevoEmail(
       /* keep text */
     }
 
+    if (!res.ok) {
+      console.error(`❌ Brevo error ${res.status}:`, parsed || text);
+    }
+
     return { ok: res.ok, status: res.status, body: parsed };
   } catch (err) {
+    console.error("❌ Brevo fetch error:", String(err));
     return { ok: false, error: String(err) };
   }
 }

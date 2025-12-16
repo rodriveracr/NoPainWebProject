@@ -40,10 +40,11 @@ export async function POST(req: Request) {
 
     const apiKey = process.env.BREVO_API_KEY;
     const listId = Number(process.env.BREVO_LIST_ID || 2);
-    if (!apiKey) {
+    if (!apiKey || apiKey.length < 10) {
+      console.error("[subscribe] ❌ Missing or invalid BREVO_API_KEY:", apiKey?.slice(0, 10));
       return NextResponse.json(
-        { error: "Falta BREVO_API_KEY" },
-        { status: 500 },
+        { error: "Falta BREVO_API_KEY válida" },
+        { status: 500 }
       );
     }
 
@@ -75,20 +76,19 @@ export async function POST(req: Request) {
     console.log("[subscribe] brevo status:", res.status, "body:", data);
 
     // ✅ Manejo explícito de estados
-    if (res.status === 201) {
+    if (res.status === 201 || res.status === 204) {
       return NextResponse.json({
         success: true,
-        message: "Suscripción creada",
+        message: res.status === 204 ? "Ya estás suscrito" : "Suscripción creada",
       });
-    } else if (res.status === 204) {
-      // Ya estaba suscrito → tratamos como éxito
-      return NextResponse.json({ success: true, message: "Ya estás suscrito" });
     } else if (res.status >= 400 && res.status < 500) {
+      console.error("[subscribe] ❌ Brevo 4xx error:", res.status, data);
       return NextResponse.json(
-        { error: "Error de validación o ya suscrito", details: data },
+        { error: "Error de validación", details: data },
         { status: 400 },
       );
-    } else {
+    } else if (!res.ok) {
+      console.error("[subscribe] ❌ Brevo error:", res.status, data);
       return NextResponse.json(
         { error: "Error del servidor de Brevo", details: data },
         { status: 500 },
