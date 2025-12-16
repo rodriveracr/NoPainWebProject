@@ -34,23 +34,13 @@ export default function Contact() {
   const [status, setStatus] = useState<null | "sending" | "ok" | "error">(null);
   const [message, setMessage] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileReady, setTurnstileReady] = useState(false);
 
   // ✅ Cargar script de Turnstile y auto-renderizar
   useEffect(() => {
-    // Agregar el script de Turnstile al head
-    const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      console.log("✅ Turnstile API cargado");
-      // El widget se auto-renderiza cuando encuentra class="cf-turnstile"
-    };
-    document.head.appendChild(script);
-
-    // Definir callbacks globales para Turnstile
+    // Definir callbacks globales ANTES de cargar el script
     (window as any).onTurnstileSuccess = (token: string) => {
-      console.log("✅ Turnstile verificado - Token recibido");
+      console.log("✅ Turnstile verificado");
       setTurnstileToken(token);
     };
 
@@ -60,15 +50,41 @@ export default function Contact() {
     };
 
     (window as any).onTurnstileExpired = () => {
-      console.warn("⚠️ Token de Turnstile expirado");
+      console.warn("⚠️ Token expirado");
       setTurnstileToken(null);
     };
 
+    // Si el script ya existe, no cargar de nuevo
+    if (window.turnstile) {
+      console.log("✅ Turnstile ya cargado");
+      setTurnstileReady(true);
+      return;
+    }
+
+    // Cargar el script
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      console.log("✅ Script de Turnstile cargado");
+      // Esperar un poco para que el API se inicialice
+      setTimeout(() => {
+        if (window.turnstile) {
+          console.log("✅ Turnstile API disponible");
+          setTurnstileReady(true);
+          // El widget se renderiza automáticamente cuando encuentra class="cf-turnstile"
+        }
+      }, 100);
+    };
+    script.onerror = () => {
+      console.error("❌ Error cargando script de Turnstile");
+    };
+
+    document.head.appendChild(script);
+
     return () => {
-      // Limpiar cuando se desmonta
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
+      // No eliminar el script para que no se recargue
     };
   }, []);
 
@@ -248,16 +264,18 @@ export default function Contact() {
               required
             />
 
-            {/* 🤖 Widget de Turnstile - Auto-renderizado por el script */}
-            <div
-              className="cf-turnstile"
-              data-sitekey={TURNSTILE_SITE_KEY}
-              data-theme="dark"
-              data-callback="onTurnstileSuccess"
-              data-error-callback="onTurnstileError"
-              data-expired-callback="onTurnstileExpired"
-              style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "1rem" }}
-            />
+            {/* 🤖 Widget de Turnstile - visible solo cuando esté listo */}
+            {turnstileReady && (
+              <div
+                className="cf-turnstile"
+                data-sitekey={TURNSTILE_SITE_KEY}
+                data-theme="dark"
+                data-callback="onTurnstileSuccess"
+                data-error-callback="onTurnstileError"
+                data-expired-callback="onTurnstileExpired"
+                style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "1rem" }}
+              />
+            )}
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">
               <input
