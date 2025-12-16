@@ -25,34 +25,10 @@ function escapeHtml(s: string) {
     .replace(/'/g, "&#039;");
 }
 
-// 🚨 Detecta patrones típicos de spam/bot
+// 🚨 Detecta patrones típicos de spam/bot - DESHABILITADO (todo permitido)
 function isLikelySpam(nombre: string, mensaje: string): boolean {
-  const lowerMsg = mensaje.toLowerCase();
-  const lowerNombre = nombre.toLowerCase();
-  
-  // Patterns de spam comunes
-  const spamPatterns = [
-    /^[a-z0-9]+$/i, // Solo caracteres sin sentido (WMFjnWZpIXOdjK)
-    /^[a-z]{10,}$/i, // Palabra larga sin vocales
-    /^[a-z0-9]{15,}$/, // Cadena muy larga sin espacios
-  ];
-  
-  // Nombre sospechoso
-  if (spamPatterns.some(p => p.test(nombre))) {
-    return true;
-  }
-  
-  // Mensaje muy corto + nombre extraño (típico de bots)
-  if (mensaje.length < 10 && /^[a-z0-9]+$/i.test(nombre)) {
-    return true;
-  }
-  
-  // Muy pocas palabras reales en el mensaje
-  const wordCount = mensaje.split(/\s+/).length;
-  if (wordCount < 2 && mensaje.length > 5) {
-    return true; // Ej: "JEJmPuIXBITkvOSA"
-  }
-  
+  // Sin restricciones - dejar pasar TODO
+  // Rate limiting (5 req/min por IP) y honeypot ya previenen bots
   return false;
 }
 
