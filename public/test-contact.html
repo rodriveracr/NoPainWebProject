@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form Test</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #222; color: white; }
+        h1 { color: #ff6b9d; }
+        form { background: #333; padding: 20px; border-radius: 8px; max-width: 500px; }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; background: #444; border: 1px solid #666; color: white; border-radius: 4px; }
+        button { width: 100%; padding: 10px; background: #ff6b9d; border: none; color: white; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #ff4d84; }
+        #response { margin-top: 20px; padding: 15px; background: #1a1a1a; border-radius: 4px; white-space: pre-wrap; word-break: break-all; }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test Contact Form</h1>
+    
+    <form id="contactForm">
+        <input type="text" id="nombre" placeholder="Nombre" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <textarea id="mensaje" placeholder="Mensaje" rows="5" required></textarea>
+        <label>
+            <input type="checkbox" id="newsletter" /> Newsletter
+        </label>
+        <button type="submit">Enviar Test</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const response = document.getElementById('response');
+            response.textContent = '⏳ Enviando...';
+
+            try {
+                const data = {
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    mensaje: document.getElementById('mensaje').value,
+                    newsletter: document.getElementById('newsletter').checked,
+                };
+
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+
+                const json = await res.json();
+                
+                if (res.ok && json.success) {
+                    response.innerHTML = `<span class="success">✅ SUCCESS!\nRequest ID: ${json.requestId}\nEmail enviado: ${json.support?.ok ? 'SÍ' : 'NO'}\n\nRespuesta completa:\n${JSON.stringify(json, null, 2)}</span>`;
+                } else {
+                    response.innerHTML = `<span class="error">❌ ERROR: ${json.error || 'Respuesta no exitosa'}\n\n${JSON.stringify(json, null, 2)}</span>`;
+                }
+            } catch (error) {
+                response.innerHTML = `<span class="error">❌ ERROR DE RED:\n${error.message}</span>`;
+            }
+        });
+
+        // Precompletar para test rápido
+        document.getElementById('nombre').value = 'Test User - ' + new Date().toLocaleTimeString();
+        document.getElementById('email').value = 'test@example.com';
+        document.getElementById('mensaje').value = 'This is a test message from the contact form testing page.';
+    </script>
+</body>
+</html>

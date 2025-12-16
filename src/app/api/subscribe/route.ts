@@ -4,19 +4,15 @@ import { rateLimit } from "@/app/api/utils/rateLimiter";
 
 export async function POST(req: Request) {
   try {
-    // 🔐 Validar origen (rechazar solo si es sospechoso, no si viene de tu sitio)
+    // 🔐 Validar origen (solo rechazar dominios completamente extraños)
     const origin = req.headers.get("origin") || req.headers.get("referer") || "";
-    const allowedOrigins = [
-      "https://www.nopainnumbing.net",
-      "https://nopainnumbing.net",
-      "http://localhost:3000",
-      "http://localhost",
-    ];
-    const isValidOrigin = allowedOrigins.some(allowed => origin.includes(allowed));
+    const isOriginSuspicious = origin && 
+      !origin.includes("nopainnumbing.net") && 
+      !origin.includes("localhost") &&
+      origin.length > 0;
     
-    // Solo rechazar si hay un origin Y no es válido (no rechazar si no hay origin)
-    if (origin && !isValidOrigin && !origin.includes("localhost")) {
-      console.warn(`[subscribe] Origen rechazado: ${origin}`);
+    if (isOriginSuspicious) {
+      console.warn(`[subscribe] Origen sospechoso rechazado: ${origin}`);
       return NextResponse.json(
         { error: "Origen no permitido" },
         { status: 403 }
