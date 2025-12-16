@@ -1,7 +1,7 @@
 // 📄 /src/app/[locale]/contact/page.tsx
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Instagram } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl"; // ✅ useLocale ya lo maneja el layout global
@@ -9,9 +9,19 @@ import "../../globals.css"; // ✅ Mantener estilos globales
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACRC2Ecebh-YraF";
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: string | HTMLElement, options: any) => string;
+      reset: (widgetId?: string) => void;
+      remove: (widgetId?: string) => void;
+      getResponse: (widgetId?: string) => string | undefined;
+    };
+  }
+}
+
 export default function Contact() {
   const t = useTranslations("Contact");
-  const turnstileRef = useRef<HTMLDivElement>(null);
 
   // 🧩 Estado del formulario
   const [formData, setFormData] = useState({
@@ -24,56 +34,43 @@ export default function Contact() {
   const [status, setStatus] = useState<null | "sending" | "ok" | "error">(null);
   const [message, setMessage] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [turnstileLoaded, setTurnstileLoaded] = useState(false);
 
-  // ✅ Cargar script de Turnstile en el head
+  // ✅ Cargar script de Turnstile y auto-renderizar
   useEffect(() => {
-    // Cargar el script de Turnstile una sola vez
-    if (!window.document.getElementById("turnstile-script")) {
-      const script = document.createElement("script");
-      script.id = "turnstile-script";
-      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        console.log("✅ Turnstile script loaded");
-        setTurnstileLoaded(true);
-      };
-      script.onerror = () => {
-        console.error("❌ Failed to load Turnstile script");
-      };
-      document.head.appendChild(script);
-    }
-  }, []);
+    // Agregar el script de Turnstile al head
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      console.log("✅ Turnstile API cargado");
+      // El widget se auto-renderiza cuando encuentra class="cf-turnstile"
+    };
+    document.head.appendChild(script);
 
-  // ✅ Renderizar widget cuando esté listo
-  useEffect(() => {
-    if (turnstileLoaded && turnstileRef.current && !(window as any).turnstileRendered) {
-      const turnstile = (window as any).turnstile;
-      if (turnstile && typeof turnstile.render === "function") {
-        console.log("🤖 Rendering Turnstile widget...");
-        turnstile.render(turnstileRef.current, {
-          sitekey: TURNSTILE_SITE_KEY,
-          theme: "dark",
-          callback: (token: string) => {
-            console.log("✅ Turnstile token received:", token.slice(0, 20) + "...");
-            setTurnstileToken(token);
-          },
-          "error-callback": () => {
-            console.error("❌ Turnstile error");
-            setTurnstileToken(null);
-          },
-          "expired-callback": () => {
-            console.warn("⚠️ Turnstile token expired");
-            setTurnstileToken(null);
-          },
-        });
-        (window as any).turnstileRendered = true;
-      } else {
-        console.warn("⚠️ Turnstile API not ready yet");
+    // Definir callbacks globales para Turnstile
+    (window as any).onTurnstileSuccess = (token: string) => {
+      console.log("✅ Turnstile verificado - Token recibido");
+      setTurnstileToken(token);
+    };
+
+    (window as any).onTurnstileError = () => {
+      console.error("❌ Error en Turnstile");
+      setTurnstileToken(null);
+    };
+
+    (window as any).onTurnstileExpired = () => {
+      console.warn("⚠️ Token de Turnstile expirado");
+      setTurnstileToken(null);
+    };
+
+    return () => {
+      // Limpiar cuando se desmonta
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
       }
-    }
-  }, [turnstileLoaded]);
+    };
+  }, []);
 
   // ✍️ Manejo de inputs
   const handleChange = (
@@ -91,7 +88,12 @@ export default function Contact() {
     e.preventDefault();
     e.stopPropagation();
 
-    // ⚠️ Turnstile es opcional por ahora - permitir envío incluso sin token
+    if (!turnstileToken) {
+      setStatus("error");
+      setMessage("❌ Por favor completa la verificación de Turnstile.");
+      return;
+    }
+
     setStatus("sending");
     setMessage(null);
 
@@ -99,7 +101,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, turnstileToken: turnstileToken || null }),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       const json = await res.json().catch(() => ({}));
@@ -110,8 +112,8 @@ export default function Contact() {
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
         setTurnstileToken(null);
         // Reset Turnstile widget si existe
-        if (typeof window !== "undefined" && (window as any).turnstile) {
-          (window as any).turnstile.reset();
+        if (typeof window !== "undefined" && window.turnstile) {
+          window.turnstile.reset();
         }
         setTimeout(() => {
           setStatus(null);
@@ -246,8 +248,16 @@ export default function Contact() {
               required
             />
 
-            {/* 🤖 Widget de Turnstile */}
-            <div ref={turnstileRef} className="flex justify-center my-4" />
+            {/* 🤖 Widget de Turnstile - Auto-renderizado por el script */}
+            <div
+              className="cf-turnstile"
+              data-sitekey={TURNSTILE_SITE_KEY}
+              data-theme="dark"
+              data-callback="onTurnstileSuccess"
+              data-error-callback="onTurnstileError"
+              data-expired-callback="onTurnstileExpired"
+              style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "1rem" }}
+            />
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">
               <input
