@@ -1,8 +1,37 @@
 // src/app/api/subscribe/route.ts
 import { NextResponse } from "next/server";
+import { rateLimit } from "@/app/api/utils/rateLimiter";
 
 export async function POST(req: Request) {
   try {
+    // 🔐 Validar origen (solo desde tu dominio o localhost)
+    const origin = req.headers.get("origin") || req.headers.get("referer") || "";
+    const allowedOrigins = [
+      "https://www.nopainnumbing.net",
+      "https://nopainnumbing.net",
+      "http://localhost:3000",
+      "http://localhost",
+    ];
+    const isValidOrigin = allowedOrigins.some(allowed => origin.includes(allowed));
+    
+    if (origin && !isValidOrigin) {
+      console.warn(`[subscribe] Origen rechazado: ${origin}`);
+      return NextResponse.json(
+        { error: "Origen no permitido" },
+        { status: 403 }
+      );
+    }
+
+    // 🛡️ Rate limiting: 5 requests por IP cada 60 segundos
+    const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown";
+    if (!rateLimit(ip, 5, 60000)) {
+      console.warn(`[subscribe] Rate limit exceeded for IP: ${ip}`);
+      return NextResponse.json(
+        { error: "Demasiadas suscripciones. Intenta más tarde." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json().catch(() => ({}));
     const email = String(body?.email || "")
       .trim()

@@ -25,6 +25,37 @@ function escapeHtml(s: string) {
     .replace(/'/g, "&#039;");
 }
 
+// 🚨 Detecta patrones típicos de spam/bot
+function isLikelySpam(nombre: string, mensaje: string): boolean {
+  const lowerMsg = mensaje.toLowerCase();
+  const lowerNombre = nombre.toLowerCase();
+  
+  // Patterns de spam comunes
+  const spamPatterns = [
+    /^[a-z0-9]+$/i, // Solo caracteres sin sentido (WMFjnWZpIXOdjK)
+    /^[a-z]{10,}$/i, // Palabra larga sin vocales
+    /^[a-z0-9]{15,}$/, // Cadena muy larga sin espacios
+  ];
+  
+  // Nombre sospechoso
+  if (spamPatterns.some(p => p.test(nombre))) {
+    return true;
+  }
+  
+  // Mensaje muy corto + nombre extraño (típico de bots)
+  if (mensaje.length < 10 && /^[a-z0-9]+$/i.test(nombre)) {
+    return true;
+  }
+  
+  // Muy pocas palabras reales en el mensaje
+  const wordCount = mensaje.split(/\s+/).length;
+  if (wordCount < 2 && mensaje.length > 5) {
+    return true; // Ej: "JEJmPuIXBITkvOSA"
+  }
+  
+  return false;
+}
+
 // --- RATE LIMIT ---
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minuto
 const MAX_REQUESTS_PER_IP = 5;
@@ -104,6 +135,24 @@ export async function POST(req: Request) {
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
+    // 🔐 Validar origen (solo desde tu dominio o localhost)
+    const origin = req.headers.get("origin") || req.headers.get("referer") || "";
+    const allowedOrigins = [
+      "https://www.nopainnumbing.net",
+      "https://nopainnumbing.net",
+      "http://localhost:3000",
+      "http://localhost",
+    ];
+    const isValidOrigin = allowedOrigins.some(allowed => origin.includes(allowed));
+    
+    if (origin && !isValidOrigin) {
+      console.warn(`[${now()}] [${reqId}] 🔐 Origen rechazado: ${origin}`);
+      return NextResponse.json(
+        { error: "Origen no permitido" },
+        { status: 403 }
+      );
+    }
+
     // 🚫 Rate limit por IP
     if (rateLimit(ip)) {
       console.warn(`[${now()}] [${reqId}] 🚫 Rate limit exceeded for ${ip}`);
@@ -150,6 +199,13 @@ export async function POST(req: Request) {
     // honeypot
     if (website) {
       console.log(`[${now()}] [${reqId}] 🕵️ Honeypot triggered`);
+      return NextResponse.json({ success: true });
+    }
+
+    // 🚨 Detección de spam/bot
+    if (isLikelySpam(nombre || "", mensaje || "")) {
+      console.log(`[${now()}] [${reqId}] 🤖 Spam detectado - Nombre: "${nombre}", Mensaje: "${mensaje}"`);
+      // Responder como si fuera válido (sin revelar que es spam)
       return NextResponse.json({ success: true });
     }
 
