@@ -1,11 +1,13 @@
 // 📄 /src/app/[locale]/contact/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Instagram } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl"; // ✅ useLocale ya lo maneja el layout global
 import "../../globals.css"; // ✅ Mantener estilos globales
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAACRC2Ecebh-YraF";
 
 export default function Contact() {
   const t = useTranslations("Contact");
@@ -20,6 +22,30 @@ export default function Contact() {
 
   const [status, setStatus] = useState<null | "sending" | "ok" | "error">(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  // ✅ Cargar script de Turnstile
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    // Callbacks globales para Turnstile
+    (window as any).onTurnstileSuccess = (token: string) => {
+      setTurnstileToken(token);
+    };
+
+    (window as any).onTurnstileError = () => {
+      setTurnstileToken(null);
+      console.error("❌ Turnstile error");
+    };
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   // ✍️ Manejo de inputs
   const handleChange = (
@@ -36,6 +62,13 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!turnstileToken) {
+      setStatus("error");
+      setMessage("❌ Por favor completa la verificación de Turnstile.");
+      return;
+    }
+
     setStatus("sending");
     setMessage(null);
 
@@ -43,7 +76,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       });
 
       const json = await res.json().catch(() => ({}));
@@ -52,6 +85,11 @@ export default function Contact() {
         setStatus("ok");
         setMessage(t("submitMessage"));
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
+        setTurnstileToken(null);
+        // Reset Turnstile widget
+        if (typeof window !== "undefined" && (window as any).turnstile) {
+          (window as any).turnstile.reset();
+        }
         setTimeout(() => {
           setStatus(null);
           setMessage(null);
@@ -183,6 +221,15 @@ export default function Contact() {
               placeholder={t("messagePlaceholder")}
               className="w-full p-3 bg-gray-800 border border-gray-700 rounded text-white min-h-[120px]"
               required
+            />
+
+            {/* 🤖 Widget de Turnstile */}
+            <div
+              className="cf-turnstile"
+              data-sitekey={TURNSTILE_SITE_KEY}
+              data-callback="onTurnstileSuccess"
+              data-error-callback="onTurnstileError"
+              data-theme="dark"
             />
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">

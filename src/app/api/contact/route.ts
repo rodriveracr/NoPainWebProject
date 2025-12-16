@@ -7,6 +7,7 @@ type Body = {
   mensaje?: string;
   newsletter?: boolean;
   website?: string;
+  turnstileToken?: string;
 };
 
 // --- UTILIDADES ---
@@ -23,6 +24,32 @@ function escapeHtml(s: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+// 🤖 Validar token de Turnstile
+async function validateTurnstileToken(token: string): Promise<boolean> {
+  const secretKey = process.env.TURNSTILE_SECRET_KEY || "";
+  if (!secretKey) {
+    console.error("❌ TURNSTILE_SECRET_KEY not configured");
+    return false;
+  }
+
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret: secretKey,
+        response: token,
+      }),
+    });
+
+    const json = await res.json();
+    return json.success === true;
+  } catch (err) {
+    console.error("❌ Turnstile validation error:", String(err));
+    return false;
+  }
 }
 
 // 🚨 Detecta patrones típicos de spam/bot - DESHABILITADO (todo permitido)
@@ -164,12 +191,32 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
     }
 
-    const { nombre, email, mensaje, newsletter, website } = body;
+    const { nombre, email, mensaje, newsletter, website, turnstileToken } = body;
     console.log(`[${now()}] [${reqId}] 📩 /api/contact received:`, {
       nombre,
       email: email ? "****" : undefined,
       mensaje: mensaje ? `(${mensaje.length} chars)` : undefined,
     });
+
+    // 🤖 Validar Turnstile
+    if (!turnstileToken) {
+      console.log(`[${now()}] [${reqId}] ❌ Turnstile token missing`);
+      return NextResponse.json(
+        { error: "Turnstile validation failed" },
+        { status: 400 }
+      );
+    }
+
+    const isValidTurnstile = await validateTurnstileToken(turnstileToken);
+    if (!isValidTurnstile) {
+      console.log(`[${now()}] [${reqId}] ❌ Turnstile validation failed`);
+      return NextResponse.json(
+        { error: "Turnstile validation failed" },
+        { status: 403 }
+      );
+    }
+
+    console.log(`[${now()}] [${reqId}] ✅ Turnstile validated`);
 
     // --- DEBUG LOGS (temporary) ---
     // NOTE: moved below emailRegex declaration to avoid TDZ ReferenceError in production
