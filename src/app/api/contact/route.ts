@@ -198,25 +198,18 @@ export async function POST(req: Request) {
       mensaje: mensaje ? `(${mensaje.length} chars)` : undefined,
     });
 
-    // 🤖 Validar Turnstile
-    if (!turnstileToken) {
-      console.log(`[${now()}] [${reqId}] ❌ Turnstile token missing`);
-      return NextResponse.json(
-        { error: "Turnstile validation failed" },
-        { status: 400 }
-      );
+    // 🤖 Validar Turnstile (OPCIONAL - si está presente, validar; si no, permitir)
+    if (turnstileToken) {
+      const isValidTurnstile = await validateTurnstileToken(turnstileToken);
+      if (!isValidTurnstile) {
+        console.log(`[${now()}] [${reqId}] ⚠️ Turnstile validation failed (pero permitiendo de todas formas)`);
+        // No rechazar, solo log
+      } else {
+        console.log(`[${now()}] [${reqId}] ✅ Turnstile validated`);
+      }
+    } else {
+      console.log(`[${now()}] [${reqId}] ℹ️ Turnstile token not provided (permitiendo)`);
     }
-
-    const isValidTurnstile = await validateTurnstileToken(turnstileToken);
-    if (!isValidTurnstile) {
-      console.log(`[${now()}] [${reqId}] ❌ Turnstile validation failed`);
-      return NextResponse.json(
-        { error: "Turnstile validation failed" },
-        { status: 403 }
-      );
-    }
-
-    console.log(`[${now()}] [${reqId}] ✅ Turnstile validated`);
 
     // --- DEBUG LOGS (temporary) ---
     // NOTE: moved below emailRegex declaration to avoid TDZ ReferenceError in production

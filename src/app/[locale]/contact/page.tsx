@@ -91,12 +91,7 @@ export default function Contact() {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!turnstileToken) {
-      setStatus("error");
-      setMessage("❌ Por favor completa la verificación de Turnstile.");
-      return;
-    }
-
+    // ⚠️ Turnstile es opcional por ahora - permitir envío incluso sin token
     setStatus("sending");
     setMessage(null);
 
@@ -104,7 +99,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, turnstileToken }),
+        body: JSON.stringify({ ...formData, turnstileToken: turnstileToken || null }),
       });
 
       const json = await res.json().catch(() => ({}));
@@ -114,7 +109,7 @@ export default function Contact() {
         setMessage(t("submitMessage"));
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
         setTurnstileToken(null);
-        // Reset Turnstile widget
+        // Reset Turnstile widget si existe
         if (typeof window !== "undefined" && (window as any).turnstile) {
           (window as any).turnstile.reset();
         }
