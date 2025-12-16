@@ -7,7 +7,7 @@ type Body = {
   mensaje?: string;
   newsletter?: boolean;
   website?: string;
-  turnstileToken?: string;
+  hcaptchaToken?: string;
 };
 
 // --- UTILIDADES ---
@@ -26,28 +26,25 @@ function escapeHtml(s: string) {
     .replace(/'/g, "&#039;");
 }
 
-// 🤖 Validar token de Turnstile
-async function validateTurnstileToken(token: string): Promise<boolean> {
-  const secretKey = process.env.TURNSTILE_SECRET_KEY || "";
+// 🔐 Validar token de hCaptcha
+async function validateHcaptchaToken(token: string): Promise<boolean> {
+  const secretKey = process.env.HCAPTCHA_SECRET_KEY || "";
   if (!secretKey) {
-    console.error("❌ TURNSTILE_SECRET_KEY not configured");
+    console.error("❌ HCAPTCHA_SECRET_KEY not configured");
     return false;
   }
 
   try {
-    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    const res = await fetch("https://hcaptcha.com/siteverify", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        secret: secretKey,
-        response: token,
-      }),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `response=${token}&secret=${secretKey}`,
     });
 
     const json = await res.json();
     return json.success === true;
   } catch (err) {
-    console.error("❌ Turnstile validation error:", String(err));
+    console.error("❌ hCaptcha validation error:", String(err));
     return false;
   }
 }
@@ -191,32 +188,32 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "JSON inválido" }, { status: 400 });
     }
 
-    const { nombre, email, mensaje, newsletter, website, turnstileToken } = body;
+    const { nombre, email, mensaje, newsletter, website, hcaptchaToken } = body;
     console.log(`[${now()}] [${reqId}] 📩 /api/contact received:`, {
       nombre,
       email: email ? "****" : undefined,
       mensaje: mensaje ? `(${mensaje.length} chars)` : undefined,
     });
 
-    // 🤖 Validar Turnstile (OBLIGATORIO)
-    if (!turnstileToken) {
-      console.log(`[${now()}] [${reqId}] ❌ Turnstile token missing`);
+    // 🔐 Validar hCaptcha (OBLIGATORIO)
+    if (!hcaptchaToken) {
+      console.log(`[${now()}] [${reqId}] ❌ hCaptcha token missing`);
       return NextResponse.json(
-        { error: "Por favor completa la verificación de Turnstile" },
+        { error: "Por favor completa la verificación de hCaptcha" },
         { status: 400 }
       );
     }
 
-    const isValidTurnstile = await validateTurnstileToken(turnstileToken);
-    if (!isValidTurnstile) {
-      console.log(`[${now()}] [${reqId}] ❌ Turnstile validation failed`);
+    const isValidHcaptcha = await validateHcaptchaToken(hcaptchaToken);
+    if (!isValidHcaptcha) {
+      console.log(`[${now()}] [${reqId}] ❌ hCaptcha validation failed`);
       return NextResponse.json(
-        { error: "Verificación de Turnstile fallida" },
+        { error: "Verificación de hCaptcha fallida" },
         { status: 403 }
       );
     }
 
-    console.log(`[${now()}] [${reqId}] ✅ Turnstile validated`);
+    console.log(`[${now()}] [${reqId}] ✅ hCaptcha validated`);
 
     // --- DEBUG LOGS (temporary) ---
     // NOTE: moved below emailRegex declaration to avoid TDZ ReferenceError in production

@@ -4,14 +4,14 @@
 import { useState, useEffect } from "react";
 import { Mail, Instagram } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl"; // ✅ useLocale ya lo maneja el layout global
-import "../../globals.css"; // ✅ Mantener estilos globales
+import { useTranslations } from "next-intl";
+import "../../globals.css";
 
-const TURNSTILE_SITE_KEY = "0x4AAAAAACRC2Ecebh-YraF";
+const HCAPTCHA_SITE_KEY = "e0deebfa-1842-483e-ba2c-eec62c0aafd8";
 
 declare global {
   interface Window {
-    turnstile?: {
+    hcaptcha?: {
       render: (container: string | HTMLElement, options: any) => string;
       reset: (widgetId?: string) => void;
       remove: (widgetId?: string) => void;
@@ -33,58 +33,42 @@ export default function Contact() {
 
   const [status, setStatus] = useState<null | "sending" | "ok" | "error">(null);
   const [message, setMessage] = useState<string | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [turnstileReady, setTurnstileReady] = useState(false);
+  const [hcaptchaToken, setHcaptchaToken] = useState<string | null>(null);
 
-  // ✅ Cargar script de Turnstile y auto-renderizar
+  // ✅ Cargar script de hCaptcha
   useEffect(() => {
-    // Definir callbacks globales ANTES de cargar el script
-    (window as any).onTurnstileSuccess = (token: string) => {
-      console.log("✅ Turnstile verificado");
-      setTurnstileToken(token);
+    // Definir callbacks globales
+    (window as any).onHcaptchaSuccess = (token: string) => {
+      console.log("✅ hCaptcha verificado");
+      setHcaptchaToken(token);
     };
 
-    (window as any).onTurnstileError = () => {
-      console.error("❌ Error en Turnstile");
-      setTurnstileToken(null);
+    (window as any).onHcaptchaError = () => {
+      console.error("❌ Error en hCaptcha");
+      setHcaptchaToken(null);
     };
 
-    (window as any).onTurnstileExpired = () => {
-      console.warn("⚠️ Token expirado");
-      setTurnstileToken(null);
+    (window as any).onHcaptchaExpire = () => {
+      console.warn("⚠️ hCaptcha expirado");
+      setHcaptchaToken(null);
     };
-
-    // Si el script ya existe, no cargar de nuevo
-    if (window.turnstile) {
-      console.log("✅ Turnstile ya cargado");
-      setTurnstileReady(true);
-      return;
-    }
 
     // Cargar el script
     const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.src = "https://js.hcaptcha.com/1/api.js";
     script.async = true;
     script.defer = true;
     script.onload = () => {
-      console.log("✅ Script de Turnstile cargado");
-      // Esperar un poco para que el API se inicialice
-      setTimeout(() => {
-        if (window.turnstile) {
-          console.log("✅ Turnstile API disponible");
-          setTurnstileReady(true);
-          // El widget se renderiza automáticamente cuando encuentra class="cf-turnstile"
-        }
-      }, 100);
+      console.log("✅ hCaptcha script cargado");
     };
     script.onerror = () => {
-      console.error("❌ Error cargando script de Turnstile");
+      console.error("❌ Error cargando hCaptcha");
     };
 
     document.head.appendChild(script);
 
     return () => {
-      // No eliminar el script para que no se recargue
+      // No eliminar el script
     };
   }, []);
 
@@ -104,9 +88,9 @@ export default function Contact() {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!turnstileToken) {
+    if (!hcaptchaToken) {
       setStatus("error");
-      setMessage("❌ Por favor completa la verificación de Turnstile.");
+      setMessage("❌ Por favor completa la verificación de hCaptcha.");
       return;
     }
 
@@ -117,7 +101,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, turnstileToken }),
+        body: JSON.stringify({ ...formData, hcaptchaToken }),
       });
 
       const json = await res.json().catch(() => ({}));
@@ -126,10 +110,10 @@ export default function Contact() {
         setStatus("ok");
         setMessage(t("submitMessage"));
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
-        setTurnstileToken(null);
-        // Reset Turnstile widget si existe
-        if (typeof window !== "undefined" && window.turnstile) {
-          window.turnstile.reset();
+        setHcaptchaToken(null);
+        // Reset hCaptcha
+        if (typeof window !== "undefined" && window.hcaptcha) {
+          window.hcaptcha.reset();
         }
         setTimeout(() => {
           setStatus(null);
@@ -264,18 +248,16 @@ export default function Contact() {
               required
             />
 
-            {/* 🤖 Widget de Turnstile - visible solo cuando esté listo */}
-            {turnstileReady && (
-              <div
-                className="cf-turnstile"
-                data-sitekey={TURNSTILE_SITE_KEY}
-                data-theme="dark"
-                data-callback="onTurnstileSuccess"
-                data-error-callback="onTurnstileError"
-                data-expired-callback="onTurnstileExpired"
-                style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "1rem" }}
-              />
-            )}
+            {/* 🔐 Widget de hCaptcha */}
+            <div
+              className="h-captcha"
+              data-sitekey={HCAPTCHA_SITE_KEY}
+              data-theme="dark"
+              data-callback="onHcaptchaSuccess"
+              data-error-callback="onHcaptchaError"
+              data-expired-callback="onHcaptchaExpire"
+              style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "1rem" }}
+            />
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">
               <input
