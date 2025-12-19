@@ -144,7 +144,7 @@ const REGIONS: Region[] = [
           {
             name: "@adsertattoos",
             url: "https://instagram.com/adsertattoos",
-            whatsapp: "+15303085643",
+            whatsapp: "+1 (786) 210-2447",
             extra: (
               <span className="break-all text-sm sm:text-base leading-relaxed block">
                 Compra online:{" "}
