@@ -10,7 +10,7 @@ export default function FloatingActions() {
   const locale = useLocale();
 
   // Official contact details from Footer
-  const whatsappHref = "https://wa.me/17862102447";
+  const whatsappHref = "https://wa.me/50683151806";
   const emailHref = "mailto:customercare@nopainnumbing.net";
 
   return (

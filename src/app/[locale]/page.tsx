@@ -20,6 +20,9 @@ type Dist = {
   whatsapp: string;
   url?: string;
   extra?: string | React.ReactNode;
+  mapLink?: string;
+  address?: string;
+  phone?: string;
   isFixedText?: boolean;
 };
 
@@ -86,7 +89,9 @@ const REGIONS: Region[] = [
             name: "@rockytattoosupply",
             url: "https://instagram.com/rockytattoosupply",
             whatsapp: "+584142429226",
-            extra: "Altamira 10-60 Caracas / Tel: 0212-4164026",
+            extra: "Altamira 10-60 Caracas",
+            mapLink: "https://maps.app.goo.gl/zpmLaKjZKp2oVqwU8",
+            phone: "0212-4164026",
             isFixedText: true,
           },
         ],
@@ -112,6 +117,7 @@ const REGIONS: Region[] = [
             whatsapp: "+50767558558",
             extra:
               "Janeth Beauty Supply – Centro Comercial Los Pueblos y Chorrera",
+            mapLink: "https://www.google.com/maps/place/Janeth+Beauty+Supply/@9.0483503,-79.4551804,17z/data=!4m14!1m7!3m6!1s0x8fab55f4edf64be7:0xed44cb89e3cbb07c!2sJaneth+Beauty+Supply!8m2!3d9.0483503!4d-79.4526055!16s%2Fg%2F11rdb5lt9s!3m5!1s0x8fab55f4edf64be7:0xed44cb89e3cbb07c!8m2!3d9.0483503!4d-79.4526055!16s%2Fg%2F11rdb5lt9s?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
             isFixedText: true,
           },
           {
@@ -120,6 +126,7 @@ const REGIONS: Region[] = [
             whatsapp: "+50762620736",
             extra:
               "Pangea Ink – Vía Argentina, Edificio Sobredo, Planta Baja Local A",
+            mapLink: "https://maps.app.goo.gl/RKueVbMFVdnRxP2P6",
             isFixedText: true,
           },
           {
@@ -146,18 +153,22 @@ const REGIONS: Region[] = [
             url: "https://instagram.com/adsertattoos",
             whatsapp: "+1 (786) 210-2447",
             extra: (
-              <span className="break-all text-sm sm:text-base leading-relaxed block">
-                Compra online:{" "}
-                <a
-                  href="https://adsertattoos.bigcartel.com/product/no-pain-numbing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline text-white hover:text-gray-300 break-all"
-                >
-                  adsertattoos.bigcartel.com/product/no-pain-numbing
-                </a>
+              <span className="space-y-2 block">
+                <div className="break-all text-sm sm:text-base leading-relaxed">
+                  Compra online:{" "}
+                  <a
+                    href="https://adsertattoos.bigcartel.com/product/no-pain-numbing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-white hover:text-gray-300 break-all"
+                  >
+                    adsertattoos.bigcartel.com/product/no-pain-numbing
+                  </a>
+                </div>
               </span>
             ),
+            mapLink: "https://maps.app.goo.gl/noCpqcMPRoFCv1D79",
+            address: "Building 3 2301 W Sample Rd, Unit 4A, Pompano Beach, FL 33073, United States",
             isFixedText: true,
           },
         ],
@@ -430,13 +441,101 @@ export default async function Home({
                                 </a>
 
                                 {d.extra && (
-                                  <p className="text-sm text-white break-words">
-                                    {typeof d.extra === "string"
-                                      ? d.isFixedText
-                                        ? d.extra
-                                        : tSuppliers(d.extra)
-                                      : d.extra}
-                                  </p>
+                                  <div className="text-sm text-white break-words space-y-1">
+                                    {d.mapLink && typeof d.extra === "string" && (
+                                      <a
+                                        href={d.mapLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
+                                      >
+                                        <Image
+                                          src="/icons/location-pin.svg"
+                                          alt="Location"
+                                          width={16}
+                                          height={16}
+                                          loading="lazy"
+                                        />
+                                        <span>
+                                          {d.isFixedText
+                                            ? d.extra
+                                            : tSuppliers(d.extra)}
+                                        </span>
+                                      </a>
+                                    )}
+                                    {d.mapLink && d.address && (
+                                      <a
+                                        href={d.mapLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
+                                      >
+                                        <Image
+                                          src="/icons/location-pin.svg"
+                                          alt="Location"
+                                          width={16}
+                                          height={16}
+                                          loading="lazy"
+                                        />
+                                        <span>{d.address}</span>
+                                      </a>
+                                    )}
+                                    {d.mapLink && typeof d.extra !== "string" && !d.address && (
+                                      <a
+                                        href={d.mapLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
+                                      >
+                                        <Image
+                                          src="/icons/location-pin.svg"
+                                          alt="Location"
+                                          width={16}
+                                          height={16}
+                                          loading="lazy"
+                                        />
+                                        <span>
+                                          {typeof d.extra === "string"
+                                            ? d.isFixedText
+                                              ? d.extra
+                                              : tSuppliers(d.extra)
+                                            : null}
+                                        </span>
+                                      </a>
+                                    )}
+                                    {d.extra && typeof d.extra !== "string" && d.mapLink && (
+                                      <div>{d.extra}</div>
+                                    )}
+                                    {d.extra && typeof d.extra === "string" && !d.mapLink && (
+                                      <p className="flex items-center gap-2">
+                                        <Image
+                                          src="/icons/location-pin.svg"
+                                          alt="Location"
+                                          width={16}
+                                          height={16}
+                                          loading="lazy"
+                                        />
+                                        {d.isFixedText
+                                          ? d.extra
+                                          : tSuppliers(d.extra)}
+                                      </p>
+                                    )}
+                                    {d.phone && (
+                                      <a
+                                        href={`tel:${d.phone}`}
+                                        className="hover:text-blue-400 hover:underline transition flex items-center gap-2"
+                                      >
+                                        <Image
+                                          src="/icons/phone.svg"
+                                          alt="Phone"
+                                          width={16}
+                                          height={16}
+                                          loading="lazy"
+                                        />
+                                        <span>Tel: {d.phone}</span>
+                                      </a>
+                                    )}
+                                  </div>
                                 )}
                               </div>
                             </div>

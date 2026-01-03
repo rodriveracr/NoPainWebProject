@@ -192,10 +192,10 @@ export default function Contact() {
           {/* WhatsApp */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
             <a
-              href="https://wa.me/17862102447"
+              href="https://wa.me/50683151806"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="+1 (786) 210-2447"
+              aria-label="+506 8315 1806"
               title="Abrir WhatsApp"
               className="flex flex-col items-center gap-2 focus:outline-none focus:ring-2 focus:ring-green-400 rounded"
             >

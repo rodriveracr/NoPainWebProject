@@ -71,6 +71,7 @@ export default function NewsletterForm({ locale = "es" }: { locale?: string }) {
       onSubmit={handleSubmit}
       className="flex flex-col sm:flex-row items-center gap-3"
       noValidate
+      suppressHydrationWarning
     >
       <input
         type="email"
