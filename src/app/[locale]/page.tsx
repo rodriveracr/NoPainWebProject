@@ -450,7 +450,7 @@ export default async function Home({
                                         className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
                                       >
                                         <Image
-                                          src="/icons/location-pin.svg"
+                                          src="/pin.svg"
                                           alt="Location"
                                           width={16}
                                           height={16}
@@ -471,7 +471,7 @@ export default async function Home({
                                         className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
                                       >
                                         <Image
-                                          src="/icons/location-pin.svg"
+                                          src="/pin.svg"
                                           alt="Location"
                                           width={16}
                                           height={16}
@@ -488,7 +488,7 @@ export default async function Home({
                                         className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
                                       >
                                         <Image
-                                          src="/icons/location-pin.svg"
+                                          src="/pin.svg"
                                           alt="Location"
                                           width={16}
                                           height={16}
@@ -509,7 +509,7 @@ export default async function Home({
                                     {d.extra && typeof d.extra === "string" && !d.mapLink && (
                                       <p className="flex items-center gap-2">
                                         <Image
-                                          src="/icons/location-pin.svg"
+                                          src="/pin.svg"
                                           alt="Location"
                                           width={16}
                                           height={16}
