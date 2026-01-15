@@ -153,16 +153,27 @@ const REGIONS: Region[] = [
             url: "https://instagram.com/adsertattoos",
             whatsapp: "+1 (786) 210-2447",
             extra: (
-              <span className="space-y-2 block">
-                <div className="break-all text-sm sm:text-base leading-relaxed">
-                  Compra online:{" "}
+              <span className="space-y-3 block text-sm sm:text-base leading-relaxed">
+                <div className="text-gray-200">
+                  Pedidos USA vía WhatsApp:{" "}
                   <a
-                    href="https://adsertattoos.bigcartel.com/product/no-pain-numbing"
+                    href="https://wa.me/17862102447"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-white hover:text-gray-300 break-all"
+                    className="underline text-white hover:text-gray-300"
                   >
-                    adsertattoos.bigcartel.com/product/no-pain-numbing
+                    +1 (786) 210-2447
+                  </a>
+                </div>
+                <div className="text-gray-400">
+                  Operamos desde Pompano Beach, FL · Soporte LatAm:{" "}
+                  <a
+                    href="https://wa.me/50683151806"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-gray-200 hover:text-white"
+                  >
+                    +506 8315 1806
                   </a>
                 </div>
               </span>
@@ -206,6 +217,14 @@ export default async function Home({
   const tAbout = await getTranslations({ locale, namespace: "About" });
   const tSuppliers = await getTranslations({ locale, namespace: "Suppliers" });
   const tHero = await getTranslations({ locale, namespace: "Hero" });
+
+  const coverageBadges = REGIONS.flatMap((region) =>
+    region.countries.map((country) => ({
+      key: `${region.name}-${country.name}`,
+      label: tSuppliers(country.name),
+      flag: country.flag,
+    })),
+  );
 
   return (
     <>
@@ -368,194 +387,47 @@ export default async function Home({
             {tSuppliers("title")}
           </h2>
 
-          <div className="max-w-6xl mx-auto space-y-16">
-            {REGIONS.map((region) => (
-              <div key={region.name}>
-                <h3 className="text-2xl font-bold mb-8 text-center uppercase">
-                  {tSuppliers(region.name)}
-                </h3>
+          <div className="max-w-4xl mx-auto text-center space-y-10">
+            <p className="text-lg text-gray-300 leading-relaxed">
+              {tSuppliers("coverageCopy")}
+            </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                  {region.countries.map((country) => (
-                    <div
-                      key={country.name}
-                      className="border border-gray-700 rounded-xl p-5 hover:border-gray-500 transition"
-                    >
-                      <h4 className="text-xl font-semibold mb-4 flex items-center gap-2 uppercase">
-                        <Image
-                          src={country.flag}
-                          alt={tSuppliers(country.name)}
-                          width={24}
-                          height={16}
-                          className="rounded-sm"
-                          loading="lazy"
-                        />
-                        {tSuppliers(country.name)}
-                      </h4>
-
-                      <div className="space-y-3 text-white">
-                        {country.dists.map((d, index) => {
-                          const wa = `https://wa.me/${d.whatsapp.replace(/\D/g, "")}`;
-                          return (
-                            <div
-                              key={`${country.name}-${index}`}
-                              className="border-b border-gray-700 pb-3"
-                            >
-                              <div className="flex flex-col gap-1">
-                                {d.url ? (
-                                  <a
-                                    href={d.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 hover:text-gray-300 break-all text-sm sm:text-base leading-relaxed"
-                                  >
-                                    <Image
-                                      src="/icons/instagram.svg"
-                                      alt="Instagram"
-                                      width={18}
-                                      height={18}
-                                      loading="lazy"
-                                    />
-                                    <span className="break-all">{d.name}</span>
-                                  </a>
-                                ) : (
-                                  <span className="flex items-center gap-2 break-all text-sm sm:text-base leading-relaxed">
-                                    {d.name}
-                                  </span>
-                                )}
-
-                                <a
-                                  href={wa}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex items-center gap-2 text-green-400 hover:text-green-300"
-                                >
-                                  <Image
-                                    src="/icons/whatsapp.svg"
-                                    alt="WhatsApp"
-                                    width={18}
-                                    height={18}
-                                    loading="lazy"
-                                  />
-                                  {d.whatsapp}
-                                </a>
-
-                                {d.extra && (
-                                  <div className="text-sm text-white break-words space-y-1">
-                                    {d.mapLink && typeof d.extra === "string" && (
-                                      <a
-                                        href={d.mapLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
-                                      >
-                                        <Image
-                                          src="/pin.svg"
-                                          alt="Location"
-                                          width={16}
-                                          height={16}
-                                          loading="lazy"
-                                        />
-                                        <span>
-                                          {d.isFixedText
-                                            ? d.extra
-                                            : tSuppliers(d.extra)}
-                                        </span>
-                                      </a>
-                                    )}
-                                    {d.mapLink && d.address && (
-                                      <a
-                                        href={d.mapLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
-                                      >
-                                        <Image
-                                          src="/pin.svg"
-                                          alt="Location"
-                                          width={16}
-                                          height={16}
-                                          loading="lazy"
-                                        />
-                                        <span>{d.address}</span>
-                                      </a>
-                                    )}
-                                    {d.mapLink && typeof d.extra !== "string" && !d.address && (
-                                      <a
-                                        href={d.mapLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="hover:text-pink-400 hover:underline transition flex items-center gap-2"
-                                      >
-                                        <Image
-                                          src="/pin.svg"
-                                          alt="Location"
-                                          width={16}
-                                          height={16}
-                                          loading="lazy"
-                                        />
-                                        <span>
-                                          {typeof d.extra === "string"
-                                            ? d.isFixedText
-                                              ? d.extra
-                                              : tSuppliers(d.extra)
-                                            : null}
-                                        </span>
-                                      </a>
-                                    )}
-                                    {d.extra && typeof d.extra !== "string" && d.mapLink && (
-                                      <div>{d.extra}</div>
-                                    )}
-                                    {d.extra && typeof d.extra === "string" && !d.mapLink && (
-                                      <p className="flex items-center gap-2">
-                                        <Image
-                                          src="/pin.svg"
-                                          alt="Location"
-                                          width={16}
-                                          height={16}
-                                          loading="lazy"
-                                        />
-                                        {d.isFixedText
-                                          ? d.extra
-                                          : tSuppliers(d.extra)}
-                                      </p>
-                                    )}
-                                    {d.phone && (
-                                      <a
-                                        href={`tel:${d.phone}`}
-                                        className="hover:text-blue-400 hover:underline transition flex items-center gap-2"
-                                      >
-                                        <Image
-                                          src="/icons/phone.svg"
-                                          alt="Phone"
-                                          width={16}
-                                          height={16}
-                                          loading="lazy"
-                                        />
-                                        <span>Tel: {d.phone}</span>
-                                      </a>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <div className="flex flex-wrap justify-center gap-3">
+              {coverageBadges.map((badge) => (
+                <span
+                  key={badge.key}
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-gray-700 rounded-full text-sm uppercase tracking-wide text-white bg-gray-900/60"
+                >
+                  <Image
+                    src={badge.flag}
+                    alt={badge.label}
+                    width={20}
+                    height={14}
+                    className="rounded-sm"
+                    loading="lazy"
+                  />
+                  {badge.label}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* Botón de contacto */}
-          <div className="text-center mt-16">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-16">
+            <a
+              href="https://wa.me/50683151806"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-phone="+50683151806"
+              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition inline-flex items-center gap-2"
+            >
+              {tSuppliers("contactUs")}
+            </a>
+
             <a
               href={`mailto:customercare@nopainnumbing.net?subject=${encodeURIComponent(
                 tSuppliers("distributorMailSubject"),
               )}&body=${encodeURIComponent(tSuppliers("distributorMailBody"))}`}
-              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl font-medium hover:opacity-90 transition"
+              className="px-6 py-3 border border-gray-600 text-white rounded-2xl font-medium hover:border-gray-400 transition inline-flex items-center gap-2"
             >
               {tSuppliers("beDistributor")}
             </a>

@@ -10,7 +10,8 @@ export default function FloatingActions() {
   const locale = useLocale();
 
   // Official contact details from Footer
-  const whatsappHref = "https://wa.me/50683151806";
+  const whatsappHref = "https://wa.me/17862102447";
+  const whatsappLatam = "+506 8315 1806";
   const emailHref = "mailto:customercare@nopainnumbing.net";
 
   return (
@@ -20,8 +21,8 @@ export default function FloatingActions() {
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={tContact("whatsappTitle")}
-        title={tContact("whatsappTitle")}
+        aria-label={`${tContact("whatsappTitle")} USA +1 (786) 210-2447`}
+        title={`USA +1 (786) 210-2447 · LATAM ${whatsappLatam}`}
       >
         <img src="/icons/whatsapp.svg" alt={tContact("whatsappAlt") || "WhatsApp"} width={20} height={20} />
         <span className="fab-label">{tContact("whatsappTitle")}</span>

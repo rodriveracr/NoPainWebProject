@@ -197,11 +197,15 @@
   },
   "Contact": {
     "title": "CONTACT",
-    "description": "We are here to help you. Write to us via WhatsApp, email, or through the form.",
+    "description": "From Florida to Costa Rica we reply fast. USA orders? WhatsApp +1 (786) 210-2447. Latin America hotline: +506 8315 1806. Write to us via email or through this form.",
     "emailTitle": "EMAIL",
     "instagramTitle": "INSTAGRAM",
     "whatsappTitle": "WHATSAPP",
     "whatsappAlt": "WhatsApp",
+    "locationTitle": "USA HUB",
+    "usaWhatsAppLabel": "USA orders",
+    "latamWhatsAppLabel": "LATAM support",
+    "locationCta": "Open in Maps",
     "submitMessage": "Thank you for contacting us. We will respond soon.",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
@@ -228,7 +232,9 @@
     "headOffice": "Head office",
     "ordersUSA": "Orders within the USA",
     "distributorMailSubject": "Request to become a No Pain distributor",
-    "distributorMailBody": "Hello No Pain,\n\nMy name is: [your name]\nMy company is: [company name]\nMy country is: [your country]\nMy WhatsApp or phone number is: [number]\n\nI would like to receive information to become an authorized distributor.\n\nThanks."
+    "distributorMailBody": "Hello No Pain,\n\nMy name is: [your name]\nMy company is: [company name]\nMy country is: [your country]\nMy WhatsApp or phone number is: [number]\n\nI would like to receive information to become an authorized distributor.\n\nThanks.",
+    "coverageCopy": "We connect every request with a verified partner. Tell us about your market and we will match you with the closest official distributor across these territories.",
+    "contactUs": "CONTACT US"
   },
 
   "popup": {

@@ -197,11 +197,15 @@
   },
   "Contact": {
     "title": "CONTACTO",
-    "description": "Estamos aquí para ayudarte. Escríbenos por WhatsApp, correo electrónico o mediante el formulario.",
+    "description": "Desde Florida hasta Costa Rica respondemos rápido. ¿Pedidos en USA? WhatsApp +1 (786) 210-2447. Línea LatAm: +506 8315 1806. También puedes escribirnos por correo o mediante este formulario.",
     "emailTitle": "EMAIL",
     "instagramTitle": "INSTAGRAM",
     "whatsappTitle": "WHATSAPP",
     "whatsappAlt": "WhatsApp",
+    "locationTitle": "BASE USA",
+    "usaWhatsAppLabel": "Pedidos USA",
+    "latamWhatsAppLabel": "Soporte LatAm",
+    "locationCta": "Ver en Maps",
     "submitMessage": "Gracias por contactarnos. Te responderemos pronto.",
     "namePlaceholder": "Nombre",
     "emailPlaceholder": "Correo electrónico",
@@ -228,7 +232,9 @@
     "headOffice": "Oficinas centrales",
     "ordersUSA": "Pedidos dentro de USA",
     "distributorMailSubject": "Solicitud para ser distribuidor No Pain",
-    "distributorMailBody": "Hola No Pain,\n\nMi nombre es: [tu nombre]\nMi empresa es: [nombre de la empresa]\nMi país es: [tu país]\nMi WhatsApp o teléfono es: [número]\n\nQuisiera recibir información para ser distribuidor autorizado.\n\nGracias."
+    "distributorMailBody": "Hola No Pain,\n\nMi nombre es: [tu nombre]\nMi empresa es: [nombre de la empresa]\nMi país es: [tu país]\nMi WhatsApp o teléfono es: [número]\n\nQuisiera recibir información para ser distribuidor autorizado.\n\nGracias.",
+    "coverageCopy": "Conectamos cada solicitud con un socio autorizado. Cuéntanos sobre tu mercado y te enlazamos con el distribuidor oficial más cercano en estas zonas.",
+    "contactUs": "CONTÁCTANOS"
   },
   "popup": {
     "monumbyTeaserTitle": "Monumby · No Pain",

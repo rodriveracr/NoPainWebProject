@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Mail, Instagram } from "lucide-react";
+import { Mail, Instagram, MapPin } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import "../../globals.css";
@@ -162,7 +162,7 @@ export default function Contact() {
         </section>
 
         {/* 📬 Datos de contacto */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
           {/* Email */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
             <Mail className="w-8 h-8 text-gray-400" />
@@ -180,33 +180,71 @@ export default function Contact() {
             <Instagram className="w-8 h-8 text-gray-400" />
             <h3 className="font-semibold text-lg">{t("instagramTitle")}</h3>
             <a
-              href="https://www.instagram.com/nopaingel"
+              href="https://www.instagram.com/adsertattoos"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white transition"
             >
-              @nopaingel
+              @adsertattoos
             </a>
           </div>
 
           {/* WhatsApp */}
+          <div className="flex flex-col items-center space-y-4 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
+            <Image
+              src="/icons/wagrey.png"
+              alt={t("whatsappAlt")}
+              width={32}
+              height={32}
+              className="opacity-80"
+            />
+            <h3 className="font-semibold text-lg">{t("whatsappTitle")}</h3>
+            <div className="w-full space-y-3 text-left">
+              <a
+                href="https://wa.me/17862102447"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp USA +1 (786) 210-2447"
+                className="block border border-gray-700 rounded-xl p-3 hover:border-gray-400 transition bg-gray-900/40"
+              >
+                <span className="text-xs uppercase tracking-wide text-gray-400">
+                  {t("usaWhatsAppLabel")}
+                </span>
+                <span className="block font-semibold text-white text-lg">
+                  +1 (786) 210-2447
+                </span>
+              </a>
+              <a
+                href="https://wa.me/50683151806"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp LATAM +506 8315 1806"
+                className="block border border-gray-700 rounded-xl p-3 hover:border-gray-400 transition bg-gray-900/40"
+              >
+                <span className="text-xs uppercase tracking-wide text-gray-400">
+                  {t("latamWhatsAppLabel")}
+                </span>
+                <span className="block font-semibold text-white text-lg">
+                  +506 8315 1806
+                </span>
+              </a>
+            </div>
+          </div>
+
+          {/* Location */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
+            <MapPin className="w-8 h-8 text-gray-400" />
+            <h3 className="font-semibold text-lg">{t("locationTitle")}</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Building 3 2301 W Sample Rd, Unit 4A, Pompano Beach, FL 33073, United States
+            </p>
             <a
-              href="https://wa.me/50683151806"
+              href="https://maps.app.goo.gl/noCpqcMPRoFCv1D79"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="+506 8315 1806"
-              title="Abrir WhatsApp"
-              className="flex flex-col items-center gap-2 focus:outline-none focus:ring-2 focus:ring-green-400 rounded"
+              className="text-sm text-pink-400 hover:text-pink-300 transition"
             >
-              <Image
-                src="/icons/wagrey.png"
-                alt={t("whatsappAlt")}
-                width={28}
-                height={28}
-                className="opacity-80"
-              />
-              <h3 className="font-semibold text-lg">{t("whatsappTitle")}</h3>
+              {t("locationCta")} →
             </a>
           </div>
         </section>
