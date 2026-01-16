@@ -180,12 +180,12 @@ export default function Contact() {
             <Instagram className="w-8 h-8 text-gray-400" />
             <h3 className="font-semibold text-lg">{t("instagramTitle")}</h3>
             <a
-              href="https://www.instagram.com/adsertattoos"
+              href="https://www.instagram.com/nopaingel/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-300 hover:text-white transition"
             >
-              @adsertattoos
+              @nopaingel
             </a>
           </div>
 
@@ -199,30 +199,16 @@ export default function Contact() {
               className="opacity-80"
             />
             <h3 className="font-semibold text-lg">{t("whatsappTitle")}</h3>
-            <div className="w-full space-y-3 text-left">
-              <a
-                href="https://wa.me/17862102447"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp USA +1 (786) 210-2447"
-                className="block border border-gray-700 rounded-xl p-3 hover:border-gray-400 transition bg-gray-900/40"
-              >
-                <span className="text-xs uppercase tracking-wide text-gray-400">
-                  {t("usaWhatsAppLabel")}
-                </span>
-                <span className="block font-semibold text-white text-lg">
-                  +1 (786) 210-2447
-                </span>
-              </a>
+            <div className="w-full text-left">
               <a
                 href="https://wa.me/50683151806"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WhatsApp LATAM +506 8315 1806"
+                aria-label="WhatsApp +506 8315 1806"
                 className="block border border-gray-700 rounded-xl p-3 hover:border-gray-400 transition bg-gray-900/40"
               >
                 <span className="text-xs uppercase tracking-wide text-gray-400">
-                  {t("latamWhatsAppLabel")}
+                  {t("usaWhatsAppLabel")}
                 </span>
                 <span className="block font-semibold text-white text-lg">
                   +506 8315 1806

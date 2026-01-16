@@ -35,7 +35,7 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
           <div className="flex gap-4 mt-2">
             {[
               {
-                href: "https://www.instagram.com/adsertattoos",
+                href: "https://www.instagram.com/nopaingel/",
                 label: "Instagram",
                 icon: "/icons/instagram.svg",
               },
@@ -50,7 +50,7 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
                 icon: "/icons/email.webp",
               },
               {
-                href: "https://wa.me/17862102447",
+                href: "https://wa.me/50683151806",
                 label: "WhatsApp",
                 icon: "/icons/whatsapp.svg",
               },

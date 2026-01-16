@@ -149,32 +149,24 @@ const REGIONS: Region[] = [
         flag: "/flags/usa.png",
         dists: [
           {
-            name: "@adsertattoos",
-            url: "https://instagram.com/adsertattoos",
-            whatsapp: "+1 (786) 210-2447",
+            name: "@nopaingel",
+            url: "https://www.instagram.com/nopaingel/",
+            whatsapp: "+506 8315 1806",
             extra: (
               <span className="space-y-3 block text-sm sm:text-base leading-relaxed">
                 <div className="text-gray-200">
-                  Pedidos USA vía WhatsApp:{" "}
-                  <a
-                    href="https://wa.me/17862102447"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-white hover:text-gray-300"
-                  >
-                    +1 (786) 210-2447
-                  </a>
-                </div>
-                <div className="text-gray-400">
-                  Operamos desde Pompano Beach, FL · Soporte LatAm:{" "}
+                  WhatsApp oficial:{" "}
                   <a
                     href="https://wa.me/50683151806"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-gray-200 hover:text-white"
+                    className="underline text-white hover:text-gray-300"
                   >
                     +506 8315 1806
                   </a>
+                </div>
+                <div className="text-gray-400">
+                  Operamos desde Pompano Beach, FL · Atención global en el mismo número.
                 </div>
               </span>
             ),
