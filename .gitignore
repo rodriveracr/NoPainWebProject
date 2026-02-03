@@ -63,5 +63,7 @@ desktop.ini
 # 🧰 Local tools, backups and temp outputs (do NOT commit)
 # ======================================================
 backups/
-tools/
+tools/*
+!tools/geolite2/
+!tools/geolite2/GeoLite2-City.mmdb
 response_root.html
