@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Mail, Instagram, MapPin } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import "../../globals.css";
@@ -162,14 +162,14 @@ export default function Contact() {
         </section>
 
         {/* 📬 Datos de contacto */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <section className="grid grid-cols-1 gap-8 sm:grid-cols-3 text-center max-w-4xl mx-auto">
           {/* Email */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
             <Mail className="w-8 h-8 text-gray-400" />
             <h3 className="font-semibold text-lg">{t("emailTitle")}</h3>
             <a
               href="mailto:customercare@nopainnumbing.net"
-              className="text-gray-300 hover:text-white transition"
+              className="text-gray-300 hover:text-white transition break-all text-xs sm:text-sm text-center leading-tight px-2"
             >
               customercare@nopainnumbing.net
             </a>
@@ -190,49 +190,24 @@ export default function Contact() {
           </div>
 
           {/* WhatsApp */}
-          <div className="flex flex-col items-center space-y-4 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
+          <a
+            href="https://wa.me/50683151806"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp +506 8315 1806"
+            className="flex flex-col items-center space-y-4 p-6 border border-gray-700 rounded-2xl hover:border-gray-400 transition bg-black/40 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+          >
             <Image
               src="/icons/wagrey.png"
               alt={t("whatsappAlt")}
-              width={32}
-              height={32}
-              className="opacity-80"
+              width={48}
+              height={48}
+              className="opacity-90"
             />
-            <h3 className="font-semibold text-lg">{t("whatsappTitle")}</h3>
-            <div className="w-full text-left">
-              <a
-                href="https://wa.me/50683151806"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp +506 8315 1806"
-                className="block border border-gray-700 rounded-xl p-3 hover:border-gray-400 transition bg-gray-900/40"
-              >
-                <span className="text-xs uppercase tracking-wide text-gray-400">
-                  {t("usaWhatsAppLabel")}
-                </span>
-                <span className="block font-semibold text-white text-lg">
-                  +506 8315 1806
-                </span>
-              </a>
-            </div>
-          </div>
-
-          {/* Location */}
-          <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
-            <MapPin className="w-8 h-8 text-gray-400" />
-            <h3 className="font-semibold text-lg">{t("locationTitle")}</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Building 3 2301 W Sample Rd, Unit 4A, Pompano Beach, FL 33073, United States
-            </p>
-            <a
-              href="https://maps.app.goo.gl/noCpqcMPRoFCv1D79"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-pink-400 hover:text-pink-300 transition"
-            >
-              {t("locationCta")} →
-            </a>
-          </div>
+            <h3 className="font-semibold text-lg tracking-wide">
+              {t("whatsappTitle")}
+            </h3>
+          </a>
         </section>
 
         {/* 📝 Formulario */}
@@ -268,7 +243,7 @@ export default function Contact() {
               value={formData.mensaje}
               onChange={handleChange}
               placeholder={t("messagePlaceholder")}
-              className="w-full p-3 bg-gray-800 border border-gray-700 rounded text-white min-h-[120px]"
+              className="w-full p-3 bg-gray-800 border border-gray-700 rounded text-white min-h-30"
               required
             />
 
@@ -295,7 +270,7 @@ export default function Contact() {
 
             <button
               type="submit"
-              className="w-full py-2 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded hover:opacity-90 transition disabled:opacity-50"
+              className="w-full py-2 bg-linear-to-r from-pink-500 to-red-500 text-white rounded hover:opacity-90 transition disabled:opacity-50"
               disabled={status === "sending"}
             >
               {status === "sending" ? "..." : t("submit")}

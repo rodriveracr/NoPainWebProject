@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import NewsletterForm from "./NewsletterForm";
-import { motion, useReducedMotion } from "framer-motion";
-import { getSlug, slugMap } from "@/utils/slugMap";
+import { motion } from "framer-motion";
+import { getSlug } from "@/utils/slugMap";
 
 export default function Footer({ locale: localeProp }: { locale?: string }) {
   const fallbackLocale = useLocale();
@@ -77,7 +77,6 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
             {(
               [
                 { slug: "contact", label: t("contact") },
-                { href: "#proveedores", label: t("suppliers") },
                 { slug: "faq", label: t("faq") },
                 { slug: "legal", label: t("legal") },
               ] as const
@@ -87,11 +86,7 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
               return (
                 <li key={i}>
                   <Link
-                    href={
-                      "slug" in item
-                        ? `/${locale}/${getSlug(item.slug, locale)}`
-                        : `/${locale}${item.href}`
-                    }
+                    href={`/${locale}/${getSlug(item.slug, locale)}`}
                     className="hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-sm transition"
                   >
                     {isContact ? (
