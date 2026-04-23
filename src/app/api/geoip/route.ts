@@ -24,14 +24,14 @@ async function getReader(dbPath: string) {
 }
 
 function extractIp(request: NextRequest): string | null {
-  const queryIp = request.nextUrl.searchParams.get("ip");
-  if (queryIp) return queryIp.trim();
-
   const headerIp = request.headers.get("x-forwarded-for");
   if (headerIp) {
     const [first] = headerIp.split(",");
     if (first) return first.trim();
   }
+
+  const realIp = request.headers.get("x-real-ip");
+  if (realIp) return realIp.trim();
 
   return null;
 }
@@ -41,19 +41,20 @@ export async function GET(request: NextRequest) {
   const ip = extractIp(request);
 
   if (!ip) {
-    return NextResponse.json({ region: null }, { status: 200 });
+    return NextResponse.json({ country: null, region: null }, { status: 200 });
   }
 
   try {
     const reader = await getReader(dbPath);
     const city = await reader.city(ip);
+    const country = city.country?.isoCode ?? null;
     const subdivisions = city.subdivisions ?? [];
     const mostSpecific = subdivisions[subdivisions.length - 1];
     const region = mostSpecific?.isoCode ?? subdivisions[0]?.isoCode ?? null;
 
-    return NextResponse.json({ region: region ?? null });
+    return NextResponse.json({ country: country ?? null, region: region ?? null });
   } catch (error) {
     console.error("GeoIP lookup failed", error);
-    return NextResponse.json({ region: null }, { status: 200 });
+    return NextResponse.json({ country: null, region: null }, { status: 200 });
   }
 }

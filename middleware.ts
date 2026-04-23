@@ -20,6 +20,13 @@ const BLOCKED_STATES = new Set(
 );
 
 const FALLBACK_HEADERS = ["x-real-ip", "x-forwarded-for"];
+const GEO_BLOCK_AUDIT = process.env.GEO_BLOCK_AUDIT === "1";
+
+type GeoResolution = {
+  country: string | null;
+  region: string | null;
+  source: "edge" | "fallback" | "unknown";
+};
 
 function extractIp(request: NextRequest) {
   for (const header of FALLBACK_HEADERS) {
@@ -36,52 +43,77 @@ function extractIp(request: NextRequest) {
   return null;
 }
 
-async function resolveRegion(request: NextRequest) {
-  const geoRegion = request.geo?.region;
-  if (geoRegion) return geoRegion.toUpperCase();
+function normalizeCode(value: string | null | undefined) {
+  if (!value) return null;
+  const normalized = value.trim().toUpperCase();
+  return normalized.length > 0 ? normalized : null;
+}
+
+async function resolveGeo(request: NextRequest): Promise<GeoResolution> {
+  const geoRegion = normalizeCode(request.geo?.region);
+  const geoCountry = normalizeCode(request.geo?.country);
+
+  if (geoRegion && geoCountry) {
+    return { country: geoCountry, region: geoRegion, source: "edge" };
+  }
 
   const ip = extractIp(request);
-  if (!ip) return null;
+  if (!ip)
+    return { country: geoCountry, region: geoRegion, source: "unknown" };
 
   try {
     const url = new URL("/api/geoip", request.url);
-    url.searchParams.set("ip", ip);
 
     const response = await fetch(url, {
       headers: {
         "x-geo-fallback": "1",
+        "x-forwarded-for": ip,
       },
       cache: "no-store",
     });
 
-    if (!response.ok) return null;
+    if (!response.ok) {
+      return { country: geoCountry, region: geoRegion, source: "unknown" };
+    }
     const payload = await response.json();
-    return typeof payload.region === "string"
-      ? payload.region.toUpperCase()
-      : null;
+
+    return {
+      country: normalizeCode(payload.country) ?? geoCountry,
+      region: normalizeCode(payload.region) ?? geoRegion,
+      source: "fallback",
+    };
   } catch (error) {
     console.warn("Geo fallback failed", error);
-    return null;
+    return { country: geoCountry, region: geoRegion, source: "unknown" };
   }
 }
 
-async function shouldBlock(request: NextRequest) {
-  const region = await resolveRegion(request);
-  if (!region) return false;
-  return BLOCKED_STATES.has(region);
+async function getBlockDecision(request: NextRequest) {
+  const geo = await resolveGeo(request);
+  const blocked = geo.country === "US" && !!geo.region && BLOCKED_STATES.has(geo.region);
+  return { blocked, geo };
 }
 
 export default async function middleware(request: NextRequest) {
   if (!request.nextUrl.pathname.startsWith(BLOCKED_PATH)) {
-    const blocked = await shouldBlock(request);
-    if (blocked) {
+    const decision = await getBlockDecision(request);
+
+    if (GEO_BLOCK_AUDIT || decision.blocked) {
+      console.info(
+        `[geo-block] blocked=${decision.blocked} country=${decision.geo.country ?? "-"} region=${decision.geo.region ?? "-"} source=${decision.geo.source} path=${request.nextUrl.pathname}`
+      );
+    }
+
+    if (decision.blocked) {
       const rewriteUrl = request.nextUrl.clone();
       rewriteUrl.pathname = BLOCKED_PATH;
       rewriteUrl.search = "";
 
-      return NextResponse.rewrite(rewriteUrl, {
+      const response = NextResponse.rewrite(rewriteUrl, {
         status: 403,
       });
+      response.headers.set("x-geo-block", "US-CA");
+      return response;
     }
   }
 
