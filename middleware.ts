@@ -124,6 +124,6 @@ export const config = {
   matcher: [
     "/",
     "/(en|es)/:path*",
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.webp|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg).*)",
+    "/((?!_next/static|_next/image|api|favicon.ico|robots.txt|sitemap.xml|.*\\.webp|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg).*)",
   ],
 };
