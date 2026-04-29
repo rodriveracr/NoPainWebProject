@@ -121,5 +121,11 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/(en|es)/:path*"],
+  matcher: [
+    // Ejecutar en ruta raíz y todas las rutas de locale
+    "/",
+    "/(en|es)/:path*",
+    // También ejecutar en rutas sin locale (para redirigir automáticamente)
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.webp|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg).*)",
+  ],
 };
