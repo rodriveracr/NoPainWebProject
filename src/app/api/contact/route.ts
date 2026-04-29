@@ -270,7 +270,7 @@ export async function POST(req: Request) {
     const safeEmailLog = safeEmail.replace(/(.{2}).+(@.*)/, "$1***$2");
 
     const FROM_EMAIL = String(
-      process.env.CONTACT_EMAIL || "customercare@nopainnumbing.net",
+      process.env.CONTACT_EMAIL || "infonopain@nopainnumbing.net",
     );
     const CONTACT_EMAIL = FROM_EMAIL;
 

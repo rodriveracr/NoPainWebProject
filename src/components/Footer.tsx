@@ -45,7 +45,7 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
                 icon: "/icons/tiktok.svg",
               },
               {
-                href: "mailto:customercare@nopainnumbing.net",
+                href: "mailto:infonopain@nopainnumbing.net",
                 label: "Email",
                 icon: "/icons/email.webp",
               },

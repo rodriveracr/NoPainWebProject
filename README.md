@@ -78,7 +78,7 @@ Every push to main is automatically deployed to production:
 👉 https://no-pain-web-project-26s6.vercel.app/
 
 📩 Contacto / Contact
-✉️ Email: customercare@nopainnumbing.net
+✉️ Email: infonopain@nopainnumbing.net
 📷 Instagram: @nopainnumbing
 
 yaml
@@ -135,7 +135,7 @@ The site will be available at http://localhost:3000.
 Every push to main is automatically deployed to production: 👉 https://no-pain-web-project-26s6.vercel.app/
 
 📩 Contact
-✉️ Email: customercare@nopainnumbing.net
+✉️ Email: infonopain@nopainnumbing.net
 
 📷 Instagram: @nopainnumbing
 

@@ -162,19 +162,7 @@ export default function Contact() {
         </section>
 
         {/* 📬 Datos de contacto */}
-        <section className="grid grid-cols-1 gap-8 sm:grid-cols-3 text-center max-w-4xl mx-auto">
-          {/* Email */}
-          <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
-            <Mail className="w-8 h-8 text-gray-400" />
-            <h3 className="font-semibold text-lg">{t("emailTitle")}</h3>
-            <a
-              href="mailto:customercare@nopainnumbing.net"
-              className="text-gray-300 hover:text-white transition break-all text-xs sm:text-sm text-center leading-tight px-2"
-            >
-              customercare@nopainnumbing.net
-            </a>
-          </div>
-
+        <section className="grid grid-cols-1 gap-8 sm:grid-cols-2 text-center max-w-4xl mx-auto">
           {/* Instagram */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
             <Instagram className="w-8 h-8 text-gray-400" />

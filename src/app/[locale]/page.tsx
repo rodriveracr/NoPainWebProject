@@ -190,7 +190,7 @@ export default async function Home({
             </a>
 
             <a
-              href={`mailto:customercare@nopainnumbing.net?subject=${encodeURIComponent(
+              href={`mailto:infonopain@nopainnumbing.net?subject=${encodeURIComponent(
                 tSuppliers("distributorMailSubject"),
               )}&body=${encodeURIComponent(tSuppliers("distributorMailBody"))}`}
               className="px-6 py-3 border border-gray-600 text-white rounded-2xl font-medium hover:border-gray-400 transition inline-flex items-center gap-2"

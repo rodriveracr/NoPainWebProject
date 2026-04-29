@@ -12,7 +12,7 @@ export default function FloatingActions() {
   // Official contact details from Footer
   const whatsappNumber = "+506 8315 1806";
   const whatsappHref = "https://wa.me/50683151806";
-  const emailHref = "mailto:customercare@nopainnumbing.net";
+  const emailHref = "mailto:infonopain@nopainnumbing.net";
 
   return (
     <div className="floating-actions" aria-hidden={false}>
