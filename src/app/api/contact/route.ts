@@ -141,19 +141,10 @@ export async function POST(req: Request) {
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
-    // 🔐 Validar origen (solo rechazar dominios completamente extraños)
+    // 🔐 Sin restricción de origen - permitir desde cualquier dominio
     const origin = req.headers.get("origin") || req.headers.get("referer") || "";
-    const isOriginSuspicious = origin && 
-      !origin.includes("nopainnumbing.net") && 
-      !origin.includes("localhost") &&
-      origin.length > 0;
-    
-    if (isOriginSuspicious) {
-      console.warn(`[${now()}] [${reqId}] 🔐 Origen sospechoso rechazado: ${origin}`);
-      return NextResponse.json(
-        { error: "Origen no permitido" },
-        { status: 403 }
-      );
+    if (origin) {
+      console.log(`[${now()}] [${reqId}] 📍 Origen: ${origin}`);
     }
 
     // 🚫 Rate limit por IP
