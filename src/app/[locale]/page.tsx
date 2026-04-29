@@ -7,14 +7,6 @@ import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import ClientPopup from "@/components/Popup";
 
-// 📄 Metadatos
-export const metadata = {
-  title: "No Pain",
-  description:
-    "No Pain offers anesthetic creams, tonics, and soaps for tattoos and PMU.",
-};
-
-
 // ✅ FIX: params ya no es Promise
 export default async function Home({
   params,
