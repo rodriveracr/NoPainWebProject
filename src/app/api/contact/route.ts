@@ -363,7 +363,7 @@ export async function POST(req: Request) {
 
     response.headers.set(
       "Access-Control-Allow-Origin",
-      "https://www.nopainnumbing.net",
+      origin || "*",
     );
     response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
     response.headers.set("Access-Control-Allow-Headers", "Content-Type");
@@ -382,10 +382,8 @@ export async function POST(req: Request) {
 // --- HANDLER OPTIONS (preflight CORS) ---
 export async function OPTIONS() {
   const res = NextResponse.json({ ok: true });
-  res.headers.set(
-    "Access-Control-Allow-Origin",
-    "https://www.nopainnumbing.net",
-  );
+  // Allow any origin for OPTIONS preflight (site manages allowed origins elsewhere)
+  res.headers.set("Access-Control-Allow-Origin", "*");
   res.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.headers.set("Access-Control-Allow-Headers", "Content-Type");
   return res;
