@@ -92,7 +92,7 @@ export default async function Home({
             ].map((video, idx) => (
               <div
                 key={idx}
-                className="w-full h-175 rounded-lg overflow-hidden border border-gray-700 shadow-lg"
+                className="w-full min-h-[22rem] md:min-h-[28rem] lg:min-h-[34rem] rounded-lg overflow-hidden border border-gray-700 shadow-lg"
               >
                 <video
                   className="w-full h-full object-cover rounded-lg"
