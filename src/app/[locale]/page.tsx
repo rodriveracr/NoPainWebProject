@@ -87,11 +87,11 @@ export default async function Home({
           {/* VIDEOS FROM GITHUB RAW IN PRODUCTION, LOCAL FILES IN DEV */}
           <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             {(() => {
-              const githubRawBase =
-                "https://raw.githubusercontent.com/rodriveracr/NoPainWebProject/main/public/videos";
+              const githubCdnBase =
+                "https://cdn.jsdelivr.net/gh/rodriveracr/NoPainWebProject@main/public/videos";
               const videoBaseUrl =
                 process.env.NEXT_PUBLIC_VIDEO_ASSET_BASE ||
-                (process.env.NODE_ENV === "production" ? githubRawBase : "/videos");
+                (process.env.NODE_ENV === "production" ? githubCdnBase : "/videos");
 
               const videoData = [
                 { name: "video7", sources: [`${videoBaseUrl}/video7.webm`, `${videoBaseUrl}/video7.mp4`] },
