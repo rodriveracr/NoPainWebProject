@@ -15,7 +15,7 @@ Incluye crema anestésica, tónicos, jabones y soluciones diseñadas con tecnolo
 - Productos diseñados para artistas profesionales.
 - Distribuidores oficiales en América Latina, EE.UU. y Europa.
 - Sitio bilingüe: Español / Inglés.
-- Galería multimedia con soporte de video (Cloudinary).
+- Galería multimedia con soporte de video desde GitHub raw.
 - Diseño minimalista y elegante (Next.js + TailwindCSS).
 
 ### 🚀 Instalación local
@@ -53,7 +53,7 @@ Official distributors in Latin America, USA, and Europe.
 
 Bilingual site: Spanish / English.
 
-Multimedia gallery with Cloudinary video support.
+Multimedia gallery with video support served from GitHub raw assets.
 
 Minimalist & elegant design (Next.js + TailwindCSS).
 

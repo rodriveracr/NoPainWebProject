@@ -84,15 +84,14 @@ export default async function Home({
             {tAbout("closing")}
           </p>
 
-          {/* VIDEOS FROM CLOUDINARY CDN */}
+          {/* VIDEOS FROM GITHUB RAW IN PRODUCTION, LOCAL FILES IN DEV */}
           <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             {(() => {
-              // 🌐 Use Cloudinary in production, fallback to local in dev
-              const cloudinaryBase = process.env.NEXT_PUBLIC_CLOUDINARY_BASE || "/videos";
+              const githubRawBase =
+                "https://raw.githubusercontent.com/rodriveracr/NoPainWebProject/main/public/videos";
               const videoBaseUrl =
-                process.env.NODE_ENV === "production" && cloudinaryBase !== "/videos"
-                  ? cloudinaryBase
-                  : "/videos";
+                process.env.NEXT_PUBLIC_VIDEO_ASSET_BASE ||
+                (process.env.NODE_ENV === "production" ? githubRawBase : "/videos");
 
               const videoData = [
                 { name: "video7", sources: [`${videoBaseUrl}/video7.webm`, `${videoBaseUrl}/video7.mp4`] },
