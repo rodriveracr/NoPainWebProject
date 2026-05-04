@@ -6,14 +6,15 @@ import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import ClientPopup from "@/components/Popup";
+import VideoPlayer from "@/components/VideoPlayer";
 
 // ✅ FIX: params ya no es Promise
 export default async function Home({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale } = await params;
+  const { locale } = params;
 
   const tNavbar = await getTranslations({ locale, namespace: "Navbar" });
   const tProducts = await getTranslations({ locale, namespace: "products" });
