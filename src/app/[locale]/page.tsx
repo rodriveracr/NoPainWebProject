@@ -92,10 +92,21 @@ export default async function Home({
               const videoBaseUrl =
                 process.env.NEXT_PUBLIC_VIDEO_ASSET_BASE ||
                 (process.env.NODE_ENV === "production" ? githubCdnBase : "/videos");
+              const productionOnlyMp4 = process.env.NODE_ENV === "production";
 
               const videoData = [
-                { name: "video7", sources: [`${videoBaseUrl}/video7.webm`, `${videoBaseUrl}/video7.mp4`] },
-                { name: "video2", sources: [`${videoBaseUrl}/video2.webm`, `${videoBaseUrl}/video2.mp4`] },
+                {
+                  name: "video7",
+                  sources: productionOnlyMp4
+                    ? [`${videoBaseUrl}/video7.mp4`]
+                    : [`${videoBaseUrl}/video7.webm`, `${videoBaseUrl}/video7.mp4`],
+                },
+                {
+                  name: "video2",
+                  sources: productionOnlyMp4
+                    ? [`${videoBaseUrl}/video2.mp4`]
+                    : [`${videoBaseUrl}/video2.webm`, `${videoBaseUrl}/video2.mp4`],
+                },
               ];
 
               return videoData.map((video, idx) => (
