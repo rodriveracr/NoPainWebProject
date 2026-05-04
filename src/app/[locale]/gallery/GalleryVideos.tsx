@@ -96,7 +96,7 @@ export default function GalleryVideos() {
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="auto"
                   className="object-cover w-full h-[40vh] lg:h-[55vh] rounded-lg"
                 >
                   {video.sources.map((src, i) => (
@@ -155,7 +155,7 @@ export default function GalleryVideos() {
                   controls
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="auto"
                   className="rounded-lg bg-black object-cover aspect-[9/16] w-full max-h-[85vh]"
                 >
                   {videos[current].sources.map((src, i) => (

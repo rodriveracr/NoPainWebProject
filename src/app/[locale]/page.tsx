@@ -121,7 +121,7 @@ export default async function Home({
                     loop
                     playsInline
                     controls
-                    preload="metadata"
+                    preload="auto"
                   >
                     {video.sources.map((src, i) => (
                       <source
