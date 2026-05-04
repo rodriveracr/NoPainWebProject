@@ -84,35 +84,46 @@ export default async function Home({
             {tAbout("closing")}
           </p>
 
-          {/* VIDEOS LOCALES */}
+          {/* VIDEOS FROM CLOUDINARY CDN */}
           <div className="mt-12 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { sources: ["/videos/video7.webm", "/videos/video7.mp4"] },
-              { sources: ["/videos/video2.webm", "/videos/video2.mp4"] },
-            ].map((video, idx) => (
-              <div
-                key={idx}
-                className="w-full min-h-[22rem] md:min-h-[28rem] lg:min-h-[34rem] rounded-lg overflow-hidden border border-gray-700 shadow-lg"
-              >
-                <video
-                  className="w-full h-full object-cover rounded-lg"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  controls
-                  preload="metadata"
+            {(() => {
+              // 🌐 Use Cloudinary in production, fallback to local in dev
+              const cloudinaryBase = process.env.NEXT_PUBLIC_CLOUDINARY_BASE || "/videos";
+              const videoBaseUrl =
+                process.env.NODE_ENV === "production" && cloudinaryBase !== "/videos"
+                  ? cloudinaryBase
+                  : "/videos";
+
+              const videoData = [
+                { name: "video7", sources: [`${videoBaseUrl}/video7.webm`, `${videoBaseUrl}/video7.mp4`] },
+                { name: "video2", sources: [`${videoBaseUrl}/video2.webm`, `${videoBaseUrl}/video2.mp4`] },
+              ];
+
+              return videoData.map((video, idx) => (
+                <div
+                  key={idx}
+                  className="w-full min-h-[22rem] md:min-h-[28rem] lg:min-h-[34rem] rounded-lg overflow-hidden border border-gray-700 shadow-lg"
                 >
-                  {video.sources.map((src, i) => (
-                    <source
-                      key={i}
-                      src={src}
-                      type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
-                    />
-                  ))}
-                </video>
-              </div>
-            ))}
+                  <video
+                    className="w-full h-full object-cover rounded-lg"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls
+                    preload="metadata"
+                  >
+                    {video.sources.map((src, i) => (
+                      <source
+                        key={i}
+                        src={src}
+                        type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
+                      />
+                    ))}
+                  </video>
+                </div>
+              ));
+            })()}
           </div>
         </section>
 
