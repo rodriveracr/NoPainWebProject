@@ -1,3 +1,5 @@
+require("@rushstack/eslint-patch/modern-module-resolution");
+
 module.exports = {
   extends: ["next/core-web-vitals"],
   ignorePatterns: ["node_modules", ".next", "dist", "public"],

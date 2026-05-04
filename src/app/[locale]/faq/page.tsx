@@ -5,6 +5,11 @@ import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+export const metadata = {
+  title: "FAQ | No Pain Brand",
+  description: "Preguntas frecuentes sobre los productos y servicios No Pain.",
+};
+
 export default async function FAQPage({
   params,
 }: {

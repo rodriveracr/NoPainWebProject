@@ -4,21 +4,9 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import VideoPlayer from "@/components/VideoPlayer";
 
 export default function GalleryVideos() {
   const t = useTranslations("Gallery");
-  const videoBaseUrl =
-    process.env.NEXT_PUBLIC_VIDEO_ASSET_BASE ||
-    (process.env.NODE_ENV === "production"
-      ? "https://cdn.jsdelivr.net/gh/rodriveracr/NoPainWebProject@main/public/videos"
-      : "/videos");
-  const productionOnlyMp4 = process.env.NODE_ENV === "production";
-
-  const makeSources = (name: string) =>
-    productionOnlyMp4
-      ? [`${videoBaseUrl}/${name}.mp4`]
-      : [`${videoBaseUrl}/${name}.webm`, `${videoBaseUrl}/${name}.mp4`];
 
   const safeT = (key: string, fallback: string) => {
     try {
@@ -31,35 +19,35 @@ export default function GalleryVideos() {
 
   const videos = [
     {
-      sources: makeSources("video8"),
+      sources: ["/videos/video8.webm", "/videos/video8.mp4"],
       desc: t("video1.overlay"),
     },
     {
-      sources: makeSources("video9"),
+      sources: ["/videos/video9.webm", "/videos/video9.mp4"],
       desc: t("video2.overlay"),
     },
     {
-      sources: makeSources("video6"),
+      sources: ["/videos/video6.webm", "/videos/video6.mp4"],
       desc: t("video3.overlay"),
     },
     {
-      sources: makeSources("video4"),
+      sources: ["/videos/video4.webm", "/videos/video4.mp4"],
       desc: t("video4.overlay"),
     },
     {
-      sources: makeSources("video5"),
+      sources: ["/videos/video5.webm", "/videos/video5.mp4"],
       desc: t("video5.overlay"),
     },
     {
-      sources: makeSources("video7"),
+      sources: ["/videos/video7.webm", "/videos/video7.mp4"],
       desc: t("video6.overlay"),
     },
     {
-      sources: makeSources("video10"),
+      sources: ["/videos/video10.webm", "/videos/video10.mp4"],
       desc: t("video7.overlay"),
     },
     {
-      sources: makeSources("wicannx"),
+      sources: ["/videos/wicannx.webm", "/videos/wicannx.mp4"],
       desc: t("video8.overlay"),
     },
   ];
@@ -92,10 +80,22 @@ export default function GalleryVideos() {
                 onClick={() => setCurrent(idx)}
                 className="gallery-item"
               >
-                <VideoPlayer
-                  sources={video.sources}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
                   className="object-cover w-full h-[40vh] lg:h-[55vh] rounded-lg"
-                />
+                >
+                  {video.sources.map((src, i) => (
+                    <source
+                      key={i}
+                      src={src}
+                      type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
+                    />
+                  ))}
+                </video>
 
                 <div className="gallery-overlay">
                   <p>{overlay || video.desc}</p>
@@ -144,7 +144,7 @@ export default function GalleryVideos() {
                   controls
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   className="rounded-lg bg-black object-cover aspect-[9/16] w-full max-h-[85vh]"
                 >
                   {videos[current].sources.map((src, i) => (

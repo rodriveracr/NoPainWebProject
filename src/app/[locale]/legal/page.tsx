@@ -4,6 +4,12 @@ import { getTranslations } from "next-intl/server";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+export const metadata = {
+  title: "Legal | No Pain Brand",
+  description:
+    "Información legal, políticas y condiciones de uso de No Pain Brand.",
+};
+
 export default async function LegalPage({
   params,
 }: {

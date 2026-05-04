@@ -141,10 +141,19 @@ export async function POST(req: Request) {
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
-    // 🔐 Sin restricción de origen - permitir desde cualquier dominio
+    // 🔐 Validar origen (solo rechazar dominios completamente extraños)
     const origin = req.headers.get("origin") || req.headers.get("referer") || "";
-    if (origin) {
-      console.log(`[${now()}] [${reqId}] 📍 Origen: ${origin}`);
+    const isOriginSuspicious = origin && 
+      !origin.includes("nopainnumbing.net") && 
+      !origin.includes("localhost") &&
+      origin.length > 0;
+    
+    if (isOriginSuspicious) {
+      console.warn(`[${now()}] [${reqId}] 🔐 Origen sospechoso rechazado: ${origin}`);
+      return NextResponse.json(
+        { error: "Origen no permitido" },
+        { status: 403 }
+      );
     }
 
     // 🚫 Rate limit por IP
@@ -270,7 +279,7 @@ export async function POST(req: Request) {
     const safeEmailLog = safeEmail.replace(/(.{2}).+(@.*)/, "$1***$2");
 
     const FROM_EMAIL = String(
-      process.env.CONTACT_EMAIL || "infonopain@nopainnumbing.net",
+      process.env.CONTACT_EMAIL || "customercare@nopainnumbing.net",
     );
     const CONTACT_EMAIL = FROM_EMAIL;
 
@@ -363,7 +372,7 @@ export async function POST(req: Request) {
 
     response.headers.set(
       "Access-Control-Allow-Origin",
-      origin || "*",
+      "https://www.nopainnumbing.net",
     );
     response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
     response.headers.set("Access-Control-Allow-Headers", "Content-Type");
@@ -382,8 +391,10 @@ export async function POST(req: Request) {
 // --- HANDLER OPTIONS (preflight CORS) ---
 export async function OPTIONS() {
   const res = NextResponse.json({ ok: true });
-  // Allow any origin for OPTIONS preflight (site manages allowed origins elsewhere)
-  res.headers.set("Access-Control-Allow-Origin", "*");
+  res.headers.set(
+    "Access-Control-Allow-Origin",
+    "https://www.nopainnumbing.net",
+  );
   res.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.headers.set("Access-Control-Allow-Headers", "Content-Type");
   return res;

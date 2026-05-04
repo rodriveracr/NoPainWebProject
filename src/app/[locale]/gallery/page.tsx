@@ -4,6 +4,12 @@ import { getTranslations } from "next-intl/server";
 import GalleryVideos from "./GalleryVideos";
 import GalleryPhotos from "./GalleryPhotos";
 
+export const metadata = {
+  title: "No Pain Gallery | Tattoo & PMU",
+  description:
+    "Explore the complete No Pain line through exclusive photos and videos representing our philosophy of excellence.",
+};
+
 export default async function GalleryPage({
   params,
 }: {

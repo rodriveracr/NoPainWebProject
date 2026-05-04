@@ -2,6 +2,12 @@
 import { getTranslations } from "next-intl/server";
 import ProductLayout from "@/components/ProductLayout";
 
+export const metadata = {
+  title: "Green Soap by No Pain",
+  description:
+    "High-quality vegetable-based antiseptic soap with 4% chlorhexidine gluconate. Ideal for professional tattoo and PMU cleaning.",
+};
+
 export default async function GreenSoap({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "products" });

@@ -47,6 +47,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
     () => [
       { href: `/${locale}`, label: t("home") },
       { href: `/${locale}#quienes-somos`, label: t("about") },
+      { href: `/${locale}#proveedores`, label: t("suppliers") },
       {
         href: `/${locale}/no-pain-numbing-cream`,
         label: t("noPainNumbingCream"),
@@ -80,7 +81,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
     >
       <nav
         className={`
-          relative flex w-full max-w-350 mx-auto items-center justify-between
+          relative flex w-full max-w-[1400px] mx-auto items-center justify-between
           px-6 sm:px-8 lg:px-14
           py-10 sm:py-12 xl:py-6
         `}
@@ -120,7 +121,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
                 onClick={handleLinkClick}
                 className={`hover:text-gray-400 transition-colors relative whitespace-nowrap ${
                   index < leftLinks.length - 1
-                    ? "after:content-[''] after:absolute after:-right-4 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-px after:bg-white/20 after:backdrop-blur-sm"
+                    ? "after:content-[''] after:absolute after:right-[-1rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
                     : ""
                 }`}
               >
@@ -130,7 +131,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
           </div>
 
           {/* 🐊 Logo Cocodrilo */}
-          <div className="shrink-0 px-8">
+          <div className="flex-shrink-0 px-8">
             <Link href={`/${locale}`} onClick={handleLinkClick}>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -143,7 +144,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
                   alt="Logo No Pain Cocodrilo"
                   width={78}
                   height={78}
-                  className="w-12 sm:w-14 md:w-16 lg:w-20 xl:w-19.5 h-auto drop-shadow-lg select-none crocodile-glow"
+                  className="w-12 sm:w-14 md:w-16 lg:w-20 xl:w-[78px] h-auto drop-shadow-lg select-none crocodile-glow"
                 />
               </motion.div>
             </Link>
@@ -166,7 +167,7 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
                   onClick={handleLinkClick}
                   className={`hover:text-gray-400 transition-colors relative whitespace-nowrap ${
                     index < rightLinks.length - 1
-                      ? "after:content-[''] after:absolute after:-right-4 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-px after:bg-white/20 after:backdrop-blur-sm"
+                      ? "after:content-[''] after:absolute after:right-[-1rem] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-[1px] after:bg-white/20 after:backdrop-blur-sm"
                       : ""
                   }`}
                 >
@@ -183,8 +184,8 @@ export default function Header({ locale: localeProp }: { locale?: string }) {
       </nav>
 
       {/* 🌐 Selector idioma Desktop */}
-      <div className="hidden xl:flex bg-black -translate-y-2.5">
-        <div className="w-full max-w-350 mx-auto flex justify-end pr-12">
+      <div className="hidden xl:flex bg-black translate-y-[-10px]">
+        <div className="w-full max-w-[1400px] mx-auto flex justify-end pr-12">
           <Suspense fallback={null}>
             <LanguageSwitcher small />
           </Suspense>

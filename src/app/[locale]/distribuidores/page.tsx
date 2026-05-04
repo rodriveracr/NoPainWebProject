@@ -4,6 +4,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Suspense } from "react";
 
+export const metadata = {
+  title: "Distribuidores - No Pain Brand",
+  description:
+    "Encuentra distribuidores autorizados de No Pain en todo el mundo.",
+};
+
 export default async function DistribuidoresPage({
   params,
 }: {

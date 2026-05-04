@@ -12,19 +12,6 @@ const nextConfig = {
     serverActions: {},
   },
   reactStrictMode: true,
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value: "noindex, nofollow, noarchive, nosnippet, noimageindex",
-          },
-        ],
-      },
-    ];
-  },
 
   // Allow dev origins (fixes Cross origin request detected warning during dev)
   // Add any local IPs or hostnames you use to access the dev server (e.g. LAN IP)

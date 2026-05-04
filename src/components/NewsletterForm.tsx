@@ -66,16 +66,12 @@ export default function NewsletterForm({ locale = "es" }: { locale?: string }) {
     }
   };
 
-  // Prevent password managers from injecting DOM nodes before hydration.
   return (
     <form
       onSubmit={handleSubmit}
       className="flex flex-col sm:flex-row items-center gap-3"
       noValidate
       suppressHydrationWarning
-      autoComplete="off"
-      data-lpignore="true"
-      data-form-type="newsletter"
     >
       <input
         type="email"
@@ -90,7 +86,7 @@ export default function NewsletterForm({ locale = "es" }: { locale?: string }) {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="px-4 py-2 bg-linear-to-r from-pink-500 to-red-500 rounded text-white disabled:opacity-60"
+        className="px-4 py-2 bg-gradient-to-r from-pink-500 to-red-500 rounded text-white disabled:opacity-60"
       >
         {status === "sending" ? "..." : t("subscribe")}
       </button>

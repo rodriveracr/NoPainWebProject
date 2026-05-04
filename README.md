@@ -15,7 +15,7 @@ Incluye crema anestésica, tónicos, jabones y soluciones diseñadas con tecnolo
 - Productos diseñados para artistas profesionales.
 - Distribuidores oficiales en América Latina, EE.UU. y Europa.
 - Sitio bilingüe: Español / Inglés.
-- Galería multimedia con soporte de video desde jsDelivr.
+- Galería multimedia con soporte de video (Cloudinary).
 - Diseño minimalista y elegante (Next.js + TailwindCSS).
 
 ### 🚀 Instalación local
@@ -53,7 +53,7 @@ Official distributors in Latin America, USA, and Europe.
 
 Bilingual site: Spanish / English.
 
-Multimedia gallery with video support served from jsDelivr CDN.
+Multimedia gallery with Cloudinary video support.
 
 Minimalist & elegant design (Next.js + TailwindCSS).
 
@@ -78,7 +78,7 @@ Every push to main is automatically deployed to production:
 👉 https://no-pain-web-project-26s6.vercel.app/
 
 📩 Contacto / Contact
-✉️ Email: infonopain@nopainnumbing.net
+✉️ Email: customercare@nopainnumbing.net
 📷 Instagram: @nopainnumbing
 
 yaml
@@ -135,7 +135,7 @@ The site will be available at http://localhost:3000.
 Every push to main is automatically deployed to production: 👉 https://no-pain-web-project-26s6.vercel.app/
 
 📩 Contact
-✉️ Email: infonopain@nopainnumbing.net
+✉️ Email: customercare@nopainnumbing.net
 
 📷 Instagram: @nopainnumbing
 
