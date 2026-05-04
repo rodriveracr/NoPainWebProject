@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import VideoPlayer from "@/components/VideoPlayer";
 
 export default function GalleryVideos() {
   const t = useTranslations("Gallery");
@@ -91,22 +92,10 @@ export default function GalleryVideos() {
                 onClick={() => setCurrent(idx)}
                 className="gallery-item"
               >
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
+                <VideoPlayer
+                  sources={video.sources}
                   className="object-cover w-full h-[40vh] lg:h-[55vh] rounded-lg"
-                >
-                  {video.sources.map((src, i) => (
-                    <source
-                      key={i}
-                      src={src}
-                      type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
-                    />
-                  ))}
-                </video>
+                />
 
                 <div className="gallery-overlay">
                   <p>{overlay || video.desc}</p>

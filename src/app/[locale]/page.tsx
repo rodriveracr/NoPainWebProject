@@ -114,23 +114,11 @@ export default async function Home({
                   key={idx}
                   className="w-full min-h-[22rem] md:min-h-[28rem] lg:min-h-[34rem] rounded-lg overflow-hidden border border-gray-700 shadow-lg"
                 >
-                  <video
-                    className="w-full h-full object-cover rounded-lg"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    controls
-                    preload="auto"
-                  >
-                    {video.sources.map((src, i) => (
-                      <source
-                        key={i}
-                        src={src}
-                        type={src.endsWith(".webm") ? "video/webm" : "video/mp4"}
-                      />
-                    ))}
-                  </video>
+                  {/* Client component to ensure click-to-play blob fallback */}
+                  <VideoPlayer
+                    sources={video.sources}
+                    className="w-full h-full"
+                  />
                 </div>
               ));
             })()}
