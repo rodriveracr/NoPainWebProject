@@ -69,10 +69,10 @@ export default function Contact() {
             <Mail className="w-8 h-8 text-gray-400" />
             <h3 className="font-semibold text-lg">{t("emailTitle")}</h3>
             <a
-              href="mailto:customercare@nopainnumbing.net"
+              href="mailto:infonopain@nopainnumbing.net"
               className="text-gray-300 hover:text-white transition"
             >
-              customercare@nopainnumbing.net
+              infonopain@nopainnumbing.net
             </a>
           </div>
 

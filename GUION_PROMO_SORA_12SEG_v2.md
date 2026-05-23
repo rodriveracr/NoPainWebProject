@@ -389,6 +389,6 @@ AUDIO REQUERIDO: Electrónico minimalista luxury, BPM ~120, 12 seg exactos.
 ## 📞 CONTACTO & CRÉDITOS
 - **Producción:** NO PAIN Team
 - **Web:** www.nopainnumbing.com
-- **Email:** info@nopainnumbing.com
+- **Email:** infonopain@nopainnumbing.net
 - **Versión Guion:** v2.0 (11/18/2025)
 

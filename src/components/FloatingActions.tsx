@@ -12,40 +12,37 @@ export default function FloatingActions() {
   // Official contact details from Footer
   const whatsappNumber = "+506 8315 1806";
   const whatsappHref = "https://wa.me/50683151806";
-  const emailHref = "mailto:customercare@nopainnumbing.net";
+  const emailHref = "mailto:infonopain@nopainnumbing.net";
 
   return (
     <div className="floating-actions" aria-hidden={false}>
       <a
-        className="fab whatsapp half-pill"
+        className="fab whatsapp"
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`${tContact("whatsappTitle")} ${whatsappNumber}`}
-        title={`${tContact("whatsappTitle")} ${whatsappNumber}`}
+        aria-label={`WhatsApp +506 8315 1806`}
+        title={`WhatsApp +506 8315 1806`}
       >
-        <img src="/icons/whatsapp.svg" alt={tContact("whatsappAlt") || "WhatsApp"} width={20} height={20} />
-        <span className="fab-label">{tContact("whatsappTitle")}</span>
+        <img src="/icons/whatsapp.svg" alt={`WhatsApp +506 8315 1806`} width={20} height={20} />
       </a>
 
       <a
-        className="fab contact half-pill"
+        className="fab contact"
         href={`/${locale}/${getSlug("contact", locale as string)}`}
         aria-label={tNavbar("contact") || tContact("title")}
         title={tNavbar("contact") || tContact("title")}
       >
         <img src="/contact-form.svg" alt={tNavbar("contact") || tContact("title") || "Contact"} width={18} height={18} />
-        <span className="fab-label">{tNavbar("contact") || tContact("title")}</span>
       </a>
 
       <a
-        className="fab email half-pill"
+        className="fab email"
         href={emailHref}
-        aria-label={tContact("emailTitle")}
-        title={tContact("emailTitle")}
+        aria-label={`EMAIL infonopain@nopainnumbing.net`}
+        title={`EMAIL infonopain@nopainnumbing.net`}
       >
-        <img src="/icons/email.webp" alt={tContact("emailTitle") || "Email"} width={18} height={18} />
-        <span className="fab-label">{tContact("emailTitle")}</span>
+        <img src="/icons/email.webp" alt={`EMAIL infonopain@nopainnumbing.net`} width={18} height={18} />
       </a>
     </div>
   );

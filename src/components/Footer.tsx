@@ -33,39 +33,38 @@ export default function Footer({ locale: localeProp }: { locale?: string }) {
           />
 
           <div className="flex gap-4 mt-2">
-            {[
-              {
-                href: "https://www.instagram.com/nopaingel/",
-                label: "Instagram",
-                icon: "/icons/instagram.svg",
-              },
-              {
-                href: "https://www.tiktok.com/@nopaingel",
-                label: "TikTok",
-                icon: "/icons/tiktok.svg",
-              },
-              {
-                href: "mailto:customercare@nopainnumbing.net",
-                label: "Email",
-                icon: "/icons/email.webp",
-              },
-              {
-                href: "https://wa.me/50683151806",
-                label: "WhatsApp",
-                icon: "/icons/whatsapp.svg",
-              },
-            ].map(({ href, label, icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-full transition"
-              >
-                <Image src={icon} alt={label} width={24} height={24} loading="lazy" />
-              </a>
-            ))}
+            {
+              /* Only icons visible — keep Instagram, Email, WhatsApp icons active */
+            }
+            <a
+              href="https://www.instagram.com/nopaingel/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-full transition"
+            >
+              <Image src="/icons/instagram.svg" alt="Instagram" width={24} height={24} loading="lazy" />
+            </a>
+
+            <a
+              href="mailto:infonopain@nopainnumbing.net"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="EMAIL infonopain@nopainnumbing.net"
+              className="hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-full transition"
+            >
+              <Image src="/icons/email.webp" alt="EMAIL infonopain@nopainnumbing.net" width={24} height={24} loading="lazy" />
+            </a>
+
+            <a
+              href="https://wa.me/50683151806"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-500 rounded-full transition"
+            >
+              <Image src="/icons/whatsapp.svg" alt="WhatsApp" width={24} height={24} loading="lazy" />
+            </a>
           </div>
 
         </div>
