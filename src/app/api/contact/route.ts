@@ -195,25 +195,30 @@ export async function POST(req: Request) {
       mensaje: mensaje ? `(${mensaje.length} chars)` : undefined,
     });
 
-    // 🔐 Validar hCaptcha (OBLIGATORIO)
-    if (!hcaptchaToken) {
-      console.log(`[${now()}] [${reqId}] ❌ hCaptcha token missing`);
-      return NextResponse.json(
-        { error: "Por favor completa la verificación de hCaptcha" },
-        { status: 400 }
-      );
-    }
+    // 🔐 Validar hCaptcha only if server is configured with a secret key
+    const serverHcaptchaSecret = process.env.HCAPTCHA_SECRET_KEY || "";
+    if (serverHcaptchaSecret) {
+      if (!hcaptchaToken) {
+        console.log(`[${now()}] [${reqId}] ❌ hCaptcha token missing`);
+        return NextResponse.json(
+          { error: "Por favor completa la verificación de hCaptcha" },
+          { status: 400 }
+        );
+      }
 
-    const isValidHcaptcha = await validateHcaptchaToken(hcaptchaToken);
-    if (!isValidHcaptcha) {
-      console.log(`[${now()}] [${reqId}] ❌ hCaptcha validation failed`);
-      return NextResponse.json(
-        { error: "Verificación de hCaptcha fallida" },
-        { status: 403 }
-      );
-    }
+      const isValidHcaptcha = await validateHcaptchaToken(hcaptchaToken);
+      if (!isValidHcaptcha) {
+        console.log(`[${now()}] [${reqId}] ❌ hCaptcha validation failed`);
+        return NextResponse.json(
+          { error: "Verificación de hCaptcha fallida" },
+          { status: 403 }
+        );
+      }
 
-    console.log(`[${now()}] [${reqId}] ✅ hCaptcha validated`);
+      console.log(`[${now()}] [${reqId}] ✅ hCaptcha validated`);
+    } else {
+      console.log(`[${now()}] [${reqId}] ℹ️ HCAPTCHA not configured server-side — skipping validation`);
+    }
 
     // --- DEBUG LOGS (temporary) ---
     // NOTE: moved below emailRegex declaration to avoid TDZ ReferenceError in production
@@ -279,7 +284,7 @@ export async function POST(req: Request) {
     const safeEmailLog = safeEmail.replace(/(.{2}).+(@.*)/, "$1***$2");
 
     const FROM_EMAIL = String(
-      process.env.CONTACT_EMAIL || "customercare@nopainnumbing.net",
+      process.env.CONTACT_EMAIL || "infonopain@nopainnumbing.net",
     );
     const CONTACT_EMAIL = FROM_EMAIL;
 

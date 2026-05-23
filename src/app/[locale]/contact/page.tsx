@@ -7,18 +7,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import "../../globals.css";
 
-const HCAPTCHA_SITE_KEY = "e0deebfa-1842-483e-ba2c-eec62c0aafd8";
-
-declare global {
-  interface Window {
-    hcaptcha?: {
-      render: (container: string | HTMLElement, options: any) => string;
-      reset: (widgetId?: string) => void;
-      remove: (widgetId?: string) => void;
-      getResponse: (widgetId?: string) => string | undefined;
-    };
-  }
-}
+// hCaptcha removed — contact form no longer requires captcha verification
 
 export default function Contact() {
   const t = useTranslations("Contact");
@@ -33,44 +22,9 @@ export default function Contact() {
 
   const [status, setStatus] = useState<null | "sending" | "ok" | "error">(null);
   const [message, setMessage] = useState<string | null>(null);
-  const [hcaptchaToken, setHcaptchaToken] = useState<string | null>(null);
+  // hCaptcha removed; no token state
 
-  // ✅ Cargar script de hCaptcha
-  useEffect(() => {
-    // Definir callbacks globales
-    (window as any).onHcaptchaSuccess = (token: string) => {
-      console.log("✅ hCaptcha verificado");
-      setHcaptchaToken(token);
-    };
-
-    (window as any).onHcaptchaError = () => {
-      console.error("❌ Error en hCaptcha");
-      setHcaptchaToken(null);
-    };
-
-    (window as any).onHcaptchaExpire = () => {
-      console.warn("⚠️ hCaptcha expirado");
-      setHcaptchaToken(null);
-    };
-
-    // Cargar el script
-    const script = document.createElement("script");
-    script.src = "https://js.hcaptcha.com/1/api.js";
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      console.log("✅ hCaptcha script cargado");
-    };
-    script.onerror = () => {
-      console.error("❌ Error cargando hCaptcha");
-    };
-
-    document.head.appendChild(script);
-
-    return () => {
-      // No eliminar el script
-    };
-  }, []);
+  // hCaptcha removed: no script to load
 
   // ✍️ Manejo de inputs
   const handleChange = (
@@ -88,12 +42,6 @@ export default function Contact() {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!hcaptchaToken) {
-      setStatus("error");
-      setMessage("❌ Por favor completa la verificación de hCaptcha.");
-      return;
-    }
-
     setStatus("sending");
     setMessage(null);
 
@@ -101,7 +49,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, hcaptchaToken }),
+        body: JSON.stringify({ ...formData }),
       });
 
       const json = await res.json().catch(() => ({}));
@@ -110,11 +58,7 @@ export default function Contact() {
         setStatus("ok");
         setMessage(t("submitMessage"));
         setFormData({ nombre: "", email: "", mensaje: "", newsletter: false });
-        setHcaptchaToken(null);
-        // Reset hCaptcha
-        if (typeof window !== "undefined" && window.hcaptcha) {
-          window.hcaptcha.reset();
-        }
+        // no captcha to reset
         setTimeout(() => {
           setStatus(null);
           setMessage(null);
@@ -162,78 +106,36 @@ export default function Contact() {
         </section>
 
         {/* 📬 Datos de contacto */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          {/* Email */}
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+          {/* Email (icon only) */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
-            <Mail className="w-8 h-8 text-gray-400" />
-            <h3 className="font-semibold text-lg">{t("emailTitle")}</h3>
-            <a
-              href="mailto:customercare@nopainnumbing.net"
-              className="text-gray-300 hover:text-white transition"
-            >
-              customercare@nopainnumbing.net
+            <a href="mailto:infonopain@nopainnumbing.net" aria-label="EMAIL infonopain@nopainnumbing.net" title="EMAIL infonopain@nopainnumbing.net" className="inline-flex">
+              <Mail className="w-8 h-8 text-gray-400" />
             </a>
           </div>
 
-          {/* Instagram */}
+          {/* Instagram (icon only) */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
-            <Instagram className="w-8 h-8 text-gray-400" />
-            <h3 className="font-semibold text-lg">{t("instagramTitle")}</h3>
-            <a
-              href="https://www.instagram.com/nopaingel/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-white transition"
-            >
-              @nopaingel
+            <a href="https://www.instagram.com/nopaingel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @nopaingel" title="Instagram @nopaingel" className="inline-flex">
+              <Instagram className="w-8 h-8 text-gray-400" />
             </a>
           </div>
 
-          {/* WhatsApp */}
-          <div className="flex flex-col items-center space-y-4 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
-            <Image
-              src="/icons/wagrey.png"
-              alt={t("whatsappAlt")}
-              width={32}
-              height={32}
-              className="opacity-80"
-            />
-            <h3 className="font-semibold text-lg">{t("whatsappTitle")}</h3>
-            <div className="w-full text-left">
-              <a
-                href="https://wa.me/50683151806"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp +506 8315 1806"
-                className="block border border-gray-700 rounded-xl p-3 hover:border-gray-400 transition bg-gray-900/40"
-              >
-                <span className="text-xs uppercase tracking-wide text-gray-400">
-                  {t("usaWhatsAppLabel")}
-                </span>
-                <span className="block font-semibold text-white text-lg">
-                  +506 8315 1806
-                </span>
-              </a>
-            </div>
-          </div>
-
-          {/* Location */}
+          {/* WhatsApp (icon only) */}
           <div className="flex flex-col items-center space-y-3 p-6 border border-gray-700 rounded-2xl hover:border-gray-500 transition bg-black/40 backdrop-blur-sm">
-            <MapPin className="w-8 h-8 text-gray-400" />
-            <h3 className="font-semibold text-lg">{t("locationTitle")}</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Building 3 2301 W Sample Rd, Unit 4A, Pompano Beach, FL 33073, United States
-            </p>
-            <a
-              href="https://maps.app.goo.gl/noCpqcMPRoFCv1D79"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-pink-400 hover:text-pink-300 transition"
-            >
-              {t("locationCta")} →
+            <a href="https://wa.me/50683151806" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp +506 8315 1806" title="WhatsApp +506 8315 1806" className="inline-flex">
+              <Image
+                src="/icons/wagrey.png"
+                alt={`WhatsApp +506 8315 1806`}
+                width={32}
+                height={32}
+                className="opacity-80"
+              />
             </a>
           </div>
         </section>
+
+        {/* Invitation removed per request */}
 
         {/* 📝 Formulario */}
         {/*
@@ -272,15 +174,7 @@ export default function Contact() {
               required
             />
 
-            {/* 🔐 Widget de hCaptcha */}
-            <div
-              className="h-captcha hcaptcha-container"
-              data-sitekey={HCAPTCHA_SITE_KEY}
-              data-theme="dark"
-              data-callback="onHcaptchaSuccess"
-              data-error-callback="onHcaptchaError"
-              data-expired-callback="onHcaptchaExpire"
-            />
+            {/* hCaptcha removed */}
 
             <label className="flex items-center space-x-2 text-sm text-gray-300">
               <input

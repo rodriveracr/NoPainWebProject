@@ -197,7 +197,7 @@
   },
   "Contact": {
     "title": "CONTACT",
-    "description": "From Florida to Costa Rica we reply fast. WhatsApp +506 8315 1806. Follow us on Instagram @nopaingel or write to us via email or through this form.",
+    "description": "",
     "emailTitle": "EMAIL",
     "instagramTitle": "INSTAGRAM",
     "whatsappTitle": "WHATSAPP",
@@ -205,7 +205,7 @@
     "locationTitle": "USA HUB",
     "usaWhatsAppLabel": "Official WhatsApp",
     "latamWhatsAppLabel": "LATAM support",
-    "locationCta": "Open in Maps",
+    "locationCta": "",
     "submitMessage": "Thank you for contacting us. We will respond soon.",
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email",
