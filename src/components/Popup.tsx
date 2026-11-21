@@ -31,26 +31,28 @@ export default function Popup({ locale, storageKey = "popup-dismissed", cooldown
   const slides: Slide[] = useMemo(
     () => [
       {
-        img: "/Green-Soap-1.jpg",
-        title: t("greenSoapTitle", { default: "Green Soap – Pro cleaning" }),
-        desc: t("greenSoapDesc", {
-          default: "Gentle soap for tattoos & PMU. Cleans without irritation.",
+        img: "/popup-scam-alert.jpeg",
+        title: t("scamAlertTitle", { default: "Scam Alert" }),
+        desc: t("scamAlertDesc", {
+          default: "Check the difference between original and counterfeit products.",
         }),
-        link: `/${locale}/green-soap`,
+        link: `/${locale}/contact`,
       },
       {
-        img: "/monumby.gif",
-        title: t("monumbyTeaserTitle", { default: "Monumby · No Pain" }),
-        desc:
-          Math.random() > 0.5
-            ? t("monumbyTeaserDesc", { default: "Coming soon. Premium professional care." })
-            : t("monumbyTeaserDescAlt", {
-                default: "Coming soon. Research, precision, results.",
-              }),
-        link: `/${locale}/monumby`,
-        secondaryLink: "/#newsletter",
-        primaryCtaKey: "ctaPrimary",
-        secondaryCtaKey: "ctaSecondary",
+        img: "/popup-formula.jpeg",
+        title: t("formulaTitle", { default: "Our Formula Makes the Difference" }),
+        desc: t("formulaDesc", {
+          default: "Learn why No Pain is committed to research and refinement.",
+        }),
+        link: `/${locale}/no-pain-numbing-cream`,
+      },
+      {
+        img: "/popup-red-flags.jpeg",
+        title: t("redFlagsTitle", { default: "Watch Out for These Red Flags" }),
+        desc: t("redFlagsDesc", {
+          default: "Verify official products, collaborations and authorized distributors.",
+        }),
+        link: `/${locale}/contact`,
       },
     ],
     [locale, t]
@@ -152,7 +154,7 @@ export default function Popup({ locale, storageKey = "popup-dismissed", cooldown
             <X size={20} />
           </button>
 
-          <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-black">
+          <div className="relative w-full aspect-[4/5] sm:aspect-[4/5] bg-black">
             <Image
               src={slide.img}
               alt={slide.title}
